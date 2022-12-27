@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ToggleSwitchTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToggleSwitchTableViewCell" rowHeight="116" id="TQa-mq-vRj" userLabel="TextfieldComponent" customClass="ToggleSwitchTableViewCell" customModule="Compan" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="123"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TQa-mq-vRj" id="0ww-rb-Erg">
+                <rect key="frame" x="0.0" y="0.0" width="372" height="123"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1M-RF-cnC">
+                        <rect key="frame" x="20" y="40" width="332" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDn-1q-SKg">
+                        <rect key="frame" x="327" y="10" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="8Xc-Ua-sFI"/>
+                            <constraint firstAttribute="width" constant="30" id="udM-3R-sea"/>
+                        </constraints>
+                        <state key="normal" image="undo"/>
+                        <connections>
+                            <action selector="resetBtn:" destination="TQa-mq-vRj" eventType="touchUpInside" id="but-GX-RA4"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssD-1m-COp">
+                        <rect key="frame" x="20" y="106" width="332" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="5mJ-ie-HGx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" systemColor="systemRedColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bmx-uD-aB4">
+                        <rect key="frame" x="20" y="70" width="51" height="31"/>
+                        <connections>
+                            <action selector="switched:" destination="TQa-mq-vRj" eventType="valueChanged" id="4g3-p5-MKk"/>
+                        </connections>
+                    </switch>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="f1M-RF-cnC" firstAttribute="leading" secondItem="0ww-rb-Erg" secondAttribute="leading" constant="20" id="Eak-KI-W6f"/>
+                    <constraint firstItem="bmx-uD-aB4" firstAttribute="leading" secondItem="f1M-RF-cnC" secondAttribute="leading" id="NDO-ax-biR"/>
+                    <constraint firstItem="f1M-RF-cnC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0ww-rb-Erg" secondAttribute="top" constant="20" id="O8w-xh-xyG"/>
+                    <constraint firstItem="bmx-uD-aB4" firstAttribute="top" secondItem="f1M-RF-cnC" secondAttribute="bottom" constant="9.5" id="UIq-oy-qpA"/>
+                    <constraint firstAttribute="trailing" secondItem="f1M-RF-cnC" secondAttribute="trailing" constant="20" id="kgq-ol-iud"/>
+                    <constraint firstAttribute="trailing" secondItem="ssD-1m-COp" secondAttribute="trailing" constant="20" id="ofa-3Q-amQ"/>
+                    <constraint firstItem="ssD-1m-COp" firstAttribute="leading" secondItem="0ww-rb-Erg" secondAttribute="leading" constant="20" id="pG7-a3-88g"/>
+                    <constraint firstAttribute="bottom" secondItem="ssD-1m-COp" secondAttribute="bottom" constant="5" id="sSQ-aK-YcG"/>
+                    <constraint firstAttribute="trailing" secondItem="JDn-1q-SKg" secondAttribute="trailing" constant="15" id="tZ9-4b-V7y"/>
+                    <constraint firstItem="ssD-1m-COp" firstAttribute="top" secondItem="bmx-uD-aB4" secondAttribute="bottom" constant="5" id="wVd-e6-DJU"/>
+                    <constraint firstItem="JDn-1q-SKg" firstAttribute="top" secondItem="0ww-rb-Erg" secondAttribute="top" constant="10" id="z6f-Ly-2dz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="errorLabel" destination="ssD-1m-COp" id="afh-Jn-v6H"/>
+                <outlet property="errorLabelHeight" destination="5mJ-ie-HGx" id="SQt-YD-eT9"/>
+                <outlet property="resetBtn" destination="JDn-1q-SKg" id="abJ-Pa-bui"/>
+                <outlet property="toggleSwitch" destination="bmx-uD-aB4" id="6LR-3V-fbI"/>
+                <outlet property="uriLbl" destination="f1M-RF-cnC" id="o09-pJ-uAh"/>
+            </connections>
+            <point key="canvasLocation" x="288.40579710144931" y="98.772321428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="undo" width="32" height="32"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
