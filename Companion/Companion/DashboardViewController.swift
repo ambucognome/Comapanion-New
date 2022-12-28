@@ -12,6 +12,7 @@ var dashboardNav : UINavigationController?
 class DashboardViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     
     enum TabIndex : Int {
@@ -80,7 +81,29 @@ class DashboardViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
             self.displayCurrentTab(0)
         })
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
+
     }
+    
+    @objc func showHideReelSection(notification: Notification) {
+        let userInfo = notification.userInfo
+        if let isHide = userInfo!["hide"] as? Bool {
+            if isHide {
+                self.collectionViewHeight.constant = 0
+                UIView.animate(withDuration: 0.2, animations: {
+                     self.view.layoutIfNeeded()
+                })
+            } else {
+                self.collectionViewHeight.constant = 90
+                UIView.animate(withDuration: 0.2, animations: {
+                     self.view.layoutIfNeeded()
+                })
+            }
+        }
+        
+    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -121,6 +144,7 @@ class DashboardViewController: UIViewController {
 }
 
 extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
         let data = self.appList[indexPath.item]
@@ -158,7 +182,7 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 80, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

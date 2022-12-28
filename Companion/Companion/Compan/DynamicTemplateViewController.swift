@@ -42,7 +42,6 @@ class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.headerLabel.text = "Welcome \(username)"
         self.navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
@@ -221,7 +220,15 @@ class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITabl
                     }
     }
 
+
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            NotificationCenter.default.post(name: Notification.Name("ReelSectionID"), object: nil,userInfo: ["hide" : true])
+        } else {
+            NotificationCenter.default.post(name: Notification.Name("ReelSectionID"), object: nil,userInfo: ["hide" : false])
+        }
+    }
 
 // MARK: - UITableViewDataSource
 func numberOfSections(in tableView: UITableView) -> Int {

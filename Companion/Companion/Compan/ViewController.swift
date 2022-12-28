@@ -82,7 +82,7 @@ class ViewController: UIViewController {
 //                    "key" : "test",
 //        ]
 //      ]
-//
+//http://chdi.montefiore.org/v1/covidsafecheck
         let parameters: [String: Any] = [
             "author" : "System",
             "template_uri" : "http://chdi.montefiore.org/v1/covidsafecheckv2",
