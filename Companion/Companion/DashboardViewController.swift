@@ -21,6 +21,7 @@ class DashboardViewController: UIViewController {
         case thirdChildTab = 2
         case fourthChildTab = 3
         case fifthChildTab = 4
+        case sixthChildTab = 5
     }
     
     var name = ""
@@ -35,18 +36,27 @@ class DashboardViewController: UIViewController {
     }()
     
     lazy var secondChildTabVC: UIViewController? = {
-        let secondChildTabVC = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppOneVC")
-        return secondChildTabVC
+        let secondChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController//UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppOneVC")
+        secondChildTabVC.template_uri = "http://chdi.montefiore.org/basicComponents"
+        secondChildTabVC.isDemo = true
+        let nav = UINavigationController.init(rootViewController: secondChildTabVC)
+        return nav
     }()
     
     lazy var thirdChildTabVC: UIViewController? = {
-        let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppTwoVC")
-        return vc
+        let vc = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController//UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppTwoVC")
+        vc.template_uri = "http://chdi.montefiore.org/patientInfo"
+        vc.isDemo = true
+        let nav = UINavigationController.init(rootViewController: vc)
+        return nav
     }()
     
     lazy var fourthChildTab: UIViewController? = {
-        let fourthChildTab = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppThreeVC")
-        return fourthChildTab
+        let fourthChildTab = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController//UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppThreeVC")
+        fourthChildTab.template_uri = "http://chdi.montefiore.org/patientInfoTest"
+        fourthChildTab.isDemo = true
+        let nav = UINavigationController.init(rootViewController: fourthChildTab)
+        return nav
     }()
     
     lazy var fifthChildTab: UIViewController? = {
@@ -135,6 +145,8 @@ class DashboardViewController: UIViewController {
             vc = fourthChildTab
         case TabIndex.fifthChildTab.rawValue :
             vc = fifthChildTab
+        case TabIndex.sixthChildTab.rawValue :
+            vc = sixthChildTab
         default:
             return nil
         }

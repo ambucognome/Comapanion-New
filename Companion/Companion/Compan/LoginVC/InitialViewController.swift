@@ -12,9 +12,16 @@ import UIKit
 class InitialViewController: UIViewController, DynamicTemplateViewControllerDelegate, FailScreenViewControllerDelegate, PassScreenViewControllerDelegate {
     
     var surveyStartTime = ""
+    
+    var isDemo = false
+    var template_uri = "http://chdi.montefiore.org/CovidSafeCheck"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if self.isDemo {
+            self.getTempleWith(uri: template_uri, context: [ "key" : "test"])
+            return
+        }
         self.startSurvey()
         self.navigationController?.isNavigationBarHidden = true
         self.addObservers()
@@ -105,7 +112,7 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
                             ERProgressHud.shared.hide()
                             print(response)
                             let template_uri = response["ddc_template_uri"] as? String ?? ""
-                            templateURI = template_uri
+                            templateURI = self.template_uri//template_uri
                                     if let survey = response["survey"] as? NSDictionary {
                                         survey_data = survey
                                         let surveyTime =  survey["survey_start"] as? String ?? ""

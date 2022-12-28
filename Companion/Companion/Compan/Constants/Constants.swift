@@ -13,10 +13,10 @@ import UIKit
 //DDC Base URL
 
 // UAT
-let BASEURL = "https://ddcbackend.azurewebsites.net/" //"https://mt-vernon-safecheck-dev-ddcbackend.azurewebsites.net/"
+//let BASEURL = "https://ddcbackend.azurewebsites.net/" //"https://mt-vernon-safecheck-dev-ddcbackend.azurewebsites.net/"
 
 //Dev
-//let BASEURL = "http://10.85.9.161:9198/"//"http://192.168.199.83:8085/"
+let BASEURL = "http://10.85.9.161:9198/"//"http://192.168.199.83:8085/"
 
 let API_END_GET_TEMPLATE = "getTemplate"
 let API_END_UPDATE_ENTITY_VALUE = "updateTemplateEntity"
@@ -97,10 +97,10 @@ let FADED_BLUE = UIColor(red: 97.0 / 255.0, green: 144.0 / 255.0, blue: 185.0 / 
 let TEMP_TOKEN_KEY = "Authorization"
 
 // UAT
-let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoiY292aWRfc2FmZWNoZWNrX2Nsb3VkIiwiaWQiOiI2MmVjMzE4YTFlNjZmMTQyZjg0N2VhMDkiLCJpYXQiOjE2NTk2NDYzNDZ9.Jyu7J6G0TlCo_i_7KAZAhpJDALA-yHYG-0kp_WaJoWA"
+//let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoiY292aWRfc2FmZWNoZWNrX2Nsb3VkIiwiaWQiOiI2MmVjMzE4YTFlNjZmMTQyZjg0N2VhMDkiLCJpYXQiOjE2NTk2NDYzNDZ9.Jyu7J6G0TlCo_i_7KAZAhpJDALA-yHYG-0kp_WaJoWA"
 
 // Dev
-//let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoidGVzdCIsImlkIjoiNjI3MTI0OGRiN2QyNTE2YjMyMzUzZmNlIiwiaWF0IjoxNjUxNTgyMDkzfQ.eFwwsyvr-n0huDnbJtyltEDB1zeFFxD1fVSXxQHUtDQ"//"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoiY292aWRfc2FmZWNoZWNrX2Nsb3VkIiwiaWQiOiI2MmVjMzE4YTFlNjZmMTQyZjg0N2VhMDkiLCJpYXQiOjE2NTk2NDYzNDZ9.Jyu7J6G0TlCo_i_7KAZAhpJDALA-yHYG-0kp_WaJoWA"
+let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoidGVzdCIsImlkIjoiNjI3MTI0OGRiN2QyNTE2YjMyMzUzZmNlIiwiaWF0IjoxNjUxNTgyMDkzfQ.eFwwsyvr-n0huDnbJtyltEDB1zeFFxD1fVSXxQHUtDQ"//"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoiY292aWRfc2FmZWNoZWNrX2Nsb3VkIiwiaWQiOiI2MmVjMzE4YTFlNjZmMTQyZjg0N2VhMDkiLCJpYXQiOjE2NTk2NDYzNDZ9.Jyu7J6G0TlCo_i_7KAZAhpJDALA-yHYG-0kp_WaJoWA"
 
 // MARK: Error Codes And Strings
 let ERROR_MESSAGE_DEFAULT = "Something went wrong. Please try again."
