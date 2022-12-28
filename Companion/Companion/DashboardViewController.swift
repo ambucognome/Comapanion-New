@@ -75,7 +75,7 @@ class DashboardViewController: UIViewController {
     let DARK_BLUE_COLOR = UIColor(red: 0.07, green: 0.22, blue: 0.40, alpha: 1.00)
     let LIGHT_BLUE_COLOR = UIColor.white
     
-    var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),AppStruct(name: "App One", image: nil, notificationCount: 0, isSelected: false),AppStruct(name: "App Two", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Three", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Four", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Five", image: nil, notificationCount: 0,isSelected: false)]
+    var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),AppStruct(name: "Basic", image: nil, notificationCount: 0, isSelected: false),AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Repeatable 2", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Four", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Five", image: nil, notificationCount: 0,isSelected: false)]
     
     struct AppStruct {
         var name : String
