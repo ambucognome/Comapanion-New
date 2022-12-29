@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SideMenu
 
 var dashboardNav : UINavigationController?
 
@@ -87,13 +88,33 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dashboardNav = self.navigationController
-        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
             self.displayCurrentTab(0)
         })
         self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
+        let btnLeftMenu: UIButton = UIButton()
+        let image = UIImage(named: "menu");
+        btnLeftMenu.setImage(image, for: .normal)
+        btnLeftMenu.frame =  CGRect(x:0, y:0, width: 25, height:25)
+        btnLeftMenu.addTarget(self, action: #selector (menu), for: .touchUpInside)
+        btnLeftMenu.imageEdgeInsets = UIEdgeInsets(top: 10 , left: 10, bottom: 10, right: 10)
+        let barButton = UIBarButtonItem(customView: btnLeftMenu)
+        self.navigationItem.rightBarButtonItem = barButton
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
+    }
+    
+    @objc func menu() {
+        let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController")
+        let menu = SideMenuNavigationController(rootViewController: vc)
+        present(menu, animated: true, completion: nil)
     }
     
     @objc func showHideReelSection(notification: Notification) {

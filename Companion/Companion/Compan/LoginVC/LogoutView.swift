@@ -23,11 +23,11 @@ class LogoutHelper : NSObject {
     static let shared = LogoutHelper()
     
     func showLogoutView(){
-        let window = UIApplication.shared.windows.last!
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if let logoutView = appDelegate.logoutView {
-            window.addSubview(logoutView)
-        }
+//        let window = UIApplication.shared.windows.last!
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        if let logoutView = appDelegate.logoutView {
+//            window.addSubview(logoutView)
+//        }
     }
     
     func removeLogoutView(){

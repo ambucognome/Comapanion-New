@@ -28,5 +28,5 @@ target 'Companion' do
     pod 'PlaceholderUITextView'
     pod 'Firebase'
     pod 'Firebase/Messaging'
-
+    pod 'SideMenu'
 end
