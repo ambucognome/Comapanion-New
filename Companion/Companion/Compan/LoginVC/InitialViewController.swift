@@ -19,7 +19,8 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         if self.isDemo {
-            self.getTempleWith(uri: template_uri, context: [ "key" : "test"])
+            self.view.isHidden = true
+            self.getTempleWith(uri: template_uri, context: [ "key" : "one"])
             return
         }
         self.startSurvey()
