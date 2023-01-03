@@ -20,7 +20,7 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
         super.viewDidLoad()
         if self.isDemo {
             self.view.isHidden = true
-            self.getTempleWith(uri: template_uri, context: [ "key" : "one"])
+            self.getTempleWith(uri: template_uri, context: [ "key" : "two"])
             return
         }
         self.startSurvey()
