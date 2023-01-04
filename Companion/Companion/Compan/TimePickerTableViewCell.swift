@@ -23,6 +23,7 @@ class TimePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     var entityGroupId: String = ""
     var parentEntityGroupId = ""
     var groupOrder = 0
+    var ddcModel : DDCFormModel?
 
     
     override func awakeFromNib() {
@@ -72,7 +73,7 @@ class TimePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
         
         @IBAction func resetBtn(_ sender: Any) {
-            RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+            RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
         }
     
     func datePickerTapped() {
@@ -92,7 +93,7 @@ class TimePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
                 formatter.dateFormat = "hh:mm:ss a"
                 self.textField.text = formatter.string(from: dt)
 //                RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: self.textField.text!)
-                RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: self.textField.text!, entityGroupId: self.entityGroupId,parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.groupOrder)
+                RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: self.textField.text!, entityGroupId: self.entityGroupId,parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.groupOrder, dataModel: self.ddcModel)
             }
         }
     }

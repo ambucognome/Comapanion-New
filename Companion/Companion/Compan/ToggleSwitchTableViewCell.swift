@@ -14,6 +14,8 @@ class ToggleSwitchTableViewCell: UITableViewCell {
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var errorLabelHeight: NSLayoutConstraint!
+    
+    var ddcModel: DDCFormModel?
 
     
     var data : DDCFormModel?
@@ -69,13 +71,13 @@ class ToggleSwitchTableViewCell: UITableViewCell {
     }
     
     @IBAction func switched(_ sender: UISwitch) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: sender.isOn, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: sender.isOn, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
  
     
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
     }
     
 }

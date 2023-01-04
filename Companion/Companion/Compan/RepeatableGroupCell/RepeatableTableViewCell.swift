@@ -16,6 +16,9 @@ class RepeatableTableViewCell: UITableViewCell {
     
     var entityGroup : EntityRepeatableGroup?
     var parentEntityGroupId : String = ""
+    
+    var ddcModel: DDCFormModel?
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -237,6 +240,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RepeatableTableViewCell", for: indexPath) as! RepeatableTableViewCell
                 cell.setupRepeatableGroupCell(entityGroup: (self.entityGroup?.sortedEntitiesArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row].value)!, data:ddcModel!,parentEntityGroupId: self.parentEntityGroupId)
                 cell.setupHeaderView(entityGroup: (self.entityGroup!), groupCount: self.entityGroup?.sortedEntitiesArray![indexPath.section].value.sortedEntityGroupsArray!.count ?? 0, sectionIndex: indexPath.section)
+                cell.ddcModel = self.ddcModel
                 return cell
             } else {
                 data = self.entityGroup?.sortedEntitiesArray![indexPath.section].value
@@ -253,6 +257,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                     cell.textField.setBottomBorder()
                     cell.textField.placeholder = "Enter " + (data?.uri)!
                     cell.setUpTextFieldCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
+                    cell.ddcModel = self.ddcModel
                     return cell
 
             } else if fieldTypeIs == .textareaField {
@@ -263,7 +268,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                 cell.setUpTextViewAreaCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
-
+                cell.ddcModel = self.ddcModel
                     return cell
 
             } else if fieldTypeIs == .datePicker {
@@ -274,7 +279,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                 cell.setUpDatePickerCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
-
+                cell.ddcModel = self.ddcModel
                        return cell
 
             } else if fieldTypeIs == .timePicker {
@@ -285,6 +290,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                 cell.setUpTimePickerCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
+                cell.ddcModel = self.ddcModel
                 return cell
 
             } else if fieldTypeIs == .picker {
@@ -295,6 +301,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                 cell.setupPickerCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
+                cell.ddcModel = self.ddcModel
                 return cell
 
             }
@@ -306,6 +313,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                     cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                     cell.setupSliderCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
+                    cell.ddcModel = self.ddcModel
                    return cell
 
                } else if fieldTypeIs == .toggleSwitch {
@@ -315,6 +323,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
     //                              [.underlineStyle: NSUnderlineStyle.single.rawValue])
                     cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
                     cell.setupSliderCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+                   cell.ddcModel = self.ddcModel
                    return cell
                } else if fieldTypeIs == .autocomplete {
                    
@@ -323,6 +332,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                    cell.textField.setBottomBorder()
                    cell.textField.placeholder = "Enter " + (data?.uri)!
                    cell.setUpTextFieldCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+                   cell.ddcModel = self.ddcModel
                    return cell
                }
 
@@ -337,6 +347,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                     cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                     cell.setUpDropDownCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
+                    cell.ddcModel = self.ddcModel
                     return cell
             } else if fieldTypeIs == .radioButton {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "RadioButtonTableViewCell", for: indexPath) as! RadioButtonTableViewCell
@@ -345,7 +356,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                 cell.setUpRadioCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
-                   
+                cell.ddcModel = self.ddcModel
                     return cell
             } else if fieldTypeIs == .checkBox {
                      let cell = tableView.dequeueReusableCell(withIdentifier: "CheckBoxTableViewCell", for: indexPath) as! CheckBoxTableViewCell
@@ -354,7 +365,7 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
                 cell.setUpCheckBoxCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: self.entityGroup!.uniqueId, parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.entityGroup?.order ?? 0)
-                    
+                cell.ddcModel = self.ddcModel
                      return cell
             }
             }
@@ -364,7 +375,6 @@ extension RepeatableTableViewCell: UITableViewDelegate, UITableViewDataSource {
 //                       [.underlineStyle: NSUnderlineStyle.single.rawValue])
 
                     cell.setUpMessageCell(data: ddcModel!, entity: data!,indexPath: indexPath,tableView: self.tableView)
-                   
                     return cell
             }
             

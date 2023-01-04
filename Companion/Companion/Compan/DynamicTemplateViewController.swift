@@ -10,7 +10,7 @@ import SwiftUI
 import NotificationBannerSwift
 
 //Model declared globally
-var ddcModel : DDCFormModel?
+//var ddcModel : DDCFormModel?
 
 //Temporary place for setting reset value
 var isResetAvailable = false // Show/hide reset button
@@ -30,15 +30,18 @@ protocol DynamicTemplateViewControllerDelegate {
     func didSubmitSurvey(params:[String:Any])
 }
 
-class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class DynamicTemplateViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerLabel: UILabel!
+    
     
     var delegate: DynamicTemplateViewControllerDelegate?
     
     // declare dictionary variable for storing heights of cells
     var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
+    
+    var dataModel: DDCFormModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +85,6 @@ class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITabl
         removeObservers()
     }
     
-
     func setUpData() {
         
     }
@@ -95,45 +97,36 @@ class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITabl
             object: nil
         )
     }
+    
     func removeObservers(){
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"ReloadTable"), object: nil)
-
     }
     
     @objc func notificationAction() {
-
         DispatchQueue.main.async {
         UIView.setAnimationsEnabled(false)
             let offset = self.tableView.contentOffset
             self.tableView.reloadData()
             self.tableView.setContentOffset(offset, animated: false)
         }
-
-//        UIView.setAnimationsEnabled(false)
-//            UIView.performWithoutAnimation {
-//                self.tableView.reloadData()
-//              //  self.tableView.beginUpdates()
-//             //   self.tableView.endUpdates()
-//            }
-          }
+    }
     
     @IBAction func submitBtn(_ sender: Any) {
         let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
-        let parameter = ["blueprint": try! ddcModel!.toDictionary(), "context_parameters": context_parameters, "modified_by": name] as [String : Any]
+        let parameter = ["blueprint": try! dataModel!.toDictionary(), "context_parameters": context_parameters, "modified_by": name] as [String : Any]
         self.saveTemplateInstance(template: parameter)
     }
     
     @IBAction func resetBtn(_ sender: Any) {
         showValidations = false
         let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
-        let parameter = ["blueprint": try! ddcModel!.toDictionary(), "context_parameters": context_parameters, "modified_by": name] as [String : Any]
+        let parameter = ["blueprint": try! dataModel!.toDictionary(), "context_parameters": context_parameters, "modified_by": name] as [String : Any]
         self.resetTemplateInstance(template: parameter)
     }
     
-    
     // Save Template instance
     func saveTemplateInstance(template: [String:Any]) {
-        if ValidationHelper.shared.checkValidation() == false {
+        if ValidationHelper.shared.checkValidation(ddcModel: self.dataModel) == false {
             let leftView = UIImageView(image: UIImage(named: "warning"))
             let banner = GrowingNotificationBanner(title: "Incomplete form", subtitle: "Please fill all required fields.", leftView: leftView, style: .warning)
             banner.haptic = .medium
@@ -144,7 +137,7 @@ class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITabl
         }
         showValidations = false
             var symptomKeys = [String]()
-            let dropDownSet = ddcModel?.valueSet?["symptomSet"]
+            let dropDownSet = dataModel?.valueSet?["symptomSet"]
             for i in 0..<(dropDownSet?.count ?? 0) {
                 let item = dropDownSet![i]
                 symptomKeys.append(item.keys.first!)
@@ -233,12 +226,12 @@ class DynamicTemplateViewController: UIViewController,UITableViewDelegate,UITabl
 // MARK: - UITableViewDataSource
 func numberOfSections(in tableView: UITableView) -> Int {
 //    return (ddcModel?.template?.entities?.count)!
-    return (ddcModel?.template?.sortedArray?.count)!
+    return (dataModel?.template?.sortedArray?.count)!
 }
 
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if ddcModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || ddcModel?.template?.sortedArray?[section].value.type == .entityGroup {
-        return ddcModel?.template?.sortedArray?[section].value.sortedEntityGroupsArray?.count ?? 0
+    if dataModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || dataModel?.template?.sortedArray?[section].value.type == .entityGroup {
+        return dataModel?.template?.sortedArray?[section].value.sortedEntityGroupsArray?.count ?? 0
     }
     return 1
 }
@@ -253,14 +246,14 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
         titleLabel.textColor = headerFontColor
         titleLabel.font = headerFont
         view.addSubview(titleLabel)
-        if ddcModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || ddcModel?.template?.sortedArray?[section].value.type == .entityGroup {
-            titleLabel.text = ddcModel?.template?.sortedArray?[section].value.title ?? ""
+        if dataModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || dataModel?.template?.sortedArray?[section].value.type == .entityGroup {
+            titleLabel.text = dataModel?.template?.sortedArray?[section].value.title ?? ""
         } else {
             if section == 0 {
-            titleLabel.text =  ddcModel?.template?.title
+            titleLabel.text =  dataModel?.template?.title
             }
         }
-        if ddcModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || ddcModel?.template?.sortedArray?[section].value.type == .entityGroup {
+        if dataModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || dataModel?.template?.sortedArray?[section].value.type == .entityGroup {
 
             let button = UIButton()
                 button.setBackgroundImage(UIImage.add.withTintColor(.blue), for: .normal)
@@ -270,7 +263,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
                 view.addSubview(button)
 
 
-            if ddcModel?.template?.entities?.count != 1 {
+            if dataModel?.template?.entities?.count != 1 {
                 let button = UIButton()
                 button.setBackgroundImage(UIImage.remove.withTintColor(.red), for: .normal)
                 button.frame = CGRect(x: view.frame.maxX - 40, y: view.frame.midY - 17.5, width: 35, height: 35)
@@ -312,7 +305,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
         if showHeader == false {
             return 0
         }
-        if ddcModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || ddcModel?.template?.sortedArray?[section].value.type == .entityGroup {
+        if dataModel?.template?.sortedArray?[section].value.type == .entityGroupRepeatable || dataModel?.template?.sortedArray?[section].value.type == .entityGroup {
             return 0
         } else {
         if section == 0 {
@@ -326,11 +319,11 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var data : Entity?
-        if ddcModel?.template?.sortedArray![indexPath.section].value.type == .entityGroupRepeatable {
+        if dataModel?.template?.sortedArray![indexPath.section].value.type == .entityGroupRepeatable {
 //            data = ddcModel?.template?.entities![indexPath.section].entityGroups![0].entities![indexPath.row]
-            return Utilities.shared.calculateGroupHeight(tableView: tableView, entityGroup: (ddcModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray?[indexPath.row].value)!, data: ddcModel!)
+            return Utilities.shared.calculateGroupHeight(tableView: tableView, entityGroup: (dataModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray?[indexPath.row].value)!, data: dataModel!)
         } else {
-            data = ddcModel?.template?.sortedArray![indexPath.section].value
+            data = dataModel?.template?.sortedArray![indexPath.section].value
         }
         if data!.type == .calculatedEntity {
             return 0
@@ -347,7 +340,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
         if enumerationEntityfieldTypeIs == .radioButton {
 
 //        let dropDownSet = ddcModel?.valueSet?.filter{ $0.refID!.localizedCaseInsensitiveContains((data!.valueSetRef)!)}
-        let dropDownSet = ddcModel?.valueSet?[(data!.valueSetRef!)]
+        let dropDownSet = dataModel?.valueSet?[(data!.valueSetRef!)]
 
         let dynamicHeightforRadioCell = dropDownSet!.count * 50 + 51 + 22
 
@@ -356,7 +349,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 
 //        let dropDownSet = ddcModel?.valueSet?.filter{ $0.refID!.localizedCaseInsensitiveContains((data!.valueSetRef)!)}
 //
-          let dropDownSet = ddcModel?.valueSet?[(data!.valueSetRef!)]
+          let dropDownSet = dataModel?.valueSet?[(data!.valueSetRef!)]
         let dynamicHeightforRadioCell = dropDownSet!.count * 50 + 51 + 22
 
           return CGFloat(dynamicHeightforRadioCell) + ComponentUtils.getResetHeight() + ComponentUtils.getErrorMessageHeight(entity: data!) + (data!.attributedTitleHeight - 20.5)
@@ -399,17 +392,18 @@ if cell == nil {
 }
 //if indexPath.section == 0 {
   
-    if ddcModel != nil {
+    if dataModel != nil {
         var data : Entity?
-        if ddcModel?.template?.sortedArray![indexPath.section].value.type == .entityGroupRepeatable {
+        if dataModel?.template?.sortedArray![indexPath.section].value.type == .entityGroupRepeatable {
 //            data = ddcModel?.template?.entities![indexPath.section].entityGroups![0].entities![indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "RepeatableTableViewCell", for: indexPath) as! RepeatableTableViewCell
-            cell.setupRepeatableGroupCell(entityGroup: (ddcModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row].value)!, data:ddcModel!, parentEntityGroupId: (ddcModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row].value.uniqueId)!)
+            cell.setupRepeatableGroupCell(entityGroup: (dataModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row].value)!, data:dataModel!, parentEntityGroupId: (dataModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row].value.uniqueId)!)
             
-            cell.setupHeaderView(entityGroup: (ddcModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row])!.value, groupCount: ddcModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray!.count ?? 0, sectionIndex: 0)
+            cell.setupHeaderView(entityGroup: (dataModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray![indexPath.row])!.value, groupCount: dataModel?.template?.sortedArray![indexPath.section].value.sortedEntityGroupsArray!.count ?? 0, sectionIndex: 0)
+            cell.ddcModel = self.dataModel
             return cell
         } else {
-            data = ddcModel?.template?.sortedArray![indexPath.section].value
+            data = dataModel?.template?.sortedArray![indexPath.section].value
         }
         if data?.type  == .textEntryEntity {
             let fieldTypeIs = ComponentUtils.getTextEntryEntityFieldType(fieldData:data!)
@@ -421,7 +415,8 @@ if cell == nil {
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
                 cell.textField.setBottomBorder()
                 cell.textField.placeholder = "Enter " + (data?.uri)!
-                cell.setUpTextFieldCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+                cell.setUpTextFieldCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+                cell.ddcModel = self.dataModel
                 return cell
 
         } else if fieldTypeIs == .textareaField {
@@ -431,7 +426,8 @@ if cell == nil {
 //                    [.underlineStyle: NSUnderlineStyle.single.rawValue])
             cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
-            cell.setUpTextViewAreaCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+            cell.setUpTextViewAreaCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+            cell.ddcModel = self.dataModel
 
                 return cell
 
@@ -441,7 +437,8 @@ if cell == nil {
 //                   cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                       [.underlineStyle: NSUnderlineStyle.single.rawValue])
             cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
-            cell.setUpDatePickerCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+            cell.setUpDatePickerCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+            cell.ddcModel = self.dataModel
 
                    return cell
 
@@ -451,7 +448,9 @@ if cell == nil {
 //            cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                           [.underlineStyle: NSUnderlineStyle.single.rawValue])
             cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
-            cell.setUpTimePickerCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+            cell.setUpTimePickerCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+            cell.ddcModel = self.dataModel
+
             return cell
 
         } else if fieldTypeIs == .picker {
@@ -460,7 +459,8 @@ if cell == nil {
 //            cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                           [.underlineStyle: NSUnderlineStyle.single.rawValue])
             cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
-            cell.setupPickerCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+            cell.setupPickerCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+            cell.ddcModel = self.dataModel
             return cell
 
         }
@@ -470,7 +470,8 @@ if cell == nil {
 //               cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                              [.underlineStyle: NSUnderlineStyle.single.rawValue])
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
-                cell.setupSliderCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+                cell.setupSliderCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+                cell.ddcModel = self.dataModel
                return cell
 
            } else if fieldTypeIs == .toggleSwitch {
@@ -479,7 +480,8 @@ if cell == nil {
 //               cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                              [.underlineStyle: NSUnderlineStyle.single.rawValue])
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
-                cell.setupSliderCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+                cell.setupSliderCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+               cell.ddcModel = self.dataModel
                return cell
 
            } else if fieldTypeIs == .autocomplete {
@@ -489,7 +491,8 @@ if cell == nil {
 //                    [.underlineStyle: NSUnderlineStyle.single.rawValue])
                cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
                cell.textField.setBottomBorder()
-               cell.setUpTextFieldCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+               cell.setUpTextFieldCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+               cell.ddcModel = self.dataModel
                return cell
        }
 
@@ -502,7 +505,8 @@ if cell == nil {
                 //    [.underlineStyle: NSUnderlineStyle.single.rawValue])
                 cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
-                cell.setUpDropDownCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
+                cell.setUpDropDownCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+                cell.ddcModel = self.dataModel
                 return cell
         } else if fieldTypeIs == .radioButton {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "RadioButtonTableViewCell", for: indexPath) as! RadioButtonTableViewCell
@@ -510,16 +514,16 @@ if cell == nil {
              //      [.underlineStyle: NSUnderlineStyle.single.rawValue])
             cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
 
-            cell.setUpRadioCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
-
+            cell.setUpRadioCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+            cell.ddcModel = self.dataModel
                 return cell
         } else if fieldTypeIs == .checkBox {
                  let cell = tableView.dequeueReusableCell(withIdentifier: "CheckBoxTableViewCell", for: indexPath) as! CheckBoxTableViewCell
 //                cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                    [.underlineStyle: NSUnderlineStyle.single.rawValue])
             cell.uriLbl.attributedText = data?.title?.htmlToAttributedString
-            cell.setUpCheckBoxCell(data: ddcModel!, entity: data!,indexPath: indexPath, entityGroupId: ddcModel?.template?.uniqueId ?? "")
-
+            cell.setUpCheckBoxCell(data: dataModel!, entity: data!,indexPath: indexPath, entityGroupId: dataModel?.template?.uniqueId ?? "")
+            cell.ddcModel = self.dataModel
                  return cell
         }
         }
@@ -527,8 +531,7 @@ if cell == nil {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
 //               cell.uriLbl.attributedText = NSAttributedString(string: (data?.uri)!, attributes:
 //                   [.underlineStyle: NSUnderlineStyle.single.rawValue])
-                cell.setUpMessageCell(data: ddcModel!, entity: data!,indexPath: indexPath,tableView: self.tableView)
-
+                cell.setUpMessageCell(data: dataModel!, entity: data!,indexPath: indexPath,tableView: self.tableView)
                 return cell
         }
 

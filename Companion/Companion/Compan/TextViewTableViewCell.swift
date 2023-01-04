@@ -85,6 +85,9 @@ class TextViewTableViewCell: UITableViewCell,UITextViewDelegate {
         }
     }
     
+    var ddcModel: DDCFormModel?
+
+    
     func textViewDidEndEditing(_ textView: UITextView) {
 
         if textView.text == "" {
@@ -92,11 +95,11 @@ class TextViewTableViewCell: UITableViewCell,UITextViewDelegate {
             self.textView.textColor = UIColor.lightGray
         } else {
 //            RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: textView.text!)
-            RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: textView.text!, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+            RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: textView.text!, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
         }
     }
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
     }
 }

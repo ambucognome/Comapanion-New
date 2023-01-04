@@ -77,8 +77,11 @@ class AutocompleteTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    var ddcModel: DDCFormModel?
+
+    
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -87,7 +90,7 @@ class AutocompleteTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func updateValue(value: [String:Any]) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: value, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: value, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
     
     struct SearchResult {

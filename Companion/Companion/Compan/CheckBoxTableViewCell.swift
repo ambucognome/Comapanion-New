@@ -118,6 +118,7 @@ class CheckBoxTableViewCell: UITableViewCell {
             self.errorLabelHeight.constant = 12
         }
     }
+    var ddcModel: DDCFormModel?
 
     @objc func selectionChanged() {
         print(selectionList.selectedIndexes)
@@ -132,12 +133,12 @@ class CheckBoxTableViewCell: UITableViewCell {
         print(values)
 //        let valueString = values.joined(separator: ",")
 //        RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: valueString)
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: values, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: values, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
 
     }
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
     }
     
 }

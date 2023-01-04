@@ -30,7 +30,9 @@ class TextfieldComponent: UITableViewCell, UITextFieldDelegate {
     var entityGroupId: String = ""
     var parentEntityGroupId = ""
     var groupOrder = 0
+    var ddcModel: DDCFormModel?
 
+    
     
     func setUpTextFieldCell(data: DDCFormModel,entity: Entity, indexPath: IndexPath,entityGroupId: String,parentEntityGroupId:String = "99",groupOrder: Int = 0) {
         self.isUserInteractionEnabled = true
@@ -61,12 +63,12 @@ class TextfieldComponent: UITableViewCell, UITextFieldDelegate {
     }
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
 //        print(RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: textField.text!))
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: textField.text!, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: textField.text!, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
     
     

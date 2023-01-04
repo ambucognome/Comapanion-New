@@ -20,7 +20,7 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
         super.viewDidLoad()
         if self.isDemo {
             self.view.isHidden = true
-            self.getTempleWith(uri: template_uri, context: [ "key" : "two"])
+            self.getTempleWith(uri: template_uri, context: [ "key" : "101"])
             return
         }
         self.startSurvey()
@@ -230,15 +230,16 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
                                           let storyboard = UIStoryboard(name: "Main", bundle: frameworkBundle)
                                           let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
                                           vc.delegate = self
-                                          ddcModel = jsonDataModels
+                                          vc.dataModel = jsonDataModels
+//                                          ddcModel = jsonDataModels
 //                                          self.present(vc, animated: true, completion: nil)
                                           if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
-                                              ScriptHelper.shared.checkIsVisibleEntity()
+                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
                                               return
                                           }
                                           self.navigationController?.pushViewController(vc, animated: true)
                                           LogoutHelper.shared.showLogoutView()
-                                          ScriptHelper.shared.checkIsVisibleEntity()
+                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
 
                                       }catch {
                                           print(error)

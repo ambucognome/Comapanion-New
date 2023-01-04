@@ -18,6 +18,8 @@ class DropDownTableViewCell: UITableViewCell {
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var errorLabelHeight: NSLayoutConstraint!
+    
+    var ddcModel: DDCFormModel?
 
 
     override func awakeFromNib() {
@@ -79,7 +81,7 @@ class DropDownTableViewCell: UITableViewCell {
           mainDropDown.didSelect{(selectedText , index , id) in
             //  self.valueLabel.text = "Selected String: \(selectedText) \n index: \(index) \n Id: \(id)"
 //              RequestHelper.shared.createRequestForEntity(data: data, index: indexPath, newValue: selectedText)
-              RequestHelper.shared.createRequestForEntity(entity: entity, newValue: id, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+              RequestHelper.shared.createRequestForEntity(entity: entity, newValue: id, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
           }
           mainDropDown.arrowSize = 10
 
@@ -102,11 +104,9 @@ class DropDownTableViewCell: UITableViewCell {
             self.errorLabel.isHidden = false
             self.errorLabelHeight.constant = 12
         }
-
-
     }
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: self.entityGroupId,parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: self.entityGroupId,parentEntityGroupId: self.parentEntityGroupId,groupOrder: self.groupOrder, dataModel: self.ddcModel)
     }
 }

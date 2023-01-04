@@ -11,7 +11,7 @@ class ValidationHelper : NSObject {
     
     static let shared = ValidationHelper()
     
-    func checkValidation() -> Bool {
+    func checkValidation(ddcModel: DDCFormModel?) -> Bool {
         let mainEntities = ddcModel?.template?.sortedArray
         for entityIndex in 0..<(mainEntities?.count ?? 0) {
             if let entity = mainEntities?[entityIndex].value {

@@ -133,18 +133,17 @@ class ViewController: UIViewController {
                                           let frameworkBundle = Bundle(for: ViewController.self)
                                           let storyboard = UIStoryboard(name: "Main", bundle: frameworkBundle)
                                           let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
-                                          ddcModel = jsonDataModels
+//                                          ddcModel = jsonDataModels
 //                                          self.present(vc, animated: true, completion: nil)
                                           if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
                                               NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
-                                              ScriptHelper.shared.checkIsVisibleEntity()
+                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
                                               return
                                           }
                                           
                                           self.navigationController?.pushViewController(vc, animated: true)
                                           showValidations = false
-                                          ScriptHelper.shared.checkIsVisibleEntity()
-
+                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
                                       }catch {
                                           print(error)
                                       }
@@ -185,15 +184,15 @@ class ViewController: UIViewController {
                                           
                                           let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                           let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
-                                          ddcModel = jsonDataModels
+//                                          ddcModel = jsonDataModels
 //                                          self.present(vc, animated: true, completion: nil)
                                           if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
-                                              ScriptHelper.shared.checkIsVisibleEntity()
+                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
                                               return
                                           }
                                           
                                           self.navigationController?.pushViewController(vc, animated: true)
-                                          ScriptHelper.shared.checkIsVisibleEntity()
+                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
 
                                       }catch {
                                           print(error)

@@ -24,7 +24,8 @@ class SliderTableViewCell: UITableViewCell {
     var parentEntityGroupId = ""
     var groupOrder = 0
 
-    
+    var ddcModel: DDCFormModel?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -91,11 +92,11 @@ class SliderTableViewCell: UITableViewCell {
         self.valueSlider.value = Float(Int(round(sender.value)))
         self.valueLabel.text = Int(round(sender.value)).description
 //        RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: Int(round(sender.value)).description)
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: Int(round(sender.value)).description, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: Int(round(sender.value)).description, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
     }
     
 

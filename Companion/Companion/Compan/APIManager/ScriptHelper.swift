@@ -19,15 +19,15 @@ class ScriptHelper : NSObject {
 
     let context = JSContext()!
     
-    func checkIsVisibleEntity() {
-        self.getCalculativeCount()
+    func checkIsVisibleEntity(ddcModel : DDCFormModel?) {
+        self.getCalculativeCount(ddcModel: ddcModel)
         url = "template"
         let mainEntities = ddcModel?.template?.sortedArray
         for entityIndex in 0..<(mainEntities?.count ?? 0) {
             if let entity = mainEntities?[entityIndex].value {
                 if entity.isVisible != nil {
                     
-                    self.executeScrip(parentObj: ddcModel?.template?.convertToString ?? "", scriptString: entity.isVisible!) { isHidden, isVisible in
+                    self.executeScrip(parentObj: ddcModel?.template?.convertToString ?? "", scriptString: entity.isVisible!, ddcModel: ddcModel) { isHidden, isVisible in
                         ddcModel?.template?.sortedArray?[entityIndex].value.isHidden = isHidden
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
                         if (isVisible)  {
@@ -35,13 +35,13 @@ class ScriptHelper : NSObject {
                         } else if !isVisible && entity.value != "" && (entity.type?.rawValue ?? "") != FieldType.messageEntity.rawValue {
                             //API Call
                             self.url += ".entities.\(entity.uri ?? "")"
-                            self.revokeEntity(entityObj: entity.convertToString ?? "", path: self.url)
+                            self.revokeEntity(entityObj: entity.convertToString ?? "", path: self.url, ddcModel: ddcModel)
                         }
                     }
                 }
                 if entity.type == .calculatedEntity && entity.calculation != nil {
-                    self.executeCalculativeScrip(parentObj: ddcModel?.template?.convertToString ?? "", scriptString: entity.calculation!) { value in
-                        RequestHelper.shared.createRequestForEntity(entity: entity, newValue: value, entityGroupId: ddcModel?.template?.uniqueId ?? "" ,parentEntityGroupId: "",isCalculativeEntity: true, groupOrder: 0)
+                    self.executeCalculativeScrip(parentObj: ddcModel?.template?.convertToString ?? "", scriptString: entity.calculation!, ddcModel: ddcModel) { value in
+                        RequestHelper.shared.createRequestForEntity(entity: entity, newValue: value, entityGroupId: ddcModel?.template?.uniqueId ?? "" ,parentEntityGroupId: "",isCalculativeEntity: true, groupOrder: 0, dataModel: ddcModel)
                         ddcModel?.template?.sortedArray?[entityIndex].value.value = AnyCodable(value)
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
 
@@ -54,7 +54,7 @@ class ScriptHelper : NSObject {
                             for nestedEntityIndex in 0..<(data.sortedEntitiesArray?.count ?? 0) {
                                 if let nestedEntity = data.sortedEntitiesArray?[nestedEntityIndex].value {
                                     if nestedEntity.isVisible != nil {
-                                        self.executeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.isVisible!) { isHidden,isVisible  in
+                                        self.executeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.isVisible!, ddcModel: ddcModel) { isHidden,isVisible  in
                                             
                                             ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.sortedEntitiesArray?[nestedEntityIndex].value.isHidden = isHidden
                                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
@@ -64,15 +64,15 @@ class ScriptHelper : NSObject {
                                                 //API Call
                                                 self.url += ".entities.\(entity.uri ?? "")"
                                                 self.url += ".entity_groups[\(entityGroupIndex.description)].\(entityGroup[entityGroupIndex].value.uri ?? "")"
-                                                self.revokeEntity(entityObj: nestedEntity.convertToString ?? "", path: self.url)
+                                                self.revokeEntity(entityObj: nestedEntity.convertToString ?? "", path: self.url, ddcModel: ddcModel)
                                             }
                                             
                                         }
                                     }
                                     if nestedEntity.type == .calculatedEntity && nestedEntity.calculation != nil {
-                                        self.executeCalculativeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.calculation!) { value in
+                                        self.executeCalculativeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.calculation!, ddcModel: ddcModel) { value in
                                             
-                                            RequestHelper.shared.createRequestForEntity(entity: nestedEntity, newValue: value, entityGroupId:data.uniqueId  ,parentEntityGroupId: ddcModel?.template?.uniqueId ?? "" ,isCalculativeEntity: true, groupOrder: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.order ?? 0)
+                                            RequestHelper.shared.createRequestForEntity(entity: nestedEntity, newValue: value, entityGroupId:data.uniqueId  ,parentEntityGroupId: ddcModel?.template?.uniqueId ?? "" ,isCalculativeEntity: true, groupOrder: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.order ?? 0, dataModel: ddcModel)
                                             
                                             ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.sortedEntitiesArray?[nestedEntityIndex].value.value = AnyCodable(value)
                                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
@@ -86,7 +86,7 @@ class ScriptHelper : NSObject {
                                                 for nnestedEntityIndex in 0..<(data.sortedEntitiesArray?.count ?? 0) {
                                                     if let nestedEntity = data.sortedEntitiesArray?[nnestedEntityIndex].value {
                                                         if nestedEntity.isVisible != nil {
-                                                            self.executeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.isVisible!) { isHidden,isVisible in
+                                                            self.executeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.isVisible!, ddcModel: ddcModel) { isHidden,isVisible in
                                                                 ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.sortedEntitiesArray?[nestedEntityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.sortedEntitiesArray?[nnestedEntityIndex].value.isHidden = isHidden
                                                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
                                                                 if (isVisible)  {
@@ -99,15 +99,15 @@ class ScriptHelper : NSObject {
                                                                     self.url += ".entity_groups[\(entityGroupIndex.description)].\(entityGroup[entityGroupIndex].value.uri ?? "")"
                                                                     self.url += ".entities.\(nestedEntity.uri ?? "")"
 
-                                                                    self.revokeEntity(entityObj: nestedEntity.convertToString ?? "", path: self.url)
+                                                                    self.revokeEntity(entityObj: nestedEntity.convertToString ?? "", path: self.url, ddcModel: ddcModel)
                                                                 }
 
                                                             }
                                                         }
                                                         if nestedEntity.type == .calculatedEntity && nestedEntity.calculation != nil {
-                                                            self.executeCalculativeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.calculation!) { value in
+                                                            self.executeCalculativeScrip(parentObj: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.convertToString ?? "", scriptString: nestedEntity.calculation!, ddcModel: ddcModel) { value in
                                                                 
-                                                                RequestHelper.shared.createRequestForEntity(entity: nestedEntity, newValue: value, entityGroupId: nestedEntityGroup[nentityGroupIndex].value.uniqueId  ,parentEntityGroupId: data.uniqueId ,isCalculativeEntity: true, groupOrder: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.order ?? 0)
+                                                                RequestHelper.shared.createRequestForEntity(entity: nestedEntity, newValue: value, entityGroupId: nestedEntityGroup[nentityGroupIndex].value.uniqueId  ,parentEntityGroupId: data.uniqueId ,isCalculativeEntity: true, groupOrder: ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.order ?? 0, dataModel: ddcModel)
 
                                                                 
                                                                 ddcModel?.template?.sortedArray?[entityIndex].value.sortedEntityGroupsArray?[entityGroupIndex].value.sortedEntitiesArray?[nestedEntityIndex].value.sortedEntityGroupsArray?[nentityGroupIndex].value.sortedEntitiesArray?[nnestedEntityIndex].value.value = AnyCodable(value)
@@ -130,7 +130,7 @@ class ScriptHelper : NSObject {
     }
     
     
-    func getCalculativeCount() {
+    func getCalculativeCount(ddcModel: DDCFormModel?) {
         entities = [:]
         calculativeCount = 0
         let mainEntities = ddcModel?.template?.sortedArray
@@ -173,7 +173,7 @@ class ScriptHelper : NSObject {
         }
     }
 
-    func revokeEntity(entityObj:String, path:String) {
+    func revokeEntity(entityObj:String, path:String,ddcModel: DDCFormModel?) {
         var entityDic  = [String:Any]()
         if let data = entityObj.data(using: .utf8) {
             let dic = try! JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.fragmentsAllowed) as! [String: Any]
@@ -202,7 +202,7 @@ class ScriptHelper : NSObject {
         }
     }
     
-    func executeScrip(parentObj:String,scriptString: String, completion: @escaping  (Bool, Bool) -> ()) {
+    func executeScrip(parentObj:String,scriptString: String,ddcModel: DDCFormModel?, completion: @escaping  (Bool, Bool) -> ()) {
         let template = ddcModel?.template?.convertToString ?? ""
         
 //        let jsCode = "return this.entities.symptoms.value.includes(\"symptoms___1\") ; "
@@ -251,7 +251,7 @@ class ScriptHelper : NSObject {
     }
     
     
-    func executeCalculativeScrip(parentObj:String,scriptString: String, completion: @escaping  (String) -> ()) {
+    func executeCalculativeScrip(parentObj:String,scriptString: String,ddcModel: DDCFormModel?, completion: @escaping  (String) -> ()) {
         let template = ddcModel?.template?.convertToString ?? ""
         
 //        let jsCode = "return this.entities.symptoms.value.includes(\"symptoms___1\") ; "

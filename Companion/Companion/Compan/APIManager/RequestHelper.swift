@@ -18,9 +18,11 @@ class RequestHelper : NSObject {
     var pathCreation = ""
     var url = ""
     let context = JSContext()!
+    var ddcModel: DDCFormModel?
 
     
-    func createRequestForEntity(entity:Entity, newValue: Any, entityGroupId: String,parentEntityGroupId:String,isCalculativeEntity: Bool = false,groupOrder:Int){
+    func createRequestForEntity(entity:Entity, newValue: Any, entityGroupId: String,parentEntityGroupId:String,isCalculativeEntity: Bool = false,groupOrder:Int,dataModel: DDCFormModel?){
+        self.ddcModel = dataModel
         self.getRepeatableEntityAddress(entityData: entity, newValue: newValue, entityGroupId: entityGroupId,parentEntityGroupId:parentEntityGroupId,isCalculativeEntity: isCalculativeEntity,groupOrder: groupOrder)
         
     }
@@ -40,7 +42,7 @@ class RequestHelper : NSObject {
                 }
                 if isAPIReloadRequired == false && isCalculativeEntity == false {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
-                    ScriptHelper.shared.checkIsVisibleEntity()
+                    ScriptHelper.shared.checkIsVisibleEntity(ddcModel: self.ddcModel)
                     return
                 }
                 if isCalculativeEntity == false {
@@ -120,7 +122,7 @@ class RequestHelper : NSObject {
                         } else if let newValueStringArray = newValue as? [String] {
                             if entity.onValue != nil && entity.onValue != "" {
                                 self.executeScript(currentValue: newValue, previousValue: entity.value?.value as Any, scriptString: entity.onValue!) { value in
-                                    ddcModel?.template?.sortedArray?[entityIndex].value.value = AnyCodable.init(stringArrayLiteral: value)
+                                    self.ddcModel?.template?.sortedArray?[entityIndex].value.value = AnyCodable.init(stringArrayLiteral: value)
                                 }
                             } else {
                                 ddcModel?.template?.sortedArray?[entityIndex].value.value = AnyCodable.init(stringArrayLiteral: newValueStringArray)
@@ -136,7 +138,7 @@ class RequestHelper : NSObject {
                     if entity.onValue != nil && entity.onValue != "" {
                         //run script
                         self.executeScript(currentValue: newValue, previousValue: entity.value?.value as Any, scriptString: entity.onValue!) { value in
-                            ddcModel?.template?.sortedArray?[entityIndex].value.value = AnyCodable.init(stringArrayLiteral: value)
+                            self.ddcModel?.template?.sortedArray?[entityIndex].value.value = AnyCodable.init(stringArrayLiteral: value)
                             self.updateValue(entity: entityData, newValue: value, path: self.url,isCalculativeEntity: isCalculativeEntity, isAPIReloadRequired: false)
                             return
                         }

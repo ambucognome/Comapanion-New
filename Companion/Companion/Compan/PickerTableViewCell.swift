@@ -25,6 +25,7 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     var parentEntityGroupId = ""
     var groupOrder = 0
 
+    var ddcModel: DDCFormModel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -107,7 +108,7 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     @objc func done(){
         self.endEditing(true)
 //        RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: self.textField.text!)
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: self.textField.text!, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: self.textField.text!, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
     
     @objc func cancelPickerView(){
@@ -116,7 +117,7 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder, dataModel: self.ddcModel)
     }
 }
 

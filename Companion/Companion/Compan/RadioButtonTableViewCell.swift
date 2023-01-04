@@ -108,18 +108,20 @@ class RadioButtonTableViewCell: UITableViewCell {
 
     }
 
+    var ddcModel: DDCFormModel?
+
     @objc func selectionChanged() {
 //        print(selectionList.selectedIndexes)
         let newValue = self.fieldIdArray[selectionList.selectedIndex ?? 0]
         if newValue == "" { return }
 //        RequestHelper.shared.createRequestForEntity(data: self.data!, index: self.indexPath!, newValue: newValue)
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: newValue, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: newValue, entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
 
     }
     
     
     @IBAction func resetBtn(_ sender: Any) {
-        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder)
+        RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }
 
 }
