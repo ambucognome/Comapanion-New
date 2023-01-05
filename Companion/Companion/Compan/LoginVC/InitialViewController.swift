@@ -113,7 +113,7 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
                             ERProgressHud.shared.hide()
                             print(response)
                             let template_uri = response["ddc_template_uri"] as? String ?? ""
-                            templateURI = self.template_uri//template_uri
+                            templateURI = template_uri
                                     if let survey = response["survey"] as? NSDictionary {
                                         survey_data = survey
                                         let surveyTime =  survey["survey_start"] as? String ?? ""
