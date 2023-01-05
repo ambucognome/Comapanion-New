@@ -26,6 +26,7 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         tableView.layer.shadowOpacity = 1
         tableView.layer.shadowOffset = CGSize(width: -5, height: -5)
         tableView.layer.shadowColor = UIColor.white.cgColor
+        
     }
     
     //TabelViewDelegate Methods

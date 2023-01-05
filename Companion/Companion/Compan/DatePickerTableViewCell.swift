@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import DatePickerDialog
 
 class DatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
