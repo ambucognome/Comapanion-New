@@ -11,6 +11,7 @@
 		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
+		92B3A848296C023A00C03761 /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3A847296C023A00C03761 /* GridViewController.swift */; };
 		92CFA7E3295461F800D77883 /* CompanionLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */; };
 		92CFA7E6295461F800D77883 /* Companion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CFA7E4295461F800D77883 /* Companion.storyboard */; };
 		92CFA7E8295461FA00D77883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFA7E7295461FA00D77883 /* Assets.xcassets */; };
@@ -165,6 +166,7 @@
 		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
+		92B3A847296C023A00C03761 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		92CFA7DB295461F800D77883 /* Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Companion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionLoginViewController.swift; sourceTree = "<group>"; };
 		92CFA7E5295461F800D77883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Companion.storyboard; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				92CFA938295A0E8A00D77883 /* SceneDelegate.swift */,
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
 				92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */,
+				92B3A847296C023A00C03761 /* GridViewController.swift */,
 				92CFA7E4295461F800D77883 /* Companion.storyboard */,
 				92CFA7E7295461FA00D77883 /* Assets.xcassets */,
 				92CFA7E9295461FA00D77883 /* LaunchScreen.storyboard */,
@@ -978,6 +981,7 @@
 				92CFAB49295B1B9C00D77883 /* MessageViewModel.swift in Sources */,
 				92CFAB30295B1B9C00D77883 /* DropDownList.swift in Sources */,
 				92CFAB76295B1B9C00D77883 /* NotificationManager.swift in Sources */,
+				92B3A848296C023A00C03761 /* GridViewController.swift in Sources */,
 				92CFABA5295B1B9C00D77883 /* BubbleTransition.swift in Sources */,
 				92CFAB68295B1B9C00D77883 /* LayoutConstraintSet.swift in Sources */,
 				92CFA7F529546D9B00D77883 /* DashboardViewController.swift in Sources */,

@@ -9,7 +9,7 @@ import UIKit
 
 class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
-    var cellNames = ["My Profile", "Settings","Register","Request App", "Log out"]
+    var cellNames = ["Connect", "My Profile", "Settings","Register","Request App", "Log out"]
 
     
     @IBOutlet weak var nameLabel : UILabel!
@@ -51,6 +51,10 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "GridViewController") as! GridViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         if indexPath.row == 4 {
             LogoutHelper.shared.logout()
         }
