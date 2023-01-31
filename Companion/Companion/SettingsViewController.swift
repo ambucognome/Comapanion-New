@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
         ]))
         
         models.append(Section(title: "Notifications", options: [
-            .staticCell(model: SettingsOption(title: "Push Notifications", icon: UIImage(systemName: "bell.and.waveform"), iconBackgroundColor: .systemBlue, handler: {
+            .staticCell(model: SettingsOption(title: "Push Notifications", icon: UIImage(systemName: "bell.and.waveform"), iconBackgroundColor: .red, handler: {
                 //Switch action code is here
             }))
         ]))
@@ -104,6 +104,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         case .switchCell(let model):
             guard let cell = tableView.dequeueReusableCell(
@@ -113,6 +114,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         }
     }

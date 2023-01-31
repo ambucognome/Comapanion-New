@@ -112,6 +112,7 @@ class NotificationsViewController: UIViewController,UITableViewDelegate, UITable
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         case .switchCell(let model):
             guard let cell = tableView.dequeueReusableCell(
@@ -126,6 +127,7 @@ class NotificationsViewController: UIViewController,UITableViewDelegate, UITable
             } else {
                 cell.mySwitch.removeTarget(self, action: #selector(self.switchValueDidChange(sender:)), for: .valueChanged)
             }
+            cell.selectionStyle = .none
             return cell
         }
     }

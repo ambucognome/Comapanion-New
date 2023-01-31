@@ -72,6 +72,7 @@ class AppLockViewController: UIViewController,UITableViewDelegate, UITableViewDa
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         case .switchCell(let model):
             guard let cell = tableView.dequeueReusableCell(
@@ -82,6 +83,7 @@ class AppLockViewController: UIViewController,UITableViewDelegate, UITableViewDa
             }
             cell.configure(with: model)
             cell.mySwitch.addTarget(self, action: #selector(self.switchValueDidChange(sender:)), for: .valueChanged)
+            cell.selectionStyle = .none
             return cell
         }
     }

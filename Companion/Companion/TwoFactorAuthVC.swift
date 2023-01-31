@@ -88,6 +88,7 @@ class TwoFactorAuthVC: UIViewController,UITableViewDelegate, UITableViewDataSour
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         case .switchCell(let model):
             guard let cell = tableView.dequeueReusableCell(
@@ -99,6 +100,7 @@ class TwoFactorAuthVC: UIViewController,UITableViewDelegate, UITableViewDataSour
             cell.configure(with: model)
             cell.mySwitch.tag = indexPath.section
             cell.mySwitch.addTarget(self, action: #selector(self.switchValueDidChange(sender:)), for: .valueChanged)
+            cell.selectionStyle = .none
             return cell
         }
     }

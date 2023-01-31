@@ -110,6 +110,7 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         case .switchCell(let model):
             guard let cell = tableView.dequeueReusableCell(
@@ -119,6 +120,7 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                 return UITableViewCell()
             }
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         }
     }
