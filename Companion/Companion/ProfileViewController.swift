@@ -33,6 +33,20 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+//        self.bottomView.addTopRoundedCornerToView(targetView: self.bottomView, desiredCurve: 0.6)
+//        
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = self.topView.bounds
+//        gradientLayer.colors = [UIColor.init(red: 103/255.0, green: 75/255.0, blue: 157/255.0, alpha: 1.0).cgColor, UIColor.init(red: 195/255.0, green: 74/255.0, blue: 130/255.0, alpha: 1.0).cgColor]
+//        self.topView.layer.addSublayer(gradientLayer)
+//        
+//        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2.0
+//        profileImageView.layer.borderWidth = 3.0
+//        profileImageView.layer.borderColor = UIColor.white.cgColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.bottomView.addTopRoundedCornerToView(targetView: self.bottomView, desiredCurve: 0.6)
         
         let gradientLayer = CAGradientLayer()
