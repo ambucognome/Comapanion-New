@@ -92,9 +92,9 @@ class DashboardViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         dashboardNav = self.navigationController
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-//        DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
-//            self.displayCurrentTab(0)
-//        })
+        DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
+            self.displayCurrentTab(0)
+        })
         self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
         let btnLeftMenu: UIButton = UIButton()

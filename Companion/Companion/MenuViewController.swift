@@ -23,7 +23,7 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         self.configure()
-        self.nameLabel.text = "Listana"//username
+        self.nameLabel.text = username
         tableView.layer.cornerRadius = 25
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         tableView.layer.masksToBounds = false
@@ -39,30 +39,13 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
     }
     
-    //TabelViewDelegate Methods
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return  cellNames.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        cell.textLabel?.text = cellNames[indexPath.row]
-//        cell.textLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-////        cell.textLabel?.textColor = DARK_BLUE_COLOR
-//        cell.contentView.backgroundColor = .clear
-//        cell.backgroundColor = .clear
-//        cell.selectionStyle = .none
-//
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 55
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "GridViewController") as! GridViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath.row == 1 {
+            let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }
         if indexPath.row == 2 {
