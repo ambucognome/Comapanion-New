@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		87B3B2A4DC7E407353ADBF06 /* Pods_Companion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFEC946DCB5B4D7F57E91E9 /* Pods_Companion.framework */; };
+		92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F642988EADC0037D723 /* SettingsViewController.swift */; };
+		92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F672988EDDB0037D723 /* SettingTableViewCell.swift */; };
+		92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */; };
+		92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F6B29890E4B0037D723 /* AppLockViewController.swift */; };
+		92496F6E29890E5F0037D723 /* TwoFactorAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */; };
+		92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F6F29890E6D0037D723 /* NotificationsViewController.swift */; };
+		92496F7229890E970037D723 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F7129890E970037D723 /* ProfileViewController.swift */; };
 		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
@@ -163,6 +170,13 @@
 /* Begin PBXFileReference section */
 		51B6E23D635BCE2B91E39B68 /* Pods-Companion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.release.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.release.xcconfig"; sourceTree = "<group>"; };
 		8FFEC946DCB5B4D7F57E91E9 /* Pods_Companion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Companion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92496F642988EADC0037D723 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		92496F672988EDDB0037D723 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		92496F6B29890E4B0037D723 /* AppLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockViewController.swift; sourceTree = "<group>"; };
+		92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthVC.swift; sourceTree = "<group>"; };
+		92496F6F29890E6D0037D723 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		92496F7129890E970037D723 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
@@ -353,6 +367,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		92496F662988EDBE0037D723 /* MenuCells */ = {
+			isa = PBXGroup;
+			children = (
+				92496F672988EDDB0037D723 /* SettingTableViewCell.swift */,
+				92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */,
+			);
+			path = MenuCells;
+			sourceTree = "<group>";
+		};
 		92AD9E262966E02400B5E936 /* DatePickerDialog */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,12 +417,18 @@
 			children = (
 				92CFAA7B295B1B9B00D77883 /* Compan */,
 				92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */,
-				92CFA7F229546D8900D77883 /* MenuViewController.swift */,
 				92CFA937295A0E8A00D77883 /* AppDelegate.swift */,
 				92CFA938295A0E8A00D77883 /* SceneDelegate.swift */,
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
 				92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */,
+				92CFA7F229546D8900D77883 /* MenuViewController.swift */,
+				92496F642988EADC0037D723 /* SettingsViewController.swift */,
 				92B3A847296C023A00C03761 /* GridViewController.swift */,
+				92496F6B29890E4B0037D723 /* AppLockViewController.swift */,
+				92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */,
+				92496F6F29890E6D0037D723 /* NotificationsViewController.swift */,
+				92496F7129890E970037D723 /* ProfileViewController.swift */,
+				92496F662988EDBE0037D723 /* MenuCells */,
 				92CFA7E4295461F800D77883 /* Companion.storyboard */,
 				92CFA7E7295461FA00D77883 /* Assets.xcassets */,
 				92CFA7E9295461FA00D77883 /* LaunchScreen.storyboard */,
@@ -941,6 +970,7 @@
 				92CFAB3F295B1B9C00D77883 /* SelectionStyleCell.swift in Sources */,
 				92CFAB5D295B1B9C00D77883 /* ChatBarView.swift in Sources */,
 				92CFAB72295B1B9C00D77883 /* TypingIndicatorView.swift in Sources */,
+				92496F6E29890E5F0037D723 /* TwoFactorAuthVC.swift in Sources */,
 				92CFA7E3295461F800D77883 /* CompanionLoginViewController.swift in Sources */,
 				92CFAB40295B1B9C00D77883 /* MessageImageCell.swift in Sources */,
 				92CFAB52295B1B9C00D77883 /* OnCallView.swift in Sources */,
@@ -948,7 +978,9 @@
 				92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */,
 				92CFAB63295B1B9C00D77883 /* PhotoDataManager.swift in Sources */,
 				92CFAB90295B1B9C00D77883 /* ScriptHelper.swift in Sources */,
+				92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */,
 				92CFAB6B295B1B9C00D77883 /* Bundle.swift in Sources */,
+				92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */,
 				92CFAB8E295B1B9C00D77883 /* LoadViewController.swift in Sources */,
 				92CFAB75295B1B9C00D77883 /* MessageViewController.swift in Sources */,
 				92CFAB5F295B1B9C00D77883 /* UIImage+Extensions.swift in Sources */,
@@ -961,6 +993,7 @@
 				92CFAB4F295B1B9C00D77883 /* MessageCell.swift in Sources */,
 				92CFAB99295B1B9C00D77883 /* RequestHelper.swift in Sources */,
 				92CFAB4C295B1B9C00D77883 /* ChatBarType.swift in Sources */,
+				92496F7229890E970037D723 /* ProfileViewController.swift in Sources */,
 				92CFAB3C295B1B9C00D77883 /* SurveyHelper.swift in Sources */,
 				92CFAB93295B1B9C00D77883 /* ValidationHelper.swift in Sources */,
 				92CFABA2295B1B9C00D77883 /* FloatingLabelTextField.swift in Sources */,
@@ -976,6 +1009,7 @@
 				92CFAB9A295B1B9C00D77883 /* ToggleSwitchTableViewCell.swift in Sources */,
 				92CFAB8A295B1B9C00D77883 /* RepeatableTableViewCell.swift in Sources */,
 				92CFAB5C295B1B9C00D77883 /* Utils.swift in Sources */,
+				92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */,
 				92CFAB79295B1B9C00D77883 /* InitialViewController.swift in Sources */,
 				92CFAB82295B1B9C00D77883 /* LaunchViewController.swift in Sources */,
 				92CFAB49295B1B9C00D77883 /* MessageViewModel.swift in Sources */,
@@ -993,6 +1027,7 @@
 				92CFAB4D295B1B9C00D77883 /* UIBezierPath.swift in Sources */,
 				92CFAB5B295B1B9C00D77883 /* ChatViewController+Subviews.swift in Sources */,
 				92CFAB58295B1B9C00D77883 /* ChatButton.swift in Sources */,
+				92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */,
 				92CFAB84295B1B9C00D77883 /* DatePickerTableViewCell.swift in Sources */,
 				92CFABA1295B1B9C00D77883 /* iOSDropDown.swift in Sources */,
 				92CFAB54295B1B9C00D77883 /* JitsiMeetViewController.swift in Sources */,
@@ -1037,6 +1072,7 @@
 				92CFAB77295B1B9C00D77883 /* EZLoginViewController.swift in Sources */,
 				92CFAB36295B1B9C00D77883 /* TextViewTableViewCell.swift in Sources */,
 				92CFAB6E295B1B9C00D77883 /* HeaderRefreshView.swift in Sources */,
+				92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */,
 				92CFAB44295B1B9C00D77883 /* Data.swift in Sources */,
 				92CFAB70295B1B9C00D77883 /* HeaderRefreshAnimator.swift in Sources */,
 				92CFAB3A295B1B9C00D77883 /* BiometricAuthenticationConstants.swift in Sources */,

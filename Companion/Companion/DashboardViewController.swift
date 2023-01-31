@@ -8,6 +8,9 @@
 import UIKit
 import SideMenu
 
+let DARK_BLUE_COLOR = UIColor(red: 0.07, green: 0.22, blue: 0.40, alpha: 1.00)
+
+
 var dashboardNav : UINavigationController?
 
 class DashboardViewController: UIViewController {
@@ -73,7 +76,6 @@ class DashboardViewController: UIViewController {
     var currentViewController: UIViewController?
     var previousViewController: UIViewController?
     
-    let DARK_BLUE_COLOR = UIColor(red: 0.07, green: 0.22, blue: 0.40, alpha: 1.00)
     let LIGHT_BLUE_COLOR = UIColor.white
     
     var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),AppStruct(name: "Basic", image: nil, notificationCount: 0, isSelected: false),AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Repeatable 2", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Four", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Five", image: nil, notificationCount: 0,isSelected: false)]
@@ -87,11 +89,12 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.largeTitleDisplayMode = .never
         dashboardNav = self.navigationController
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
-            self.displayCurrentTab(0)
-        })
+//        DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
+//            self.displayCurrentTab(0)
+//        })
         self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
         let btnLeftMenu: UIButton = UIButton()

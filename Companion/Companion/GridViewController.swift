@@ -2,7 +2,7 @@
 //  GridViewController.swift
 //  Companion
 //
-//  Created by Santosh Naidu on 09/01/23.
+//  Created by Ambu Sangoli  on 09/01/23.
 //
 
 import UIKit
@@ -30,6 +30,13 @@ class GridViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+
+        self.navigationController?.navigationBar.standardAppearance = appearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
         SocketHelper.shared.connectSocket { success in
             print(success)
             SocketHelper.Events.server_initiated_event.listen { (result) in

@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
         registerForPushNotifications()
         Messaging.messaging().delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
+
         return true
     }
     
