@@ -63,22 +63,22 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         //MARK: SECTION ONE
         models.append(Section(title: "", options: [
-            .staticCell(model: SettingsOption(title: "Connect", icon: UIImage(systemName: "phone.connection"), iconBackgroundColor: .systemBlue, handler: {
+            .staticCell(model: SettingsOption(title: "Connect", icon: UIImage(named:  "connect"), iconBackgroundColor: .clear, handler: {
                 //Switch action code is here
             })),
-            .staticCell(model: SettingsOption(title: "My Profile", icon: UIImage(systemName: "person"), iconBackgroundColor: .systemPink, handler: {
+            .staticCell(model: SettingsOption(title: "My Profile", icon: UIImage(named: "profile"), iconBackgroundColor: .clear, handler: {
             })),
-            .staticCell(model: SettingsOption(title: "Settings", icon: UIImage(systemName: "gear"), iconBackgroundColor: .link, handler: {
+            .staticCell(model: SettingsOption(title: "Settings", icon: UIImage(named: "settings"), iconBackgroundColor: .clear, handler: {
 //                let nav = UINavigationController(rootViewController: vc)
                 
             })),
-            .staticCell(model: SettingsOption(title: "Register", icon: UIImage(systemName: "textformat.abc.dottedunderline"), iconBackgroundColor: .systemGreen, handler: {
+            .staticCell(model: SettingsOption(title: "Register", icon: UIImage(named: "register"), iconBackgroundColor: .clear, handler: {
                 //Hücrenin yapacağı işlev buraya ...
             })),
-            .staticCell(model: SettingsOption(title: "Request App", icon: UIImage(systemName: "tray.and.arrow.down"), iconBackgroundColor: .systemOrange, handler: {
+            .staticCell(model: SettingsOption(title: "Request App", icon: UIImage(named: "request"), iconBackgroundColor: .clear, handler: {
                 //Hücrenin yapacağı işlev buraya ...
             })),
-            .staticCell(model: SettingsOption(title: "Logout", icon: UIImage(systemName: "delete.forward"), iconBackgroundColor: .red, handler: {
+            .staticCell(model: SettingsOption(title: "Logout", icon: UIImage(named: "logout"), iconBackgroundColor: .clear, handler: {
                 //Hücrenin yapacağı işlev buraya ...
             }, disclosureRequired : false))
         ]))
