@@ -421,13 +421,8 @@
 				92CFA938295A0E8A00D77883 /* SceneDelegate.swift */,
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
 				92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */,
-				92CFA7F229546D8900D77883 /* MenuViewController.swift */,
-				92496F642988EADC0037D723 /* SettingsViewController.swift */,
-				92B3A847296C023A00C03761 /* GridViewController.swift */,
-				92496F6B29890E4B0037D723 /* AppLockViewController.swift */,
-				92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */,
-				92496F6F29890E6D0037D723 /* NotificationsViewController.swift */,
-				92496F7129890E970037D723 /* ProfileViewController.swift */,
+				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
+				92E49AAC298A7DA70018F6E5 /* SettingsVC */,
 				92496F662988EDBE0037D723 /* MenuCells */,
 				92CFA7E4295461F800D77883 /* Companion.storyboard */,
 				92CFA7E7295461FA00D77883 /* Assets.xcassets */,
@@ -810,6 +805,27 @@
 				92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */,
 			);
 			path = SWRevealController;
+			sourceTree = "<group>";
+		};
+		92E49AAC298A7DA70018F6E5 /* SettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				92496F6B29890E4B0037D723 /* AppLockViewController.swift */,
+				92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */,
+				92496F6F29890E6D0037D723 /* NotificationsViewController.swift */,
+			);
+			path = SettingsVC;
+			sourceTree = "<group>";
+		};
+		92E49AAD298A7DBD0018F6E5 /* MenuVC */ = {
+			isa = PBXGroup;
+			children = (
+				92CFA7F229546D8900D77883 /* MenuViewController.swift */,
+				92496F642988EADC0037D723 /* SettingsViewController.swift */,
+				92B3A847296C023A00C03761 /* GridViewController.swift */,
+				92496F7129890E970037D723 /* ProfileViewController.swift */,
+			);
+			path = MenuVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
