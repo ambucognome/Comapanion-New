@@ -13,15 +13,6 @@ class GridViewController: UIViewController {
 
     let DARK_BLUE_COLOR = UIColor(red: 0.07, green: 0.22, blue: 0.40, alpha: 1.00)
     let LIGHT_BLUE_COLOR = UIColor.white
-    
-    var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Basic", image: nil, notificationCount: 0, isSelected: false),AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Repeatable 2", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Four", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Five", image: nil, notificationCount: 0,isSelected: false)]
-    
-    struct AppStruct {
-        var name : String
-        var image : UIImage?
-        var notificationCount : Int?
-        var isSelected : Bool
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +69,7 @@ extension GridViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
-        let data = self.appList[indexPath.item]
+        let data = appList[indexPath.item]
         cell.nameLabel.text = data.name
 //        if data.isSelected {
             cell.nameLabel.textColor = DARK_BLUE_COLOR
@@ -112,7 +103,7 @@ extension GridViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appList.count
+        return appList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

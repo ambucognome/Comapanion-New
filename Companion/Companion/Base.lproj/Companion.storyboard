@@ -70,31 +70,32 @@
                                 <color key="textColor" red="0.070588235289999995" green="0.21960784310000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Companion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVw-Vy-dAH">
-                                <rect key="frame" x="97" y="108" width="220" height="45"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="40"/>
-                                <color key="textColor" red="0.070588235289999995" green="0.21960784310000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17x-tH-THY">
                                 <rect key="frame" x="180.5" y="211" width="53" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.070588235289999995" green="0.21960784310000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="companionlogo" translatesAutoresizingMaskIntoConstraints="NO" id="bej-6A-zvD">
+                                <rect key="frame" x="57" y="101" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0In-rm-Kvp"/>
+                                    <constraint firstAttribute="width" constant="300" id="8fE-BG-Jvc"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZG7-Rz-Sa2"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="17x-tH-THY" firstAttribute="top" secondItem="bej-6A-zvD" secondAttribute="bottom" constant="60" id="3Mg-jt-6NT"/>
                             <constraint firstItem="rzn-zq-ETL" firstAttribute="leading" secondItem="ZG7-Rz-Sa2" secondAttribute="leading" constant="20" id="5cR-gO-lAh"/>
                             <constraint firstItem="ZG7-Rz-Sa2" firstAttribute="bottom" secondItem="rzn-zq-ETL" secondAttribute="bottom" constant="20" id="B7C-cF-faH"/>
+                            <constraint firstItem="bej-6A-zvD" firstAttribute="centerX" secondItem="ZG7-Rz-Sa2" secondAttribute="centerX" id="BLR-Yu-u7t"/>
                             <constraint firstItem="ZG7-Rz-Sa2" firstAttribute="trailing" secondItem="rzn-zq-ETL" secondAttribute="trailing" constant="20" id="CvJ-Yl-1NY"/>
                             <constraint firstItem="Y3k-my-Fz4" firstAttribute="leading" secondItem="ZG7-Rz-Sa2" secondAttribute="leading" constant="20" id="Gjb-HO-i90"/>
-                            <constraint firstItem="LVw-Vy-dAH" firstAttribute="top" secondItem="ZG7-Rz-Sa2" secondAttribute="top" constant="20" id="Nvq-b4-dAi"/>
                             <constraint firstItem="JPG-ep-fRn" firstAttribute="centerX" secondItem="ZG7-Rz-Sa2" secondAttribute="centerX" id="UYF-a1-m7d"/>
                             <constraint firstItem="uGb-0S-052" firstAttribute="leading" secondItem="ZG7-Rz-Sa2" secondAttribute="leading" constant="20" id="VZK-jc-BhD"/>
                             <constraint firstItem="pvL-BP-1A7" firstAttribute="trailing" secondItem="Y3k-my-Fz4" secondAttribute="trailing" id="YZ6-2e-Qyr"/>
-                            <constraint firstItem="LVw-Vy-dAH" firstAttribute="centerX" secondItem="j73-H1-bwr" secondAttribute="centerX" id="YhZ-HL-YkS"/>
                             <constraint firstItem="17x-tH-THY" firstAttribute="centerX" secondItem="ZG7-Rz-Sa2" secondAttribute="centerX" id="ZHm-Vq-1Q6"/>
                             <constraint firstItem="Y3k-my-Fz4" firstAttribute="top" secondItem="17x-tH-THY" secondAttribute="bottom" constant="20" id="aJ1-2D-QyZ"/>
                             <constraint firstItem="pvL-BP-1A7" firstAttribute="leading" secondItem="Y3k-my-Fz4" secondAttribute="leading" id="biJ-bj-Tgc"/>
@@ -104,7 +105,6 @@
                             <constraint firstItem="pvL-BP-1A7" firstAttribute="top" secondItem="Y3k-my-Fz4" secondAttribute="bottom" constant="20" id="qQw-KF-YsP"/>
                             <constraint firstItem="uGb-0S-052" firstAttribute="top" secondItem="JPG-ep-fRn" secondAttribute="bottom" constant="50" id="rt9-wT-1Zu"/>
                             <constraint firstItem="ZG7-Rz-Sa2" firstAttribute="trailing" secondItem="Y3k-my-Fz4" secondAttribute="trailing" constant="20" id="uF2-XA-JVB"/>
-                            <constraint firstItem="17x-tH-THY" firstAttribute="top" secondItem="LVw-Vy-dAH" secondAttribute="bottom" constant="58" id="vZc-cv-C8Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jg7-KM-baE"/>
@@ -947,6 +947,7 @@
     </scenes>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="companionlogo" width="794" height="216"/>
         <image name="logo4" width="1570" height="202"/>
         <image name="user" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">

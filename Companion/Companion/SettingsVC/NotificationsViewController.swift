@@ -36,16 +36,7 @@ class NotificationsViewController: UIViewController,UITableViewDelegate, UITable
 //        navigationItem.largeTitleDisplayMode = .always
 
     }
-    
-    var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Basic", image: nil, notificationCount: 0, isSelected: false),AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Repeatable 2", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Four", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Five", image: nil, notificationCount: 0,isSelected: false)]
 
-    struct AppStruct {
-        var name : String
-        var image : UIImage?
-        var notificationCount : Int?
-        var isSelected : Bool
-    }
-    
     func configure() {
         //MARK: SWİTCH
         models.append(Section(title: "When disabled, you'll not receive any notifications from cognome", options: [

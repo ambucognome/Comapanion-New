@@ -10,6 +10,22 @@ import SideMenu
 
 let DARK_BLUE_COLOR = UIColor(red: 0.07, green: 0.22, blue: 0.40, alpha: 1.00)
 
+var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),
+               AppStruct(name: "Registration", image: nil, notificationCount: 0, isSelected: false),
+               AppStruct(name: "Report", image: nil, notificationCount: 0,isSelected: false),
+               AppStruct(name: "Screening", image: nil, notificationCount: 0,isSelected: false),
+               AppStruct(name: "Basic", image: nil, notificationCount: 0,isSelected: false),
+               AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),
+               AppStruct(name: "All component", image: nil, notificationCount: 0,isSelected: false)]
+
+struct AppStruct {
+    var name : String
+    var image : UIImage?
+    var notificationCount : Int?
+    var isSelected : Bool
+}
+
+
 
 var dashboardNav : UINavigationController?
 
@@ -26,6 +42,7 @@ class DashboardViewController: UIViewController {
         case fourthChildTab = 3
         case fifthChildTab = 4
         case sixthChildTab = 5
+        case seventhChildTab = 6
     }
     
     var name = ""
@@ -40,37 +57,57 @@ class DashboardViewController: UIViewController {
     }()
     
     lazy var secondChildTabVC: UIViewController? = {
-        let secondChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController//UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppOneVC")
-        secondChildTabVC.template_uri = "http://chdi.montefiore.org/basicComponents"
+        let secondChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        secondChildTabVC.template_uri = "http://chdi.montefiore.org/newPatientRegistration"
         secondChildTabVC.isDemo = true
+        secondChildTabVC.key = "102"
         let nav = UINavigationController.init(rootViewController: secondChildTabVC)
         return nav
     }()
     
     lazy var thirdChildTabVC: UIViewController? = {
-        let vc = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController//UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppTwoVC")
-        vc.template_uri = "http://chdi.montefiore.org/patientInfo"
+        let vc = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        vc.template_uri = "http://chdi.montefiore.org/newpatientreport"
         vc.isDemo = true
+        vc.key = "102"
         let nav = UINavigationController.init(rootViewController: vc)
         return nav
     }()
     
     lazy var fourthChildTab: UIViewController? = {
-        let fourthChildTab = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController//UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppThreeVC")
-        fourthChildTab.template_uri = "http://chdi.montefiore.org/patientInfoTest"
+        let fourthChildTab = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        fourthChildTab.template_uri = "http://chdi.montefiore.org/screening"
         fourthChildTab.isDemo = true
+        fourthChildTab.key = "102"
         let nav = UINavigationController.init(rootViewController: fourthChildTab)
         return nav
     }()
     
     lazy var fifthChildTab: UIViewController? = {
-        let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppFourVC")
-        return vc
+        let vc =  UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        vc.template_uri = "http://chdi.montefiore.org/basicComponents"
+        vc.isDemo = true
+        vc.key = "102"
+        let nav = UINavigationController.init(rootViewController: vc)
+        return nav
     }()
     
     lazy var sixthChildTab: UIViewController? = {
-        let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppFiveVC")
-        return vc
+        let vc =  UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        vc.template_uri = "http://chdi.montefiore.org/blueprintWithRepeatable"
+        vc.isDemo = true
+        vc.key = "102"
+        let nav = UINavigationController.init(rootViewController: vc)
+        return nav
+    }()
+    
+    lazy var seventhChildTab: UIViewController? = {
+        let vc =  UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        vc.template_uri = "http://chdi.montefiore.org/allComponents"
+        vc.isDemo = true
+        vc.key = "102"
+        let nav = UINavigationController.init(rootViewController: vc)
+        return nav
     }()
     
     var currentViewController: UIViewController?
@@ -78,14 +115,6 @@ class DashboardViewController: UIViewController {
     
     let LIGHT_BLUE_COLOR = UIColor.white
     
-    var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),AppStruct(name: "Basic", image: nil, notificationCount: 0, isSelected: false),AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "Repeatable 2", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Four", image: nil, notificationCount: 0,isSelected: false),AppStruct(name: "App Five", image: nil, notificationCount: 0,isSelected: false)]
-    
-    struct AppStruct {
-        var name : String
-        var image : UIImage?
-        var notificationCount : Int?
-        var isSelected : Bool
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,6 +200,8 @@ class DashboardViewController: UIViewController {
             vc = fifthChildTab
         case TabIndex.sixthChildTab.rawValue :
             vc = sixthChildTab
+        case TabIndex.seventhChildTab.rawValue :
+            vc = seventhChildTab
         default:
             return nil
         }
@@ -183,7 +214,7 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
-        let data = self.appList[indexPath.item]
+        let data = appList[indexPath.item]
         cell.nameLabel.text = data.name
         if data.isSelected {
             cell.nameLabel.textColor = DARK_BLUE_COLOR
@@ -204,17 +235,17 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for i in 0..<self.appList.count {
-            self.appList[i].isSelected = false
+        for i in 0..<appList.count {
+            appList[i].isSelected = false
         }
-        self.appList[indexPath.item].isSelected = true
+        appList[indexPath.item].isSelected = true
         self.collectionView.reloadData()
         print("selected at", indexPath.item)
         displayCurrentTab(indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.appList.count
+        return appList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

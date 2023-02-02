@@ -15,12 +15,13 @@ class InitialViewController: UIViewController, DynamicTemplateViewControllerDele
     
     var isDemo = false
     var template_uri = "http://chdi.montefiore.org/CovidSafeCheck"
+    var key = "101"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if self.isDemo {
             self.view.isHidden = true
-            self.getTempleWith(uri: template_uri, context: [ "key" : "101"])
+            self.getTempleWith(uri: template_uri, context: [ "key" : key])
             return
         }
         self.startSurvey()
