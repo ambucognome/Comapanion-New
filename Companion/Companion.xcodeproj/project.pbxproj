@@ -165,6 +165,7 @@
 		92CFABAE295B1B9C00D77883 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */; };
 		92CFABAF295B1B9C00D77883 /* DynamicTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */; };
 		92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */; };
+		92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -335,6 +336,7 @@
 		92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTemplateViewController.swift; sourceTree = "<group>"; };
 		92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldComponent.swift; sourceTree = "<group>"; };
+		92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		97C6F73AD60BBE563114AE33 /* Pods-Companion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.debug.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -417,6 +419,7 @@
 			children = (
 				92CFAA7B295B1B9B00D77883 /* Compan */,
 				92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */,
+				92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */,
 				92CFA937295A0E8A00D77883 /* AppDelegate.swift */,
 				92CFA938295A0E8A00D77883 /* SceneDelegate.swift */,
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
@@ -1033,6 +1036,7 @@
 				92CFAB76295B1B9C00D77883 /* NotificationManager.swift in Sources */,
 				92B3A848296C023A00C03761 /* GridViewController.swift in Sources */,
 				92CFABA5295B1B9C00D77883 /* BubbleTransition.swift in Sources */,
+				92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */,
 				92CFAB68295B1B9C00D77883 /* LayoutConstraintSet.swift in Sources */,
 				92CFA7F529546D9B00D77883 /* DashboardViewController.swift in Sources */,
 				92CFAB6C295B1B9C00D77883 /* FooterRefreshView.swift in Sources */,

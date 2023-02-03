@@ -77,5 +77,22 @@ class func getToken() -> String {
         }
         return fcmToken
     }
+    
+    // Save Biometrics enabled
+    // Params :
+    // isEnabled : It is the Bool which is to be saved
+    class func setBiometricsEnabled(isEnabled : Bool){
+        UserDefaults.standard.set(isEnabled, forKey: "isEnabled")
+    }
+    
+    // Fetch the Biometrics enabled
+    class func getBiometricsEnabled() -> Bool {
+        let defaults = UserDefaults.standard
+        guard let isEnabled =  defaults.value(forKey: "isEnabled") as? Bool else {
+            //APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            return false
+        }
+        return isEnabled
+    }
 
 }

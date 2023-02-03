@@ -15,7 +15,7 @@ var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isS
                AppStruct(name: "Report", image: nil, notificationCount: 0,isSelected: false),
                AppStruct(name: "Screening", image: nil, notificationCount: 0,isSelected: false),
                AppStruct(name: "Basic", image: nil, notificationCount: 0,isSelected: false),
-               AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),
+//               AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),
                AppStruct(name: "All component", image: nil, notificationCount: 0,isSelected: false)]
 
 struct AppStruct {
@@ -42,17 +42,24 @@ class DashboardViewController: UIViewController {
         case fourthChildTab = 3
         case fifthChildTab = 4
         case sixthChildTab = 5
-        case seventhChildTab = 6
+//        case seventhChildTab = 6
     }
     
     var name = ""
     var ezid = ""
+    var isFromLogin = false
     
     lazy var firstChildTabVC : UIViewController? = {
-        let firstChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "EZLoginViewController") as! EZLoginViewController
-        firstChildTabVC.ezId = ezid
-        firstChildTabVC.name = name
-        let nav = UINavigationController.init(rootViewController: firstChildTabVC)
+        if isFromLogin {
+            let firstChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "EZLoginViewController") as! EZLoginViewController
+            firstChildTabVC.ezId = ezid
+            firstChildTabVC.name = name
+            let nav = UINavigationController.init(rootViewController: firstChildTabVC)
+            return nav
+        }
+        let storyboard = UIStoryboard(name: "covidCheck", bundle: nil)
+         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        let nav = UINavigationController.init(rootViewController: vc)
         return nav
     }()
     
@@ -94,7 +101,7 @@ class DashboardViewController: UIViewController {
     
     lazy var sixthChildTab: UIViewController? = {
         let vc =  UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
-        vc.template_uri = "http://chdi.montefiore.org/blueprintWithRepeatable"
+        vc.template_uri = "http://chdi.montefiore.org/allComponents" //"http://chdi.montefiore.org/blueprintWithRepeatable"
         vc.isDemo = true
         vc.key = "102"
         let nav = UINavigationController.init(rootViewController: vc)
@@ -200,8 +207,8 @@ class DashboardViewController: UIViewController {
             vc = fifthChildTab
         case TabIndex.sixthChildTab.rawValue :
             vc = sixthChildTab
-        case TabIndex.seventhChildTab.rawValue :
-            vc = seventhChildTab
+//        case TabIndex.seventhChildTab.rawValue :
+//            vc = seventhChildTab
         default:
             return nil
         }

@@ -53,7 +53,7 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             self.navigationController?.pushViewController(vc, animated: true)
 
         }
-        if indexPath.row == 4 {
+        if indexPath.row == 5 {
             LogoutHelper.shared.logout()
         }
     }

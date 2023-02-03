@@ -30,6 +30,7 @@ class CompanionLoginViewController: UIViewController {
         }
         let storyboard = UIStoryboard(name: "Companion", bundle: nil)
          let vc = storyboard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
+        vc.isFromLogin = true
         vc.name = self.lastNameTextField.text!
         vc.ezid = self.ezIdTextField.text!
          self.navigationController?.pushViewController(vc, animated: true)

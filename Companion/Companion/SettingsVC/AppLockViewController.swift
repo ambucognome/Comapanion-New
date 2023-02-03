@@ -7,7 +7,6 @@
 
 import UIKit
 
-var isFacIdOn = true
 
 class AppLockViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -42,7 +41,7 @@ class AppLockViewController: UIViewController,UITableViewDelegate, UITableViewDa
                 .switchCell(model: SettingsSwitchOption(title: "Require Face ID", icon: nil, iconBackgroundColor: .clear, handler: {
 //                    isFacIdOn =
                     print("yes")
-                }, isOn: isFacIdOn))
+                }, isOn:SafeCheckUtils.getBiometricsEnabled()))
             ]))
         
         }
@@ -90,7 +89,7 @@ class AppLockViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     @objc func switchValueDidChange(sender:UISwitch!)
     {
-        isFacIdOn = sender.isOn
+        SafeCheckUtils.setBiometricsEnabled(isEnabled: sender.isOn)
         if (sender.isOn == true){
             print("on")
         }
