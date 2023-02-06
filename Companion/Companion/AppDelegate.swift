@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 import FirebaseMessaging
+import IQKeyboardManagerSwift
+
 
 var LAUNCHED_FROM_KILLED_STATE : Bool = true
 
@@ -52,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
         registerForPushNotifications()
         Messaging.messaging().delegate = self
         UIApplication.shared.applicationIconBadgeNumber = 0
-
+        IQKeyboardManager.shared.enable = true
+        
         return true
     }
     

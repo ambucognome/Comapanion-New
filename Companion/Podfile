@@ -29,4 +29,5 @@ target 'Companion' do
     pod 'Firebase'
     pod 'Firebase/Messaging'
     pod 'SideMenu'
+    pod 'IQKeyboardManagerSwift'
 end
