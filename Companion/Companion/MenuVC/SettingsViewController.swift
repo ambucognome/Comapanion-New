@@ -38,20 +38,20 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
     func configure() {
         //MARK: SWİTCH
         models.append(Section(title: "Account", options: [
-            .staticCell(model: SettingsOption(title: "Two-Step Verification", icon: UIImage(systemName: "hand.raised"), iconBackgroundColor: .systemBlue, handler: {
+            .staticCell(model: SettingsOption(title: "Two-Step Verification", icon: UIImage(named:  "two-step"), iconBackgroundColor: .clear, handler: {
                 //Switch action code is here
             }))
         ]))
         
         //MARK: SECTION ONE
         models.append(Section(title: "Privacy", options: [
-            .staticCell(model: SettingsOption(title: "App Lock", icon: UIImage(systemName: "faceid"), iconBackgroundColor: .systemGreen, handler: {
+            .staticCell(model: SettingsOption(title: "App Lock", icon: UIImage(named: "app-lock"), iconBackgroundColor: .clear, handler: {
                 //Hücrenin yapacağı işlev buraya ...
             }))
         ]))
         
         models.append(Section(title: "Notifications", options: [
-            .staticCell(model: SettingsOption(title: "Push Notifications", icon: UIImage(systemName: "bell.and.waveform"), iconBackgroundColor: .red, handler: {
+            .staticCell(model: SettingsOption(title: "Push Notifications", icon: UIImage(named: "notification"), iconBackgroundColor: .clear, handler: {
                 //Switch action code is here
             }))
         ]))

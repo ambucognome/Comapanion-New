@@ -64,6 +64,10 @@ class SettingTableViewCell: UITableViewCell {
                              y: 0,
                              width: contentView.frame.size.width - 20 - iconContainer.frame.size.width,
                              height: contentView.frame.size.height)
+        if self.iconImageView.image == nil {
+            self.iconContainer.frame.size.width = 0
+            self.label.frame.origin.x = 25
+        }
     }
 
     override func prepareForReuse() {

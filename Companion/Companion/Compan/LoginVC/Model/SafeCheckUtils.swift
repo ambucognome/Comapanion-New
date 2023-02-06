@@ -94,5 +94,39 @@ class func getToken() -> String {
         }
         return isEnabled
     }
+    
+    // Save the user email
+    // Params :
+    // email : It is the string which is to be saved
+    class func setEmail(email : String){
+        UserDefaults.standard.set(email, forKey: "email")
+    }
+    
+    // Fetch the email
+    class func getEmail() -> String {
+        let defaults = UserDefaults.standard
+        guard let email =  defaults.value(forKey: "email") as? String else {
+            //APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            return ""
+        }
+        return email
+    }
+
+    // Save the user mobile
+    // Params :
+    // email : It is the string which is to be saved
+    class func setMobile(mobile : String){
+        UserDefaults.standard.set(mobile, forKey: "mobile")
+    }
+    
+    // Fetch the email
+    class func getMobile() -> String {
+        let defaults = UserDefaults.standard
+        guard let mobile =  defaults.value(forKey: "mobile") as? String else {
+            //APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            return ""
+        }
+        return mobile
+    }
 
 }

@@ -157,20 +157,20 @@ class DashboardViewController: UIViewController {
     }
     
     @objc func showHideReelSection(notification: Notification) {
-        let userInfo = notification.userInfo
-        if let isHide = userInfo!["hide"] as? Bool {
-            if isHide {
-                self.collectionViewHeight.constant = 0
-                UIView.animate(withDuration: 0.2, animations: {
-                     self.view.layoutIfNeeded()
-                })
-            } else {
-                self.collectionViewHeight.constant = 90
-                UIView.animate(withDuration: 0.2, animations: {
-                     self.view.layoutIfNeeded()
-                })
-            }
-        }
+//        let userInfo = notification.userInfo
+//        if let isHide = userInfo!["hide"] as? Bool {
+//            if isHide {
+//                self.collectionViewHeight.constant = 0
+//                UIView.animate(withDuration: 0.2, animations: {
+//                     self.view.layoutIfNeeded()
+//                })
+//            } else {
+//                self.collectionViewHeight.constant = 90
+//                UIView.animate(withDuration: 0.2, animations: {
+//                     self.view.layoutIfNeeded()
+//                })
+//            }
+//        }
         
     }
 

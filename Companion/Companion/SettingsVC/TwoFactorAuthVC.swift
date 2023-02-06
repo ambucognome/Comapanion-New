@@ -7,8 +7,8 @@
 
 import UIKit
 
-var isEmailOn = false
-var isSMSOn = false
+var isEmailOn = true
+var isSMSOn = true
 
 class TwoFactorAuthVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -39,17 +39,35 @@ class TwoFactorAuthVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     }
     
     func configure() {
+        self.models.removeAll()
+        var mobile = "Add mobile"
+        let isMobileAdded = (SafeCheckUtils.getMobile() != "")
+        if SafeCheckUtils.getMobile() != "" {
+            mobile = SafeCheckUtils.getMobile()
+        }
+        var email = "Add Email"
+        let isEmailAdded = (SafeCheckUtils.getEmail() != "")
+        if SafeCheckUtils.getEmail() != "" {
+            email = SafeCheckUtils.getEmail()
+        }
             models.append(Section(title: "When enabled, you'll need to verify through sms verification before accessing account", options: [
+                .staticCell(model: SettingsOption(title: mobile, icon: nil, iconBackgroundColor: .clear, handler: {
+                    
+                },disclosureRequired: !isMobileAdded)),
                 .switchCell(model: SettingsSwitchOption(title: "SMS Verification", icon: nil, iconBackgroundColor: .clear, handler: {
 
                 }, isOn: isSMSOn))
+                
             ]))
         
         models.append(Section(title: "When enabled, you'll need to verify through email ID verification before accessing account", options: [
+            .staticCell(model: SettingsOption(title: email, icon: nil, iconBackgroundColor: .clear, handler: {
+                
+            },disclosureRequired: !isEmailAdded)),
             .switchCell(model: SettingsSwitchOption(title: "Email Verification", icon: nil, iconBackgroundColor: .clear, handler: {
             
             }, isOn: isEmailOn))
-        ]))
+            ]))
      }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -69,6 +87,16 @@ class TwoFactorAuthVC: UIViewController,UITableViewDelegate, UITableViewDataSour
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return models.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == IndexPath(row: 1, section: 0) {
+            if SafeCheckUtils.getMobile() == "" { return 0 }
+        }
+        if indexPath == IndexPath(row: 1, section: 1) {
+            if SafeCheckUtils.getEmail() == "" { return 0 }
+        }
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,6 +141,50 @@ class TwoFactorAuthVC: UIViewController,UITableViewDelegate, UITableViewDataSour
             isEmailOn = sender.isOn
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(row: 0, section: 0) {
+            if (SafeCheckUtils.getMobile() != "") {return}
+            self.getPhone()
+        }
+        if indexPath == IndexPath(row: 0, section: 1) {
+            if (SafeCheckUtils.getEmail() != "") {return}
+            self.getEmail()
+        }
+    }
+    
+    func getPhone() {
+        let ac = UIAlertController(title: "Enter mobile number", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        ac.textFields![0].keyboardType = .numberPad
+
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            let mobile = ac.textFields![0]
+            print(mobile)
+            SafeCheckUtils.setMobile(mobile: mobile.text!)
+            isSMSOn = true
+            self.configure()
+            self.tableView.reloadData()
+        }
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+    
+    func getEmail() {
+        let ac = UIAlertController(title: "Enter Email", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            let email = ac.textFields![0]
+            print(email)
+            SafeCheckUtils.setEmail(email: email.text!)
+            isEmailOn = true
+            self.configure()
+            self.tableView.reloadData()
+        }
+        ac.addAction(submitAction)
+        present(ac, animated: true)
     }
     
 //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
