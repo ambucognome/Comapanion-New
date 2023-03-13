@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
+        self.navigationItem.title = "Profile"
         self.nameLabel.text = username
         self.emailLabel.text = username.removingWhitespaces() + "@demo.com"
     }

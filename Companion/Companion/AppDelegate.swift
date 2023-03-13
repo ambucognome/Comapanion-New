@@ -25,37 +25,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if self.logoutView == nil {
-            self.logoutView = Bundle.main.loadNibNamed("LogoutView", owner:
-            self, options: nil)?.first as? LogoutView
-            self.logoutView?.tag = 111
-            self.logoutView?.frame = CGRect(x: UIScreen.main.bounds.maxX - 90, y: 40, width: 80, height: 40)
-            self.logoutView?.layer.cornerRadius = 20
-            self.logoutView?.isUserInteractionEnabled = true
-        }
-        if self.callView == nil {
-            self.callView = Bundle.main.loadNibNamed("OnCallView", owner:
-            self, options: nil)?.first as? OnCallView
-            self.callView?.tag = 100
-            self.callView?.frame = CGRect(x: UIScreen.main.bounds.maxX - 140, y: UIScreen.main.bounds.midY, width: 120, height: 160)
-            self.callView?.layer.cornerRadius = 20
-            self.callView?.imageView.layer.cornerRadius = 20
-            let origImage = UIImage(named: "icCallFilled")
-            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-            self.callView?.callBtn.setImage(tintedImage, for: .normal)
-            self.callView?.callBtn.tintColor = .white
-            var panGesture       = UIPanGestureRecognizer()
-            panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.draggedView(_:)))
-            self.callView?.isUserInteractionEnabled = true
-            self.callView?.addGestureRecognizer(panGesture)
-        }
-        FirebaseApp.configure()
-        UNUserNotificationCenter.current().delegate = self
-        registerForPushNotifications()
-        Messaging.messaging().delegate = self
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        IQKeyboardManager.shared.enable = true
+//        if self.logoutView == nil {
+//            self.logoutView = Bundle.main.loadNibNamed("LogoutView", owner:
+//            self, options: nil)?.first as? LogoutView
+//            self.logoutView?.tag = 111
+//            self.logoutView?.frame = CGRect(x: UIScreen.main.bounds.maxX - 90, y: 40, width: 80, height: 40)
+//            self.logoutView?.layer.cornerRadius = 20
+//            self.logoutView?.isUserInteractionEnabled = true
+//        }
+//        if self.callView == nil {
+//            self.callView = Bundle.main.loadNibNamed("OnCallView", owner:
+//            self, options: nil)?.first as? OnCallView
+//            self.callView?.tag = 100
+//            self.callView?.frame = CGRect(x: UIScreen.main.bounds.maxX - 140, y: UIScreen.main.bounds.midY, width: 120, height: 160)
+//            self.callView?.layer.cornerRadius = 20
+//            self.callView?.imageView.layer.cornerRadius = 20
+//            let origImage = UIImage(named: "icCallFilled")
+//            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+//            self.callView?.callBtn.setImage(tintedImage, for: .normal)
+//            self.callView?.callBtn.tintColor = .white
+//            var panGesture       = UIPanGestureRecognizer()
+//            panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.draggedView(_:)))
+//            self.callView?.isUserInteractionEnabled = true
+//            self.callView?.addGestureRecognizer(panGesture)
+//        }
+//        FirebaseApp.configure()
+//        UNUserNotificationCenter.current().delegate = self
+//        registerForPushNotifications()
+//        Messaging.messaging().delegate = self
+//        UIApplication.shared.applicationIconBadgeNumber = 0
+//        IQKeyboardManager.shared.enable = true
+        // Set `backgroundImage` to be able to use `shadowImage`
         
+        let tabBarAppearance = UITabBar.appearance()
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.shadowImage = UIImage.colorForNavBar(color: UIColor(hexString: "#E0DDDD"))
+            tabBarAppearance.standardAppearance = appearance
+            tabBarAppearance.scrollEdgeAppearance = appearance
+            tabBarAppearance.backgroundImage = UIImage()
+        } else {
+            UITabBar.appearance().shadowImage = UIImage.colorForNavBar(color: UIColor(hexString: "#E0DDDD"))
+            UITabBar.appearance().backgroundImage = UIImage()
+        }
         return true
     }
     
@@ -173,3 +185,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
 
 }
 
+extension UIImage {
+class func colorForNavBar(color: UIColor) -> UIImage {
+    //let rect = CGRectMake(0.0, 0.0, 1.0, 1.0)
+
+    let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 1.0, height: 1.0))
+
+    UIGraphicsBeginImageContext(rect.size)
+    let context = UIGraphicsGetCurrentContext()
+
+    context!.setFillColor(color.cgColor)
+    context!.fill(rect)
+
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+
+     return image!
+    }
+}

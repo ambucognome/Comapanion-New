@@ -12,20 +12,21 @@ class IntroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        
+//        let notificationCenter = NotificationCenter.default
+//        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        self.appBecomeActive()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if SafeCheckUtils.getBiometricsEnabled()  {
-            self.authenticateDeviceOwner()
-        } else {
-            self.checkForUserType()
-        }
+//        if SafeCheckUtils.getBiometricsEnabled()  {
+//            self.authenticateDeviceOwner()
+//        } else {
+//            self.checkForUserType()
+//        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -39,7 +40,11 @@ class IntroViewController: UIViewController {
     }
     
     @objc func appBecomeActive() {
-//        self.appCheck()
+        let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+        let vc = storyboard.instantiateViewController(identifier: "TabBarController") as! UITabBarController
+//            let nav = UINavigationController(rootViewController: vc)
+            self.setRootViewController(vc: vc)
+
     }
     
 

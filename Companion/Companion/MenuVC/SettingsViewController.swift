@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Settings"
+        self.navigationItem.title = "Settings"
         self.configure()
         tableView.register(SettingTableViewCell.self,
                        forCellReuseIdentifier: SettingTableViewCell.identifier)
