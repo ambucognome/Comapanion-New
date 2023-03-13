@@ -31,12 +31,6 @@
 		928122D629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122C629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m */; };
 		928122D729BF5BC10021A679 /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122C729BF5BC00021A679 /* FSCalendarDelegationFactory.m */; };
 		928122DA29BF5DF50021A679 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928122D929BF5DF50021A679 /* HomeViewController.swift */; };
-		92AA350129BF68B900A6A4AB /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350029BF68B900A6A4AB /* EventsTableViewCell.swift */; };
-		92AA350329BF68C200A6A4AB /* CareTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350229BF68C200A6A4AB /* CareTeamTableViewCell.swift */; };
-		92AA350629BF702000A6A4AB /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350529BF702000A6A4AB /* EventCell.swift */; };
-		92AA350829BF7E9100A6A4AB /* CareTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350729BF7E9100A6A4AB /* CareTeamCell.swift */; };
-		92AA350A29BF8BA000A6A4AB /* MyCareTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350929BF8BA000A6A4AB /* MyCareTeamViewController.swift */; };
-		92AA350C29BF8E8C00A6A4AB /* DoctorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350B29BF8E8C00A6A4AB /* DoctorTableViewCell.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -50,7 +44,6 @@
 		92AA352729BF945300A6A4AB /* Yalta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351929BF945300A6A4AB /* Yalta.swift */; };
 		92AA352829BF945300A6A4AB /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351B29BF945300A6A4AB /* Localize.swift */; };
 		92AA352929BF945300A6A4AB /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351C29BF945300A6A4AB /* SheetViewController.swift */; };
-		92AA352B29BF948E00A6A4AB /* DoctorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA352A29BF948E00A6A4AB /* DoctorProfileViewController.swift */; };
 		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
@@ -264,12 +257,6 @@
 		928122C729BF5BC00021A679 /* FSCalendarDelegationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarDelegationFactory.m; sourceTree = "<group>"; };
 		928122D829BF5C310021A679 /* Companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		928122D929BF5DF50021A679 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		92AA350029BF68B900A6A4AB /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
-		92AA350229BF68C200A6A4AB /* CareTeamTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareTeamTableViewCell.swift; sourceTree = "<group>"; };
-		92AA350529BF702000A6A4AB /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
-		92AA350729BF7E9100A6A4AB /* CareTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareTeamCell.swift; sourceTree = "<group>"; };
-		92AA350929BF8BA000A6A4AB /* MyCareTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCareTeamViewController.swift; sourceTree = "<group>"; };
-		92AA350B29BF8E8C00A6A4AB /* DoctorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorTableViewCell.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -284,7 +271,6 @@
 		92AA351929BF945300A6A4AB /* Yalta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Yalta.swift; sourceTree = "<group>"; };
 		92AA351B29BF945300A6A4AB /* Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		92AA351C29BF945300A6A4AB /* SheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
-		92AA352A29BF948E00A6A4AB /* DoctorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorProfileViewController.swift; sourceTree = "<group>"; };
 		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
@@ -551,11 +537,6 @@
 		92AA350429BF6F2D00A6A4AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				92AA350029BF68B900A6A4AB /* EventsTableViewCell.swift */,
-				92AA350529BF702000A6A4AB /* EventCell.swift */,
-				92AA350229BF68C200A6A4AB /* CareTeamTableViewCell.swift */,
-				92AA350729BF7E9100A6A4AB /* CareTeamCell.swift */,
-				92AA350B29BF8E8C00A6A4AB /* DoctorTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -638,8 +619,6 @@
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
 				92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */,
 				928122D929BF5DF50021A679 /* HomeViewController.swift */,
-				92AA350929BF8BA000A6A4AB /* MyCareTeamViewController.swift */,
-				92AA352A29BF948E00A6A4AB /* DoctorProfileViewController.swift */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
 				92E49AAC298A7DA70018F6E5 /* SettingsVC */,
@@ -1217,11 +1196,9 @@
 				92CFAB40295B1B9C00D77883 /* MessageImageCell.swift in Sources */,
 				92CFAB52295B1B9C00D77883 /* OnCallView.swift in Sources */,
 				92CFAB55295B1B9C00D77883 /* SocketHelper.swift in Sources */,
-				92AA350329BF68C200A6A4AB /* CareTeamTableViewCell.swift in Sources */,
 				92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */,
 				92CFAB63295B1B9C00D77883 /* PhotoDataManager.swift in Sources */,
 				92CFAB90295B1B9C00D77883 /* ScriptHelper.swift in Sources */,
-				92AA350829BF7E9100A6A4AB /* CareTeamCell.swift in Sources */,
 				92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */,
 				92CFAB6B295B1B9C00D77883 /* Bundle.swift in Sources */,
 				92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */,
@@ -1243,7 +1220,6 @@
 				92CFAB93295B1B9C00D77883 /* ValidationHelper.swift in Sources */,
 				92CFABA2295B1B9C00D77883 /* FloatingLabelTextField.swift in Sources */,
 				92CFABAB295B1B9C00D77883 /* MessageTableViewCell.swift in Sources */,
-				92AA350129BF68B900A6A4AB /* EventsTableViewCell.swift in Sources */,
 				92CFAB60295B1B9C00D77883 /* ImagePickerCollectionView.swift in Sources */,
 				92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */,
 				92CFABA4295B1B9C00D77883 /* CustomTextField.swift in Sources */,
@@ -1251,7 +1227,6 @@
 				928122CC29BF5BC00021A679 /* FSCalendarWeekdayView.m in Sources */,
 				92CFAB62295B1B9C00D77883 /* ImagePickerCollectionCell.swift in Sources */,
 				92CFAB9F295B1B9C00D77883 /* ERProgressHud.swift in Sources */,
-				92AA350629BF702000A6A4AB /* EventCell.swift in Sources */,
 				92CFAB2B295B1B9C00D77883 /* DPDKeyboardListener.swift in Sources */,
 				92CFAB64295B1B9C00D77883 /* ImagePickerView.swift in Sources */,
 				92CFAB65295B1B9C00D77883 /* ImagePickerCollectionHeader.swift in Sources */,
@@ -1264,7 +1239,6 @@
 				92CFAB5C295B1B9C00D77883 /* Utils.swift in Sources */,
 				92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */,
 				92CFAB79295B1B9C00D77883 /* InitialViewController.swift in Sources */,
-				92AA352B29BF948E00A6A4AB /* DoctorProfileViewController.swift in Sources */,
 				92CFAB82295B1B9C00D77883 /* LaunchViewController.swift in Sources */,
 				92CFAB49295B1B9C00D77883 /* MessageViewModel.swift in Sources */,
 				92CFAB30295B1B9C00D77883 /* DropDownList.swift in Sources */,
@@ -1299,12 +1273,10 @@
 				92CFAB2C295B1B9C00D77883 /* DPDConstants.swift in Sources */,
 				92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */,
 				92CFAB42295B1B9C00D77883 /* Kingfisher.swift in Sources */,
-				92AA350A29BF8BA000A6A4AB /* MyCareTeamViewController.swift in Sources */,
 				92CFAB38295B1B9C00D77883 /* SliderTableViewCell.swift in Sources */,
 				92CFABA0295B1B9C00D77883 /* Utilities.swift in Sources */,
 				92CFAB6D295B1B9C00D77883 /* UIScrollView+Refreshable.swift in Sources */,
 				92AA352229BF945300A6A4AB /* SheetViewDelegate.swift in Sources */,
-				92AA350C29BF8E8C00A6A4AB /* DoctorTableViewCell.swift in Sources */,
 				92CFABAE295B1B9C00D77883 /* SWRevealViewController.m in Sources */,
 				92CFAB86295B1B9C00D77883 /* AutocompleteTableViewCell.swift in Sources */,
 				92CFAB92295B1B9C00D77883 /* APIManager.swift in Sources */,
