@@ -51,6 +51,7 @@
 		92AA353729BF9EA600A6A4AB /* MyCareTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */; };
 		92AA353829BF9EA600A6A4AB /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353129BF9EA500A6A4AB /* EventCell.swift */; };
 		92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */; };
+		92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */; };
 		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
@@ -285,6 +286,7 @@
 		92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCareTeamViewController.swift; sourceTree = "<group>"; };
 		92AA353129BF9EA500A6A4AB /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareTeamCell.swift; sourceTree = "<group>"; };
+		92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 				928122D929BF5DF50021A679 /* HomeViewController.swift */,
 				92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */,
 				92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */,
+				92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
 				92E49AAC298A7DA70018F6E5 /* SettingsVC */,
@@ -1326,6 +1329,7 @@
 				92CFA7F329546D8900D77883 /* MenuViewController.swift in Sources */,
 				92CFAB50295B1B9C00D77883 /* ListReponseObject.swift in Sources */,
 				92CFA93A295A0E8A00D77883 /* SceneDelegate.swift in Sources */,
+				92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */,
 				92CFABA6295B1B9C00D77883 /* Extention.swift in Sources */,
 				92CFAB2D295B1B9C00D77883 /* DPDUIView+Extension.swift in Sources */,
 				92CFAB69295B1B9C00D77883 /* UITableView.swift in Sources */,
