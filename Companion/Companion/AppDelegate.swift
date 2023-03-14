@@ -68,6 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
             UITabBar.appearance().shadowImage = UIImage.colorForNavBar(color: UIColor(hexString: "#E0DDDD"))
             UITabBar.appearance().backgroundImage = UIImage()
         }
+        UINavigationBar.appearance().barTintColor = .white
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
         return true
     }
     

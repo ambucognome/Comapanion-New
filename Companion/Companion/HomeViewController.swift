@@ -22,11 +22,11 @@ final class ContentSizedTableView: UITableView {
 
 struct DateData {
     var date : String
-    var events : [Event]
+    var events : [EventStruct]
     var careTeam : [CareTeam]
 }
 
-struct Event {
+struct EventStruct {
     var name : String
     var time : String
 }
@@ -42,15 +42,18 @@ struct CareTeam {
     var bio : String = ""
 }
 
+//MARK: Add events data here
 let eventsData : [DateData] = [
-    DateData(date: "14/03/2023", events: [Event(name: "Daily check", time: "10:45 AM")], careTeam: [CareTeam(image: "profile1", name: "Dr.Randy Wigham", specality: "Dentist", lastVisitDate: "Last visit : April 20 2022")]),
+    DateData(date: "14/03/2023", events: [EventStruct(name: "Daily check", time: "10:30 AM")], careTeam: [CareTeam(image: "profile1", name: "Dr.Randy Wigham", specality: "Dentist", lastVisitDate: "Last visit : April 20 2022")]),
+    
     DateData(date: "15/03/2023", events: [
-        Event(name: "Respiratory therapy home visit", time: "10:45 AM"),
-        Event(name: "Daily Check", time: "11:45 AM"),
-        Event(name: "Telehealth cardiology appointment", time: "4:00 PM")
+        EventStruct(name: "Respiratory therapy home visit", time: "10:45 AM"),
+        EventStruct(name: "Daily Check", time: "1:00 PM"),
+        EventStruct(name: "Telehealth cardiology appointment", time: "5:00 PM")
     ], careTeam: [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
                   CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]),
-    DateData(date: "25/03/2023", events: [Event(name: "Daily check", time: "10:45 AM")], careTeam: [CareTeam(image: "", name: "Jazmin Chang", specality: "Orthopedic", lastVisitDate: "Last visit : June 20 2022")])]
+    
+    DateData(date: "25/03/2023", events: [EventStruct(name: "Daily check", time: "10:45 AM")], careTeam: [CareTeam(image: "profile1", name: "Jazmin Chang", specality: "Orthopedic", lastVisitDate: "Last visit : June 20 2022")])]
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
     
@@ -58,6 +61,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var calendar: FSCalendar!
     
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -73,7 +77,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return panGesture
     }()
     
+    let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
+                   AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false)]
+
+    
     var selectedDate = Date()
+    let btnLeftMenu: UIButton = UIButton()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,10 +101,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
-        let btnLeftMenu: UIButton = UIButton()
-        btnLeftMenu.setTitle("Toggle", for: .normal)
-        btnLeftMenu.setTitleColor(.blue, for: .normal)
+        btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
         btnLeftMenu.addTarget(self, action: #selector (menu), for: .touchUpInside)
+        btnLeftMenu.frame.size = CGSize(width:25, height: 25)
         let barButton = UIBarButtonItem(customView: btnLeftMenu)
         self.navigationItem.rightBarButtonItem = barButton
         self.tableView.estimatedRowHeight = 100
@@ -102,13 +111,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
+        self.selectedDate = self.getDateFromString(dateString: "14/03/2023")
+        self.tableView.reloadData()
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     @objc func menu() {
         if self.calendar.scope == .month {
             self.calendar.setScope(.week, animated: true)
+            btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
         } else {
             self.calendar.setScope(.month, animated: true)
+            btnLeftMenu.setImage(UIImage(named:  "vertical"), for: .normal)
         }
     }
     
@@ -208,11 +227,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.eventData = data.events
             cell.tableView.reloadData()
             cell.layoutSubviews()
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CareTeamTableViewCell") as! CareTeamTableViewCell
             cell.careTeamData = data.careTeam
             cell.tableView.reloadData()
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -220,7 +241,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var data = eventsData[indexPath.section]
+        for dataa in eventsData {
+            if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
+                data = dataa
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            let dayViewController = CalendarViewController()
+            dayViewController.hidesBottomBarWhenPushed = true
+            dayViewController.selectedDate = data.date
+            self.navigationController?.pushViewController(dayViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -251,3 +284,73 @@ extension UIView {
     layer.rasterizationScale = scale ? UIScreen.main.scale : 1
   }
 }
+
+extension UIColor {
+    func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+            self.setFill()
+            rendererContext.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        }
+    }
+}
+
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
+        let data = self.appList[indexPath.item]
+        cell.imgView.image = data.image
+        cell.imgView.layer.cornerRadius = 25
+        cell.mainView.layer.borderWidth = 2
+        
+        if indexPath.item == 0 {
+            cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
+        } else {
+            cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        }
+        cell.badgeLabel.text = data.notificationCount?.description
+        cell.badgeLabel.layer.cornerRadius = 7.5
+        cell.badgeLabel.layer.masksToBounds = true
+//        cell.mainView.bringSubviewToFront(cell.badgeLabel)
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            if self.calendar.scope == .month {
+                self.calendar.setScope(.week, animated: true)
+                btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
+            } else {
+                self.calendar.setScope(.month, animated: true)
+                btnLeftMenu.setImage(UIImage(named:  "vertical"), for: .normal)
+            }
+        } else {
+            self.tabBarController?.selectedIndex = 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return appList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 58, height: 58)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    
+    
+    
+}
+

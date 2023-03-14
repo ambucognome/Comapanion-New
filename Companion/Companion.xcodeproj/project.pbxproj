@@ -44,6 +44,14 @@
 		92AA352729BF945300A6A4AB /* Yalta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351929BF945300A6A4AB /* Yalta.swift */; };
 		92AA352829BF945300A6A4AB /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351B29BF945300A6A4AB /* Localize.swift */; };
 		92AA352929BF945300A6A4AB /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351C29BF945300A6A4AB /* SheetViewController.swift */; };
+		92AA353329BF9EA500A6A4AB /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA352C29BF9EA500A6A4AB /* EventsTableViewCell.swift */; };
+		92AA353429BF9EA600A6A4AB /* DoctorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA352D29BF9EA500A6A4AB /* DoctorTableViewCell.swift */; };
+		92AA353529BF9EA600A6A4AB /* CareTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA352E29BF9EA500A6A4AB /* CareTeamTableViewCell.swift */; };
+		92AA353629BF9EA600A6A4AB /* DoctorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */; };
+		92AA353729BF9EA600A6A4AB /* MyCareTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */; };
+		92AA353829BF9EA600A6A4AB /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353129BF9EA500A6A4AB /* EventCell.swift */; };
+		92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */; };
+		92AA353B29C0597E00A6A4AB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353A29C0597E00A6A4AB /* CalendarViewController.swift */; };
 		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
@@ -271,6 +279,14 @@
 		92AA351929BF945300A6A4AB /* Yalta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Yalta.swift; sourceTree = "<group>"; };
 		92AA351B29BF945300A6A4AB /* Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		92AA351C29BF945300A6A4AB /* SheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
+		92AA352C29BF9EA500A6A4AB /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
+		92AA352D29BF9EA500A6A4AB /* DoctorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorTableViewCell.swift; sourceTree = "<group>"; };
+		92AA352E29BF9EA500A6A4AB /* CareTeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareTeamTableViewCell.swift; sourceTree = "<group>"; };
+		92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorProfileViewController.swift; sourceTree = "<group>"; };
+		92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCareTeamViewController.swift; sourceTree = "<group>"; };
+		92AA353129BF9EA500A6A4AB /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareTeamCell.swift; sourceTree = "<group>"; };
+		92AA353A29C0597E00A6A4AB /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
@@ -537,6 +553,11 @@
 		92AA350429BF6F2D00A6A4AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */,
+				92AA352E29BF9EA500A6A4AB /* CareTeamTableViewCell.swift */,
+				92AA352D29BF9EA500A6A4AB /* DoctorTableViewCell.swift */,
+				92AA353129BF9EA500A6A4AB /* EventCell.swift */,
+				92AA352C29BF9EA500A6A4AB /* EventsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -619,6 +640,9 @@
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
 				92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */,
 				928122D929BF5DF50021A679 /* HomeViewController.swift */,
+				92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */,
+				92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */,
+				92AA353A29C0597E00A6A4AB /* CalendarViewController.swift */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
 				92E49AAC298A7DA70018F6E5 /* SettingsVC */,
@@ -1177,6 +1201,7 @@
 				92CFAB39295B1B9C00D77883 /* BioMetricAuthenticator.swift in Sources */,
 				92AA352629BF945300A6A4AB /* InitialTouchPanGestureRecognizer.swift in Sources */,
 				92CFAB5A295B1B9C00D77883 /* ChatViewConfiguration.swift in Sources */,
+				92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */,
 				92CFAB5E295B1B9C00D77883 /* DocumentPickerHelper.swift in Sources */,
 				928122C929BF5BC00021A679 /* FSCalendarStickyHeader.m in Sources */,
 				92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */,
@@ -1200,6 +1225,7 @@
 				92CFAB63295B1B9C00D77883 /* PhotoDataManager.swift in Sources */,
 				92CFAB90295B1B9C00D77883 /* ScriptHelper.swift in Sources */,
 				92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */,
+				92AA353329BF9EA500A6A4AB /* EventsTableViewCell.swift in Sources */,
 				92CFAB6B295B1B9C00D77883 /* Bundle.swift in Sources */,
 				92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */,
 				92CFAB8E295B1B9C00D77883 /* LoadViewController.swift in Sources */,
@@ -1260,19 +1286,23 @@
 				928122D329BF5BC00021A679 /* FSCalendarSeparatorDecorationView.m in Sources */,
 				92CFAB4D295B1B9C00D77883 /* UIBezierPath.swift in Sources */,
 				92CFAB5B295B1B9C00D77883 /* ChatViewController+Subviews.swift in Sources */,
+				92AA353529BF9EA600A6A4AB /* CareTeamTableViewCell.swift in Sources */,
 				92CFAB58295B1B9C00D77883 /* ChatButton.swift in Sources */,
 				92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */,
+				92AA353629BF9EA600A6A4AB /* DoctorProfileViewController.swift in Sources */,
 				92CFAB84295B1B9C00D77883 /* DatePickerTableViewCell.swift in Sources */,
 				92CFABA1295B1B9C00D77883 /* iOSDropDown.swift in Sources */,
 				92CFAB54295B1B9C00D77883 /* JitsiMeetViewController.swift in Sources */,
 				928122C829BF5BC00021A679 /* FSCalendarCollectionViewLayout.m in Sources */,
 				92CFAB46295B1B9C00D77883 /* Message.swift in Sources */,
 				92CFAB33295B1B9C00D77883 /* TimePickerTableViewCell.swift in Sources */,
+				92AA353829BF9EA600A6A4AB /* EventCell.swift in Sources */,
 				92CFAB85295B1B9C00D77883 /* PickerTableViewCell.swift in Sources */,
 				92CFAB78295B1B9C00D77883 /* ImageViewController.swift in Sources */,
 				92CFAB2C295B1B9C00D77883 /* DPDConstants.swift in Sources */,
 				92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */,
 				92CFAB42295B1B9C00D77883 /* Kingfisher.swift in Sources */,
+				92AA353429BF9EA600A6A4AB /* DoctorTableViewCell.swift in Sources */,
 				92CFAB38295B1B9C00D77883 /* SliderTableViewCell.swift in Sources */,
 				92CFABA0295B1B9C00D77883 /* Utilities.swift in Sources */,
 				92CFAB6D295B1B9C00D77883 /* UIScrollView+Refreshable.swift in Sources */,
@@ -1299,6 +1329,7 @@
 				92CFA7F329546D8900D77883 /* MenuViewController.swift in Sources */,
 				92CFAB50295B1B9C00D77883 /* ListReponseObject.swift in Sources */,
 				92CFA93A295A0E8A00D77883 /* SceneDelegate.swift in Sources */,
+				92AA353B29C0597E00A6A4AB /* CalendarViewController.swift in Sources */,
 				92CFABA6295B1B9C00D77883 /* Extention.swift in Sources */,
 				92CFAB2D295B1B9C00D77883 /* DPDUIView+Extension.swift in Sources */,
 				92CFAB69295B1B9C00D77883 /* UITableView.swift in Sources */,
@@ -1318,6 +1349,7 @@
 				92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */,
 				92CFAB44295B1B9C00D77883 /* Data.swift in Sources */,
 				92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */,
+				92AA353729BF9EA600A6A4AB /* MyCareTeamViewController.swift in Sources */,
 				92CFAB70295B1B9C00D77883 /* HeaderRefreshAnimator.swift in Sources */,
 				92CFAB3A295B1B9C00D77883 /* BiometricAuthenticationConstants.swift in Sources */,
 				92CFAB80295B1B9C00D77883 /* SafeCheckUtils.swift in Sources */,
@@ -1483,6 +1515,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
+				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

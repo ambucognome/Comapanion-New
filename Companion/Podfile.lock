@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.9.1)
   - BiometricAuthentication (3.1.3)
+  - CalendarKit (1.1.6)
   - DropDown (2.3.13)
   - Firebase (10.2.0):
     - Firebase/Core (= 10.2.0)
@@ -141,6 +142,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - BiometricAuthentication
+  - CalendarKit
   - DropDown
   - Firebase
   - Firebase/Messaging
@@ -164,6 +166,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - BiometricAuthentication
+    - CalendarKit
     - DropDown
     - Firebase
     - FirebaseAnalytics
@@ -201,6 +204,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   BiometricAuthentication: b63d51be9260ba94165e032829ae78f074b129df
+  CalendarKit: c76fa678d94cb0f3e7da2a0695c2989fe407cc2b
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Firebase: a3ea7eba4382afd83808376edb99acdaff078dcf
   FirebaseAnalytics: 24a15e58e505abcedc3017b6f7c206fbfa964580
@@ -235,6 +239,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyMenu: bffdad1aa7de3a5faf3dc218c989b112a804299b
 
-PODFILE CHECKSUM: afab21ecdecbcc3e7d996c0d68e30d098db35818
+PODFILE CHECKSUM: c6ee6ebf3073baa6fbd32208d1c2ff39c434f70a
 
 COCOAPODS: 1.11.3
