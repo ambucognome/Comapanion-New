@@ -65,6 +65,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var containerView: UIView!
+
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
@@ -80,7 +82,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }()
     
     let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
-                   AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false)]
+                   AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
+                   AppStruct(name: "Safecheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
 
     
     var selectedDate = Date()
@@ -99,7 +102,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
-        self.navigationItem.title = "Events"
+        self.navigationItem.title = "Home"
         
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
@@ -117,6 +120,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.reloadData()
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         navigationController?.navigationBar.isTranslucent = false
+        self.containerView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -136,6 +140,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     deinit {
         print("\(#function)")
     }
+    
+    lazy var safeCheckVC : UIViewController? = {
+        if isFromLogin {
+            let firstChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "EZLoginViewController") as! EZLoginViewController
+            firstChildTabVC.ezId = ezid
+            firstChildTabVC.name = name
+            let nav = UINavigationController.init(rootViewController: firstChildTabVC)
+            return nav
+        }
+        let storyboard = UIStoryboard(name: "covidCheck", bundle: nil)
+         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
+        let nav = UINavigationController.init(rootViewController: vc)
+        return nav
+    }()
     
     // MARK:- UIGestureRecognizerDelegate
     
@@ -161,8 +179,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print("did select date \(self.dateFormatter.string(from: date))")
         self.selectedDate = date
-//        let selectedDates = calendar.selectedDates.map({self.dateFormatter.string(from: $0)})
-//        print("selected dates is \(selectedDates)")
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
@@ -304,16 +320,18 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         cell.imgView.image = data.image
         cell.imgView.layer.cornerRadius = 25
         cell.mainView.layer.borderWidth = 2
-        
+        cell.badgeLabel.isHidden = true
         if indexPath.item == 0 {
             cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
         } else {
             cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
         }
         cell.badgeLabel.text = data.notificationCount?.description
+        if indexPath.item == 0 || indexPath.item == 1{
+            cell.badgeLabel.isHidden = false
+        }
         cell.badgeLabel.layer.cornerRadius = 7.5
         cell.badgeLabel.layer.masksToBounds = true
-//        cell.mainView.bringSubviewToFront(cell.badgeLabel)
         return cell
     }
     
@@ -322,16 +340,20 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            if self.calendar.scope == .month {
-                self.calendar.setScope(.week, animated: true)
-                btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
-            } else {
-                self.calendar.setScope(.month, animated: true)
-                btnLeftMenu.setImage(UIImage(named:  "vertical"), for: .normal)
+        if indexPath.item == 2 {
+            if let vc = self.safeCheckVC {
+                self.addChild(vc)
+                vc.didMove(toParent: self)
+                vc.view.frame = self.containerView.bounds
+                self.containerView.isHidden = false
+                self.containerView.subviews.forEach({ $0.removeFromSuperview() })
+                self.containerView.addSubview(vc.view)
             }
         } else {
-            self.tabBarController?.selectedIndex = 1
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     
