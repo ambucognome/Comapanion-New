@@ -42,6 +42,8 @@ struct CareTeam {
     var bio : String = ""
 }
 
+
+
 //MARK: Add events data here
 let eventsData : [DateData] = [
     DateData(date: "14/03/2023", events: [EventStruct(name: "Daily check", time: "10:30 AM")], careTeam: [CareTeam(image: "profile1", name: "Dr.Randy Wigham", specality: "Dentist", lastVisitDate: "Last visit : April 20 2022")]),
@@ -97,7 +99,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
-        self.navigationItem.title = "Home"
+        self.navigationItem.title = "Events"
         
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"

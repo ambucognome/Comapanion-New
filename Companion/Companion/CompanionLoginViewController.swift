@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class CompanionLoginViewController: UIViewController {
 
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -29,11 +31,22 @@ class CompanionLoginViewController: UIViewController {
             return
         }
         let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-         let vc = storyboard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
-        vc.isFromLogin = true
-        vc.name = self.lastNameTextField.text!
-        vc.ezid = self.ezIdTextField.text!
-         self.navigationController?.pushViewController(vc, animated: true)
+//         let vc = storyboard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+//        vc.isFromLogin = true
+        isFromLogin = true
+        name = self.lastNameTextField.text!
+        ezid = self.ezIdTextField.text!
+//        vc.name = self.lastNameTextField.text!
+//        vc.ezid = self.ezIdTextField.text!
+//         self.navigationController?.pushViewController(vc, animated: true)
+        self.setRootViewController(vc: vc)
     }
+    
+    func setRootViewController(vc: UIViewController) {
+        UIApplication.shared.windows.first?.rootViewController = vc
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+    }
+   
 }
 

@@ -26,8 +26,16 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Profile"
-//        self.nameLabel.text = username
-//        self.emailLabel.text = username.removingWhitespaces() + "@demo.com"
+        self.nameLabel.text = username
+        self.emailLabel.text = username.removingWhitespaces() + "@demo.com"
+        let btnLeftMenu: UIButton = UIButton()
+        btnLeftMenu.setTitle("Logout", for: .normal)
+        btnLeftMenu.setTitleColor(DARK_BLUE_COLOR, for: .normal)
+//                btnLeftMenu.frame =  CGRect(x:0, y:0, width: 25, height:25)
+                btnLeftMenu.addTarget(self, action: #selector (menu), for: .touchUpInside)
+                btnLeftMenu.imageEdgeInsets = UIEdgeInsets(top: 0 , left: 0, bottom: 0, right: 0)
+                let barButton = UIBarButtonItem(customView: btnLeftMenu)
+                self.navigationItem.rightBarButtonItem = barButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,7 +65,13 @@ class ProfileViewController: UIViewController {
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2.0
         profileImageView.layer.borderWidth = 3.0
         profileImageView.layer.borderColor = UIColor.white.cgColor
-    }
+
+
+            }
+            
+            @objc func menu() {
+                LogoutHelper.shared.logout()
+            }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)

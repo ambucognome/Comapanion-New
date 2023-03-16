@@ -31,6 +31,10 @@ var dashboardNav : UINavigationController?
 
 class DashboardViewController: UIViewController {
     
+    let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
+                   AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false)]
+
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
@@ -45,9 +49,8 @@ class DashboardViewController: UIViewController {
 //        case seventhChildTab = 6
     }
     
-    var name = ""
-    var ezid = ""
-    var isFromLogin = false
+//    var name = ""
+//    var ezid = ""
     
     lazy var firstChildTabVC : UIViewController? = {
         if isFromLogin {
@@ -133,20 +136,21 @@ class DashboardViewController: UIViewController {
         })
         self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
-        let btnLeftMenu: UIButton = UIButton()
-        let image = UIImage(named: "menu");
-        btnLeftMenu.setImage(image, for: .normal)
-        btnLeftMenu.frame =  CGRect(x:0, y:0, width: 25, height:25)
-        btnLeftMenu.addTarget(self, action: #selector (menu), for: .touchUpInside)
-        btnLeftMenu.imageEdgeInsets = UIEdgeInsets(top: 10 , left: 10, bottom: 10, right: 10)
-        let barButton = UIBarButtonItem(customView: btnLeftMenu)
-        self.navigationItem.rightBarButtonItem = barButton
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        self.navigationItem.title = "Dashboard"
+//        let btnLeftMenu: UIButton = UIButton()
+//        let image = UIImage(named: "menu");
+//        btnLeftMenu.setImage(image, for: .normal)
+//        btnLeftMenu.frame =  CGRect(x:0, y:0, width: 25, height:25)
+//        btnLeftMenu.addTarget(self, action: #selector (menu), for: .touchUpInside)
+//        btnLeftMenu.imageEdgeInsets = UIEdgeInsets(top: 10 , left: 10, bottom: 10, right: 10)
+//        let barButton = UIBarButtonItem(customView: btnLeftMenu)
+//        self.navigationItem.rightBarButtonItem = barButton
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.isNavigationBarHidden = false
+//        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+//        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
     }
     
@@ -221,19 +225,20 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
-        let data = appList[indexPath.item]
-        cell.nameLabel.text = data.name
-        if data.isSelected {
-            cell.nameLabel.textColor = DARK_BLUE_COLOR
-            cell.contentView.backgroundColor = LIGHT_BLUE_COLOR
-            cell.contentView.layer.borderWidth = 5
-            cell.contentView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        let data = self.appList[indexPath.item]
+        cell.imgView.image = data.image
+        cell.imgView.layer.cornerRadius = 25
+        cell.mainView.layer.borderWidth = 2
+        
+        if indexPath.item == 0 {
+            cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
         } else {
-            cell.nameLabel.textColor = .white
-            cell.contentView.backgroundColor = DARK_BLUE_COLOR
-            cell.contentView.layer.borderWidth = 0
-            cell.contentView.layer.borderColor = UIColor.clear.cgColor
+            cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
         }
+        cell.badgeLabel.text = data.notificationCount?.description
+        cell.badgeLabel.layer.cornerRadius = 7.5
+        cell.badgeLabel.layer.masksToBounds = true
+//        cell.mainView.bringSubviewToFront(cell.badgeLabel)
         return cell
     }
     
@@ -242,13 +247,11 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for i in 0..<appList.count {
-            appList[i].isSelected = false
+        if indexPath.item == 0 {
+            self.tabBarController?.selectedIndex = 1
+        } else {
+            self.tabBarController?.selectedIndex = 2
         }
-        appList[indexPath.item].isSelected = true
-        self.collectionView.reloadData()
-        print("selected at", indexPath.item)
-        displayCurrentTab(indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -256,7 +259,7 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 80)
+        return CGSize(width: 58, height: 58)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -266,6 +269,54 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
+//        let data = appList[indexPath.item]
+//        cell.nameLabel.text = data.name
+//        if data.isSelected {
+//            cell.nameLabel.textColor = DARK_BLUE_COLOR
+//            cell.contentView.backgroundColor = LIGHT_BLUE_COLOR
+//            cell.contentView.layer.borderWidth = 5
+//            cell.contentView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+//        } else {
+//            cell.nameLabel.textColor = .white
+//            cell.contentView.backgroundColor = DARK_BLUE_COLOR
+//            cell.contentView.layer.borderWidth = 0
+//            cell.contentView.layer.borderColor = UIColor.clear.cgColor
+//        }
+//        return cell
+//    }
+//    
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        for i in 0..<appList.count {
+//            appList[i].isSelected = false
+//        }
+//        appList[indexPath.item].isSelected = true
+//        self.collectionView.reloadData()
+//        print("selected at", indexPath.item)
+//        displayCurrentTab(indexPath.item)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return appList.count
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 80, height: 80)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 10
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 10
+//    }
     
     
     

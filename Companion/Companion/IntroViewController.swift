@@ -8,24 +8,28 @@
 import UIKit
 import LocalAuthentication
 
+var isFromLogin = false
+var name = ""
+var ezid = ""
+
 class IntroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
-//        notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
-        self.appBecomeActive()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+//        self.appBecomeActive()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        if SafeCheckUtils.getBiometricsEnabled()  {
-//            self.authenticateDeviceOwner()
-//        } else {
-//            self.checkForUserType()
-//        }
+        if SafeCheckUtils.getBiometricsEnabled()  {
+            self.authenticateDeviceOwner()
+        } else {
+            self.checkForUserType()
+        }
         
     }
     
@@ -40,10 +44,10 @@ class IntroViewController: UIViewController {
     }
     
     @objc func appBecomeActive() {
-        let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-        let vc = storyboard.instantiateViewController(identifier: "TabBarController") as! UITabBarController
-//            let nav = UINavigationController(rootViewController: vc)
-            self.setRootViewController(vc: vc)
+//        let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+//        let vc = storyboard.instantiateViewController(identifier: "TabBarController") as! UITabBarController
+////            let nav = UINavigationController(rootViewController: vc)
+//            self.setRootViewController(vc: vc)
 
     }
     
@@ -52,10 +56,12 @@ class IntroViewController: UIViewController {
         if (SafeCheckUtils.getToken() != "") {
             //User type not selected but logged in
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
-            vc.isFromLogin = false
-            let nav = UINavigationController(rootViewController: vc)
-            self.setRootViewController(vc: nav)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
+            let vc = storyboard.instantiateViewController(identifier: "TabBarController") as! UITabBarController
+//            vc.isFromLogin = false
+            isFromLogin = false
+//            let nav = UINavigationController(rootViewController: vc)
+            self.setRootViewController(vc: vc)
             if LAUNCHED_FROM_NOTIFICATION {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
                 NotificationManager.shared.parsePayload( data: notificationData)
