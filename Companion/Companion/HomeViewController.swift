@@ -83,7 +83,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
                    AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
-                   AppStruct(name: "Safecheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
+                   AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
 
     
     var selectedDate = Date()
@@ -340,21 +340,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 2 {
-            if let vc = self.safeCheckVC {
-                self.addChild(vc)
-                vc.didMove(toParent: self)
-                vc.view.frame = self.containerView.bounds
-                self.containerView.isHidden = false
-                self.containerView.subviews.forEach({ $0.removeFromSuperview() })
-                self.containerView.addSubview(vc.view)
-            }
-        } else {
-            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
-            controller.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
+        self.tabBarController?.selectedIndex = indexPath.item
+//        if indexPath.item == 2 {
+//            if let vc = self.safeCheckVC {
+//                self.addChild(vc)
+//                vc.didMove(toParent: self)
+//                vc.view.frame = self.containerView.bounds
+//                self.containerView.isHidden = false
+//                self.containerView.subviews.forEach({ $0.removeFromSuperview() })
+//                self.containerView.addSubview(vc.view)
+//            }
+//        } else {
+//            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+//            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+//            controller.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

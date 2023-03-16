@@ -136,7 +136,7 @@ class DashboardViewController: UIViewController {
         })
         self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
-        self.navigationItem.title = "Dashboard"
+        self.navigationItem.title = "SafeCheck"
 //        let btnLeftMenu: UIButton = UIButton()
 //        let image = UIImage(named: "menu");
 //        btnLeftMenu.setImage(image, for: .normal)
