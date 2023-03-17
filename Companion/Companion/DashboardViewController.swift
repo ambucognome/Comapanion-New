@@ -126,7 +126,8 @@ class DashboardViewController: UIViewController {
     
     let LIGHT_BLUE_COLOR = UIColor.white
     
-
+var formLoaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.messageLabel.text = message
@@ -138,6 +139,7 @@ class DashboardViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
                 self.containerView.isHidden = false
             self.displayCurrentTab(0)
+                self.formLoaded = true
             })
         }
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -158,6 +160,16 @@ class DashboardViewController: UIViewController {
 //        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
 //        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if selectedForm && (formLoaded == false){
+            DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
+                self.containerView.isHidden = false
+            self.displayCurrentTab(0)
+                self.formLoaded = true
+            })
+        }
     }
     
     @objc func menu() {

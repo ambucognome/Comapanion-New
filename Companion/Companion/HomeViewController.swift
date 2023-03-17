@@ -44,7 +44,7 @@ struct CareTeam {
 
 
 //MARK: Add message text here
-let message = "Form not selected from app"
+let message = "App not selected"
 
 //MARK: Add reels data here
 let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),

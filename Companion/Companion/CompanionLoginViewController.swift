@@ -19,6 +19,7 @@ class CompanionLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        selectedForm = false
     }
     
     @IBAction func loginBtn(_ sender: Any) {
