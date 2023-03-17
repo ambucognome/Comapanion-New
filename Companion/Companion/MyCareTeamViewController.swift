@@ -11,6 +11,8 @@ import UIKit
 class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
+
     
 //MARK: Add caretaker data here
     let careteamData : [CareTeam] = [
@@ -24,6 +26,7 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
 
         self.tableView.rowHeight = UITableView.automaticDimension
         var frame = CGRect.zero
@@ -94,3 +97,64 @@ let options = SheetOptions(
     // Adds a padding on the left and right of the sheet with this amount. Defaults to zero (no padding)
     horizontalPadding: 0
 )
+
+
+extension MyCareTeamViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
+        let data = appList[indexPath.item]
+        cell.imgView.image = data.image
+        cell.imgView.layer.cornerRadius = 25
+        cell.mainView.layer.borderWidth = 2
+        cell.badgeLabel.isHidden = true
+        if indexPath.item == 0 {
+            cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
+        } else {
+            cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        }
+        cell.badgeLabel.text = data.notificationCount?.description
+        if indexPath.item == 0 || indexPath.item == 1{
+            cell.badgeLabel.isHidden = false
+        }
+        cell.badgeLabel.layer.cornerRadius = 7.5
+        cell.badgeLabel.layer.masksToBounds = true
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 2 {
+            selectedForm = true
+            self.tabBarController?.selectedIndex = 2
+        } else {
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return appList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 58, height: 58)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    
+    
+    
+}

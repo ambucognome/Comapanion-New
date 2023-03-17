@@ -141,3 +141,69 @@ class CalendarViewController: DayViewController {
       
     }
   }
+
+extension CalendarViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
+        let data = appList[indexPath.item]
+        cell.imgView.image = data.image
+        cell.imgView.layer.cornerRadius = 25
+        cell.mainView.layer.borderWidth = 2
+        cell.badgeLabel.isHidden = true
+        if indexPath.item == 0 {
+            cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
+        } else {
+            cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        }
+        cell.badgeLabel.text = data.notificationCount?.description
+        if indexPath.item == 0 || indexPath.item == 1{
+            cell.badgeLabel.isHidden = false
+        }
+        cell.badgeLabel.layer.cornerRadius = 7.5
+        cell.badgeLabel.layer.masksToBounds = true
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if indexPath.item == 2 {
+//            if let vc = self.safeCheckVC {
+//                self.addChild(vc)
+//                vc.didMove(toParent: self)
+//                vc.view.frame = self.containerView.bounds
+//                self.containerView.isHidden = false
+//                self.containerView.subviews.forEach({ $0.removeFromSuperview() })
+//                self.containerView.addSubview(vc.view)
+//            }
+//        } else {
+//            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+//            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+//            controller.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return appList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 58, height: 58)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    
+    
+    
+}

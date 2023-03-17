@@ -43,6 +43,14 @@ struct CareTeam {
 }
 
 
+//MARK: Add message text here
+let message = "Form not selected from app"
+
+//MARK: Add reels data here
+let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
+               AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
+               AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
+
 
 //MARK: Add events data here
 let eventsData : [DateData] = [
@@ -80,11 +88,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         panGesture.maximumNumberOfTouches = 2
         return panGesture
     }()
-    
-    let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
-                   AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
-                   AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
-
     
     var selectedDate = Date()
     let btnLeftMenu: UIButton = UIButton()
@@ -316,7 +319,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
-        let data = self.appList[indexPath.item]
+        let data = appList[indexPath.item]
         cell.imgView.image = data.image
         cell.imgView.layer.cornerRadius = 25
         cell.mainView.layer.borderWidth = 2
@@ -340,22 +343,15 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.tabBarController?.selectedIndex = indexPath.item
-//        if indexPath.item == 2 {
-//            if let vc = self.safeCheckVC {
-//                self.addChild(vc)
-//                vc.didMove(toParent: self)
-//                vc.view.frame = self.containerView.bounds
-//                self.containerView.isHidden = false
-//                self.containerView.subviews.forEach({ $0.removeFromSuperview() })
-//                self.containerView.addSubview(vc.view)
-//            }
-//        } else {
-//            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-//            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
-//            controller.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
+        if indexPath.item == 2 {
+            selectedForm = true
+            self.tabBarController?.selectedIndex = 2
+        } else {
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

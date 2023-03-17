@@ -14,11 +14,13 @@ class AppCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mainView : UIView!
     @IBOutlet weak var badgeLabel : UILabel!
 
-
+    var isFromGrid = false
     override func layoutSubviews() {
         super.layoutSubviews()
-//        self.contentView.layer.cornerRadius = self.contentView.frame.size.height / 2
-//        self.contentView.layer.masksToBounds = true
+        if isFromGrid {
+        self.contentView.layer.cornerRadius = self.contentView.frame.size.height / 2
+        self.contentView.layer.masksToBounds = true
+        }
     }
     
 }

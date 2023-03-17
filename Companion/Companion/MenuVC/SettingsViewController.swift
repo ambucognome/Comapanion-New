@@ -10,14 +10,15 @@ import UIKit
 class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView : UITableView!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+
     
     var models = [Section]()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         self.navigationItem.title = "Settings"
         self.configure()
         tableView.register(SettingTableViewCell.self,
@@ -37,6 +38,11 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func configure() {
         //MARK: SWİTCH
+        models.append(Section(title: "Contact", options: [
+        .staticCell(model: SettingsOption(title: "Connect", icon: UIImage(named:  "connect"), iconBackgroundColor: .clear, handler: {
+            //Switch action code is here
+        }))
+    ]))
         models.append(Section(title: "Account", options: [
             .staticCell(model: SettingsOption(title: "Two-Step Verification", icon: UIImage(named:  "two-step"), iconBackgroundColor: .clear, handler: {
                 //Switch action code is here
@@ -59,16 +65,24 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(item: 0, section: 0) {
-            let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "TwoFactorAuthVC") as! TwoFactorAuthVC
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+            if indexPath == IndexPath(item: 0, section: 0) {
+                let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "GridViewController") as! GridViewController
+                vc.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         if indexPath == IndexPath(item: 0, section: 1) {
-            let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppLockViewController") as! AppLockViewController
+            let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "TwoFactorAuthVC") as! TwoFactorAuthVC
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         if indexPath == IndexPath(item: 0, section: 2) {
+            let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "AppLockViewController") as! AppLockViewController
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath == IndexPath(item: 0, section: 3) {
             let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "NotificationsViewController") as! NotificationsViewController
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -120,4 +134,59 @@ class SettingsViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
 
 
+}
+
+extension SettingsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
+        let data = appList[indexPath.item]
+        cell.imgView.image = data.image
+        cell.imgView.layer.cornerRadius = 25
+        cell.mainView.layer.borderWidth = 2
+        
+        if indexPath.item == 0 {
+            cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
+        } else {
+            cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        }
+        cell.badgeLabel.text = data.notificationCount?.description
+        cell.badgeLabel.layer.cornerRadius = 7.5
+        cell.badgeLabel.layer.masksToBounds = true
+//        cell.mainView.bringSubviewToFront(cell.badgeLabel)
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 2 {
+            selectedForm = true
+            self.tabBarController?.selectedIndex = 2
+        } else {
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return appList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 58, height: 58)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
 }

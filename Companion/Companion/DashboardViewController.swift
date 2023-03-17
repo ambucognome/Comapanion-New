@@ -10,13 +10,13 @@ import SideMenu
 
 let DARK_BLUE_COLOR = UIColor(red: 0.07, green: 0.22, blue: 0.40, alpha: 1.00)
 
-var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),
-               AppStruct(name: "Registration", image: nil, notificationCount: 0, isSelected: false),
-               AppStruct(name: "Report", image: nil, notificationCount: 0,isSelected: false),
-               AppStruct(name: "Screening", image: nil, notificationCount: 0,isSelected: false),
-               AppStruct(name: "Basic", image: nil, notificationCount: 0,isSelected: false),
-//               AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),
-               AppStruct(name: "All component", image: nil, notificationCount: 0,isSelected: false)]
+//var appList = [AppStruct(name: "SafeCheck", image: nil, notificationCount: 0,isSelected: true),
+//               AppStruct(name: "Registration", image: nil, notificationCount: 0, isSelected: false),
+//               AppStruct(name: "Report", image: nil, notificationCount: 0,isSelected: false),
+//               AppStruct(name: "Screening", image: nil, notificationCount: 0,isSelected: false),
+//               AppStruct(name: "Basic", image: nil, notificationCount: 0,isSelected: false),
+////               AppStruct(name: "Repeatable", image: nil, notificationCount: 0,isSelected: false),
+//               AppStruct(name: "All component", image: nil, notificationCount: 0,isSelected: false)]
 
 struct AppStruct {
     var name : String
@@ -25,19 +25,20 @@ struct AppStruct {
     var isSelected : Bool
 }
 
+var selectedForm = false
 
 
 var dashboardNav : UINavigationController?
 
 class DashboardViewController: UIViewController {
     
-    let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
-                   AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false)]
-
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var messageLabel: UILabel!
+
     
     enum TabIndex : Int {
         case firstChildTab = 0
@@ -128,12 +129,17 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.messageLabel.text = message
         navigationItem.largeTitleDisplayMode = .never
         dashboardNav = self.navigationController
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
+        self.containerView.isHidden = true
+        if selectedForm {
+            DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
+                self.containerView.isHidden = false
             self.displayCurrentTab(0)
-        })
+            })
+        }
         self.navigationItem.setHidesBackButton(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showHideReelSection(notification:)), name: Notification.Name("ReelSectionID"), object: nil)
         self.navigationItem.title = "SafeCheck"
@@ -225,7 +231,7 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCollectionViewCell", for: indexPath) as! AppCollectionViewCell
-        let data = self.appList[indexPath.item]
+        let data = appList[indexPath.item]
         cell.imgView.image = data.image
         cell.imgView.layer.cornerRadius = 25
         cell.mainView.layer.borderWidth = 2
@@ -247,10 +253,15 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            self.tabBarController?.selectedIndex = 1
+        if indexPath.item == 2 {
+            selectedForm = true
+            self.containerView.isHidden = false
+            self.displayCurrentTab(0)
         } else {
-            self.tabBarController?.selectedIndex = 2
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
         }
     }
     
