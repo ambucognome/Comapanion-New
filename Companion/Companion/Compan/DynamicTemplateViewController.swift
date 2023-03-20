@@ -42,6 +42,7 @@ class DynamicTemplateViewController: UIViewController, UITableViewDelegate, UITa
     var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
     
     var dataModel: DDCFormModel?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

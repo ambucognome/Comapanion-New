@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AG5-PW-biX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AG5-PW-biX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -1419,29 +1420,44 @@
                                     <constraint firstAttribute="height" constant="1" id="bwF-KQ-83O"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fsj-v1-emn">
-                                <rect key="frame" x="0.0" y="159" width="414" height="737"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35r-Sg-TEf">
+                                <rect key="frame" x="334" y="733" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.070588235289999995" green="0.21960784310000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="8iQ-7F-QU4"/>
+                                    <constraint firstAttribute="width" constant="60" id="yXr-dB-owl"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addBtn:" destination="8aB-Ct-aeB" eventType="touchUpInside" id="lUS-TS-zM7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vwY-0k-aaz"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="vwY-0k-aaz" firstAttribute="bottom" secondItem="35r-Sg-TEf" secondAttribute="bottom" constant="20" id="73J-XX-3DN"/>
                             <constraint firstAttribute="trailing" secondItem="ZTu-A4-kG8" secondAttribute="trailing" id="9EX-cD-Vvj"/>
                             <constraint firstItem="cIZ-nf-Cm4" firstAttribute="trailing" secondItem="vwY-0k-aaz" secondAttribute="trailing" id="Aip-QJ-pKV"/>
                             <constraint firstItem="aTd-N8-udu" firstAttribute="top" secondItem="cIZ-nf-Cm4" secondAttribute="bottom" id="EGv-ER-hUV"/>
                             <constraint firstItem="cIZ-nf-Cm4" firstAttribute="top" secondItem="M8J-i8-v2w" secondAttribute="bottom" id="HbW-cR-V71"/>
+                            <constraint firstItem="vwY-0k-aaz" firstAttribute="trailing" secondItem="35r-Sg-TEf" secondAttribute="trailing" constant="20" id="IaY-9Q-Elw"/>
                             <constraint firstItem="vwY-0k-aaz" firstAttribute="trailing" secondItem="aTd-N8-udu" secondAttribute="trailing" id="KEy-b8-1Jl"/>
                             <constraint firstItem="M8J-i8-v2w" firstAttribute="leading" secondItem="ZPG-gy-Yl0" secondAttribute="leading" id="KFO-iR-Jrp"/>
                             <constraint firstItem="aTd-N8-udu" firstAttribute="trailing" secondItem="cIZ-nf-Cm4" secondAttribute="trailing" id="RbR-Mp-CMv"/>
                             <constraint firstItem="aTd-N8-udu" firstAttribute="leading" secondItem="ZPG-gy-Yl0" secondAttribute="leading" id="Rrj-qy-oNF"/>
-                            <constraint firstAttribute="bottom" secondItem="Fsj-v1-emn" secondAttribute="bottom" id="aSV-k0-xWl"/>
-                            <constraint firstItem="Fsj-v1-emn" firstAttribute="trailing" secondItem="vwY-0k-aaz" secondAttribute="trailing" id="aSh-LZ-H7Y"/>
-                            <constraint firstItem="Fsj-v1-emn" firstAttribute="top" secondItem="M8J-i8-v2w" secondAttribute="bottom" constant="5" id="bDn-FP-2Lb"/>
                             <constraint firstItem="M8J-i8-v2w" firstAttribute="top" secondItem="ZTu-A4-kG8" secondAttribute="bottom" constant="5" id="diI-0f-Xe7"/>
                             <constraint firstItem="aTd-N8-udu" firstAttribute="leading" secondItem="cIZ-nf-Cm4" secondAttribute="leading" id="ePp-uW-bJt"/>
                             <constraint firstItem="ZTu-A4-kG8" firstAttribute="leading" secondItem="ZPG-gy-Yl0" secondAttribute="leading" id="gcz-NO-vtm"/>
-                            <constraint firstItem="Fsj-v1-emn" firstAttribute="leading" secondItem="vwY-0k-aaz" secondAttribute="leading" id="q8X-jn-cMa"/>
                             <constraint firstItem="vwY-0k-aaz" firstAttribute="trailing" secondItem="M8J-i8-v2w" secondAttribute="trailing" id="uKt-ex-YcH"/>
                             <constraint firstItem="cIZ-nf-Cm4" firstAttribute="leading" secondItem="vwY-0k-aaz" secondAttribute="leading" id="xh7-W3-Ff6"/>
                             <constraint firstItem="ZTu-A4-kG8" firstAttribute="top" secondItem="vwY-0k-aaz" secondAttribute="top" id="yn9-gc-tc1"/>
@@ -1453,7 +1469,6 @@
                         <outlet property="calendar" destination="cIZ-nf-Cm4" id="OgT-ua-vgJ"/>
                         <outlet property="calendarHeightConstraint" destination="7av-t4-XpN" id="TcJ-Cy-MDU"/>
                         <outlet property="collectionView" destination="M8J-i8-v2w" id="mKK-LM-i8Y"/>
-                        <outlet property="containerView" destination="Fsj-v1-emn" id="h8E-Ed-JaR"/>
                         <outlet property="tableView" destination="aTd-N8-udu" id="5Nq-Vg-u6r"/>
                     </connections>
                 </viewController>
@@ -2498,6 +2513,7 @@
         <image name="home" width="18" height="17.5"/>
         <image name="home_filled" width="18" height="17.5"/>
         <image name="logo4" width="1570" height="202"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="profile1" width="32" height="32"/>
         <image name="setting" width="24" height="24"/>
         <image name="team" width="23" height="18"/>

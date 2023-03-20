@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NotificationBannerSwift
 
 final class ContentSizedTableView: UITableView {
     override var contentSize:CGSize {
@@ -65,7 +66,7 @@ let eventsData : [DateData] = [
     
     DateData(date: "25/03/2023", events: [EventStruct(name: "Daily check", time: "10:45 AM")], careTeam: [CareTeam(image: "profile1", name: "Jazmin Chang", specality: "Orthopedic", lastVisitDate: "Last visit : June 20 2022")])]
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, DynamicTemplateViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
@@ -123,9 +124,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.reloadData()
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         navigationController?.navigationBar.isTranslucent = false
-        self.containerView.isHidden = true
+        self.addObservers()
     }
-    
+    deinit {
+        removeObservers()
+    }
+
+    func addObservers(){
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(addBtn(_:)),
+            name: NSNotification.Name(rawValue: "ReloadAPI") ,
+            object: nil
+        )
+    }
+
+    func removeObservers(){
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"ReloadAPI"), object: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -140,23 +156,81 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    deinit {
-        print("\(#function)")
+
+    
+    @IBAction func addBtn(_ sender: Any) {
+        self.getTempleWith(uri: template_uri, context: [ "key" : key])
     }
     
-    lazy var safeCheckVC : UIViewController? = {
-        if isFromLogin {
-            let firstChildTabVC = UIStoryboard(name: "covidCheck", bundle: nil).instantiateViewController(withIdentifier: "EZLoginViewController") as! EZLoginViewController
-            firstChildTabVC.ezId = ezid
-            firstChildTabVC.name = name
-            let nav = UINavigationController.init(rootViewController: firstChildTabVC)
-            return nav
+
+    var template_uri = "http://chdi.montefiore.org/calenderEvent"
+    var key = "101"
+    
+    func didSubmitSurvey(params: [String : Any]) {
+        print("survey completed")
+        let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
+        banner.show()
+    }
+
+
+    func getTempleWith(uri: String, context: Any) {
+        let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
+        let parameters: [String: Any] = [
+            "author" : name,
+            "template_uri" : (uri),
+            "context": context
+        ]
+        context_parameters = context as! [String : Any]
+        if (self.navigationController?.topViewController as? DynamicTemplateViewController) == nil {
+            ERProgressHud.shared.show()
         }
-        let storyboard = UIStoryboard(name: "covidCheck", bundle: nil)
-         let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as! InitialViewController
-        let nav = UINavigationController.init(rootViewController: vc)
-        return nav
-    }()
+        print("getTemplate request========",parameters)
+        APIManager.sharedInstance.makeRequestToGetTemplate(params: parameters as [String:Any]){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                if let responseData = response as? Dictionary<String, Any> {
+                                  var jsonData: Data? = nil
+                                  do {
+                                      jsonData = try JSONSerialization.data(
+                                          withJSONObject: responseData as Any,
+                                          options: .prettyPrinted)
+                                      do{
+                                          let jsonDataModels = try JSONDecoder().decode(DDCFormModel.self, from: jsonData!)
+//                                          print(response)
+                                          let frameworkBundle = Bundle(for: DynamicTemplateViewController.self)
+                                          let storyboard = UIStoryboard(name: "Main", bundle: frameworkBundle)
+                                          let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
+                                          vc.delegate = self
+                                          vc.dataModel = jsonDataModels
+                                          vc.hidesBottomBarWhenPushed = true
+//                                          ddcModel = jsonDataModels
+//                                          self.present(vc, animated: true, completion: nil)
+                                          if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
+                                              if let vccc = self.navigationController?.topViewController as? DynamicTemplateViewController {
+                                                vccc.dataModel = jsonDataModels
+                                                  vccc.tableView.reloadData()
+                                                }
+                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
+                                              return
+                                          }
+                                          self.navigationController?.pushViewController(vc, animated: true)
+//                                          LogoutHelper.shared.showLogoutView()
+                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
+
+                                      }catch {
+                                          print(error)
+                                      }
+                                  } catch {
+                                      print(error)
+                                  }
+                        }
+            } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
+        }
+    }
     
     // MARK:- UIGestureRecognizerDelegate
     
