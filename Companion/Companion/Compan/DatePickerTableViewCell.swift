@@ -33,6 +33,7 @@ class DatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
         textField.delegate = self
     }
 
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -59,6 +60,7 @@ class DatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
 //        }
         
         self.textField.text = dataa?.value?.value as? String ?? ""
+        self.textField.placeholder = "Select \(dataa?.title ?? "")"
         self.resetBtn.isHidden = true
         if isResetAvailable {
             self.resetBtn.isHidden = false
@@ -78,12 +80,11 @@ class DatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
         var dateComponents = DateComponents()
         dateComponents.month = -3
         let threeMonthAgo = Calendar.current.date(byAdding: dateComponents, to: currentDate)
-
-        datePicker.show("DatePickerDialog",
+        datePicker.show("Select Date",
                         doneButtonTitle: "Done",
                         cancelButtonTitle: "Cancel",
-                        minimumDate: threeMonthAgo,
-                        maximumDate: currentDate,
+                        minimumDate: nil,
+                        maximumDate: nil,
                         datePickerMode: .date) { (date) in
             if let dt = date {
                 let formatter = DateFormatter()
@@ -112,3 +113,41 @@ class DatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
 }
 
 
+
+extension UITextField {
+    func addBottomBorder(){
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 1, width: self.frame.size.width, height: 1)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        borderStyle = .none
+        layer.addSublayer(bottomLine)
+    }
+}
+
+
+class UnderlinedTextField: UITextField {
+    private let defaultUnderlineColor = UIColor.black
+    private let bottomLine = UIView()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        borderStyle = .none
+        bottomLine.translatesAutoresizingMaskIntoConstraints = false
+        bottomLine.backgroundColor = defaultUnderlineColor
+
+        self.addSubview(bottomLine)
+        bottomLine.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 1).isActive = true
+        bottomLine.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        bottomLine.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        bottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+
+    public func setUnderlineColor(color: UIColor = .red) {
+        bottomLine.backgroundColor = color
+    }
+
+    public func setDefaultUnderlineColor() {
+        bottomLine.backgroundColor = defaultUnderlineColor
+    }
+}

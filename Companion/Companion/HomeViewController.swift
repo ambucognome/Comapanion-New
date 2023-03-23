@@ -159,12 +159,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     
     @IBAction func addBtn(_ sender: Any) {
-        self.getTempleWith(uri: template_uri, context: [ "key" : key])
+        self.getTempleWith(uri: template_uri, context: [
+            "key": "test123",
+            "app":"companion",
+            "userid":"421421412"
+            ])
     }
     
 
-    var template_uri = "http://chdi.montefiore.org/calenderEvent"
-    var key = "101"
+    var template_uri = "http://chdi.montefiore.org/calendarEvent"
+    var key = "293984"
     
     func didSubmitSurvey(params: [String : Any]) {
         print("survey completed")

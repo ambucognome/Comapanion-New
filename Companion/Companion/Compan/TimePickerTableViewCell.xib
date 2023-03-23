@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TimePickerTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimePickerTableViewCell" rowHeight="84" id="4T9-jL-kRq" userLabel="TextfieldComponent" customClass="TimePickerTableViewCell" customModule="Compan" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TimePickerTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimePickerTableViewCell" rowHeight="84" id="4T9-jL-kRq" userLabel="TextfieldComponent" customClass="TimePickerTableViewCell" customModule="Companion" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="372" height="91"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4T9-jL-kRq" id="8dg-yI-zTF">
                 <rect key="frame" x="0.0" y="0.0" width="372" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hso-3H-uQ2">
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hso-3H-uQ2" customClass="UnderlinedTextField" customModule="Companion" customModuleProvider="target">
                         <rect key="frame" x="20" y="39" width="332" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="7aC-8O-VVX"/>
@@ -54,6 +54,13 @@
                         <color key="textColor" systemColor="systemRedColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vectordown" translatesAutoresizingMaskIntoConstraints="NO" id="grg-ec-xeK">
+                        <rect key="frame" x="337" y="46.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="aOF-Uq-MEq"/>
+                            <constraint firstAttribute="height" constant="15" id="yoU-SX-gJ2"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -64,7 +71,9 @@
                     <constraint firstItem="QyF-my-Zdx" firstAttribute="top" secondItem="hso-3H-uQ2" secondAttribute="bottom" constant="5" id="Mvq-5W-cDG"/>
                     <constraint firstAttribute="trailing" secondItem="20o-wm-lvk" secondAttribute="trailing" constant="20" id="OKs-Re-buo"/>
                     <constraint firstItem="20o-wm-lvk" firstAttribute="leading" secondItem="8dg-yI-zTF" secondAttribute="leading" constant="20" id="PiZ-Fn-NFB"/>
+                    <constraint firstItem="grg-ec-xeK" firstAttribute="trailing" secondItem="hso-3H-uQ2" secondAttribute="trailing" id="UIO-b9-4Y3"/>
                     <constraint firstItem="hso-3H-uQ2" firstAttribute="leading" secondItem="20o-wm-lvk" secondAttribute="leading" id="V3e-lS-OSB"/>
+                    <constraint firstItem="grg-ec-xeK" firstAttribute="centerY" secondItem="hso-3H-uQ2" secondAttribute="centerY" id="cKi-Wf-vn8"/>
                     <constraint firstItem="hso-3H-uQ2" firstAttribute="trailing" secondItem="20o-wm-lvk" secondAttribute="trailing" id="leU-fW-0Xh"/>
                     <constraint firstItem="rSb-Qw-fwb" firstAttribute="top" secondItem="8dg-yI-zTF" secondAttribute="top" constant="10" id="o0c-qK-yI9"/>
                     <constraint firstItem="20o-wm-lvk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8dg-yI-zTF" secondAttribute="top" constant="20" id="qJd-RU-uT5"/>
@@ -82,6 +91,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Vectordown" width="11.5" height="7"/>
         <image name="undo" width="32" height="32"/>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
