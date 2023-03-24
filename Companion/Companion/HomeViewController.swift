@@ -157,13 +157,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
 
+    var context = [
+        "key": "test123",
+        "app":"companion",
+        "userid":"421421412"
+        ]
     
     @IBAction func addBtn(_ sender: Any) {
-        self.getTempleWith(uri: template_uri, context: [
-            "key": "test123",
-            "app":"companion",
-            "userid":"421421412"
-            ])
+        self.getTempleWith(uri: template_uri, context: self.context)
     }
     
 
@@ -172,8 +173,32 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func didSubmitSurvey(params: [String : Any]) {
         print("survey completed")
-        let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
-        banner.show()
+        self.createEvent(data: params)
+    }
+    
+    func createEvent(data: [String: Any]) {
+        var dataDic = data
+        dataDic["ddc_context"] = context
+        dataDic["template_uri"] = self.template_uri
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        
+        ERProgressHud.shared.show()
+                    BaseAPIManager.sharedInstance.makeRequestToCreateEvent( data: jsonData){ (success, response,statusCode)  in
+                        if (success) {
+                            ERProgressHud.shared.hide()
+                            print(response)
+                            if statusCode == 200 {
+                                let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
+                                banner.show()
+                            }
+                        } else {
+                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                            ERProgressHud.shared.hide()
+                        }
+                    }
     }
 
 

@@ -159,31 +159,32 @@ class DynamicTemplateViewController: UIViewController, UITableViewDelegate, UITa
                             if statusCode == 200 {
                                 print(response)
                                 if var dataDic = response as? Dictionary<String, Any> {
-                                    let recordID = dataDic["id"] as? String ?? ""
-                                    let symtoms = dataDic["symptoms"] as? [String] ?? []
-                                    dataDic.removeValue(forKey: "id")
-                                    dataDic.removeValue(forKey: "symptoms")
-                                    dataDic["record_id"] = recordID
-                                    dataDic["project_id"] = recordID
-                                    for key in symptomKeys {
-                                        for sym in symtoms {
-                                            if sym == key {
-                                                dataDic[key] = 1
-                                            } //else {
-//                                                dataDic[key] = NSNull()
-//                                            }
-                                        }
-                                    }
-                                    print(dataDic)
-                                    if let surveyData = survey_data as? Dictionary<String, Any> {
-                                        var newDic = surveyData
-                                        newDic.merge(dict: dataDic)
-                                        print(newDic)
+//                                    let recordID = dataDic["id"] as? String ?? ""
+//                                    let symtoms = dataDic["symptoms"] as? [String] ?? []
+//                                    dataDic.removeValue(forKey: "id")
+//                                    dataDic.removeValue(forKey: "symptoms")
+//                                    dataDic["record_id"] = recordID
+//                                    dataDic["project_id"] = recordID
+//                                    for key in symptomKeys {
+//                                        for sym in symtoms {
+//                                            if sym == key {
+//                                                dataDic[key] = 1
+//                                            } //else {
+////                                                dataDic[key] = NSNull()
+////                                            }
+//                                        }
+//                                    }
+//                                    print(dataDic)
+//                                    if let surveyData = survey_data as? Dictionary<String, Any> {
+//                                        var newDic = surveyData
+//                                        newDic.merge(dict: dataDic)
+//                                        print(newDic)
                                         // self.completeSurvey(surveyDetails: newDic)
                                         self.navigationController?.popViewController {
-                                            self.delegate?.didSubmitSurvey(params: newDic)
+//                                            self.delegate?.didSubmitSurvey(params: newDic)
+                                            self.delegate?.didSubmitSurvey(params: dataDic)
                                         }
-                                    }
+//                                    }
                                 }
                             }
                         } else {

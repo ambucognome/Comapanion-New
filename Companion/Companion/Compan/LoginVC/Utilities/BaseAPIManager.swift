@@ -25,6 +25,7 @@ class BaseAPIManager : NSObject {
         case startSurvey(Data,String)
         case completeSurvey(Data)
         case uploadToken(Data)
+        case createEvent(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -36,6 +37,8 @@ class BaseAPIManager : NSObject {
             case .completeSurvey:
                 return .post
             case .uploadToken:
+                return .post
+            case .createEvent:
                 return .post
             }
         }
@@ -51,6 +54,8 @@ class BaseAPIManager : NSObject {
                 return API_END_COMPLETE_SURVEY
             case .uploadToken:
                 return API_END_ADD_TOKEN
+            case .createEvent:
+                return API_END_CREATE_EVENT
             }
         }
         
@@ -91,6 +96,18 @@ class BaseAPIManager : NSObject {
             case .uploadToken(let data):
                 urlTokenRequest.httpBody = data
                 return urlTokenRequest
+            case .createEvent(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                
+                var urlTokenRequest = URLRequest(url: url)
+                urlTokenRequest.httpMethod = method.rawValue
+                urlTokenRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlTokenRequest.httpBody = data
+//                urlTokenRequest.setValue("Bearer \(SafeCheckUtils.getToken())", forHTTPHeaderField: "Authorization")
+                return urlRequest
             }
         }
     }
@@ -192,6 +209,31 @@ class BaseAPIManager : NSObject {
     // Returns User details
     func makeRequestToUploadFCMToken(data:Data,completion: @escaping completionHandlerWithStatusCode) {
         Alamofire.request(Router.uploadToken(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }   else {
+                    LogoutHelper.shared.logout()
+                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Create Event
+    // completion : Completion object to return parameters to the calling functions
+    // Returns Event
+    func makeRequestToCreateEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.createEvent(data)).responseJSON { response in
             switch response.result {
             case .success(let JSON):
                 ERProgressHud.shared.hide()
