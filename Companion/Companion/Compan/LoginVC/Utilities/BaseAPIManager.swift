@@ -101,12 +101,7 @@ class BaseAPIManager : NSObject {
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                
-                var urlTokenRequest = URLRequest(url: url)
-                urlTokenRequest.httpMethod = method.rawValue
-                urlTokenRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                urlTokenRequest.httpBody = data
-//                urlTokenRequest.setValue("Bearer \(SafeCheckUtils.getToken())", forHTTPHeaderField: "Authorization")
+                urlRequest.httpBody = data
                 return urlRequest
             }
         }

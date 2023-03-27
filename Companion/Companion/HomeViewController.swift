@@ -177,9 +177,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func createEvent(data: [String: Any]) {
+        
+        let date = data["date"] as? String
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let newDate = dateFormatter.date(from: date!)
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        let dateString = formatter.string(from: newDate! as Date)
+
+        
         var dataDic = data
         dataDic["ddc_context"] = context
         dataDic["template_uri"] = self.template_uri
+        dataDic["date"] = dateString
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
