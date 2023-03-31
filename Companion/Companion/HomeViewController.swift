@@ -33,6 +33,10 @@ struct EventStruct {
     var duration : String = "30"
     var parentId : String?
     var description : String = ""
+    var guestname : String = ""
+    var guestId : String = ""
+    var guestEmail  : String = ""
+    var date: String = ""
 }
 
 struct CareTeam {
@@ -51,8 +55,8 @@ struct CareTeam {
 let message = "App not selected"
 
 //MARK: Add reels data here
-let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
-               AppStruct(name: "", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
+let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
+               AppStruct(name: "Careteam", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
                AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
 
 
@@ -67,6 +71,9 @@ var eventsData : [DateData] = [
                   CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]),
     
     DateData(date: "25/03/2023", events: [EventStruct(name: "Daily check", time: "10:45 AM")], careTeam: [CareTeam(image: "profile1", name: "Jazmin Chang", specality: "Orthopedic", lastVisitDate: "Last visit : June 20 2022")])]
+
+var careteamData = [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
+                    CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, DynamicTemplateViewControllerDelegate {
     
@@ -83,6 +90,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         formatter.dateFormat = "dd/MM/yyyy"
         return formatter
     }()
+    
     fileprivate lazy var scopeGesture: UIPanGestureRecognizer = {
         [unowned self] in
         let panGesture = UIPanGestureRecognizer(target: self.calendar, action: #selector(self.calendar.handleScopeGesture(_:)))
@@ -249,6 +257,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             print(response)
                             for i in 0..<response.count {
                                 if let eventDic = response[i] as? NSDictionary {
+                                    let eventID = eventDic["eventId"] as? String ?? ""
                                     let metaDataString = eventDic["metadata"] as? String ?? ""
                                     if let metaDataDic = metaDataString.convertToDictionary() {
                                         print(metaDataDic)
@@ -291,7 +300,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         let guestId = guestDic["guestId"] ?? ""
                                         
                                         
-                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
+                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
                                         eventsData.append(data)
                                         
                                     }
@@ -467,8 +476,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CareTeamTableViewCell") as! CareTeamTableViewCell
-//            cell.careTeamData = data.careTeam
-            cell.dateEvents = events
+            cell.careTeamData = careteamData//data.careTeam
+//            cell.dateEvents = events
             cell.tableView.reloadData()
             cell.selectionStyle = .none
             return cell

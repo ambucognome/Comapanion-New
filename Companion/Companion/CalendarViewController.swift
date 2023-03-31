@@ -84,6 +84,7 @@ class CalendarViewController: DayViewController {
             event.text = "\(data.time) - \(data.name) : \(data.description)"
             event.color = DARK_BLUE_COLOR
             event.isAllDay = false
+            event.userInfo = data
             events.append(event)
         }
         return events
@@ -100,6 +101,18 @@ class CalendarViewController: DayViewController {
         return
       }
       print("Event has been selected: \(descriptor) \(String(describing: descriptor.userInfo))")
+        if let eventData = descriptor.userInfo as? EventStruct {
+        let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+        let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
+        controller.eventData = eventData
+//        let nav = UINavigationController(rootViewController: controller)
+        let sheetController = SheetViewController(
+            controller: controller,
+            sizes: [.intrinsic],options: options)
+        sheetController.gripSize = CGSize(width: 50, height: 3)
+        sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
+        self.present(sheetController, animated: true, completion: nil)
+        }
     }
     
     override func dayViewDidLongPressEventView(_ eventView: EventView) {

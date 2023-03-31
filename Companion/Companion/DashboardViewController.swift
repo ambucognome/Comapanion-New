@@ -248,10 +248,15 @@ extension DashboardViewController : UICollectionViewDelegate, UICollectionViewDa
         cell.imgView.layer.cornerRadius = 25
         cell.mainView.layer.borderWidth = 2
         
+        cell.badgeLabel.isHidden = true
         if indexPath.item == 0 {
             cell.mainView.layer.borderColor = UIColor(red: 0.78, green: 0.44, blue: 0.14, alpha: 1.00).cgColor
         } else {
             cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        }
+        cell.badgeLabel.text = data.notificationCount?.description
+        if indexPath.item == 0 || indexPath.item == 1{
+            cell.badgeLabel.isHidden = false
         }
         cell.badgeLabel.text = data.notificationCount?.description
         cell.badgeLabel.layer.cornerRadius = 7.5

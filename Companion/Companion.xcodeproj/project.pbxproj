@@ -52,6 +52,7 @@
 		92AA353829BF9EA600A6A4AB /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353129BF9EA500A6A4AB /* EventCell.swift */; };
 		92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */; };
 		92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */; };
+		92AA353F29D6E86D00A6A4AB /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */; };
 		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
@@ -287,6 +288,7 @@
 		92AA353129BF9EA500A6A4AB /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CareTeamCell.swift; sourceTree = "<group>"; };
 		92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 				92AA353029BF9EA500A6A4AB /* MyCareTeamViewController.swift */,
 				92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */,
 				92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */,
+				92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
 				92E49AAC298A7DA70018F6E5 /* SettingsVC */,
@@ -1273,6 +1276,7 @@
 				92B3A848296C023A00C03761 /* GridViewController.swift in Sources */,
 				92CFABA5295B1B9C00D77883 /* BubbleTransition.swift in Sources */,
 				92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */,
+				92AA353F29D6E86D00A6A4AB /* EventDetailVC.swift in Sources */,
 				92CFAB68295B1B9C00D77883 /* LayoutConstraintSet.swift in Sources */,
 				92AA352329BF945300A6A4AB /* SheetContentViewController.swift in Sources */,
 				92CFA7F529546D9B00D77883 /* DashboardViewController.swift in Sources */,
