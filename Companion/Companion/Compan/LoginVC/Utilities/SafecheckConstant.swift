@@ -23,5 +23,7 @@ let API_END_COMPLETE_SURVEY = "/completeSurvey"
 let API_END_ADD_TOKEN = "/add-token"
 
 
-let EVENT_BASE_URL = "http://10.85.9.161:9095/events"
-let API_END_CREATE_EVENT = "/create"
+let EVENT_BASE_URL = "http://10.85.9.161:9095"//"http://192.168.199.69:8080"
+let API_END_CREATE_EVENT = "/eventapi/events/create"
+let API_END_GET_EVENTS = "/eventapi/events/date-range"
+

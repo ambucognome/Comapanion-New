@@ -13,6 +13,7 @@ class EventsTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewData
     @IBOutlet weak var shadowView: UIView!
 
     var eventData = [EventStruct]()
+    var dateEvents = [DateData]()
     
 
     override func awakeFromNib() {
@@ -47,14 +48,21 @@ class EventsTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.eventData.count
+        return self.dateEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = self.dateEvents[indexPath.row].events[0]
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell") as! EventCell
-            cell.eventName.text = self.eventData[indexPath.row].name
-            cell.time.text = self.eventData[indexPath.row].time
+            cell.eventName.text = data.name
+            cell.time.text = data.time
             cell.selectionStyle = .none
+        cell.durationLabel.text = "Duration: \(data.duration) mins"
+        if data.parentId == nil {
+            cell.hostLabel.text = "You are the host for this event."
+        } else {
+            cell.hostLabel.text = ""
+        }
         
         self.layoutSubviews()
             return cell

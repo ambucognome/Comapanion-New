@@ -42,12 +42,15 @@ class DynamicTemplateViewController: UIViewController, UITableViewDelegate, UITa
     var cellHeightsDictionary: [IndexPath: CGFloat] = [:]
     
     var dataModel: DDCFormModel?
+    var isFromEvent = false
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.headerLabel.text = "Welcome \(username)"
+        if isFromEvent == false {
         self.navigationController?.isNavigationBarHidden = true
+        }
         // Do any additional setup after loading the view.
         tableView.register(UITableViewCell.self,
                            forCellReuseIdentifier: "DefaultCell")

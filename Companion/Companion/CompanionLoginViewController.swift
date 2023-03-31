@@ -38,6 +38,8 @@ class CompanionLoginViewController: UIViewController {
         isFromLogin = true
         name = self.lastNameTextField.text!
         ezid = self.ezIdTextField.text!
+        SafeCheckUtils.setEZID(ezId: ezid)
+        SafeCheckUtils.setName(name: name)
 //        vc.name = self.lastNameTextField.text!
 //        vc.ezid = self.ezIdTextField.text!
 //         self.navigationController?.pushViewController(vc, animated: true)

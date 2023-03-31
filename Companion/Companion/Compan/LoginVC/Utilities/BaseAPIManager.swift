@@ -26,6 +26,7 @@ class BaseAPIManager : NSObject {
         case completeSurvey(Data)
         case uploadToken(Data)
         case createEvent(Data)
+        case getEvents(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -39,6 +40,8 @@ class BaseAPIManager : NSObject {
             case .uploadToken:
                 return .post
             case .createEvent:
+                return .post
+            case .getEvents:
                 return .post
             }
         }
@@ -56,6 +59,8 @@ class BaseAPIManager : NSObject {
                 return API_END_ADD_TOKEN
             case .createEvent:
                 return API_END_CREATE_EVENT
+            case .getEvents:
+                return API_END_GET_EVENTS
             }
         }
         
@@ -103,6 +108,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 urlRequest.httpBody = data
                 return urlRequest
+            case .getEvents(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
             }
         }
     }
@@ -114,7 +126,7 @@ class BaseAPIManager : NSObject {
     typealias completionHandlerWithSuccessAndMessage = (_ success:Bool,_ message: NSDictionary) -> Void
     typealias completionHandlerWithResponse = (HTTPURLResponse) -> Void
     typealias completionHandlerWithResponseAndError = (HTTPURLResponse?, NSError?) -> Void
-    typealias completionHandlerWithSuccessAndResultArray = (_ success:Bool, _ results: NSArray) -> Void
+    typealias completionHandlerWithSuccessAndResultArray = (_ success:Bool, _ message: NSArray,_ statusCode: Int) -> Void
     typealias completionHandlerWithSuccessAndResultsArray = (_ success:Bool, _ result_1: NSArray, _ result_2: NSArray) -> Void
     typealias completionHandlerWithStatusCode = (_ success:Bool,_ message: NSDictionary,_ statusCode: Int) -> Void
     typealias completionHandlerWithBoolAndStatusCode = (_ success:Bool,_ message: Bool,_ statusCode: Int) -> Void
@@ -240,11 +252,37 @@ class BaseAPIManager : NSObject {
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
                 }   else {
+                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
+//                    LogoutHelper.shared.logout()
+//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Get Event
+    // completion : Completion object to return parameters to the calling functions
+    // Returns Events
+    func makeRequestToGetEvent(data:Data,completion: @escaping completionHandlerWithSuccessAndResultArray) {
+        Alamofire.request(Router.getEvents(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSArray else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }   else {
                     LogoutHelper.shared.logout()
                     APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
                 }
             case .failure( _):
-                completion(false,[:],0)
+                completion(false,[],0)
             }
         }
     }

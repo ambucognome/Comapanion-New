@@ -128,5 +128,39 @@ class func getToken() -> String {
         }
         return mobile
     }
+    
+    // Save the user Id
+    // Params :
+    // email : It is the string which is to be saved
+    class func setEZID(ezId : String){
+        UserDefaults.standard.set(ezId, forKey: "ezid")
+    }
+    
+    // Fetch the email
+    class func getEZID() -> String {
+        let defaults = UserDefaults.standard
+        guard let ezId =  defaults.value(forKey: "ezid") as? String else {
+            //APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            return ""
+        }
+        return ezId
+    }
+    
+    // Save the user Id
+    // Params :
+    // email : It is the string which is to be saved
+    class func setName(name : String){
+        UserDefaults.standard.set(name, forKey: "name")
+    }
+    
+    // Fetch the email
+    class func getName() -> String {
+        let defaults = UserDefaults.standard
+        guard let name =  defaults.value(forKey: "name") as? String else {
+            //APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            return ""
+        }
+        return name
+    }
 
 }

@@ -12,7 +12,8 @@ class CareTeamTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shadowView: UIView!
 
-    var careTeamData = [CareTeam]()
+//    var careTeamData = [CareTeam]()
+    var dateEvents = [DateData]()
 
     
     override func awakeFromNib() {
@@ -47,11 +48,12 @@ class CareTeamTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.careTeamData.count
+        return self.dateEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = self.careTeamData[indexPath.row]
+//        let data = self.careTeamData[indexPath.row]
+        let data = self.dateEvents[indexPath.row].careTeam[0]
             let cell = tableView.dequeueReusableCell(withIdentifier: "CareTeamCell") as! CareTeamCell
         cell.nameLabel.text = "\(data.name) | \(data.specality) "
         cell.lastVisitLabel.text = data.lastVisitDate

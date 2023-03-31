@@ -30,6 +30,9 @@ struct DateData {
 struct EventStruct {
     var name : String
     var time : String
+    var duration : String = "30"
+    var parentId : String?
+    var description : String = ""
 }
 
 struct CareTeam {
@@ -54,9 +57,8 @@ let appList = [AppStruct(name: "", image: UIImage(named: "calen"), notificationC
 
 
 //MARK: Add events data here
-let eventsData : [DateData] = [
+var eventsData : [DateData] = [
     DateData(date: "14/03/2023", events: [EventStruct(name: "Daily check", time: "10:30 AM")], careTeam: [CareTeam(image: "profile1", name: "Dr.Randy Wigham", specality: "Dentist", lastVisitDate: "Last visit : April 20 2022")]),
-    
     DateData(date: "15/03/2023", events: [
         EventStruct(name: "Respiratory therapy home visit", time: "10:45 AM"),
         EventStruct(name: "Daily Check", time: "1:00 PM"),
@@ -92,6 +94,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var selectedDate = Date()
     let btnLeftMenu: UIButton = UIButton()
+    
+    let dateRange = [
+        "fromDate": "2023-02-10 00:00:00",
+        "meiID": "421421412",
+        "toDate": "2023-04-10 20:00:00" ]
 
     
     override func viewDidLoad() {
@@ -102,6 +109,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         self.calendar.select(Date())
+//        self.selectedDate = Data()
         
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
@@ -120,15 +128,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
-        self.selectedDate = self.getDateFromString(dateString: "14/03/2023")
-        self.tableView.reloadData()
+//        self.selectedDate = self.getDateFromString(dateString: "14/03/2023")
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         navigationController?.navigationBar.isTranslucent = false
+        self.tableView.reloadData()
         self.addObservers()
+
+        self.getEvents(data: dateRange)
     }
     deinit {
         removeObservers()
     }
+    
+    
 
     func addObservers(){
         NotificationCenter.default.addObserver(
@@ -144,6 +156,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        context["userid"] = "421421412"//SafeCheckUtils.getEZID()
+        context["key"] = "421421412_\(self.random(digits: 4))"
     }
     
     @objc func menu() {
@@ -155,21 +169,27 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             btnLeftMenu.setImage(UIImage(named:  "vertical"), for: .normal)
         }
     }
-    
 
     var context = [
-        "key": "test123",
+        "key": "test12345",
         "app":"companion",
-        "userid":"421421412"
+        "userid" : "421421412"
         ]
     
     @IBAction func addBtn(_ sender: Any) {
         self.getTempleWith(uri: template_uri, context: self.context)
     }
     
+    func random(digits:Int) -> String {
+        var number = String()
+        for _ in 1...digits {
+           number += "\(Int.random(in: 1...9))"
+        }
+        return number
+    }
+    
 
     var template_uri = "http://chdi.montefiore.org/calendarEvent"
-    var key = "293984"
     
     func didSubmitSurvey(params: [String : Any]) {
         print("survey completed")
@@ -205,6 +225,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             if statusCode == 200 {
                                 let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
                                 banner.show()
+                                self.getEvents(data: self.dateRange)
                             }
                         } else {
                             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
@@ -212,7 +233,79 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         }
                     }
     }
+    
+    
+    func getEvents(data: [String: Any]) {
+        let jsonData = try! JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
 
+        eventsData.removeAll()
+
+        ERProgressHud.shared.show()
+                    BaseAPIManager.sharedInstance.makeRequestToGetEvent(data: jsonData){ (success, response,statusCode)  in
+                        if (success) {
+                            ERProgressHud.shared.hide()
+                            print(response)
+                            for i in 0..<response.count {
+                                if let eventDic = response[i] as? NSDictionary {
+                                    let metaDataString = eventDic["metadata"] as? String ?? ""
+                                    if let metaDataDic = metaDataString.convertToDictionary() {
+                                        print(metaDataDic)
+                                        let parentId = metaDataDic["parentId"] as? String
+                                        let eventDate = metaDataDic["date"] as? String ?? ""
+                                        
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                        let newDate = dateFormatter.date(from: eventDate)
+
+                                        let formatter = DateFormatter()
+                                        formatter.dateFormat = "dd/MM/yyyy"
+                                        let dateString = formatter.string(from: newDate! as Date)
+                                        
+                                        let startTime = metaDataDic["startTime"] as? String ?? ""
+                                        let timeFormatter = DateFormatter()
+                                        timeFormatter.dateFormat = "hh:mm:ss a"
+                                        let time = timeFormatter.date(from: startTime)
+
+                                        let newformatter = DateFormatter()
+                                        newformatter.dateFormat = "h:mm a"
+                                        let timeString = newformatter.string(from: time! as Date)
+                                        
+                                        
+                                        let title = metaDataDic["title"] as? String ?? ""
+                                        let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
+                                        let description = metaDataDic["description"] as? String ?? ""
+                                        let guestString = metaDataDic["guests"] as? String ?? ""
+                                        let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
+                                        let components = guestStr.components(separatedBy: ", ")
+                                        var guestDic: [String : String] = [:]
+
+                                        for component in components{
+                                          let pair = component.components(separatedBy: "=")
+                                            guestDic[pair[0]] = pair[1]
+                                        }
+                                        print(guestDic)
+                                        let guestName = guestDic["name"] ?? ""
+                                        let email = guestDic["email"] ?? ""
+                                        let guestId = guestDic["guestId"] ?? ""
+                                        
+                                        
+                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
+                                        eventsData.append(data)
+                                        
+                                    }
+
+                                }
+                            }
+                            self.tableView.reloadData()
+                            self.calendar.reloadData()
+                        } else {
+                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                            ERProgressHud.shared.hide()
+                        }
+                    }
+    }
 
     func getTempleWith(uri: String, context: Any) {
         let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
@@ -245,6 +338,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                           vc.delegate = self
                                           vc.dataModel = jsonDataModels
                                           vc.hidesBottomBarWhenPushed = true
+                                          vc.isFromEvent = true
 //                                          ddcModel = jsonDataModels
 //                                          self.present(vc, animated: true, completion: nil)
                                           if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
@@ -321,12 +415,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        var eventCount = 0
         for data in eventsData {
             if self.getDateFromString(dateString: data.date) == date {
-                return data.events.count
+                eventCount += 1
             }
         }
-        return 0
+        return eventCount
     }
     
     func getDateFromString(dateString: String) -> Date {
@@ -341,9 +436,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func numberOfSections(in tableView: UITableView) -> Int {
         for data in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: data.date) {
+                self.tableView.restore()
                 return 2
             }
         }
+        self.tableView.setEmptyMessage("No Events for this date.")
         return 0
     }
     
@@ -352,22 +449,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var events = [DateData]()
         var data = eventsData[indexPath.section]
         for dataa in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
-                data = dataa
+//                data = dataa
+                events.append(dataa)
             }
         }
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
             cell.eventData = data.events
+            cell.dateEvents = events
             cell.tableView.reloadData()
             cell.layoutSubviews()
             cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CareTeamTableViewCell") as! CareTeamTableViewCell
-            cell.careTeamData = data.careTeam
+//            cell.careTeamData = data.careTeam
+            cell.dateEvents = events
             cell.tableView.reloadData()
             cell.selectionStyle = .none
             return cell
@@ -490,3 +591,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 
+extension UITableView {
+
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .black
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel
+        self.separatorStyle = .none
+    }
+
+    func restore() {
+        self.backgroundView = nil
+    }
+}

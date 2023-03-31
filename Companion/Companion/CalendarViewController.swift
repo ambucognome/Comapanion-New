@@ -79,9 +79,9 @@ class CalendarViewController: DayViewController {
             var workingDate = Calendar.current.date(byAdding: .hour, value: hour, to: date)!
             workingDate = Calendar.current.date(byAdding: .minute, value: minutes, to: workingDate)!
             
-            let duration = Int.random(in: 30...120)
+            let duration = Int(data.duration) ?? 30
             event.dateInterval = DateInterval(start: workingDate, duration: TimeInterval(duration * 60))
-            event.text = "\(data.time) - \(data.name)"
+            event.text = "\(data.time) - \(data.name) : \(data.description)"
             event.color = DARK_BLUE_COLOR
             event.isAllDay = false
             events.append(event)

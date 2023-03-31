@@ -633,6 +633,7 @@
 				92AA350D29BF945300A6A4AB /* FittedSheets */,
 				9281229529BF5BAA0021A679 /* FSCalendar */,
 				92CFAA7B295B1B9B00D77883 /* Compan */,
+				92CFAA93295B1B9B00D77883 /* LoginVC */,
 				92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */,
 				92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */,
 				92CFA937295A0E8A00D77883 /* AppDelegate.swift */,
@@ -670,7 +671,6 @@
 				92CFAA8F295B1B9B00D77883 /* TextViewTableViewCell.swift */,
 				92CFAA90295B1B9B00D77883 /* Constants */,
 				92CFAA92295B1B9B00D77883 /* SliderTableViewCell.swift */,
-				92CFAA93295B1B9B00D77883 /* LoginVC */,
 				92CFAAED295B1B9C00D77883 /* DatePickerTableViewCell.swift */,
 				92CFAAEE295B1B9C00D77883 /* PickerTableViewCell.swift */,
 				92CFAAEF295B1B9C00D77883 /* AutocompleteTableViewCell.swift */,
@@ -770,7 +770,8 @@
 				92CFAAEB295B1B9C00D77883 /* LaunchViewController.swift */,
 				92CFAAEC295B1B9C00D77883 /* FailScreenViewController.swift */,
 			);
-			path = LoginVC;
+			name = LoginVC;
+			path = Compan/LoginVC;
 			sourceTree = "<group>";
 		};
 		92CFAA94295B1B9B00D77883 /* BiometricAuth */ = {
