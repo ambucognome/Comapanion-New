@@ -11,6 +11,8 @@ import JitsiMeetSDK
 class JitsiMeetViewController: UIViewController {
     
     var meetingName: String!
+    var email: String = ""
+    var userName = ""
 //    var callTimer: Timer?
     
     @IBOutlet private var meetView: JitsiMeetView!
@@ -52,12 +54,12 @@ class JitsiMeetViewController: UIViewController {
     private func joinMeeting(name: String) {
         let options = JitsiMeetConferenceOptions.fromBuilder { builder in
             builder.room = name
-            builder.userInfo = JitsiMeetUserInfo(displayName: userName, andEmail: nil, andAvatar: nil)
+            builder.userInfo = JitsiMeetUserInfo(displayName: self.userName, andEmail: self.email, andAvatar: nil)
 
             builder.setAudioMuted(true)
             builder.setVideoMuted(true)
-            let url = URL(string: "https://www.companion.today")
-            builder.serverURL = url
+//            let url = URL(string: "https://www.companion.today")
+//            builder.serverURL = url
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
             builder.setFeatureFlag("ios.screensharing.enabled", withBoolean: true)
             builder.setFeatureFlag("pip.enabled", withBoolean: true)
@@ -75,7 +77,8 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
         OnCallHelper.shared.removeOnCallView()
 //        callTimer.invalidate()
 //        self.callTimer = nil
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     func conferenceJoined(_ data: [AnyHashable : Any]!) {
@@ -99,7 +102,8 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
         self.meetViewWidth.constant = 120
         self.meetViewHeight.constant = 140
         OnCallHelper.shared.showOnCallView(image: self.meetView.takeScreenshot())
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             OnCallHelper.shared.updateSnapshot(image: self.meetView.takeScreenshot())
             self.meetViewWidth.constant = self.view.frame.size.width

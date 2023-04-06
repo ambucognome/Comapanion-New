@@ -2825,6 +2825,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2r1-JS-t5e">
+                                <rect key="frame" x="269" y="476" width="120" height="50"/>
+                                <color key="backgroundColor" red="0.070588235289999995" green="0.21960784310000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="F2n-FA-vkv"/>
+                                    <constraint firstAttribute="height" constant="50" id="hU1-gX-1cP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Join">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="joinBtn:" destination="LhG-99-9ca" eventType="touchUpInside" id="WzX-cW-Gbj"/>
+                                    <action selector="loginBtn:" destination="Nnp-mT-gtt" eventType="touchUpInside" id="JVI-HF-mEk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NPz-QO-j41"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2842,6 +2864,8 @@
                             <constraint firstItem="LsY-ab-qoS" firstAttribute="trailing" secondItem="3He-7o-ggw" secondAttribute="trailing" id="H5V-an-iy7"/>
                             <constraint firstItem="LsY-ab-qoS" firstAttribute="bottom" secondItem="llx-jH-5mV" secondAttribute="centerY" id="HmL-vG-xVR"/>
                             <constraint firstItem="gkx-Oe-k9I" firstAttribute="top" secondItem="nia-7y-gLV" secondAttribute="bottom" constant="20" id="IBJ-YG-rdX"/>
+                            <constraint firstItem="2r1-JS-t5e" firstAttribute="trailing" secondItem="82a-hV-ZDE" secondAttribute="trailing" id="Ied-Jw-raT"/>
+                            <constraint firstItem="2r1-JS-t5e" firstAttribute="bottom" secondItem="ky7-VC-cFd" secondAttribute="bottom" id="Igs-EA-kpa"/>
                             <constraint firstItem="omi-nF-YNg" firstAttribute="trailing" secondItem="LsY-ab-qoS" secondAttribute="trailing" id="KBo-d8-1kF"/>
                             <constraint firstItem="ky7-VC-cFd" firstAttribute="leading" secondItem="k3u-AD-ANC" secondAttribute="trailing" constant="15" id="KwT-in-HAX"/>
                             <constraint firstItem="omi-nF-YNg" firstAttribute="top" secondItem="LsY-ab-qoS" secondAttribute="bottom" id="MEZ-DR-5YN"/>

@@ -46,5 +46,25 @@ class EventDetailVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func joinBtn(_ sender: Any) {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+
+        OnCallHelper.shared.removeOnCallView()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let vc = appDelegate.voiceCallVC {
+            self.navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+        let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+        vc.meetingName = self.eventData?.meetingId
+            vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+        appDelegate.voiceCallVC = vc
+//            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 
 }

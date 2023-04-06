@@ -27,6 +27,7 @@ class BaseAPIManager : NSObject {
         case uploadToken(Data)
         case createEvent(Data)
         case getEvents(Data)
+        case deleteEvents(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -43,6 +44,8 @@ class BaseAPIManager : NSObject {
                 return .post
             case .getEvents:
                 return .post
+            case .deleteEvents:
+                return .delete
             }
         }
             
@@ -61,6 +64,8 @@ class BaseAPIManager : NSObject {
                 return API_END_CREATE_EVENT
             case .getEvents:
                 return API_END_GET_EVENTS
+            case .deleteEvents:
+                return API_END_DELETE_EVENT
             }
         }
         
@@ -109,6 +114,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .getEvents(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .deleteEvents(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -286,6 +298,23 @@ class BaseAPIManager : NSObject {
             }
         }
     }
+    
+    //  Delete Event
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToDeleteEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.deleteEvents(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+
     
     // Shows alert view according to the code sent
     // Params:

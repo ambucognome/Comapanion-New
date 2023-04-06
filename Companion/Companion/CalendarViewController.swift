@@ -8,13 +8,21 @@
 import UIKit
 import CalendarKit
 
-class CalendarViewController: DayViewController {
+protocol  CalendarViewControllerDelegate {
+    func didUpdateEvent(eventData: [String : Any], eventId: String)
+}
+
+class CalendarViewController: DayViewController , DynamicTemplateViewControllerDelegate{
     
+    var template_uri = "http://chdi.montefiore.org/calendarEvent"
+
     
     var generatedEvents = [EventDescriptor]()
     var alreadyGeneratedSet = Set<Date>()
     
     var colors = [DARK_BLUE_COLOR]
+    
+    var calendarDelegate: CalendarViewControllerDelegate?
 
     private lazy var dateIntervalFormatter: DateIntervalFormatter = {
       let dateIntervalFormatter = DateIntervalFormatter()
@@ -55,6 +63,15 @@ class CalendarViewController: DayViewController {
         
       return self.generatedEvents
     }
+    var selectedEventId = ""
+    
+    func didSubmitSurvey(params: [String : Any]) {
+        print("survey completed")
+        self.navigationController?.popViewController(completion: {
+            self.calendarDelegate?.didUpdateEvent(eventData: params,eventId: self.selectedEventId)
+        })
+        
+    }
     
     func getDateFromString(dateString: String) -> Date {
         let dateFormatter = DateFormatter()
@@ -94,6 +111,7 @@ class CalendarViewController: DayViewController {
     
     // MARK: DayViewDelegate
     
+    
     private var createdEvent: EventDescriptor?
     
     override func dayViewDidSelectEventView(_ eventView: EventView) {
@@ -101,18 +119,41 @@ class CalendarViewController: DayViewController {
         return
       }
       print("Event has been selected: \(descriptor) \(String(describing: descriptor.userInfo))")
-        if let eventData = descriptor.userInfo as? EventStruct {
-        let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-        let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
-        controller.eventData = eventData
-//        let nav = UINavigationController(rootViewController: controller)
-        let sheetController = SheetViewController(
-            controller: controller,
-            sizes: [.intrinsic],options: options)
-        sheetController.gripSize = CGSize(width: 50, height: 3)
-        sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
-        self.present(sheetController, animated: true, completion: nil)
-        }
+
+        let alert = UIAlertController(title: nil, message: "Please Select an Option", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "View", style: .default , handler:{ (UIAlertAction)in
+            if let eventData = descriptor.userInfo as? EventStruct {
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
+            controller.eventData = eventData
+    //        let nav = UINavigationController(rootViewController: controller)
+            let sheetController = SheetViewController(
+                controller: controller,
+                sizes: [.intrinsic],options: options)
+            sheetController.gripSize = CGSize(width: 50, height: 3)
+            sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
+            self.present(sheetController, animated: true, completion: nil)
+            }
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
+            if let data = descriptor.userInfo as? EventStruct {
+                self.selectedEventId = data.eventId
+                self.getTempleWith(uri: self.template_uri, contextt: data.context)
+            }
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        //uncomment for iPad Support
+        //alert.popoverPresentationController?.sourceView = self.view
+
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
     }
     
     override func dayViewDidLongPressEventView(_ eventView: EventView) {
@@ -121,6 +162,67 @@ class CalendarViewController: DayViewController {
       }
       endEventEditing()
       print("Event has been longPressed: \(descriptor) \(String(describing: descriptor.userInfo))")
+
+    }
+    
+    func getTempleWith(uri: String, contextt: Any) {
+        let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
+        let parameters: [String: Any] = [
+            "author" : name,
+            "template_uri" : (uri),
+            "context": contextt
+        ]
+        context_parameters = contextt as! [String : Any]
+        if (self.navigationController?.topViewController as? DynamicTemplateViewController) == nil {
+            ERProgressHud.shared.show()
+        }
+        print("getTemplate request========",parameters)
+        APIManager.sharedInstance.makeRequestToGetTemplate(params: parameters as [String:Any]){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                if let responseData = response as? Dictionary<String, Any> {
+                                  var jsonData: Data? = nil
+                                  do {
+                                      jsonData = try JSONSerialization.data(
+                                          withJSONObject: responseData as Any,
+                                          options: .prettyPrinted)
+                                      do{
+                                          let jsonDataModels = try JSONDecoder().decode(DDCFormModel.self, from: jsonData!)
+//                                          print(response)
+                                          let frameworkBundle = Bundle(for: DynamicTemplateViewController.self)
+                                          let storyboard = UIStoryboard(name: "Main", bundle: frameworkBundle)
+                                          let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
+                                          vc.delegate = self
+                                          vc.dataModel = jsonDataModels
+                                          vc.hidesBottomBarWhenPushed = true
+                                          vc.isFromEvent = true
+//                                          ddcModel = jsonDataModels
+//                                          self.present(vc, animated: true, completion: nil)
+                                          if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
+                                              if let vccc = self.navigationController?.topViewController as? DynamicTemplateViewController {
+                                                vccc.dataModel = jsonDataModels
+                                                  vccc.tableView.reloadData()
+                                                }
+                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
+                                              return
+                                          }
+                                          self.navigationController?.pushViewController(vc, animated: true)
+//                                          LogoutHelper.shared.showLogoutView()
+                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
+
+                                      }catch {
+                                          print(error)
+                                      }
+                                  } catch {
+                                      print(error)
+                                  }
+                        }
+            } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
+        }
     }
     
     override func dayView(dayView: DayView, didTapTimelineAt date: Date) {

@@ -37,6 +37,9 @@ struct EventStruct {
     var guestId : String = ""
     var guestEmail  : String = ""
     var date: String = ""
+    var meetingId : String = ""
+    var context : [String:String] = [:]
+    var eventId : String = ""
 }
 
 struct CareTeam {
@@ -75,7 +78,7 @@ var eventsData : [DateData] = [
 var careteamData = [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
                     CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, DynamicTemplateViewControllerDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, DynamicTemplateViewControllerDelegate, CalendarViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
@@ -103,22 +106,28 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var selectedDate = Date()
     let btnLeftMenu: UIButton = UIButton()
     
-    let dateRange = [
+    var dateRange = [
         "fromDate": "2023-02-10 00:00:00",
-        "meiID": "421421412",
-        "toDate": "2023-04-10 20:00:00" ]
+        "toDate": "2023-06-10 20:00:00" ]
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            self.dateRange["meiID"] = retrievedCodableObject.user?.mail
+        }
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
         
-        self.calendar.select(Date())
-//        self.selectedDate = Data()
-        
+//        self.calendar.select(Date())
+//        self.selectedDate = Date()
+//        calendar.select(calendar.today)
+        self.calendar.select(calendar.today, scrollToDate: false)
+
+        //Call after select method.
+        self.calendar(self.calendar, didSelect: calendar.today!, at: .current)
+
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         self.calendar.scope = .week
@@ -153,7 +162,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func addObservers(){
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(addBtn(_:)),
+            selector: #selector(getTemplate),
             name: NSNotification.Name(rawValue: "ReloadAPI") ,
             object: nil
         )
@@ -164,8 +173,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        context["userid"] = "421421412"//SafeCheckUtils.getEZID()
-        context["key"] = "421421412_\(self.random(digits: 4))"
+
     }
     
     @objc func menu() {
@@ -180,11 +188,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     var context = [
         "key": "test12345",
-        "app":"companion",
+        "app":"Companion_iOS",
         "userid" : "421421412"
-        ]
+    ]
     
     @IBAction func addBtn(_ sender: Any) {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            context["userid"] = retrievedCodableObject.user?.mail ?? ""
+            context["key"] = "Companion_\(self.random(digits: 4))"
+            self.getTemplate()
+        }
+        
+    }
+    
+    @objc func getTemplate() {
         self.getTempleWith(uri: template_uri, context: self.context)
     }
     
@@ -204,7 +221,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.createEvent(data: params)
     }
     
-    func createEvent(data: [String: Any]) {
+    func didUpdateEvent(eventData: [String : Any],eventId: String) {
+        self.deleteEvent(eventId: eventId, data: eventData)
+    }
+    
+    func createEvent(data: [String: Any],isEdit: Bool = false) {
         
         let date = data["date"] as? String
         let dateFormatter = DateFormatter()
@@ -231,8 +252,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             ERProgressHud.shared.hide()
                             print(response)
                             if statusCode == 200 {
-                                let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
-                                banner.show()
+                                if isEdit {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event was updated successfully.", style: .success)
+                                    banner.show()
+                                } else {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
+                                    banner.show()
+                                }
                                 self.getEvents(data: self.dateRange)
                             }
                         } else {
@@ -242,6 +268,27 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     }
     }
     
+    func deleteEvent(eventId: String, data: [String: Any]) {
+        let dataDic = ["eventId":eventId]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        
+        ERProgressHud.shared.show()
+                    BaseAPIManager.sharedInstance.makeRequestToDeleteEvent( data: jsonData){ (success, response,statusCode)  in
+                        if (success) {
+                            ERProgressHud.shared.hide()
+                            if statusCode == 200 {
+                                self.createEvent(data: data,isEdit: true)
+                            }
+                        } else {
+                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                            ERProgressHud.shared.hide()
+                        }
+                    }
+    }
+
     
     func getEvents(data: [String: Any]) {
         let jsonData = try! JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -286,6 +333,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
                                         let description = metaDataDic["description"] as? String ?? ""
                                         let guestString = metaDataDic["guests"] as? String ?? ""
+                                        let meetingId = metaDataDic["meetingId"] as? String ?? ""
                                         let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
                                         let components = guestStr.components(separatedBy: ", ")
                                         var guestDic: [String : String] = [:]
@@ -299,9 +347,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         let email = guestDic["email"] ?? ""
                                         let guestId = guestDic["guestId"] ?? ""
                                         
+                                        let contextString = metaDataDic["context"] as? String ?? ""
+                                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
+                                        let contextComponents = contextStr.components(separatedBy: ", ")
+                                        var contextDic: [String : String] = [:]
+
+                                        for component in contextComponents{
+                                          let pair = component.components(separatedBy: "=")
+                                            contextDic[pair[0]] = pair[1]
+                                        }
                                         
-                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
+
+                                        
+                                        
+                                        
+                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
                                         eventsData.append(data)
+                                        self.tableView.reloadData()
                                         
                                     }
 
@@ -309,6 +371,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             }
                             self.tableView.reloadData()
                             self.calendar.reloadData()
+                            DispatchQueue.main.asyncAfter(deadline: .now()  + 0.1) {
+                                self.tableView.reloadData()
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now()  + 0.2) {
+                                self.tableView.reloadData()
+                            }
                         } else {
                             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                             ERProgressHud.shared.hide()
@@ -459,7 +527,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var events = [DateData]()
-        var data = eventsData[indexPath.section]
+//        var data = eventsData[indexPath.section - 1]
         for dataa in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
 //                data = dataa
@@ -468,7 +536,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
-            cell.eventData = data.events
+//            cell.eventData = data.events
             cell.dateEvents = events
             cell.tableView.reloadData()
             cell.layoutSubviews()
@@ -496,6 +564,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             let dayViewController = CalendarViewController()
+            dayViewController.calendarDelegate = self
             dayViewController.hidesBottomBarWhenPushed = true
             dayViewController.selectedDate = data.date
             self.navigationController?.pushViewController(dayViewController, animated: true)

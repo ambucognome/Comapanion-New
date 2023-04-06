@@ -12,7 +12,7 @@ class EventsTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shadowView: UIView!
 
-    var eventData = [EventStruct]()
+//    var eventData = [EventStruct]()
     var dateEvents = [DateData]()
     
 
