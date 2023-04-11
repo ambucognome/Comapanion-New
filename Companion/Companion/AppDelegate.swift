@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
 //        registerForPushNotifications()
 //        Messaging.messaging().delegate = self
 //        UIApplication.shared.applicationIconBadgeNumber = 0
-//        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enable = true
         // Set `backgroundImage` to be able to use `shadowImage`
         
         let tabBarAppearance = UITabBar.appearance()
@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
         appearance.backgroundColor = .white
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
 
         return true
     }

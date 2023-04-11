@@ -9,7 +9,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Wants to access photo for uploading your documents and profile</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Wants to access your camera to capture photo</string>
+	<string>Wants to access your camera to capture photos</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
