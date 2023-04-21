@@ -107,8 +107,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let btnLeftMenu: UIButton = UIButton()
     
     var dateRange = [
-        "fromDate": "2023-02-10 00:00:00",
-        "toDate": "2023-06-10 20:00:00" ]
+        "fromDate": "2023-01-10 00:00:00",
+        "toDate": "2023-08-10 20:00:00" ]
 
     
     override func viewDidLoad() {

@@ -30,8 +30,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         self.navigationItem.title = "Profile"
-        self.nameLabel.text = username
-        self.emailLabel.text = username.removingWhitespaces() + "@demo.com"
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            self.emailLabel.text = retrievedCodableObject.user?.mail
+            self.nameLabel.text = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+        }
+
         let btnLeftMenu: UIButton = UIButton()
         btnLeftMenu.setTitle("Logout", for: .normal)
         btnLeftMenu.setTitleColor(DARK_BLUE_COLOR, for: .normal)
