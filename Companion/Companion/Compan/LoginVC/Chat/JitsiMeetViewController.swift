@@ -58,8 +58,8 @@ class JitsiMeetViewController: UIViewController {
 
             builder.setAudioMuted(true)
             builder.setVideoMuted(true)
-//            let url = URL(string: "https://www.companion.today")
-//            builder.serverURL = url
+            let url = URL(string: "https://chdiaz.montefiore.org")
+            builder.serverURL = url
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
             builder.setFeatureFlag("ios.screensharing.enabled", withBoolean: true)
             builder.setFeatureFlag("pip.enabled", withBoolean: true)

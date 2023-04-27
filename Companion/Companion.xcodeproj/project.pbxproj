@@ -1526,19 +1526,24 @@
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Want to use calender forscheduling meetings";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Wants to access your camera to capture photos";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow for call";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Wants to access photo for uploading your documents and profile";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cognome.Companion;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Companion/Companion-Bridging-Header.h";
@@ -1559,19 +1564,24 @@
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Want to use calender forscheduling meetings";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Wants to access your camera to capture photos";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow for call";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Wants to access photo for uploading your documents and profile";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cognome.Companion;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Companion/Companion-Bridging-Header.h";

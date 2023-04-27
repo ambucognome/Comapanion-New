@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 import SwiftUI
-import FirebaseMessaging
+//import FirebaseMessaging
 
 
 var context_parameters = [String:Any]()
@@ -113,12 +113,12 @@ class EZLoginViewController: UIViewController {
     
     func uploadFCMTokenAPI(){
         if SafeCheckUtils.getDeviceToken() != "" {
-            Messaging.messaging().token { token, error in
-              if let error = error {
-                print("Error fetching FCM registration token: \(error)")
-              } else if let token = token {
-                print("FCM registration token: \(token)")
-                  SafeCheckUtils.setFCMToken(fcmToken: token)
+//            Messaging.messaging().token { token, error in
+//              if let error = error {
+//                print("Error fetching FCM registration token: \(error)")
+//              } else if let token = token {
+//                print("FCM registration token: \(token)")
+//                  SafeCheckUtils.setFCMToken(fcmToken: token)
         ERProgressHud.shared.show()
         let parameters : [String: String] = [
             "appId": Bundle.main.bundleIdentifier ?? "",
@@ -140,8 +140,8 @@ class EZLoginViewController: UIViewController {
             }
           }
          }
-        }
-      }
+//        }
+//      }
     }
 }
 

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseMessaging
+//import FirebaseMessaging
 
 class LoginViewController: UIViewController {
 
@@ -89,12 +89,12 @@ class LoginViewController: UIViewController {
     
     func uploadFCMTokenAPI(eid:String){
         if SafeCheckUtils.getDeviceToken() != "" {
-            Messaging.messaging().token { token, error in
-              if let error = error {
-                print("Error fetching FCM registration token: \(error)")
-              } else if let token = token {
-                print("FCM registration token: \(token)")
-                  SafeCheckUtils.setFCMToken(fcmToken: token)
+//            Messaging.messaging().token { token, error in
+//              if let error = error {
+//                print("Error fetching FCM registration token: \(error)")
+//              } else if let token = token {
+//                print("FCM registration token: \(token)")
+//                  SafeCheckUtils.setFCMToken(fcmToken: token)
         ERProgressHud.shared.show()
         let parameters : [String: String] = [
             "appId": Bundle.main.bundleIdentifier ?? "",
@@ -115,8 +115,8 @@ class LoginViewController: UIViewController {
                 ERProgressHud.shared.hide()
             }
         }
-              }
-            }
+//              }
+//            }
     }
     }
 }

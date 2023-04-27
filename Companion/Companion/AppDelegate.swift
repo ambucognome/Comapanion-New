@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseMessaging
 import IQKeyboardManagerSwift
 
 
@@ -15,7 +13,7 @@ var LAUNCHED_FROM_KILLED_STATE : Bool = true
 
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
     
     var logoutView : LogoutView?
     var callView : OnCallView?
@@ -50,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
 //            self.callView?.addGestureRecognizer(panGesture)
 //        }
 //        FirebaseApp.configure()
-//        UNUserNotificationCenter.current().delegate = self
-//        registerForPushNotifications()
+        UNUserNotificationCenter.current().delegate = self
+        registerForPushNotifications()
 //        Messaging.messaging().delegate = self
 //        UIApplication.shared.applicationIconBadgeNumber = 0
         IQKeyboardManager.shared.enable = true
@@ -124,31 +122,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate,UNUserN
       UNUserNotificationCenter.current().getNotificationSettings { settings in
         print("Notification settings: \(settings)")
         guard settings.authorizationStatus == .authorized else { return }
-        Messaging.messaging().delegate = self
         DispatchQueue.main.async {
           UIApplication.shared.registerForRemoteNotifications()
         }
       }
     }
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("Firebase registration token: \(fcmToken ?? "")")
-        SafeCheckUtils.setFCMToken(fcmToken: fcmToken ?? "")
-    }
-    
+
     func application(_ application: UIApplication,didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print(token)
         SafeCheckUtils.setDeviceToken(deviceToken: token)
-        Messaging.messaging().token { token, error in
-          if let error = error {
-            print("Error fetching FCM registration token: \(error)")
-          } else if let token = token {
-            print("FCM registration token: \(token)")
-              SafeCheckUtils.setFCMToken(fcmToken: token)
-          }
-        }
+        
     }
 
     func application( _ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

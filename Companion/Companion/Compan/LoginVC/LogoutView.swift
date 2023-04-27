@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseMessaging
+//import FirebaseMessaging
 
 class LogoutView: UIView {
 
@@ -53,9 +53,9 @@ class LogoutHelper : NSObject {
         nav.modalPresentationCapturesStatusBarAppearance = true
         nav.modalPresentationStyle = .custom
         SafeCheckUtils.setDeviceToken(deviceToken: deviceToken)
-        Messaging.messaging().deleteData { error in
-            
-        }
+//        Messaging.messaging().deleteData { error in
+//            
+//        }
         UIApplication.getTopViewController()?.present(nav, animated: true, completion: nil)
     }
     
