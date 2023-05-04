@@ -62,7 +62,7 @@ class EventDetailVC: UIViewController {
                 let roomId = response["roomId"] as? String ?? ""
                 let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
                 let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
-                vc.name = retrievedCodableObject.user?.firstname ?? ""
+                vc.name = self.eventData?.name ?? ""
                 self.present(vc, animated: true)
             
         } else {
