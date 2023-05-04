@@ -325,9 +325,6 @@ class NotificationManager : NSObject {
     }
     
     func handleNotificationWhenActive(data : [AnyHashable : Any] ) {
- 
-        if let eventDic = data["eventdatajson"] as? [String:Any] {
-        print(eventDic)
         if let dataString = data["eventdatajson"] as? String {
             var callTitle = ""
             if let apsDict = data["aps"] as? [String:Any] {
@@ -391,7 +388,7 @@ class NotificationManager : NSObject {
                 }
             }
         }
-        }
+        
     }
 }
 
