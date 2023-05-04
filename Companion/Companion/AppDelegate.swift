@@ -150,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //        } else {
    
 //        completionHandler([.sound,.banner,.badge])
-        NotificationManager.shared.handleNotificationWhenActive(data: dict)
+        NotificationManager.shared.processNotification(data: dict)
         
 //        }
     }

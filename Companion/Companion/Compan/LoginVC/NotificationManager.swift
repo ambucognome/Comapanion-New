@@ -298,7 +298,34 @@ class NotificationManager : NSObject {
     }
     
     
+    func processNotification(data : [AnyHashable : Any] ) {
+        if (SafeCheckUtils.getToken() != "") {
+        
+       if UIApplication.shared.applicationState == .active {
+           UIApplication.shared.applicationIconBadgeNumber = 0
+           handleNotificationWhenActive(data: data)
+       }
+       if UIApplication.shared.applicationState == .inactive ||  UIApplication.shared.applicationState == .background {
+           UIApplication.shared.applicationIconBadgeNumber = 0
+           if LAUNCHED_FROM_KILLED_STATE {
+               LAUNCHED_FROM_NOTIFICATION = true
+//               notificationData = dict
+//               return
+
+//               DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+//                self.handleNotificationWhenActive(data: data)
+//               }
+           } else {
+               DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.handleNotificationWhenActive(data: data)
+               }
+           }
+       }
+        }
+    }
+    
     func handleNotificationWhenActive(data : [AnyHashable : Any] ) {
+ 
         if let eventDic = data["eventdatajson"] as? [String:Any] {
         print(eventDic)
         if let dataString = data["eventdatajson"] as? String {
