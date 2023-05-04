@@ -149,8 +149,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //            NotificationManager.shared.processNotification(dict: dict)
 //        } else {
    
-//        completionHandler([.sound,.banner,.badge])
-        NotificationManager.shared.processNotification(data: dict)
+        completionHandler([.sound,.banner,.badge])
+//        NotificationManager.shared.processNotification(data: dict)
         
 //        }
     }
