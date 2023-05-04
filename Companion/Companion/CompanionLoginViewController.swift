@@ -66,9 +66,11 @@ class CompanionLoginViewController: UIViewController {
                                           SafeCheckUtils.setName(name: name)
                                           SafeCheckUtils.setToken(token: jsonDataModels.user?.jwtToken ?? "")
                                           SafeCheckUtils.setUserData(data: jsonDataModels)
+                                          self.uploadDeviceTokenAPI(emailID: jsonDataModels.user?.mail ?? "")
                                           let storyboard = UIStoryboard(name: "Companion", bundle: nil)
                                           let vc = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                                           self.setRootViewController(vc: vc)
+                                          
                                       } catch {
                                           print(error)
                                       }
@@ -85,6 +87,31 @@ class CompanionLoginViewController: UIViewController {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
             }
         }
+    }
+    
+    func uploadDeviceTokenAPI(emailID: String){
+        if SafeCheckUtils.getDeviceToken() != "" {
+        let parameters : [String: String] = [
+            "appId": Bundle.main.bundleIdentifier ?? "",
+            "appToken": "",
+            "fcmToken": SafeCheckUtils.getDeviceToken(),
+            "userId": emailID
+           ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        BaseAPIManager.sharedInstance.makeRequestToUploadFCMToken( data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                print(response)
+            } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
+          }
+         }
+//        }
+//      }
     }
    
 }

@@ -149,15 +149,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //            NotificationManager.shared.processNotification(dict: dict)
 //        } else {
    
-//        completionHandler([.sound])
-        NotificationManager.shared.showNotificationBanner(dict: dict)
+//        completionHandler([.sound,.banner,.badge])
+        NotificationManager.shared.handleNotificationWhenActive(data: dict)
+        
 //        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let dict = response.notification.request.content.userInfo
-//        print(dict)
-        NotificationManager.shared.processNotification(dict: dict)
+        print(dict)
+        NotificationManager.shared.processEventNotification(dict: dict)
         completionHandler()
     }
 

@@ -28,6 +28,10 @@ class BaseAPIManager : NSObject {
         case createEvent(Data)
         case getEvents(Data)
         case deleteEvents(Data)
+        
+        case startCall(Data)
+        case acceptCall(Data)
+        case rejectCall(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -46,6 +50,12 @@ class BaseAPIManager : NSObject {
                 return .post
             case .deleteEvents:
                 return .delete
+            case .startCall:
+                return .post
+            case .acceptCall:
+                return .post
+            case .rejectCall:
+                return .post
             }
         }
             
@@ -59,13 +69,19 @@ class BaseAPIManager : NSObject {
             case .completeSurvey:
                 return API_END_COMPLETE_SURVEY
             case .uploadToken:
-                return API_END_ADD_TOKEN
+                return API_END_ADD_DEVICE_TOKEN
             case .createEvent:
                 return API_END_CREATE_EVENT
             case .getEvents:
                 return API_END_GET_EVENTS
             case .deleteEvents:
                 return API_END_DELETE_EVENT
+            case .startCall:
+                return API_END_START_CALL
+            case .acceptCall:
+                return API_END_ACCEPT_CALL
+            case .rejectCall:
+                return API_END_REJECT_CALL
             }
         }
         
@@ -99,13 +115,16 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
                 
-                return urlTokenRequest
             case .completeSurvey(let data):
                 urlTokenRequest.httpBody = data
                 return urlTokenRequest
             case .uploadToken(let data):
-                urlTokenRequest.httpBody = data
-                return urlTokenRequest
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
             case .createEvent(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
@@ -121,6 +140,27 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .deleteEvents(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .startCall(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .acceptCall(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .rejectCall(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -238,9 +278,6 @@ class BaseAPIManager : NSObject {
                 }
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
-                }   else {
-                    LogoutHelper.shared.logout()
-                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
                 }
             case .failure( _):
                 completion(false,[:],0)
@@ -290,8 +327,9 @@ class BaseAPIManager : NSObject {
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
                 }   else {
-                    LogoutHelper.shared.logout()
-                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
+//                    LogoutHelper.shared.logout()
+//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
                 }
             case .failure( _):
                 completion(false,[],0)
@@ -304,6 +342,64 @@ class BaseAPIManager : NSObject {
     // Returns
     func makeRequestToDeleteEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
         Alamofire.request(Router.deleteEvents(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Start Call
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToStartCall(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.startCall(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }   else {
+                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
+//                    LogoutHelper.shared.logout()
+//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Accept Call
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToAcceptCall(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.acceptCall(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Reject Call
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToRejectCall(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.rejectCall(data)).response { response in
             print(response)
             ERProgressHud.shared.hide()
             let statusCode = response.response?.statusCode

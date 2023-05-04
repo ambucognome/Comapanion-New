@@ -23,8 +23,12 @@ let API_END_COMPLETE_SURVEY = "/completeSurvey"
 let API_END_ADD_TOKEN = "/add-token"
 
 
-let EVENT_BASE_URL = "http://10.85.9.161:9095"
+let EVENT_BASE_URL = "http://192.168.199.90:8080" //"http://10.85.9.161:9095"
 let API_END_CREATE_EVENT = "/eventapi/events/create"
 let API_END_GET_EVENTS = "/eventapi/events/date-range"
 let API_END_DELETE_EVENT = "/eventapi/events/delete"
+let API_END_ADD_DEVICE_TOKEN = "/eventapi/add-token"
 
+let API_END_START_CALL = "/eventapi/start-call"
+let API_END_ACCEPT_CALL = "/eventapi/accept-call"
+let API_END_REJECT_CALL = "/eventapi/reject-call"

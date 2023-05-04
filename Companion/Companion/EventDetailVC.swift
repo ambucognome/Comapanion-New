@@ -17,6 +17,8 @@ class EventDetailVC: UIViewController {
     @IBOutlet weak var guestEmailLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var videoCallImage: UIImageView!
+    @IBOutlet weak var callImageView: UIImageView!
+
 
     var eventData : EventStruct?
 
@@ -34,18 +36,44 @@ class EventDetailVC: UIViewController {
 
             
         }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.call))
+        self.callImageView.isUserInteractionEnabled = true
+        self.callImageView.addGestureRecognizer(tap)
+        
     }
     
+    @objc func call() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = [
+            "appId": Bundle.main.bundleIdentifier ?? "",
+            "calleeEmailId": self.eventData?.guestEmail ?? "",
+            "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+            "callerName": retrievedCodableObject.user?.firstname ?? ""
+          ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
 
-    /*
-    // MARK: - Navigation
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToStartCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                let roomId = response["roomId"] as? String ?? ""
+                let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
+                let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
+                vc.name = retrievedCodableObject.user?.firstname ?? ""
+                self.present(vc, animated: true)
+            
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
+
     
     @IBAction func joinBtn(_ sender: Any) {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {

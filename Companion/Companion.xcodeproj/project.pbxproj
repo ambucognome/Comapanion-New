@@ -203,6 +203,8 @@
 		92CFABAE295B1B9C00D77883 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */; };
 		92CFABAF295B1B9C00D77883 /* DynamicTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */; };
 		92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */; };
+		92D9C31C2A02C391008F5987 /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31B2A02C390008F5987 /* CallingViewController.swift */; };
+		92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */; };
 		92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -448,6 +450,8 @@
 		92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTemplateViewController.swift; sourceTree = "<group>"; };
 		92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldComponent.swift; sourceTree = "<group>"; };
+		92D9C31B2A02C390008F5987 /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
+		92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingViewController.swift; sourceTree = "<group>"; };
 		92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		97C6F73AD60BBE563114AE33 /* Pods-Companion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.debug.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -649,6 +653,7 @@
 				92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */,
 				92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */,
 				92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */,
+				92D9C31D2A02C3A7008F5987 /* CallsVC */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
 				92E49AAC298A7DA70018F6E5 /* SettingsVC */,
@@ -1037,6 +1042,15 @@
 			path = SWRevealController;
 			sourceTree = "<group>";
 		};
+		92D9C31D2A02C3A7008F5987 /* CallsVC */ = {
+			isa = PBXGroup;
+			children = (
+				92D9C31B2A02C390008F5987 /* CallingViewController.swift */,
+				92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */,
+			);
+			path = CallsVC;
+			sourceTree = "<group>";
+		};
 		92E49AAC298A7DA70018F6E5 /* SettingsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,6 +1266,7 @@
 				92CFAB93295B1B9C00D77883 /* ValidationHelper.swift in Sources */,
 				92CFABA2295B1B9C00D77883 /* FloatingLabelTextField.swift in Sources */,
 				92CFABAB295B1B9C00D77883 /* MessageTableViewCell.swift in Sources */,
+				92D9C31C2A02C391008F5987 /* CallingViewController.swift in Sources */,
 				92CFAB60295B1B9C00D77883 /* ImagePickerCollectionView.swift in Sources */,
 				92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */,
 				92CFABA4295B1B9C00D77883 /* CustomTextField.swift in Sources */,
@@ -1298,6 +1313,7 @@
 				92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */,
 				92AA353629BF9EA600A6A4AB /* DoctorProfileViewController.swift in Sources */,
 				92CFAB84295B1B9C00D77883 /* DatePickerTableViewCell.swift in Sources */,
+				92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */,
 				92CFABA1295B1B9C00D77883 /* iOSDropDown.swift in Sources */,
 				92CFAB54295B1B9C00D77883 /* JitsiMeetViewController.swift in Sources */,
 				928122C829BF5BC00021A679 /* FSCalendarCollectionViewLayout.m in Sources */,

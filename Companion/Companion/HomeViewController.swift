@@ -188,9 +188,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     var context = [
         "key": "test12345",
-        "app":"Companion_iOS",
-        "userid" : "421421412"
-    ]
+        "app":"Companion_iOS"    ]
     
     @IBAction func addBtn(_ sender: Any) {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
@@ -222,6 +220,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func didUpdateEvent(eventData: [String : Any],eventId: String) {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            context["userid"] = retrievedCodableObject.user?.mail ?? ""
+            context["key"] = "Companion_\(self.random(digits: 4))"
+            self.getTemplate()
+        }
         self.deleteEvent(eventId: eventId, data: eventData)
     }
     
@@ -241,6 +244,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         dataDic["ddc_context"] = context
         dataDic["template_uri"] = self.template_uri
         dataDic["date"] = dateString
+        dataDic["appId"] = Bundle.main.bundleIdentifier ?? ""
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
