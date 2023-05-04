@@ -51,6 +51,7 @@ struct CareTeam {
     var patients : String = ""
     var review : String = ""
     var bio : String = ""
+    var email: String = ""
 }
 
 

@@ -44,6 +44,8 @@ class RingingViewController: UIViewController {
                     let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
                     let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
                     vc.meetingName = self.roomId
+                    vc.isFromDialing = true
+                    vc.callerEmailId = self.callerEmailId
                         vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {

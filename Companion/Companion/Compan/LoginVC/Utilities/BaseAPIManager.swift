@@ -32,6 +32,7 @@ class BaseAPIManager : NSObject {
         case startCall(Data)
         case acceptCall(Data)
         case rejectCall(Data)
+        case endCall(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -55,6 +56,8 @@ class BaseAPIManager : NSObject {
             case .acceptCall:
                 return .post
             case .rejectCall:
+                return .post
+            case .endCall:
                 return .post
             }
         }
@@ -82,6 +85,8 @@ class BaseAPIManager : NSObject {
                 return API_END_ACCEPT_CALL
             case .rejectCall:
                 return API_END_REJECT_CALL
+            case .endCall(_):
+                return API_END_END_CALL
             }
         }
         
@@ -161,6 +166,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .rejectCall(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .endCall(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -400,6 +412,22 @@ class BaseAPIManager : NSObject {
     // Returns
     func makeRequestToRejectCall(data:Data,completion: @escaping completionHandlerWithStatusCode) {
         Alamofire.request(Router.rejectCall(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  End Call
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToEndCall(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.endCall(data)).response { response in
             print(response)
             ERProgressHud.shared.hide()
             let statusCode = response.response?.statusCode

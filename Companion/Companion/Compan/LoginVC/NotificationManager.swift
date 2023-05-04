@@ -325,77 +325,7 @@ class NotificationManager : NSObject {
     }
     
     func handleNotificationWhenActive(data : [AnyHashable : Any] ) {
-        if let eventDic = data["eventdatajson"] as? [String:Any] {
-        print(eventDic)
-        let eventType = eventDic["eventType"] as? NSNumber ?? 0
-        if eventType == 1 {
-        let eventID = eventDic["eventId"] as? String ?? ""
-        let metaDataString = eventDic["metadata"] as? [String:Any]
-        if let metaDataDic = metaDataString {
-            print(metaDataDic)
-            let parentId = metaDataDic["parentId"] as? String
-            let eventDate = metaDataDic["date"] as? String ?? ""
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            let newDate = dateFormatter.date(from: eventDate)
-
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy"
-            let dateString = formatter.string(from: newDate! as Date)
-            
-            let startTime = metaDataDic["startTime"] as? String ?? ""
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "hh:mm:ss a"
-            let time = timeFormatter.date(from: startTime)
-
-            let newformatter = DateFormatter()
-            newformatter.dateFormat = "h:mm a"
-            let timeString = newformatter.string(from: time! as Date)
-            
-            
-            let title = metaDataDic["title"] as? String ?? ""
-            let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
-            let description = metaDataDic["description"] as? String ?? ""
-            let guestString = metaDataDic["guests"] as? String ?? ""
-            let meetingId = metaDataDic["meetingId"] as? String ?? ""
-            let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
-            let components = guestStr.components(separatedBy: ", ")
-            var guestDic: [String : String] = [:]
-
-            for component in components{
-              let pair = component.components(separatedBy: "=")
-                guestDic[pair[0]] = pair[1]
-            }
-            print(guestDic)
-            let guestName = guestDic["name"] ?? ""
-            let email = guestDic["email"] ?? ""
-            let guestId = guestDic["guestId"] ?? ""
-            
-            let contextString = metaDataDic["context"] as? String ?? ""
-            let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
-            let contextComponents = contextStr.components(separatedBy: ", ")
-            var contextDic: [String : String] = [:]
-
-            for component in contextComponents{
-              let pair = component.components(separatedBy: "=")
-                contextDic[pair[0]] = pair[1]
-            }
-            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
-            controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)
-    //        let nav = UINavigationController(rootViewController: controller)
-            let sheetController = SheetViewController(
-                controller: controller,
-                sizes: [.intrinsic],options: options)
-            sheetController.gripSize = CGSize(width: 50, height: 3)
-            sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
-            if let navVC = UIApplication.getTopViewController()  {
-                navVC.present(sheetController, animated: true, completion: nil)
-            }
-        }
-        }
-        } else if let dataString = data["eventdatajson"] as? String {
+  if let dataString = data["eventdatajson"] as? String {
             var callTitle = ""
             if let apsDict = data["aps"] as? [String:Any] {
             if let alert = apsDict["alert"] as? [String:Any] {
@@ -431,13 +361,20 @@ class NotificationManager : NSObject {
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
-                                if let topVC = UIApplication.getTopViewController()  {
-                                    topVC.present(vc, animated: false, completion: nil)
-                                    return
+                                if let eventVC = UIApplication.getTopViewController() as? DoctorProfileViewController  {
+                                    eventVC.dismiss(animated: false) {
+                                        if let topVC = UIApplication.getTopViewController()  {
+                                            topVC.present(vc, animated: false, completion: nil)
+                                            return
+                                        }
+                                    }
+                                } else {
+                                    UIApplication.getTopViewController()?.present(vc, animated: false, completion: nil)
                                 }
                             }
+                        } else {
+                            navVC.present(vc, animated: false, completion: nil)
                         }
-                        navVC.present(vc, animated: false, completion: nil)
                     }
                 } else if eventType == 4 {
                     let roomId = dataDic["roomId"] as? String ?? ""
@@ -448,12 +385,30 @@ class NotificationManager : NSObject {
                                 let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
-
+                                return
                             }
-                        }
+                        } else {
                         let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
-                        banner.haptic = .heavy
-                        banner.show()
+                            banner.haptic = .heavy
+                            banner.show()
+                        }
+                    }
+                } else if eventType == 5 {
+                    let roomId = dataDic["roomId"] as? String ?? ""
+                    let actionBy = dataDic["actionBy"] as? String ?? ""
+                    if let navVC = UIApplication.getTopViewController()  {
+                        if navVC as? JitsiMeetViewController != nil {
+                            navVC.dismiss(animated: false) {
+                                let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                                banner.haptic = .heavy
+                                banner.show()
+                                return
+                            }
+                        } else {
+                        let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                            banner.haptic = .heavy
+                            banner.show()
+                        }
                     }
                 }
             }

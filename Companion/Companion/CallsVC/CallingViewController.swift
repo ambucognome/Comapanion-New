@@ -25,6 +25,12 @@ class CallingViewController: UIViewController {
 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
 
     @objc func timerfunction() {
         self.dismiss(animated: true) {
@@ -32,8 +38,12 @@ class CallingViewController: UIViewController {
             banner.haptic = .heavy
             banner.show()
         }
-        
     }
 
+
+
+@IBAction func rejectBtn(_ sender: Any) {
+    self.dismiss(animated: true, completion: nil)
+}
 
 }

@@ -13,6 +13,8 @@ class JitsiMeetViewController: UIViewController {
     var meetingName: String!
     var email: String = ""
     var userName = ""
+    var isFromDialing = false
+    var callerEmailId = ""
 //    var callTimer: Timer?
     
     @IBOutlet private var meetView: JitsiMeetView!
@@ -62,7 +64,10 @@ class JitsiMeetViewController: UIViewController {
             builder.serverURL = url
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
             builder.setFeatureFlag("ios.screensharing.enabled", withBoolean: true)
-            builder.setFeatureFlag("pip.enabled", withBoolean: true)
+//            builder.setFeatureFlag("pip.enabled", withBoolean: true)
+            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
+            builder.setFeatureFlag("invite.enabled", withBoolean: false)
+            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
         }
 
         meetView.join(options)
@@ -77,8 +82,38 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
         OnCallHelper.shared.removeOnCallView()
 //        callTimer.invalidate()
 //        self.callTimer = nil
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) {
+            if self.isFromDialing {
+                self.endCall()
+            }
+        }
 //        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func endCall() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = [
+              "actionBy": retrievedCodableObject.user?.firstname ?? "",
+              "callerEmailId": self.callerEmailId,
+              "roomId": self.meetingName,
+            "appId": Bundle.main.bundleIdentifier ?? ""
+            
+          ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToEndCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
     }
     
     func conferenceJoined(_ data: [AnyHashable : Any]!) {

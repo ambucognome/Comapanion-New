@@ -19,7 +19,6 @@ class DoctorProfileViewController: UIViewController {
     @IBOutlet weak var videoCallImage : UIImageView!
 
 
-    
     var data : CareTeam?
 
     override func viewDidLoad() {
@@ -37,8 +36,42 @@ class DoctorProfileViewController: UIViewController {
             self.videoCallImage.layer.borderWidth = 2
 
         }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.call))
+        self.videoCallImage.isUserInteractionEnabled = true
+        self.videoCallImage.addGestureRecognizer(tap)
+        
     }
     
+    @objc func call() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        var dataDic = ["appId": Bundle.main.bundleIdentifier ?? "",
+            "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+            "callerName": retrievedCodableObject.user?.firstname ?? ""
+          ]
+            dataDic["calleeEmailId"] = self.data?.email ?? ""
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToStartCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                let roomId = response["roomId"] as? String ?? ""
+                let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
+                let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
+                vc.name = self.data?.name ?? ""
+                self.present(vc, animated: true)
+            
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+
+    }
 
 
 }
