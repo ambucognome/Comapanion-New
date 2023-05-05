@@ -265,6 +265,8 @@ class NotificationManager : NSObject {
                     vc.meetingName = roomId
                         vc.userName = actionBy
                     appDelegate.voiceCallVC = vc
+                    vc.isFromDialing = true
+                    vc.callerEmailId = "anechis@montefiore.org" //email
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
@@ -357,6 +359,8 @@ class NotificationManager : NSObject {
                     let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
                     vc.meetingName = roomId
                         vc.userName = actionBy
+                    vc.isFromDialing = true
+                    vc.callerEmailId = "MLISTANA@montefiore.org" //email
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {
