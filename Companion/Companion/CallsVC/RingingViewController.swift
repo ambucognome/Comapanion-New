@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 class RingingViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
+    
+    var player: AVAudioPlayer?
+
     
     var callTitle = ""
     var roomId = ""
@@ -19,10 +23,12 @@ class RingingViewController: UIViewController {
         super.viewDidLoad()
 
         self.titleLabel.text = callTitle
+        self.playSound()
     }
     
 
     @IBAction func acceptBtn(_ sender: Any) {
+        self.player?.stop()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         let dataDic = [
               "actionBy": retrievedCodableObject.user?.firstname ?? "",
@@ -62,6 +68,7 @@ class RingingViewController: UIViewController {
     }
     
     @IBAction func rejectBtn(_ sender: Any) {
+        self.player?.stop()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         let dataDic = [
               "actionBy": retrievedCodableObject.user?.firstname ?? "",
@@ -86,6 +93,22 @@ class RingingViewController: UIViewController {
             ERProgressHud.shared.hide()
         }
      }
+        }
+    }
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "callertune", withExtension: "caf") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let player = player else { return }
+            player.play()
+
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
 

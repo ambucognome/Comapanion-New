@@ -405,7 +405,7 @@ class NotificationManager : NSObject {
                                 return
                             }
                         } else {
-                        let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                            let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                             banner.haptic = .heavy
                             banner.show()
                         }

@@ -205,6 +205,8 @@
 		92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */; };
 		92D9C31C2A02C391008F5987 /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31B2A02C390008F5987 /* CallingViewController.swift */; };
 		92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */; };
+		92D9C3232A03F574008F5987 /* phoneringing.caf in Resources */ = {isa = PBXBuildFile; fileRef = 92D9C3202A03F40E008F5987 /* phoneringing.caf */; };
+		92D9C3272A03FAE8008F5987 /* callertune.caf in Resources */ = {isa = PBXBuildFile; fileRef = 92D9C3262A03FAE2008F5987 /* callertune.caf */; };
 		92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -452,6 +454,8 @@
 		92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldComponent.swift; sourceTree = "<group>"; };
 		92D9C31B2A02C390008F5987 /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
 		92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingViewController.swift; sourceTree = "<group>"; };
+		92D9C3202A03F40E008F5987 /* phoneringing.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = phoneringing.caf; sourceTree = "<group>"; };
+		92D9C3262A03FAE2008F5987 /* callertune.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = callertune.caf; sourceTree = "<group>"; };
 		92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		97C6F73AD60BBE563114AE33 /* Pods-Companion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.debug.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -619,6 +623,8 @@
 		92CFA7D2295461F800D77883 = {
 			isa = PBXGroup;
 			children = (
+				92D9C3262A03FAE2008F5987 /* callertune.caf */,
+				92D9C3202A03F40E008F5987 /* phoneringing.caf */,
 				92CFA7DD295461F800D77883 /* Companion */,
 				92CFA7DC295461F800D77883 /* Products */,
 				8E2A8D55C1F2FAC40C4C1E13 /* Pods */,
@@ -1132,6 +1138,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92D9C3272A03FAE8008F5987 /* callertune.caf in Resources */,
+				92D9C3232A03F574008F5987 /* phoneringing.caf in Resources */,
 				92CFABA3295B1B9C00D77883 /* FloatingLabelTextField.xib in Resources */,
 				92CFAB53295B1B9C00D77883 /* OnCallView.xib in Resources */,
 				92CFAB45295B1B9C00D77883 /* conversation.json in Resources */,
