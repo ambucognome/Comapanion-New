@@ -354,6 +354,9 @@ class NotificationManager : NSObject {
                     controller.roomId = roomId
                     controller.callerEmailId = callerEmailId
                     controller.opponentEmailId = opponentEmailId
+                    if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+                        controller.opponentEmailId = retrievedCodableObject.user?.mail ?? ""
+                    }
                     if let navVC = UIApplication.getTopViewController()  {
                         navVC.present(controller, animated: true, completion: nil)
                     }
