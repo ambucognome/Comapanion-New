@@ -302,6 +302,23 @@ class NotificationManager : NSObject {
                         banner.haptic = .heavy
                         banner.show()
                     }
+                }  else if eventType == 5 {
+                    let roomId = dataDic["roomId"] as? String ?? ""
+                    let actionBy = dataDic["actionBy"] as? String ?? ""
+                    if let navVC = UIApplication.getTopViewController()  {
+                        if navVC as? JitsiMeetViewController != nil {
+                            navVC.dismiss(animated: false) {
+                                let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                                banner.haptic = .heavy
+                                banner.show()
+                                return
+                            }
+                        } else {
+                            let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                            banner.haptic = .heavy
+                            banner.show()
+                        }
+                    }
                 }
             }
         }
