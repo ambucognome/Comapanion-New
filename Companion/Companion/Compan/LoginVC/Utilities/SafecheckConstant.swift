@@ -23,7 +23,7 @@ let API_END_COMPLETE_SURVEY = "/completeSurvey"
 let API_END_ADD_TOKEN = "/add-token"
 
                         
-let EVENT_BASE_URL = "https://15b2-202-168-85-93.ngrok.io"//"http://10.85.9.161:9095"
+let EVENT_BASE_URL = "https://60d0-202-168-85-93.ngrok.io"//"http://10.85.9.161:9095"
 let API_END_CREATE_EVENT = "/eventapi/events/create"
 let API_END_GET_EVENTS = "/eventapi/events/date-range"
 let API_END_DELETE_EVENT = "/eventapi/events/delete"
