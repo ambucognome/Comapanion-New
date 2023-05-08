@@ -44,9 +44,10 @@ class DoctorProfileViewController: UIViewController {
     
     @objc func call() {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        var dataDic = ["appId": Bundle.main.bundleIdentifier ?? "",
+        var dataDic = [
             "callerEmailId": retrievedCodableObject.user?.mail ?? "",
-            "callerName": retrievedCodableObject.user?.firstname ?? ""
+            "callerName": retrievedCodableObject.user?.firstname ?? "",
+            "appId": Bundle.main.bundleIdentifier ?? ""
           ]
             dataDic["calleeEmailId"] = self.data?.email ?? ""
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)

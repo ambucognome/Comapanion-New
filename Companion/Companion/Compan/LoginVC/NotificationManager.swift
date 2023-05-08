@@ -246,12 +246,14 @@ class NotificationManager : NSObject {
                 if eventType == 2 {
                     let roomId = dataDic["roomId"] as? String ?? ""
                     let callerEmailId = dataDic["callerEmailId"] as? String ?? ""
+                    let opponentEmailId = dataDic["opponentEmailId"] as? String ?? ""
                     let storyboard = UIStoryboard(name: "Companion", bundle: nil)
                     let controller = storyboard.instantiateViewController(identifier: "RingingViewController") as! RingingViewController
                     controller.callTitle = callTitle
                     controller.modalPresentationStyle = .fullScreen
                     controller.roomId = roomId
                     controller.callerEmailId = callerEmailId
+                    controller.opponentEmailId = opponentEmailId
                     if let navVC = UIApplication.getTopViewController()  {
                         navVC.present(controller, animated: true, completion: nil)
                     }
@@ -259,6 +261,8 @@ class NotificationManager : NSObject {
                 } else if eventType == 3 {
                     let roomId = dataDic["roomId"] as? String ?? ""
                     let actionBy = dataDic["actionBy"] as? String ?? ""
+                    let callerEmailId = dataDic["callerEmailId"] as? String ?? ""
+                    let opponentEmailId = dataDic["opponentEmailId"] as? String ?? ""
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
                     let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
@@ -266,7 +270,8 @@ class NotificationManager : NSObject {
                         vc.userName = actionBy
                     appDelegate.voiceCallVC = vc
                     vc.isFromDialing = true
-                    vc.callerEmailId = "anechis@montefiore.org" //email
+                    vc.callerEmailId = callerEmailId
+                    vc.opponentEmailId = opponentEmailId
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
@@ -341,12 +346,14 @@ class NotificationManager : NSObject {
                 if eventType == 2 {
                     let roomId = dataDic["roomId"] as? String ?? ""
                     let callerEmailId = dataDic["callerEmailId"] as? String ?? ""
+                    let opponentEmailId = dataDic["opponentEmailId"] as? String ?? ""
                     let storyboard = UIStoryboard(name: "Companion", bundle: nil)
                     let controller = storyboard.instantiateViewController(identifier: "RingingViewController") as! RingingViewController
                     controller.callTitle = callTitle
                     controller.modalPresentationStyle = .fullScreen
                     controller.roomId = roomId
                     controller.callerEmailId = callerEmailId
+                    controller.opponentEmailId = opponentEmailId
                     if let navVC = UIApplication.getTopViewController()  {
                         navVC.present(controller, animated: true, completion: nil)
                     }
@@ -354,13 +361,18 @@ class NotificationManager : NSObject {
                 } else if eventType == 3 {
                     let roomId = dataDic["roomId"] as? String ?? ""
                     let actionBy = dataDic["actionBy"] as? String ?? ""
+                    let callerEmailId = dataDic["callerEmailId"] as? String ?? ""
+                    let opponentEmailId = dataDic["opponentEmailId"] as? String ?? ""
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
                     let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
                     vc.meetingName = roomId
-                        vc.userName = actionBy
+                    if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+                        vc.userName = retrievedCodableObject.user?.firstname ?? ""
+                    }
                     vc.isFromDialing = true
-                    vc.callerEmailId = "MLISTANA@montefiore.org" //email
+                    vc.callerEmailId = callerEmailId //email
+                    vc.opponentEmailId = opponentEmailId
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {

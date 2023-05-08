@@ -15,6 +15,7 @@ class JitsiMeetViewController: UIViewController {
     var userName = ""
     var isFromDialing = false
     var callerEmailId = ""
+    var opponentEmailId = ""
 //    var callTimer: Timer?
     
     @IBOutlet private var meetView: JitsiMeetView!
@@ -96,8 +97,8 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
               "actionBy": retrievedCodableObject.user?.firstname ?? "",
               "callerEmailId": self.callerEmailId,
               "roomId": self.meetingName,
-            "appId": Bundle.main.bundleIdentifier ?? ""
-            
+            "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": self.opponentEmailId
           ]
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String

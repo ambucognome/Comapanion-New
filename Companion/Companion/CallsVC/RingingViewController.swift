@@ -18,6 +18,7 @@ class RingingViewController: UIViewController {
     var callTitle = ""
     var roomId = ""
     var callerEmailId = ""
+    var opponentEmailId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,8 @@ class RingingViewController: UIViewController {
               "actionBy": retrievedCodableObject.user?.firstname ?? "",
               "callerEmailId": callerEmailId,
               "roomId": self.roomId,
-            "appId": Bundle.main.bundleIdentifier ?? ""
+              "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": self.opponentEmailId
             
           ]
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -52,7 +54,8 @@ class RingingViewController: UIViewController {
                     vc.meetingName = self.roomId
                     vc.isFromDialing = true
                     vc.callerEmailId = self.callerEmailId
-                        vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+                    vc.opponentEmailId = self.opponentEmailId
+                    vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {
                         navVC.present(vc, animated: false, completion: nil)
@@ -74,8 +77,8 @@ class RingingViewController: UIViewController {
               "actionBy": retrievedCodableObject.user?.firstname ?? "",
               "callerEmailId": callerEmailId,
               "roomId": self.roomId,
-            "appId": Bundle.main.bundleIdentifier ?? ""
-            
+              "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": self.opponentEmailId
           ]
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
