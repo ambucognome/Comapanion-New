@@ -55,6 +55,7 @@ class RingingViewController: UIViewController {
                     vc.isFromDialing = true
                     vc.callerEmailId = self.callerEmailId
                     vc.opponentEmailId = self.opponentEmailId
+                    vc.modalPresentationStyle = .fullScreen
                     vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {

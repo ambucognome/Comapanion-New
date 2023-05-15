@@ -323,6 +323,8 @@ class BaseAPIManager : NSObject {
         }
     }
     
+ 
+    
     //  Get Event
     // completion : Completion object to return parameters to the calling functions
     // Returns Events
@@ -333,6 +335,7 @@ class BaseAPIManager : NSObject {
                 ERProgressHud.shared.hide()
                 let statusCode = response.response?.statusCode
                 guard let jsonData =  JSON  as? NSArray else {
+//                    completion(true, [], statusCode!)
                     APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                     return
                 }
@@ -348,6 +351,8 @@ class BaseAPIManager : NSObject {
             }
         }
     }
+    
+
     
     //  Delete Event
     // completion : Completion object to return parameters to the calling functions
@@ -499,4 +504,6 @@ class BaseAPIManager : NSObject {
         return message;
     }
 }
+
+
 

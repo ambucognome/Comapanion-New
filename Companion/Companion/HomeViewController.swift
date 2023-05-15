@@ -194,7 +194,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func addBtn(_ sender: Any) {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             context["userid"] = retrievedCodableObject.user?.mail ?? ""
-            context["key"] = "Companion_\(self.random(digits: 4))"
+            context["key"] = "Companion_\(self.random(digits: 5))"
             self.getTemplate()
         }
         
@@ -221,11 +221,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func didUpdateEvent(eventData: [String : Any],eventId: String) {
-        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            context["userid"] = retrievedCodableObject.user?.mail ?? ""
-            context["key"] = "Companion_\(self.random(digits: 4))"
+//        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+//            context["userid"] = retrievedCodableObject.user?.mail ?? ""
+//            context["key"] = "Companion_\(self.random(digits: 5))"
             self.getTemplate()
-        }
+//        }
         self.deleteEvent(eventId: eventId, data: eventData)
     }
     
@@ -258,10 +258,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             print(response)
                             if statusCode == 200 {
                                 if isEdit {
-                                    let banner = NotificationBanner(title: "Success", subtitle: "Event was updated successfully.", style: .success)
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event updated successfully.", style: .success)
                                     banner.show()
                                 } else {
-                                    let banner = NotificationBanner(title: "Success", subtitle: "Event was added successfully.", style: .success)
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event created successfully.", style: .success)
                                     banner.show()
                                 }
                                 self.getEvents(data: self.dateRange)
@@ -339,18 +339,33 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         let description = metaDataDic["description"] as? String ?? ""
                                         let guestString = metaDataDic["guests"] as? String ?? ""
                                         let meetingId = metaDataDic["meetingId"] as? String ?? ""
-                                        let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
-                                        let components = guestStr.components(separatedBy: ", ")
-                                        var guestDic: [String : String] = [:]
+                                        
+                                        var guestName = ""
+                                        var email = ""
+                                        var guestId = ""
 
-                                        for component in components{
-                                          let pair = component.components(separatedBy: "=")
-                                            guestDic[pair[0]] = pair[1]
+                                        if let array = guestString.convertToNSDictionary() {
+                                            print(array.first)
+                                            if let guestDic = array.first as? NSDictionary {
+                                                if let guestData = guestDic["guest"] as? NSDictionary {
+                                                guestName = guestData["name"] as? String ?? ""
+                                                 email = guestData["email"] as? String ?? ""
+                                                 guestId = guestData["guestId"] as? String ?? ""
+                                                }
+                                            }
                                         }
-                                        print(guestDic)
-                                        let guestName = guestDic["name"] ?? ""
-                                        let email = guestDic["email"] ?? ""
-                                        let guestId = guestDic["guestId"] ?? ""
+//                                        let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
+//                                        let components = guestStr.components(separatedBy: ", ")
+//                                        var guestDic: [String : String] = [:]
+//
+//                                        for component in components{
+//                                          let pair = component.components(separatedBy: "=")
+//                                            guestDic[pair[0]] = pair[1]
+//                                        }
+//                                        print(guestDic)
+//                                        let guestName = guestDic["name"] ?? ""
+//                                        let email = guestDic["email"] ?? ""
+//                                        let guestId = guestDic["guestId"] ?? ""
                                         
                                         let contextString = metaDataDic["context"] as? String ?? ""
                                         let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
@@ -358,12 +373,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         var contextDic: [String : String] = [:]
 
                                         for component in contextComponents{
-                                          let pair = component.components(separatedBy: "=")
+                                          let pair = component.components(separatedBy: ":")
                                             contextDic[pair[0]] = pair[1]
                                         }
-                                        
-
-                                        
                                         
                                         
                                         let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])

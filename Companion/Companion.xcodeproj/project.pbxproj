@@ -207,6 +207,7 @@
 		92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */; };
 		92D9C3232A03F574008F5987 /* phoneringing.caf in Resources */ = {isa = PBXBuildFile; fileRef = 92D9C3202A03F40E008F5987 /* phoneringing.caf */; };
 		92D9C3272A03FAE8008F5987 /* callertune.caf in Resources */ = {isa = PBXBuildFile; fileRef = 92D9C3262A03FAE2008F5987 /* callertune.caf */; };
+		92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C3282A0CC467008F5987 /* LocalNotification.swift */; };
 		92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -456,6 +457,7 @@
 		92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingViewController.swift; sourceTree = "<group>"; };
 		92D9C3202A03F40E008F5987 /* phoneringing.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = phoneringing.caf; sourceTree = "<group>"; };
 		92D9C3262A03FAE2008F5987 /* callertune.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = callertune.caf; sourceTree = "<group>"; };
+		92D9C3282A0CC467008F5987 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		97C6F73AD60BBE563114AE33 /* Pods-Companion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.debug.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -651,6 +653,7 @@
 				92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */,
 				92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */,
 				92CFA937295A0E8A00D77883 /* AppDelegate.swift */,
+				92D9C3282A0CC467008F5987 /* LocalNotification.swift */,
 				92CFA938295A0E8A00D77883 /* SceneDelegate.swift */,
 				92CFA7F429546D9B00D77883 /* DashboardViewController.swift */,
 				92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */,
@@ -1314,6 +1317,7 @@
 				92AA352729BF945300A6A4AB /* Yalta.swift in Sources */,
 				928122CB29BF5BC00021A679 /* FSCalendarAppearance.m in Sources */,
 				928122D329BF5BC00021A679 /* FSCalendarSeparatorDecorationView.m in Sources */,
+				92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */,
 				92CFAB4D295B1B9C00D77883 /* UIBezierPath.swift in Sources */,
 				92CFAB5B295B1B9C00D77883 /* ChatViewController+Subviews.swift in Sources */,
 				92AA353529BF9EA600A6A4AB /* CareTeamTableViewCell.swift in Sources */,

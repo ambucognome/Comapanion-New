@@ -25,7 +25,7 @@ class EventDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = eventData {
-            self.guestNameLabel.text = "\(data.guestname) | \(data.guestId) "
+            self.guestNameLabel.text = "\(data.guestname) "
             self.guestEmailLabel.text = data.guestEmail
             self.nameLabel.text = data.name
             self.dateTimeLabel.text = "\(data.date) at \(data.time)"

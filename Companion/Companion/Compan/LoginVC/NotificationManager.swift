@@ -196,18 +196,32 @@ class NotificationManager : NSObject {
             let description = metaDataDic["description"] as? String ?? ""
             let guestString = metaDataDic["guests"] as? String ?? ""
             let meetingId = metaDataDic["meetingId"] as? String ?? ""
-            let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
-            let components = guestStr.components(separatedBy: ", ")
-            var guestDic: [String : String] = [:]
+//            let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
+//            let components = guestStr.components(separatedBy: ", ")
+//            var guestDic: [String : String] = [:]
+//
+//            for component in components{
+//              let pair = component.components(separatedBy: "=")
+//                guestDic[pair[0]] = pair[1]
+//            }
+//            print(guestDic)
+//            let guestName = guestDic["name"] ?? ""
+//            let email = guestDic["email"] ?? ""
+//            let guestId = guestDic["guestId"] ?? ""
+            var guestName = ""
+            var email = ""
+            var guestId = ""
 
-            for component in components{
-              let pair = component.components(separatedBy: "=")
-                guestDic[pair[0]] = pair[1]
+            if let array = guestString.convertToNSDictionary() {
+                print(array.first)
+                if let guestDic = array.first as? NSDictionary {
+                    if let guestData = guestDic["guest"] as? NSDictionary {
+                    guestName = guestData["name"] as? String ?? ""
+                     email = guestData["email"] as? String ?? ""
+                     guestId = guestData["guestId"] as? String ?? ""
+                    }
+                }
             }
-            print(guestDic)
-            let guestName = guestDic["name"] ?? ""
-            let email = guestDic["email"] ?? ""
-            let guestId = guestDic["guestId"] ?? ""
             
             let contextString = metaDataDic["context"] as? String ?? ""
             let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
@@ -215,7 +229,7 @@ class NotificationManager : NSObject {
             var contextDic: [String : String] = [:]
 
             for component in contextComponents{
-              let pair = component.components(separatedBy: "=")
+              let pair = component.components(separatedBy: ":")
                 contextDic[pair[0]] = pair[1]
             }
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
@@ -378,7 +392,11 @@ class NotificationManager : NSObject {
                         controller.opponentEmailId = retrievedCodableObject.user?.mail ?? ""
                     }
                     if let navVC = UIApplication.getTopViewController()  {
-                        navVC.present(controller, animated: true, completion: nil)
+                        if navVC as? JitsiMeetViewController != nil {
+                            return
+                        } else {
+                            navVC.present(controller, animated: true, completion: nil)
+                        }
                     }
                     
                 } else if eventType == 3 {
@@ -390,6 +408,7 @@ class NotificationManager : NSObject {
                     let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
                     let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
                     vc.meetingName = roomId
+                    vc.modalPresentationStyle = .fullScreen
                     if let retrievedCodableObject = SafeCheckUtils.getUserData() {
                         vc.userName = retrievedCodableObject.user?.firstname ?? ""
                     }
