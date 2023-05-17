@@ -55,6 +55,7 @@ class JitsiMeetViewController: UIViewController {
     }
     
     private func joinMeeting(name: String) {
+        CALL_COMPLETED = false
         let options = JitsiMeetConferenceOptions.fromBuilder { builder in
             builder.room = name
             builder.userInfo = JitsiMeetUserInfo(displayName: self.userName, andEmail: self.email, andAvatar: nil)
@@ -84,9 +85,8 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
 //        callTimer.invalidate()
 //        self.callTimer = nil
         self.dismiss(animated: true) {
-            if self.isFromDialing {
+            CALL_COMPLETED = true
                 self.endCall()
-            }
         }
 //        self.navigationController?.popViewController(animated: true)
     }

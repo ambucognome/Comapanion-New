@@ -44,7 +44,7 @@ class CallingViewController: UIViewController {
 
     @IBAction func rejectBtn(_ sender: Any) {
         player?.stop()
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     
     func playSound() {

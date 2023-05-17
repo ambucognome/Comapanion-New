@@ -60,19 +60,21 @@ class DoctorProfileViewController: UIViewController {
                 ERProgressHud.shared.hide()
                 print(response)
                 let roomId = response["roomId"] as? String ?? ""
-                let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
-                let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
-                vc.name = self.data?.name ?? ""
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            
+        self.dismiss(animated: false) {
+            let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
+            vc.name = self.data?.name ?? ""
+            vc.modalPresentationStyle = .fullScreen
+        if let navVC = UIApplication.getTopViewController() {
+            navVC.present(vc, animated: true)
+        }
+        }
         } else {
             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
             ERProgressHud.shared.hide()
         }
      }
         }
-
     }
 
 

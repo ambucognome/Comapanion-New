@@ -42,6 +42,10 @@ class EventDetailVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     @objc func call() {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         let dataDic = [
@@ -64,14 +68,13 @@ class EventDetailVC: UIViewController {
                 let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
                 vc.name = self.eventData?.guestname ?? ""
                 self.present(vc, animated: true)
-            
+
         } else {
             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
             ERProgressHud.shared.hide()
         }
      }
         }
-
     }
 
     
@@ -94,5 +97,5 @@ class EventDetailVC: UIViewController {
 //        self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-
+    
 }

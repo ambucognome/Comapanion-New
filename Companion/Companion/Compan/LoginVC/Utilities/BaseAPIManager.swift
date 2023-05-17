@@ -322,7 +322,6 @@ class BaseAPIManager : NSObject {
             }
         }
     }
-    
  
     
     //  Get Event

@@ -12,6 +12,8 @@ import NotificationBannerSwift
 var LAUNCHED_FROM_NOTIFICATION = false
 var notificationData : [AnyHashable : Any] = [:]
 
+var CALL_COMPLETED = false
+
 class NotificationManager : NSObject {
     
     static let shared = NotificationManager()
@@ -272,7 +274,11 @@ class NotificationManager : NSObject {
                         controller.opponentEmailId = retrievedCodableObject.user?.mail ?? ""
                     }
                     if let navVC = UIApplication.getTopViewController()  {
-                        navVC.present(controller, animated: true, completion: nil)
+                        if (navVC as? JitsiMeetViewController != nil) || (navVC as? RingingViewController != nil){
+                            return
+                        } else {
+                            navVC.present(controller, animated: true, completion: nil)
+                        }
                     }
                     
                 } else if eventType == 3 {
@@ -306,15 +312,16 @@ class NotificationManager : NSObject {
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
-                                let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                                CALL_COMPLETED = true
+                                let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
 
                             }
                         }
-                        let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
-                        banner.haptic = .heavy
-                        banner.show()
+//                        let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+//                        banner.haptic = .heavy
+//                        banner.show()
                     }
                 }  else if eventType == 5 {
                     let roomId = dataDic["roomId"] as? String ?? ""
@@ -322,12 +329,16 @@ class NotificationManager : NSObject {
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? JitsiMeetViewController != nil {
                             navVC.dismiss(animated: false) {
+                                CALL_COMPLETED = true
                                 let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
                                 return
                             }
                         } else {
+                            if CALL_COMPLETED {
+                                return
+                            }
                             let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                             banner.haptic = .heavy
                             banner.show()
@@ -392,7 +403,7 @@ class NotificationManager : NSObject {
                         controller.opponentEmailId = retrievedCodableObject.user?.mail ?? ""
                     }
                     if let navVC = UIApplication.getTopViewController()  {
-                        if navVC as? JitsiMeetViewController != nil {
+                        if (navVC as? JitsiMeetViewController != nil) || (navVC as? RingingViewController != nil){
                             return
                         } else {
                             navVC.present(controller, animated: true, completion: nil)
@@ -440,15 +451,16 @@ class NotificationManager : NSObject {
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
-                                let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                                CALL_COMPLETED = true
+                                let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
                                 return
                             }
                         } else {
-                        let banner = NotificationBanner(title: "Call was declined", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
-                            banner.haptic = .heavy
-                            banner.show()
+//                        let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+//                            banner.haptic = .heavy
+//                            banner.show()
                         }
                     }
                 } else if eventType == 5 {
@@ -457,12 +469,16 @@ class NotificationManager : NSObject {
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? JitsiMeetViewController != nil {
                             navVC.dismiss(animated: false) {
+                                CALL_COMPLETED = true
                                 let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
                                 return
                             }
                         } else {
+                            if CALL_COMPLETED {
+                                return
+                            }
                             let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                             banner.haptic = .heavy
                             banner.show()
