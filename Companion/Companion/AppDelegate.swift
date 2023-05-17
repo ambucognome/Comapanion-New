@@ -144,8 +144,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let dict = notification.request.content.userInfo
         print(dict)
-        if    (dict["eventdatajson"] as? [String:Any]) != nil {
-            completionHandler([.banner, .sound])
+        if  let eventData = (dict["eventdatajson"] as? String) {
+            if let eventDataDic = eventData.convertToDictionary() {
+                if let eventType = eventDataDic["eventType"] as? NSNumber {
+                    if eventType == 1 {
+                        completionHandler([.banner, .sound])
+                    }
+                }
+            }
         }
 
 

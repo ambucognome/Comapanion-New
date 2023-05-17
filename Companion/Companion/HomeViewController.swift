@@ -109,7 +109,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var dateRange = [
         "fromDate": "2023-01-10 00:00:00",
-        "toDate": "2023-08-10 20:00:00" ]
+        "toDate": "2023-10-10 20:00:00" ]
 
     
     override func viewDidLoad() {
@@ -221,11 +221,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func didUpdateEvent(eventData: [String : Any],eventId: String) {
-//        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-//            context["userid"] = retrievedCodableObject.user?.mail ?? ""
-//            context["key"] = "Companion_\(self.random(digits: 5))"
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            context["userid"] = retrievedCodableObject.user?.mail ?? ""
+            context["key"] = Companion_\(self.random(digits: 5))"
             self.getTemplate()
-//        }
+        }
         self.deleteEvent(eventId: eventId, data: eventData)
     }
     

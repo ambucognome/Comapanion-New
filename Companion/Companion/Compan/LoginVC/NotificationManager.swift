@@ -198,18 +198,7 @@ class NotificationManager : NSObject {
             let description = metaDataDic["description"] as? String ?? ""
             let guestString = metaDataDic["guests"] as? String ?? ""
             let meetingId = metaDataDic["meetingId"] as? String ?? ""
-//            let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
-//            let components = guestStr.components(separatedBy: ", ")
-//            var guestDic: [String : String] = [:]
-//
-//            for component in components{
-//              let pair = component.components(separatedBy: "=")
-//                guestDic[pair[0]] = pair[1]
-//            }
-//            print(guestDic)
-//            let guestName = guestDic["name"] ?? ""
-//            let email = guestDic["email"] ?? ""
-//            let guestId = guestDic["guestId"] ?? ""
+
             var guestName = ""
             var email = ""
             var guestId = ""
@@ -257,6 +246,80 @@ class NotificationManager : NSObject {
             }
         }
 
+            if let eventDic = dataString.convertToDictionary() {
+                let eventType = eventDic["eventType"] as? NSNumber ?? 0
+                if eventType == 1 {
+                    let eventID = eventDic["eventId"] as? String ?? ""
+                    let metaDataString = eventDic["metadata"] as? [String:Any]
+                    if let metaDataDic = metaDataString {
+                        print(metaDataDic)
+                        let parentId = metaDataDic["parentId"] as? String
+                        let eventDate = metaDataDic["date"] as? String ?? ""
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                        let newDate = dateFormatter.date(from: eventDate)
+
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "dd/MM/yyyy"
+                        let dateString = formatter.string(from: newDate! as Date)
+                        
+                        let startTime = metaDataDic["startTime"] as? String ?? ""
+                        let timeFormatter = DateFormatter()
+                        timeFormatter.dateFormat = "hh:mm:ss a"
+                        let time = timeFormatter.date(from: startTime)
+
+                        let newformatter = DateFormatter()
+                        newformatter.dateFormat = "h:mm a"
+                        let timeString = newformatter.string(from: time! as Date)
+                        
+                        
+                        let title = metaDataDic["title"] as? String ?? ""
+                        let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
+                        let description = metaDataDic["description"] as? String ?? ""
+                        let guestString = metaDataDic["guests"] as? String ?? ""
+                        let meetingId = metaDataDic["meetingId"] as? String ?? ""
+
+                        var guestName = ""
+                        var email = ""
+                        var guestId = ""
+
+                        if let array = guestString.convertToNSDictionary() {
+                            print(array.first)
+                            if let guestDic = array.first as? NSDictionary {
+                                if let guestData = guestDic["guest"] as? NSDictionary {
+                                guestName = guestData["name"] as? String ?? ""
+                                 email = guestData["email"] as? String ?? ""
+                                 guestId = guestData["guestId"] as? String ?? ""
+                                }
+                            }
+                        }
+                        
+                        let contextString = metaDataDic["context"] as? String ?? ""
+                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
+                        let contextComponents = contextStr.components(separatedBy: ", ")
+                        var contextDic: [String : String] = [:]
+
+                        for component in contextComponents{
+                          let pair = component.components(separatedBy: ":")
+                            contextDic[pair[0]] = pair[1]
+                        }
+                        let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+                        let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
+                        controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)
+                //        let nav = UINavigationController(rootViewController: controller)
+                        let sheetController = SheetViewController(
+                            controller: controller,
+                            sizes: [.intrinsic],options: options)
+                        sheetController.gripSize = CGSize(width: 50, height: 3)
+                        sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
+                        if let navVC = UIApplication.getTopViewController()  {
+                            navVC.present(sheetController, animated: true, completion: nil)
+                        }
+                    }
+                    }
+            }
+            
             if let dataDic = dataString.convertToDictionary() {
                 let eventType = dataDic["eventType"] as? NSNumber ?? 0
                 if eventType == 2 {
