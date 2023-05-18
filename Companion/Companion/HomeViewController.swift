@@ -136,9 +136,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
-        btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
+//        btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
         btnLeftMenu.addTarget(self, action: #selector (menu), for: .touchUpInside)
-        btnLeftMenu.frame.size = CGSize(width:25, height: 25)
+        btnLeftMenu.setTitle("Refresh", for: .normal)
+        btnLeftMenu.setTitleColor(.blue, for: .normal)
+//        btnLeftMenu.frame.size = CGSize(width:25, height: 25)
         let barButton = UIBarButtonItem(customView: btnLeftMenu)
         self.navigationItem.rightBarButtonItem = barButton
         self.tableView.estimatedRowHeight = 100
@@ -178,13 +180,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @objc func menu() {
-        if self.calendar.scope == .month {
-            self.calendar.setScope(.week, animated: true)
-            btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
-        } else {
-            self.calendar.setScope(.month, animated: true)
-            btnLeftMenu.setImage(UIImage(named:  "vertical"), for: .normal)
-        }
+//        if self.calendar.scope == .month {
+//            self.calendar.setScope(.week, animated: true)
+//            btnLeftMenu.setImage(UIImage(named:  "calendar_tab"), for: .normal)
+//        } else {
+//            self.calendar.setScope(.month, animated: true)
+//            btnLeftMenu.setImage(UIImage(named:  "vertical"), for: .normal)
+//        }
+        self.getEvents(data: dateRange)
     }
 
     var context = [
@@ -223,7 +226,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func didUpdateEvent(eventData: [String : Any],eventId: String) {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             context["userid"] = retrievedCodableObject.user?.mail ?? ""
-            context["key"] = Companion_\(self.random(digits: 5))"
+            context["key"] = "Companion_\(self.random(digits: 5))"
             self.getTemplate()
         }
         self.deleteEvent(eventId: eventId, data: eventData)
