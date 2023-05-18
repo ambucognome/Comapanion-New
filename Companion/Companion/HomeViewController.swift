@@ -38,7 +38,7 @@ struct EventStruct {
     var guestEmail  : String = ""
     var date: String = ""
     var meetingId : String = ""
-    var context : [String:String] = [:]
+    var context : [String:Any] = [:]
     var eventId : String = ""
 }
 
@@ -232,6 +232,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.deleteEvent(eventId: eventId, data: eventData)
     }
     
+    func didDeleteEvent(eventId: String) {
+        self.deleteEvent(eventId: eventId, isDeleteSelected: true)
+    }
+    
     func createEvent(data: [String: Any],isEdit: Bool = false) {
         
         let date = data["date"] as? String
@@ -276,7 +280,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     }
     }
     
-    func deleteEvent(eventId: String, data: [String: Any]) {
+    func deleteEvent(eventId: String, data: [String: Any] = [:],isDeleteSelected:Bool = false) {
         let dataDic = ["eventId":eventId]
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
@@ -288,6 +292,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         if (success) {
                             ERProgressHud.shared.hide()
                             if statusCode == 200 {
+                                if isDeleteSelected {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event deleted successfully.", style: .success)
+                                    banner.show()
+                                    self.getEvents(data: self.dateRange)
+                                    return
+                                }
                                 self.createEvent(data: data,isEdit: true)
                             }
                         } else {
@@ -371,19 +381,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //                                        let guestId = guestDic["guestId"] ?? ""
                                         
                                         let contextString = metaDataDic["context"] as? String ?? ""
-                                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
-                                        let contextComponents = contextStr.components(separatedBy: ", ")
-                                        var contextDic: [String : String] = [:]
+                                        if let cont = contextString.convertToDictionary() {
+                                            print(cont)
+                                        
+//                                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
+//                                        let contextComponents = contextStr.components(separatedBy: ",")
+//                                        var contextDic: [String : String] = [:]
+//
+//                                        for component in contextComponents{
+//                                          let pair = component.components(separatedBy: ":")
+//                                            contextDic[pair[0]] = pair[1]
+//                                        }
+                                        
+                                        
+                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: cont, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
+                                            eventsData.append(data)
+                                            self.tableView.reloadData()
 
-                                        for component in contextComponents{
-                                          let pair = component.components(separatedBy: ":")
-                                            contextDic[pair[0]] = pair[1]
                                         }
-                                        
-                                        
-                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
-                                        eventsData.append(data)
-                                        self.tableView.reloadData()
                                         
                                     }
 

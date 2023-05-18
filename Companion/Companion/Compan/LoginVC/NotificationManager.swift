@@ -215,17 +215,12 @@ class NotificationManager : NSObject {
             }
             
             let contextString = metaDataDic["context"] as? String ?? ""
-            let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
-            let contextComponents = contextStr.components(separatedBy: ", ")
-            var contextDic: [String : String] = [:]
+            if let cont = contextString.convertToDictionary() {
+                print(cont)
 
-            for component in contextComponents{
-              let pair = component.components(separatedBy: ":")
-                contextDic[pair[0]] = pair[1]
-            }
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
             let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
-            controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)
+            controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: cont, eventId: eventID)
     //        let nav = UINavigationController(rootViewController: controller)
             let sheetController = SheetViewController(
                 controller: controller,
@@ -233,8 +228,14 @@ class NotificationManager : NSObject {
             sheetController.gripSize = CGSize(width: 50, height: 3)
             sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
             if let navVC = UIApplication.getTopViewController()  {
+                if let vc = navVC as? HomeViewController {
+                    vc.getEvents(data: [
+                        "fromDate": "2023-01-10 00:00:00",
+                        "toDate": "2023-10-10 20:00:00" ])
+                }
                 navVC.present(sheetController, animated: true, completion: nil)
             }
+        }
         }
         }
         } else if let dataString = data["eventdatajson"] as? String {
@@ -296,17 +297,12 @@ class NotificationManager : NSObject {
                         }
                         
                         let contextString = metaDataDic["context"] as? String ?? ""
-                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
-                        let contextComponents = contextStr.components(separatedBy: ", ")
-                        var contextDic: [String : String] = [:]
+                        if let cont = contextString.convertToDictionary() {
+                            print(cont)
 
-                        for component in contextComponents{
-                          let pair = component.components(separatedBy: ":")
-                            contextDic[pair[0]] = pair[1]
-                        }
                         let storyboard = UIStoryboard(name: "Companion", bundle: nil)
                         let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
-                        controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: contextDic, eventId: eventID)
+                        controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: cont, eventId: eventID)
                 //        let nav = UINavigationController(rootViewController: controller)
                         let sheetController = SheetViewController(
                             controller: controller,
@@ -314,8 +310,14 @@ class NotificationManager : NSObject {
                         sheetController.gripSize = CGSize(width: 50, height: 3)
                         sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
                         if let navVC = UIApplication.getTopViewController()  {
+                            if let vc = navVC as? HomeViewController {
+                                vc.getEvents(data: [
+                                    "fromDate": "2023-01-10 00:00:00",
+                                    "toDate": "2023-10-10 20:00:00" ])
+                            }
                             navVC.present(sheetController, animated: true, completion: nil)
                         }
+                    }
                     }
                     }
             }
@@ -376,7 +378,7 @@ class NotificationManager : NSObject {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
                                 CALL_COMPLETED = true
-                                let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                                let banner = NotificationBanner(title: "Call rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
 
@@ -393,7 +395,7 @@ class NotificationManager : NSObject {
                         if navVC as? JitsiMeetViewController != nil {
                             navVC.dismiss(animated: false) {
                                 CALL_COMPLETED = true
-                                let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                                let banner = NotificationBanner(title: "Call ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
                                 return
@@ -402,7 +404,7 @@ class NotificationManager : NSObject {
                             if CALL_COMPLETED {
                                 return
                             }
-                            let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                            let banner = NotificationBanner(title: "Call ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                             banner.haptic = .heavy
                             banner.show()
                         }
@@ -515,7 +517,7 @@ class NotificationManager : NSObject {
                         if navVC as? CallingViewController != nil {
                             navVC.dismiss(animated: false) {
                                 CALL_COMPLETED = true
-                                let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                                let banner = NotificationBanner(title: "Call rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
                                 return
@@ -533,7 +535,7 @@ class NotificationManager : NSObject {
                         if navVC as? JitsiMeetViewController != nil {
                             navVC.dismiss(animated: false) {
                                 CALL_COMPLETED = true
-                                let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                                let banner = NotificationBanner(title: "Call ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                                 banner.haptic = .heavy
                                 banner.show()
                                 return
@@ -542,7 +544,7 @@ class NotificationManager : NSObject {
                             if CALL_COMPLETED {
                                 return
                             }
-                            let banner = NotificationBanner(title: "Call was ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
+                            let banner = NotificationBanner(title: "Call ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
                             banner.haptic = .heavy
                             banner.show()
                         }

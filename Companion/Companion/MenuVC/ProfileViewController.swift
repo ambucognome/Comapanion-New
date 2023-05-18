@@ -77,8 +77,37 @@ class ProfileViewController: UIViewController {
             }
             
             @objc func menu() {
+                if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+                    self.logout(emailID: retrievedCodableObject.user?.mail ?? "")
+                }
                 LogoutHelper.shared.logout()
             }
+    
+    func logout(emailID: String){
+        if SafeCheckUtils.getDeviceToken() != "" {
+        let parameters : [String: String] = [
+            "appId": Bundle.main.bundleIdentifier ?? "",
+            "appToken": "",
+            "fcmToken": SafeCheckUtils.getDeviceToken(),
+            "userId": emailID,
+            "appType" : "ios"
+           ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        BaseAPIManager.sharedInstance.makeRequestToUploadFCMToken( data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                print(response)
+            } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
+          }
+         }
+//        }
+//      }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)

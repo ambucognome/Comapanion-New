@@ -33,6 +33,7 @@ class BaseAPIManager : NSObject {
         case acceptCall(Data)
         case rejectCall(Data)
         case endCall(Data)
+        case logout(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -58,6 +59,8 @@ class BaseAPIManager : NSObject {
             case .rejectCall:
                 return .post
             case .endCall:
+                return .post
+            case .logout:
                 return .post
             }
         }
@@ -87,6 +90,8 @@ class BaseAPIManager : NSObject {
                 return API_END_REJECT_CALL
             case .endCall(_):
                 return API_END_END_CALL
+            case .logout(_):
+                return API_END_LOGOUT
             }
         }
         
@@ -173,6 +178,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .endCall(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .logout(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -438,6 +450,28 @@ class BaseAPIManager : NSObject {
             if statusCode == 200 {
                 completion(true,[:],200)
             } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    // Logout
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToLogout(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.logout(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+//                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }
+            case .failure( _):
                 completion(false,[:],0)
             }
         }

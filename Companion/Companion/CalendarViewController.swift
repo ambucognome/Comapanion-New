@@ -10,6 +10,7 @@ import CalendarKit
 
 protocol  CalendarViewControllerDelegate {
     func didUpdateEvent(eventData: [String : Any], eventId: String)
+    func didDeleteEvent(eventId: String)
 }
 
 class CalendarViewController: DayViewController , DynamicTemplateViewControllerDelegate{
@@ -145,6 +146,16 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
             }
             
         }))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+            if let data = descriptor.userInfo as? EventStruct {
+                self.navigationController?.popViewController(completion: {
+                self.calendarDelegate?.didDeleteEvent(eventId: data.eventId)
+                })
+            }
+            
+        }))
+
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         

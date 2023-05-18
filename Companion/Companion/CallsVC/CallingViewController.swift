@@ -36,7 +36,7 @@ class CallingViewController: UIViewController {
     @objc func timerfunction() {
         player?.stop()
         self.dismiss(animated: true) {
-            let banner = NotificationBanner(title: "Call was not answered", subtitle: nil, leftView: nil, rightView: nil, style: .warning, colors: nil)
+            let banner = NotificationBanner(title: "Call not answered", subtitle: nil, leftView: nil, rightView: nil, style: .warning, colors: nil)
             banner.haptic = .heavy
             banner.show()
         }
