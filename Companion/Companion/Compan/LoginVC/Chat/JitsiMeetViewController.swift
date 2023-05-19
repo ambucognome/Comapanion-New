@@ -95,7 +95,7 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
     func endCall() {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
+              "actionBy": retrievedCodableObject.user?.mail ?? "",
               "callerEmailId": self.callerEmailId,
               "roomId": self.meetingName,
             "appId": Bundle.main.bundleIdentifier ?? "",
