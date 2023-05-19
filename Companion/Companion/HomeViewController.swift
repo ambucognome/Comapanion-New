@@ -33,13 +33,17 @@ struct EventStruct {
     var duration : String = "30"
     var parentId : String?
     var description : String = ""
-    var guestname : String = ""
-    var guestId : String = ""
-    var guestEmail  : String = ""
     var date: String = ""
+    var guestData : [GuestStruct]
     var meetingId : String = ""
     var context : [String:Any] = [:]
     var eventId : String = ""
+}
+
+struct GuestStruct {
+    var guestname : String = ""
+    var guestId : String = ""
+    var guestEmail  : String = ""
 }
 
 struct CareTeam {
@@ -65,16 +69,7 @@ let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notific
 
 
 //MARK: Add events data here
-var eventsData : [DateData] = [
-    DateData(date: "14/03/2023", events: [EventStruct(name: "Daily check", time: "10:30 AM")], careTeam: [CareTeam(image: "profile1", name: "Dr.Randy Wigham", specality: "Dentist", lastVisitDate: "Last visit : April 20 2022")]),
-    DateData(date: "15/03/2023", events: [
-        EventStruct(name: "Respiratory therapy home visit", time: "10:45 AM"),
-        EventStruct(name: "Daily Check", time: "1:00 PM"),
-        EventStruct(name: "Telehealth cardiology appointment", time: "5:00 PM")
-    ], careTeam: [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
-                  CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]),
-    
-    DateData(date: "25/03/2023", events: [EventStruct(name: "Daily check", time: "10:45 AM")], careTeam: [CareTeam(image: "profile1", name: "Jazmin Chang", specality: "Orthopedic", lastVisitDate: "Last visit : June 20 2022")])]
+var eventsData : [DateData] = []
 
 var careteamData = [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
                     CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]
@@ -353,18 +348,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                         let guestString = metaDataDic["guests"] as? String ?? ""
                                         let meetingId = metaDataDic["meetingId"] as? String ?? ""
                                         
-                                        var guestName = ""
-                                        var email = ""
-                                        var guestId = ""
-
+                                        var guestDat = [GuestStruct]()
                                         if let array = guestString.convertToNSDictionary() {
-                                            print(array.first)
-                                            if let guestDic = array.first as? NSDictionary {
+                                            for guest in array {
+                                            if let guestDic = guest as? NSDictionary {
                                                 if let guestData = guestDic["guest"] as? NSDictionary {
-                                                guestName = guestData["name"] as? String ?? ""
-                                                 email = guestData["email"] as? String ?? ""
-                                                 guestId = guestData["guestId"] as? String ?? ""
+                                                let guestName = guestData["name"] as? String ?? ""
+                                                 let email = guestData["email"] as? String ?? ""
+                                                 let guestId = guestData["guestId"] as? String ?? ""
+                                                    guestDat.append(GuestStruct(guestname: guestName, guestId: guestId, guestEmail: email))
                                                 }
+                                            }
                                             }
                                         }
 //                                        let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
@@ -394,7 +388,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //                                        }
                                         
                                         
-                                        let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: cont, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: guestName, specality: guestId, lastVisitDate: email)])
+                                            let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, date: dateString, guestData: guestDat,meetingId: meetingId, context: cont, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: "guestName", specality: "guestId", lastVisitDate: "email")])
                                             eventsData.append(data)
                                             self.tableView.reloadData()
 

@@ -152,7 +152,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
                     }
                 }
             }
-        }
+        } else if let eventData = (dict["eventdatajson"] as? NSDictionary) {
+                if let eventType = eventData["eventType"] as? NSNumber {
+                    if eventType == 1 {
+                        completionHandler([.banner, .sound])
+                    }
+                }
+            }
+        
 
 
 //        if ((dict["data"] as? String)) != nil {

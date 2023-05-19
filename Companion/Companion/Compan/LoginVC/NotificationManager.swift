@@ -199,18 +199,18 @@ class NotificationManager : NSObject {
             let guestString = metaDataDic["guests"] as? String ?? ""
             let meetingId = metaDataDic["meetingId"] as? String ?? ""
 
-            var guestName = ""
-            var email = ""
-            var guestId = ""
 
+            var guestDat = [GuestStruct]()
             if let array = guestString.convertToNSDictionary() {
-                print(array.first)
-                if let guestDic = array.first as? NSDictionary {
+                for guest in array {
+                if let guestDic = guest as? NSDictionary {
                     if let guestData = guestDic["guest"] as? NSDictionary {
-                    guestName = guestData["name"] as? String ?? ""
-                     email = guestData["email"] as? String ?? ""
-                     guestId = guestData["guestId"] as? String ?? ""
+                    let guestName = guestData["name"] as? String ?? ""
+                     let email = guestData["email"] as? String ?? ""
+                     let guestId = guestData["guestId"] as? String ?? ""
+                        guestDat.append(GuestStruct(guestname: guestName, guestId: guestId, guestEmail: email))
                     }
+                }
                 }
             }
             
@@ -220,7 +220,8 @@ class NotificationManager : NSObject {
 
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
             let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
-            controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: cont, eventId: eventID)
+            controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, date: dateString, guestData: guestDat,meetingId: meetingId, context: cont, eventId: eventID)
+
     //        let nav = UINavigationController(rootViewController: controller)
             let sheetController = SheetViewController(
                 controller: controller,
@@ -231,7 +232,9 @@ class NotificationManager : NSObject {
                 if let vc = navVC as? HomeViewController {
                     vc.getEvents(data: [
                         "fromDate": "2023-01-10 00:00:00",
-                        "toDate": "2023-10-10 20:00:00" ])
+                        "toDate": "2023-10-10 20:00:00" ,
+                        "meiID" : SafeCheckUtils.getUserData()?.user?.mail ?? ""
+                        ])
                 }
                 navVC.present(sheetController, animated: true, completion: nil)
             }
@@ -281,18 +284,17 @@ class NotificationManager : NSObject {
                         let guestString = metaDataDic["guests"] as? String ?? ""
                         let meetingId = metaDataDic["meetingId"] as? String ?? ""
 
-                        var guestName = ""
-                        var email = ""
-                        var guestId = ""
-
+                        var guestDat = [GuestStruct]()
                         if let array = guestString.convertToNSDictionary() {
-                            print(array.first)
-                            if let guestDic = array.first as? NSDictionary {
+                            for guest in array {
+                            if let guestDic = guest as? NSDictionary {
                                 if let guestData = guestDic["guest"] as? NSDictionary {
-                                guestName = guestData["name"] as? String ?? ""
-                                 email = guestData["email"] as? String ?? ""
-                                 guestId = guestData["guestId"] as? String ?? ""
+                                let guestName = guestData["name"] as? String ?? ""
+                                 let email = guestData["email"] as? String ?? ""
+                                 let guestId = guestData["guestId"] as? String ?? ""
+                                    guestDat.append(GuestStruct(guestname: guestName, guestId: guestId, guestEmail: email))
                                 }
+                            }
                             }
                         }
                         
@@ -302,7 +304,8 @@ class NotificationManager : NSObject {
 
                         let storyboard = UIStoryboard(name: "Companion", bundle: nil)
                         let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
-                        controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, guestname: guestName,guestId: guestId,guestEmail: email,date: dateString,meetingId: meetingId, context: cont, eventId: eventID)
+                        controller.eventData = EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, date: dateString, guestData: guestDat,meetingId: meetingId, context: cont, eventId: eventID)
+
                 //        let nav = UINavigationController(rootViewController: controller)
                         let sheetController = SheetViewController(
                             controller: controller,
@@ -313,7 +316,9 @@ class NotificationManager : NSObject {
                             if let vc = navVC as? HomeViewController {
                                 vc.getEvents(data: [
                                     "fromDate": "2023-01-10 00:00:00",
-                                    "toDate": "2023-10-10 20:00:00" ])
+                                    "toDate": "2023-10-10 20:00:00" ,
+                                    "meiID" : SafeCheckUtils.getUserData()?.user?.mail ?? ""
+                                    ])
                             }
                             navVC.present(sheetController, animated: true, completion: nil)
                         }

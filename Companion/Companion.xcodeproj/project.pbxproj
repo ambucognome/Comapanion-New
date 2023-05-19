@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87B3B2A4DC7E407353ADBF06 /* Pods_Companion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFEC946DCB5B4D7F57E91E9 /* Pods_Companion.framework */; };
+		9243A62A2A176C4100073436 /* GuestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243A6292A176C4000073436 /* GuestCell.swift */; };
 		92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F642988EADC0037D723 /* SettingsViewController.swift */; };
 		92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F672988EDDB0037D723 /* SettingTableViewCell.swift */; };
 		92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */; };
@@ -214,6 +215,7 @@
 /* Begin PBXFileReference section */
 		51B6E23D635BCE2B91E39B68 /* Pods-Companion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.release.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.release.xcconfig"; sourceTree = "<group>"; };
 		8FFEC946DCB5B4D7F57E91E9 /* Pods_Companion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Companion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9243A6292A176C4000073436 /* GuestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestCell.swift; sourceTree = "<group>"; };
 		92496F642988EADC0037D723 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		92496F672988EDDB0037D723 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				92AA352F29BF9EA500A6A4AB /* DoctorProfileViewController.swift */,
 				92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */,
 				92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */,
+				9243A6292A176C4000073436 /* GuestCell.swift */,
 				92D9C31D2A02C3A7008F5987 /* CallsVC */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
@@ -1315,6 +1318,7 @@
 				92CFAB47295B1B9C00D77883 /* FileInfo.swift in Sources */,
 				92CFAB48295B1B9C00D77883 /* UserChat.swift in Sources */,
 				92AA352729BF945300A6A4AB /* Yalta.swift in Sources */,
+				9243A62A2A176C4100073436 /* GuestCell.swift in Sources */,
 				928122CB29BF5BC00021A679 /* FSCalendarAppearance.m in Sources */,
 				928122D329BF5BC00021A679 /* FSCalendarSeparatorDecorationView.m in Sources */,
 				92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */,

@@ -13,8 +13,6 @@ class EventDetailVC: UIViewController {
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
 
-    @IBOutlet weak var guestNameLabel: UILabel!
-    @IBOutlet weak var guestEmailLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var videoCallImage: UIImageView!
     @IBOutlet weak var callImageView: UIImageView!
@@ -25,8 +23,6 @@ class EventDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = eventData {
-            self.guestNameLabel.text = "\(data.guestname) "
-            self.guestEmailLabel.text = data.guestEmail
             self.nameLabel.text = data.name
             self.dateTimeLabel.text = "\(data.date) at \(data.time)"
             self.durationLabel.text = "\(data.duration) mins"
@@ -50,7 +46,7 @@ class EventDetailVC: UIViewController {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         let dataDic = [
             "appId": Bundle.main.bundleIdentifier ?? "",
-            "calleeEmailId": self.eventData?.guestEmail ?? "",
+            "calleeEmailId": self.eventData?.guestData[0].guestEmail ?? "",
             "callerEmailId": retrievedCodableObject.user?.mail ?? "",
             "callerName": retrievedCodableObject.user?.firstname ?? ""
           ]
@@ -66,7 +62,7 @@ class EventDetailVC: UIViewController {
                 let roomId = response["roomId"] as? String ?? ""
                 let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
                 let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
-                vc.name = self.eventData?.guestname ?? ""
+                vc.name = self.eventData?.guestData[0].guestname ?? ""
                 self.present(vc, animated: true)
 
         } else {
@@ -97,5 +93,24 @@ class EventDetailVC: UIViewController {
 //        self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+}
+extension EventDetailVC : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.eventData?.guestData.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = self.eventData?.guestData[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GuestCell") as! GuestCell
+        cell.guestNameLabel.text = "\(data?.guestname ?? "") "
+        cell.guestEmailLabel.text = data?.guestEmail ?? ""
+
+        cell.selectionStyle = .none
+        return cell
+
+    }
+    
+    
     
 }
