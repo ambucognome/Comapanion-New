@@ -37,6 +37,118 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         DispatchQueue.main.asyncAfter(deadline: .now()  + 0.0) {
             self.tableView.reloadData()
         }
+        self.getCareteam()
+    }
+    
+    func getCareteam() {
+        let params : [String:String] = ["meiId":SafeCheckUtils.getUserData()?.user?.mail ?? ""]
+        let jsonData = try! JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        eventsData.removeAll()
+
+        ERProgressHud.shared.show()
+                    BaseAPIManager.sharedInstance.makeRequestToGetCareteam(data: jsonData){ (success, response,statusCode)  in
+                        if (success) {
+                            ERProgressHud.shared.hide()
+                            print(response)
+//                            for i in 0..<response.count {
+//                                if let eventDic = response[i] as? NSDictionary {
+//                                    let eventID = eventDic["eventId"] as? String ?? ""
+//                                    let metaDataString = eventDic["metadata"] as? String ?? ""
+//                                    if let metaDataDic = metaDataString.convertToDictionary() {
+//                                        print(metaDataDic)
+//                                        let parentId = metaDataDic["parentId"] as? String
+//                                        let eventDate = metaDataDic["date"] as? String ?? ""
+//
+//                                        let dateFormatter = DateFormatter()
+//                                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//                                        let newDate = dateFormatter.date(from: eventDate)
+//
+//                                        let formatter = DateFormatter()
+//                                        formatter.dateFormat = "dd/MM/yyyy"
+//                                        let dateString = formatter.string(from: newDate! as Date)
+//
+//                                        let startTime = metaDataDic["startTime"] as? String ?? ""
+//                                        let timeFormatter = DateFormatter()
+//                                        timeFormatter.dateFormat = "hh:mm:ss a"
+//                                        let time = timeFormatter.date(from: startTime)
+//
+//                                        let newformatter = DateFormatter()
+//                                        newformatter.dateFormat = "h:mm a"
+//                                        let timeString = newformatter.string(from: time! as Date)
+//
+//
+//                                        let title = metaDataDic["title"] as? String ?? ""
+//                                        let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
+//                                        let description = metaDataDic["description"] as? String ?? ""
+//                                        let guestString = metaDataDic["guests"] as? String ?? ""
+//                                        let meetingId = metaDataDic["meetingId"] as? String ?? ""
+//
+//                                        var guestDat = [GuestStruct]()
+//                                        if let array = guestString.convertToNSDictionary() {
+//                                            for guest in array {
+//                                            if let guestDic = guest as? NSDictionary {
+//                                                if let guestData = guestDic["guest"] as? NSDictionary {
+//                                                let guestName = guestData["name"] as? String ?? ""
+//                                                 let email = guestData["email"] as? String ?? ""
+//                                                 let guestId = guestData["guestId"] as? String ?? ""
+//                                                    guestDat.append(GuestStruct(guestname: guestName, guestId: guestId, guestEmail: email))
+//                                                }
+//                                            }
+//                                            }
+//                                        }
+////                                        let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
+////                                        let components = guestStr.components(separatedBy: ", ")
+////                                        var guestDic: [String : String] = [:]
+////
+////                                        for component in components{
+////                                          let pair = component.components(separatedBy: "=")
+////                                            guestDic[pair[0]] = pair[1]
+////                                        }
+////                                        print(guestDic)
+////                                        let guestName = guestDic["name"] ?? ""
+////                                        let email = guestDic["email"] ?? ""
+////                                        let guestId = guestDic["guestId"] ?? ""
+//
+//                                        let contextString = metaDataDic["context"] as? String ?? ""
+//                                        if let cont = contextString.convertToDictionary() {
+//                                            print(cont)
+//
+////                                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
+////                                        let contextComponents = contextStr.components(separatedBy: ",")
+////                                        var contextDic: [String : String] = [:]
+////
+////                                        for component in contextComponents{
+////                                          let pair = component.components(separatedBy: ":")
+////                                            contextDic[pair[0]] = pair[1]
+////                                        }
+//
+//
+//                                            let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, date: dateString, guestData: guestDat,meetingId: meetingId, context: cont, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: "guestName", specality: "guestId", lastVisitDate: "email")])
+//                                            eventsData.append(data)
+//                                            self.tableView.reloadData()
+//
+//                                        }
+//
+//                                    }
+//
+//                                }
+//                            }
+//                            self.tableView.reloadData()
+//                            self.calendar.reloadData()
+//                            DispatchQueue.main.asyncAfter(deadline: .now()  + 0.1) {
+//                                self.tableView.reloadData()
+//                            }
+//                            DispatchQueue.main.asyncAfter(deadline: .now()  + 0.2) {
+//                                self.tableView.reloadData()
+//                            }
+                        } else {
+                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                            ERProgressHud.shared.hide()
+                        }
+                    }
     }
     
     // MARK:- UITableViewDataSource

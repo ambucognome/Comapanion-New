@@ -66,7 +66,8 @@ class CompanionLoginViewController: UIViewController {
                                           SafeCheckUtils.setName(name: name)
                                           SafeCheckUtils.setToken(token: jsonDataModels.user?.jwtToken ?? "")
                                           SafeCheckUtils.setUserData(data: jsonDataModels)
-                                          self.uploadDeviceTokenAPI(emailID: jsonDataModels.user?.mail ?? "")
+                                          let username = "\(jsonDataModels.user?.firstname ?? "") \(jsonDataModels.user?.lastname ?? "")"
+                                          self.uploadDeviceTokenAPI(emailID: jsonDataModels.user?.mail ?? "", username: username)
                                           let storyboard = UIStoryboard(name: "Companion", bundle: nil)
                                           let vc = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                                           self.setRootViewController(vc: vc)
@@ -89,14 +90,15 @@ class CompanionLoginViewController: UIViewController {
         }
     }
     
-    func uploadDeviceTokenAPI(emailID: String){
+    func uploadDeviceTokenAPI(emailID: String, username: String){
         if SafeCheckUtils.getDeviceToken() != "" {
         let parameters : [String: String] = [
             "appId": Bundle.main.bundleIdentifier ?? "",
             "appToken": "",
             "fcmToken": SafeCheckUtils.getDeviceToken(),
             "userId": emailID,
-            "appType" : "ios"
+            "appType" : "ios",
+            "username" : username
            ]
         let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
