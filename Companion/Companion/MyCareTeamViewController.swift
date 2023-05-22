@@ -92,7 +92,8 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.specialityLabel.text = data.specality
         cell.expLabel.text = data.experience
         cell.patientsLabel.text = data.patients
-        cell.imgView.image = UIImage(named: data.image)
+//        cell.imgView.image = UIImage(named: data.image)
+        cell.imgView.setImageForName(data.name, backgroundColor: nil, circular: false, textAttributes: nil)
         cell.layoutSubviews()
         cell.shadowView.dropShadoww()
         return cell

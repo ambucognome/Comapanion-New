@@ -210,6 +210,7 @@
 		92D9C3272A03FAE8008F5987 /* callertune.caf in Resources */ = {isa = PBXBuildFile; fileRef = 92D9C3262A03FAE2008F5987 /* callertune.caf */; };
 		92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C3282A0CC467008F5987 /* LocalNotification.swift */; };
 		92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */; };
+		92EC46162A1B470A00C57EEE /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EC46152A1B470A00C57EEE /* InitialsImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -461,6 +462,7 @@
 		92D9C3262A03FAE2008F5987 /* callertune.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = callertune.caf; sourceTree = "<group>"; };
 		92D9C3282A0CC467008F5987 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		92EC46152A1B470A00C57EEE /* InitialsImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsImageView.swift; sourceTree = "<group>"; };
 		97C6F73AD60BBE563114AE33 /* Pods-Companion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.debug.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -951,6 +953,7 @@
 		92CFAAE1295B1B9C00D77883 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				92EC46152A1B470A00C57EEE /* InitialsImageView.swift */,
 				92CFAAE2295B1B9C00D77883 /* BaseAPIManager.swift */,
 				92CFAAE3295B1B9C00D77883 /* SafecheckConstant.swift */,
 			);
@@ -1329,6 +1332,7 @@
 				92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */,
 				92AA353629BF9EA600A6A4AB /* DoctorProfileViewController.swift in Sources */,
 				92CFAB84295B1B9C00D77883 /* DatePickerTableViewCell.swift in Sources */,
+				92EC46162A1B470A00C57EEE /* InitialsImageView.swift in Sources */,
 				92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */,
 				92CFABA1295B1B9C00D77883 /* iOSDropDown.swift in Sources */,
 				92CFAB54295B1B9C00D77883 /* JitsiMeetViewController.swift in Sources */,
