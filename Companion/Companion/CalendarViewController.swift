@@ -120,6 +120,21 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
         return
       }
       print("Event has been selected: \(descriptor) \(String(describing: descriptor.userInfo))")
+        if let data = descriptor.userInfo as? EventStruct {
+            if data.parentId != nil {
+                let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+                let controller = storyboard.instantiateViewController(identifier: "EventDetailVC") as! EventDetailVC
+                controller.eventData = data
+        //        let nav = UINavigationController(rootViewController: controller)
+                let sheetController = SheetViewController(
+                    controller: controller,
+                    sizes: [.intrinsic],options: options)
+                sheetController.gripSize = CGSize(width: 50, height: 3)
+                sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
+                self.present(sheetController, animated: true, completion: nil)
+                return
+            }
+        }
 
         let alert = UIAlertController(title: nil, message: "Please Select an Option", preferredStyle: .actionSheet)
         

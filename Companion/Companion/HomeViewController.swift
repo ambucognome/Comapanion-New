@@ -321,7 +321,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                     let metaDataString = eventDic["metadata"] as? String ?? ""
                                     if let metaDataDic = metaDataString.convertToDictionary() {
                                         print(metaDataDic)
-                                        let parentId = metaDataDic["parentId"] as? String
+                                        let parentId = eventDic["parentId"] as? String
                                         let eventDate = metaDataDic["date"] as? String ?? ""
                                         
                                         let dateFormatter = DateFormatter()

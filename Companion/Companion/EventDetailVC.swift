@@ -83,13 +83,19 @@ class EventDetailVC: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             return
         }
+            self.dismiss(animated: false) {
+
         let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
         vc.meetingName = self.eventData?.meetingId
             vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
         appDelegate.voiceCallVC = vc
-//            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            vc.modalPresentationStyle = .fullScreen
+                if let navVC = UIApplication.getTopViewController() {
+                    navVC.present(vc, animated: true)
+                }
+            }
+//            self.present(vc, animated: true)
 //        self.navigationController?.pushViewController(vc, animated: true)
         }
     }

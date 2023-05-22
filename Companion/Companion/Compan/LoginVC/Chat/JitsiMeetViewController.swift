@@ -86,8 +86,10 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
 //        callTimer.invalidate()
 //        self.callTimer = nil
         self.dismiss(animated: true) {
-            CALL_COMPLETED = true
+            if self.isFromDialing {
+                CALL_COMPLETED = true
                 self.endCall()
+            }
         }
 //        self.navigationController?.popViewController(animated: true)
     }
