@@ -492,13 +492,13 @@ class BaseAPIManager : NSObject {
     // Get careTeam
     // completion : Completion object to return parameters to the calling functions
     // Returns careteam
-    func makeRequestToGetCareteam(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+    func makeRequestToGetCareteam(data:Data,completion: @escaping completionHandlerWithSuccessAndResultArray) {
         Alamofire.request(Router.getCareTeam(data)).responseJSON { response in
             switch response.result {
             case .success(let JSON):
                 ERProgressHud.shared.hide()
                 let statusCode = response.response?.statusCode
-                guard let jsonData =  JSON  as? NSDictionary else {
+                guard let jsonData =  JSON  as? NSArray else {
 //                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                     return
                 }
@@ -506,7 +506,7 @@ class BaseAPIManager : NSObject {
                     completion(true, jsonData, statusCode!)
                 }
             case .failure( _):
-                completion(false,[:],0)
+                completion(false,[],0)
             }
         }
     }
