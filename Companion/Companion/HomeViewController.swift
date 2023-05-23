@@ -109,9 +109,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            self.dateRange["meiID"] = retrievedCodableObject.user?.mail
-        }
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
@@ -149,10 +146,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.reloadData()
         self.addObservers()
 
-        self.getEvents(data: dateRange)
     }
     deinit {
         removeObservers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            self.dateRange["meiID"] = retrievedCodableObject.user?.mail
+            self.getEvents(data: dateRange)
+        }
     }
     
     
@@ -543,7 +547,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         for data in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: data.date) {
                 self.tableView.restore()
-                return 2
+                return 1
             }
         }
         self.tableView.setEmptyMessage("No Events for this date.")

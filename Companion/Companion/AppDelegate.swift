@@ -31,22 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //            self.logoutView?.layer.cornerRadius = 20
 //            self.logoutView?.isUserInteractionEnabled = true
 //        }
-//        if self.callView == nil {
-//            self.callView = Bundle.main.loadNibNamed("OnCallView", owner:
-//            self, options: nil)?.first as? OnCallView
-//            self.callView?.tag = 100
-//            self.callView?.frame = CGRect(x: UIScreen.main.bounds.maxX - 140, y: UIScreen.main.bounds.midY, width: 120, height: 160)
-//            self.callView?.layer.cornerRadius = 20
-//            self.callView?.imageView.layer.cornerRadius = 20
-//            let origImage = UIImage(named: "icCallFilled")
-//            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-//            self.callView?.callBtn.setImage(tintedImage, for: .normal)
-//            self.callView?.callBtn.tintColor = .white
-//            var panGesture       = UIPanGestureRecognizer()
-//            panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.draggedView(_:)))
-//            self.callView?.isUserInteractionEnabled = true
-//            self.callView?.addGestureRecognizer(panGesture)
-//        }
+        if self.callView == nil {
+            self.callView = Bundle.main.loadNibNamed("OnCallView", owner:
+            self, options: nil)?.first as? OnCallView
+            self.callView?.tag = 100
+            self.callView?.frame = CGRect(x: UIScreen.main.bounds.maxX - 140, y: UIScreen.main.bounds.midY, width: 120, height: 160)
+            self.callView?.layer.cornerRadius = 20
+            self.callView?.imageView.layer.cornerRadius = 20
+            let origImage = UIImage(named: "icCallFilled")
+            let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+            self.callView?.callBtn.setImage(tintedImage, for: .normal)
+            self.callView?.callBtn.tintColor = .white
+            var panGesture       = UIPanGestureRecognizer()
+            panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.draggedView(_:)))
+            self.callView?.isUserInteractionEnabled = true
+            self.callView?.addGestureRecognizer(panGesture)
+        }
 //        FirebaseApp.configure()
         UNUserNotificationCenter.current().delegate = self
         registerForPushNotifications()

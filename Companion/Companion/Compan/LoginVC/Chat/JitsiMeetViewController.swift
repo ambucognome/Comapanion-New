@@ -22,6 +22,8 @@ class JitsiMeetViewController: UIViewController {
     @IBOutlet private var meetViewHeight: NSLayoutConstraint!
     @IBOutlet private var meetViewWidth: NSLayoutConstraint!
 
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +73,19 @@ class JitsiMeetViewController: UIViewController {
             builder.setFeatureFlag("add-people.enabled", withBoolean: false)
             builder.setFeatureFlag("invite.enabled", withBoolean: false)
             builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
+            builder.setFeatureFlag("server-url-change.enabled", withBoolean:false)
+            builder.setFeatureFlag("meeting-password.enabled", withBoolean:false)
+            builder.setFeatureFlag("live-streaming.enabled", withBoolean:false)
+            builder.setFeatureFlag("pip.enabled", withBoolean:true)
+            builder.setFeatureFlag("ios.recording.enabled", withBoolean:false)
+            builder.setFeatureFlag("calendar.enabled", withBoolean:false)
+            builder.setFeatureFlag("close-captions.enabled", withBoolean:false)
+            builder.setFeatureFlag("video-share.enabled", withBoolean:false)
+            builder.setFeatureFlag("security-options.enabled", withBoolean:false)
+            builder.setFeatureFlag("reactions.enabled", withBoolean:false)
+            builder.setFeatureFlag("speakerstats.enabled", withBoolean:false)
+            builder.setFeatureFlag("call-integration.enabled", withBoolean:true) // CallKit integration
+            builder.setFeatureFlag("raise-hand.enabled", withBoolean:true)
         }
 
         meetView.join(options)
@@ -125,11 +140,11 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
     }
     
     func participantJoined(_ data: [AnyHashable : Any]!) {
-//        OnCallHelper.shared.updateSnapshot(image: self.meetView.takeScreenshot())
+        OnCallHelper.shared.updateSnapshot(image: self.meetView.takeScreenshot())
     }
     
     func participantLeft(_ data: [AnyHashable : Any]!) {
-//        OnCallHelper.shared.updateSnapshot(image: self.meetView.takeScreenshot())
+        OnCallHelper.shared.updateSnapshot(image: self.meetView.takeScreenshot())
     }
     
     
