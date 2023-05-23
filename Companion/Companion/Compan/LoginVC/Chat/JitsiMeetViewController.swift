@@ -39,6 +39,13 @@ class JitsiMeetViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: downButton)
         self.navigationItem.leftBarButtonItem = barButton
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       super.traitCollectionDidChange(previousTraitCollection)
+                self.meetViewWidth.constant = self.view.frame.size.width
+                self.meetViewHeight.constant = self.view.frame.size.height
+        self.meetView.frame = CGRect(origin: .zero, size: view.bounds.size)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

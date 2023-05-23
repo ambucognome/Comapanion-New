@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="MMM-33-hgG">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="l1e-o8-pzr" customClass="LoginViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="l1e-o8-pzr" customClass="LoginViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UT6-dE-sMW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -156,7 +156,7 @@
         <!--Login View Controller-->
         <scene sceneID="1qR-JW-bcy">
             <objects>
-                <viewController storyboardIdentifier="EZLoginViewController" id="OSu-0N-cTp" customClass="EZLoginViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EZLoginViewController" id="OSu-0N-cTp" customClass="EZLoginViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kSj-Oc-yeq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,7 +306,7 @@
         <!--Fail Screen View Controller-->
         <scene sceneID="mYw-3g-lb6">
             <objects>
-                <viewController storyboardIdentifier="FailScreenViewController" id="lLE-Nd-zlI" customClass="FailScreenViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FailScreenViewController" id="lLE-Nd-zlI" customClass="FailScreenViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DiI-C6-kdJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -483,7 +483,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Pass Screen View Controller-->
         <scene sceneID="uxH-cw-8iT">
             <objects>
-                <viewController storyboardIdentifier="PassScreenViewController" id="j41-MG-0YV" customClass="PassScreenViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PassScreenViewController" id="j41-MG-0YV" customClass="PassScreenViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayu-JV-eWC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -633,7 +633,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Initial View Controller-->
         <scene sceneID="4Yl-fz-oLT">
             <objects>
-                <viewController storyboardIdentifier="InitialViewController" id="dNU-pK-NZQ" customClass="InitialViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" id="dNU-pK-NZQ" customClass="InitialViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IA8-2j-EoW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -679,7 +679,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Launch View Controller-->
         <scene sceneID="CGG-DN-gQB">
             <objects>
-                <viewController storyboardIdentifier="LaunchViewController" id="ZNu-r0-hxs" customClass="LaunchViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchViewController" id="ZNu-r0-hxs" customClass="LaunchViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gfd-er-uSt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -717,7 +717,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Message View Controller-->
         <scene sceneID="KE9-jc-if1">
             <objects>
-                <viewController storyboardIdentifier="MessageViewController" id="3P3-qY-Bzn" customClass="MessageViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageViewController" id="3P3-qY-Bzn" customClass="MessageViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Df-SE-NPC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -733,7 +733,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Jitsi Meet View Controller-->
         <scene sceneID="wct-jI-W1I">
             <objects>
-                <viewController storyboardIdentifier="JitsiMeetViewController" id="Sz8-mi-tR3" customClass="JitsiMeetViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JitsiMeetViewController" id="Sz8-mi-tR3" customClass="JitsiMeetViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mfo-hg-Lae">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -748,7 +748,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="92v-dP-J4l"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="E70-Ak-JO6" firstAttribute="top" secondItem="mfo-hg-Lae" secondAttribute="top" id="Reg-tI-Pdr"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="E70-Ak-JO6" secondAttribute="bottom" id="Udj-RJ-W6c"/>
@@ -769,7 +769,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Notifications-->
         <scene sceneID="jbz-B4-zoL">
             <objects>
-                <viewController storyboardIdentifier="WebViewController" title="Notifications" id="WLw-oT-RNC" customClass="WebViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" title="Notifications" id="WLw-oT-RNC" customClass="WebViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mPN-eO-saA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -784,7 +784,7 @@ Mon-Friday 8am-6pm, Saturday and Sunday 8AM-4PM</string>
         <!--Notifications-->
         <scene sceneID="uxf-cT-IdD">
             <objects>
-                <viewController storyboardIdentifier="ImageViewController" title="Notifications" id="GBJ-vB-rlo" customClass="ImageViewController" customModule="Safecheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageViewController" title="Notifications" id="GBJ-vB-rlo" customClass="ImageViewController" customModule="Companion" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="47h-Gu-N85">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
