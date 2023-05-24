@@ -26,12 +26,13 @@ class DoctorProfileViewController: UIViewController {
 
         if let data = data {
             self.nameLabel.text = data.name
-            self.specialityLabel.text = data.specality
+            self.specialityLabel.text = data.email
             self.patientsLabel.text = data.patients
             self.experienceLabel.text = data.experience
             self.reviewLabel.text = data.review
             self.bioTextView.text = data.bio
-            self.imgView.image = UIImage(named: data.image)
+//            self.imgView.image = UIImage(named: data.image)
+            self.imgView.setImageForName(data.name, backgroundColor: nil, circular: false, textAttributes: nil)
             self.videoCallImage.layer.borderColor = DARK_BLUE_COLOR.cgColor
             self.videoCallImage.layer.borderWidth = 2
 

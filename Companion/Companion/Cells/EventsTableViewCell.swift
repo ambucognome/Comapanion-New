@@ -14,6 +14,8 @@ class EventsTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewData
 
 //    var eventData = [EventStruct]()
     var dateEvents = [DateData]()
+    var nav : UINavigationController?
+    var vc : HomeViewController?
     
 
     override func awakeFromNib() {
@@ -63,14 +65,49 @@ class EventsTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewData
         } else {
             cell.hostLabel.text = ""
         }
+        cell.callBtn.tag = indexPath.row
+        cell.callBtn.addTarget(self, action: #selector(self.callAction(_:)), for: .touchUpInside)
         
         self.layoutSubviews()
             return cell
     }
     
+    @objc func callAction(_ sender: UIButton) {
+        print(sender.tag)
+        let data = self.dateEvents[sender.tag].events[0]
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+
+        OnCallHelper.shared.removeOnCallView()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+        let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+        let jitsi = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+            jitsi.meetingName = data.meetingId
+            jitsi.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+        appDelegate.voiceCallVC = jitsi
+            jitsi.modalPresentationStyle = .fullScreen
+                if let navVC = UIApplication.getTopViewController() {
+                    navVC.present(jitsi, animated: true)
+                }
+            }
+//            self.present(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let data =  self.dateEvents[indexPath.row].events[0]
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            let dayViewController = CalendarViewController()
+            dayViewController.calendarDelegate = vc
+            dayViewController.hidesBottomBarWhenPushed = true
+            dayViewController.selectedDate = data.date
+            self.nav?.pushViewController(dayViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

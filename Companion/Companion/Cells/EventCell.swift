@@ -13,6 +13,8 @@ class EventCell: UITableViewCell {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var hostLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var callBtn: UIButton!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

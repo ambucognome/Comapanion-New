@@ -574,6 +574,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.tableView.reloadData()
             cell.layoutSubviews()
             cell.selectionStyle = .none
+            cell.nav = self.navigationController
+            cell.vc = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CareTeamTableViewCell") as! CareTeamTableViewCell
@@ -588,20 +590,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var data = eventsData[indexPath.section]
-        for dataa in eventsData {
-            if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
-                data = dataa
-            }
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
-            let dayViewController = CalendarViewController()
-            dayViewController.calendarDelegate = self
-            dayViewController.hidesBottomBarWhenPushed = true
-            dayViewController.selectedDate = data.date
-            self.navigationController?.pushViewController(dayViewController, animated: true)
-        }
+//        var data = eventsData[indexPath.section]
+//        for dataa in eventsData {
+//            if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
+//                data = dataa
+//            }
+//        }
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        if indexPath.section == 0 {
+//            let dayViewController = CalendarViewController()
+//            dayViewController.calendarDelegate = self
+//            dayViewController.hidesBottomBarWhenPushed = true
+//            dayViewController.selectedDate = data.date
+//            self.navigationController?.pushViewController(dayViewController, animated: true)
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
