@@ -32,6 +32,7 @@
 		928122D629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122C629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m */; };
 		928122D729BF5BC10021A679 /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122C729BF5BC00021A679 /* FSCalendarDelegationFactory.m */; };
 		928122DA29BF5DF50021A679 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928122D929BF5DF50021A679 /* HomeViewController.swift */; };
+		92914E272A20E822003B968E /* EventListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92914E262A20E822003B968E /* EventListVC.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -274,6 +275,7 @@
 		928122C729BF5BC00021A679 /* FSCalendarDelegationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarDelegationFactory.m; sourceTree = "<group>"; };
 		928122D829BF5C310021A679 /* Companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		928122D929BF5DF50021A679 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		92914E262A20E822003B968E /* EventListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListVC.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */,
 				92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */,
 				9243A6292A176C4000073436 /* GuestCell.swift */,
+				92914E262A20E822003B968E /* EventListVC.swift */,
 				92D9C31D2A02C3A7008F5987 /* CallsVC */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
@@ -1246,6 +1249,7 @@
 				92CFAB2E295B1B9C00D77883 /* DropDownCell.swift in Sources */,
 				92CFAB61295B1B9C00D77883 /* ImagePickerHelper.swift in Sources */,
 				92CFAB66295B1B9C00D77883 /* MediaProcesser.swift in Sources */,
+				92914E272A20E822003B968E /* EventListVC.swift in Sources */,
 				92CFAB94295B1B9C00D77883 /* DDCFormModel.swift in Sources */,
 				92CFAB71295B1B9C00D77883 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				92CFAB3F295B1B9C00D77883 /* SelectionStyleCell.swift in Sources */,
@@ -1557,7 +1561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1596,7 +1600,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;

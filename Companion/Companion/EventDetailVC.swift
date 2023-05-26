@@ -75,10 +75,14 @@ class EventDetailVC: UIViewController {
 
     
     @IBAction func joinBtn(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.voiceCallVC != nil {
+            APIManager.sharedInstance.showAlertWithMessage(message: "Call in progress, can't join another call.")
+            return
+        }
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
 
         OnCallHelper.shared.removeOnCallView()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if let vc = appDelegate.voiceCallVC {
             self.navigationController?.pushViewController(vc, animated: true)
             return

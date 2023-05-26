@@ -35,6 +35,9 @@ class BaseAPIManager : NSObject {
         case endCall(Data)
         case logout(Data)
         case getCareTeam(Data)
+        case joinEvent(Data)
+        case leaveEvent(Data)
+
 
         // Api Methods
         var method: HTTPMethod {
@@ -64,6 +67,10 @@ class BaseAPIManager : NSObject {
             case .logout:
                 return .post
             case .getCareTeam:
+                return .post
+            case .joinEvent:
+                return .post
+            case .leaveEvent:
                 return .post
             }
         }
@@ -97,6 +104,10 @@ class BaseAPIManager : NSObject {
                 return API_END_LOGOUT
             case .getCareTeam:
                 return API_END_GET_CARETEAM
+            case .joinEvent(_):
+                return API_END_JOIN_EVENT
+            case .leaveEvent(_):
+                return API_END_LEAVE_EVENT
             }
         }
         
@@ -203,6 +214,21 @@ class BaseAPIManager : NSObject {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 urlRequest.httpBody = data
                 return urlRequest
+            case .joinEvent(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .leaveEvent(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+
             }
         }
     }
@@ -264,7 +290,9 @@ class BaseAPIManager : NSObject {
                 }
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
-                }   else {
+                }  else if statusCode == ERROR_CODE_401 || statusCode == 403 {
+                    self.loginAPI(urlRequest: Router.startSurvey(data,isForced), completion: completion)
+                } else {
                     LogoutHelper.shared.logout()
                     APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
                 }
@@ -289,7 +317,74 @@ class BaseAPIManager : NSObject {
                 }
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
-                }   else {
+                }  else if statusCode == ERROR_CODE_401 || statusCode == 403 {
+                    self.loginAPI(urlRequest: Router.completeSurvey(data), completion: completion)
+                } else {
+                    LogoutHelper.shared.logout()
+                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    func loginAPI(urlRequest: URLRequestConvertible, completion: @escaping completionHandlerWithStatusCode){
+        if let data = SafeCheckUtils.getUserData() {
+
+        ERProgressHud.shared.show()
+            let parameters : [String: String] = [ "eid" : data.user?.eid ?? "","lastname": data.user?.lastname ?? "","loginType": "EZ-ID" ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        BaseAPIManager.sharedInstance.makeRequestToLoginUser( data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                                if let responseData = response as? Dictionary<String, Any> {
+                                  var jsonData: Data? = nil
+                                  do {
+                                      jsonData = try JSONSerialization.data(
+                                          withJSONObject: responseData as Any,
+                                          options: .prettyPrinted)
+                                      do{
+                                          let jsonDataModels = try JSONDecoder().decode(LoginModel.self, from: jsonData!)
+                                          print(jsonDataModels)
+                                          SafeCheckUtils.setEZID(ezId: ezid)
+                                          SafeCheckUtils.setName(name: name)
+                                          SafeCheckUtils.setToken(token: jsonDataModels.user?.jwtToken ?? "")
+                                          SafeCheckUtils.setUserData(data: jsonDataModels)
+                                          
+                                          
+                                      } catch {
+                                          print(error)
+                                      }
+                                  } catch {
+                                      print(error)
+                                  }
+                        }
+            } else {
+                ERProgressHud.shared.hide()
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            }
+        }
+        }
+    }
+    
+    func buildRequest(urlRequest: URLRequestConvertible, completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(urlRequest).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                } else {
                     LogoutHelper.shared.logout()
                     APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
                 }
@@ -462,6 +557,58 @@ class BaseAPIManager : NSObject {
             if statusCode == 200 {
                 completion(true,[:],200)
             } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Join Event
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToJoinEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.joinEvent(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }   else {
+                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
+//                    LogoutHelper.shared.logout()
+//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Leave Event
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToLeaveEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.leaveEvent(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }   else {
+                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
+//                    LogoutHelper.shared.logout()
+//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
+                }
+            case .failure( _):
                 completion(false,[:],0)
             }
         }

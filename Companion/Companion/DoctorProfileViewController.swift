@@ -44,6 +44,7 @@ class DoctorProfileViewController: UIViewController {
     }
     
     @objc func call() {
+ 
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         var dataDic = [
             "callerEmailId": retrievedCodableObject.user?.mail ?? "",

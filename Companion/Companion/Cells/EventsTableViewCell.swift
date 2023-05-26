@@ -74,6 +74,11 @@ class EventsTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewData
     
     @objc func callAction(_ sender: UIButton) {
         print(sender.tag)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.voiceCallVC != nil {
+            APIManager.sharedInstance.showAlertWithMessage(message: "Call in progress, can't join another call.")
+            return
+        }
         let data = self.dateEvents[sender.tag].events[0]
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
 

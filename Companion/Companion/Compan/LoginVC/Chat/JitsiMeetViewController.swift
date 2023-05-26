@@ -76,14 +76,12 @@ class JitsiMeetViewController: UIViewController {
             builder.serverURL = url
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
             builder.setFeatureFlag("ios.screensharing.enabled", withBoolean: true)
-//            builder.setFeatureFlag("pip.enabled", withBoolean: true)
             builder.setFeatureFlag("add-people.enabled", withBoolean: false)
             builder.setFeatureFlag("invite.enabled", withBoolean: false)
             builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
             builder.setFeatureFlag("server-url-change.enabled", withBoolean:false)
             builder.setFeatureFlag("meeting-password.enabled", withBoolean:false)
             builder.setFeatureFlag("live-streaming.enabled", withBoolean:false)
-            builder.setFeatureFlag("pip.enabled", withBoolean:true)
             builder.setFeatureFlag("ios.recording.enabled", withBoolean:false)
             builder.setFeatureFlag("calendar.enabled", withBoolean:false)
             builder.setFeatureFlag("close-captions.enabled", withBoolean:false)
@@ -93,10 +91,59 @@ class JitsiMeetViewController: UIViewController {
             builder.setFeatureFlag("speakerstats.enabled", withBoolean:false)
             builder.setFeatureFlag("call-integration.enabled", withBoolean:true) // CallKit integration
             builder.setFeatureFlag("raise-hand.enabled", withBoolean:true)
+            if self.isFromDialing {
+                builder.setFeatureFlag("pip.enabled", withBoolean:true)
+            }
         }
 
         meetView.join(options)
     }
+    
+    func joinEvent() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
+                       "eventId": self.meetingName ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToJoinEvent(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+        
+    }
+    
+    func leaveEvent() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            let dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
+                           "eventId": self.meetingName ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToLeaveEvent(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                self.dismiss(animated: true)
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+        
+    }
+
 }
 
 extension JitsiMeetViewController: JitsiMeetViewDelegate {
@@ -107,11 +154,13 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
         OnCallHelper.shared.removeOnCallView()
 //        callTimer.invalidate()
 //        self.callTimer = nil
+        if self.isFromDialing {
         self.dismiss(animated: true) {
-            if self.isFromDialing {
                 CALL_COMPLETED = true
                 self.endCall()
-            }
+        }
+        } else {
+            self.leaveEvent()
         }
 //        self.navigationController?.popViewController(animated: true)
     }
@@ -144,6 +193,9 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
     
     func conferenceJoined(_ data: [AnyHashable : Any]!) {
         print(data)
+        if self.isFromDialing == false {
+            self.joinEvent()
+        }
     }
     
     func participantJoined(_ data: [AnyHashable : Any]!) {

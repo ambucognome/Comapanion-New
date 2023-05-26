@@ -151,10 +151,10 @@ extension SettingsViewController : UICollectionViewDelegate, UICollectionViewDat
         } else {
             cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
         }
-        cell.badgeLabel.text = data.notificationCount?.description
-        if indexPath.item == 0 || indexPath.item == 1{
-            cell.badgeLabel.isHidden = false
-        }
+//        cell.badgeLabel.text = data.notificationCount?.description
+//        if indexPath.item == 0 || indexPath.item == 1{
+//            cell.badgeLabel.isHidden = false
+//        }
         cell.badgeLabel.text = data.notificationCount?.description
         cell.badgeLabel.layer.cornerRadius = 7.5
         cell.badgeLabel.layer.masksToBounds = true
@@ -167,13 +167,17 @@ extension SettingsViewController : UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 2 {
+        if indexPath.item == 1 {
             selectedForm = true
             self.tabBarController?.selectedIndex = 2
         } else {
+//            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+//            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+//            controller.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(controller, animated: true)
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
-            controller.hidesBottomBarWhenPushed = true
+            let controller = storyboard.instantiateViewController(identifier: "EventListVC") as! EventListVC
+//            controller.vc = self
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

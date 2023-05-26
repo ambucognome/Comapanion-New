@@ -63,8 +63,8 @@ struct CareTeam {
 let message = "App not selected"
 
 //MARK: Add reels data here
-let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notificationCount: 3,isSelected: false),
-               AppStruct(name: "Careteam", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
+let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notificationCount: 0,isSelected: false),
+//               AppStruct(name: "Careteam", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
                AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
 
 
@@ -542,7 +542,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // MARK:- UITableViewDataSource
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         for data in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: data.date) {
@@ -658,10 +657,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         } else {
             cell.mainView.layer.borderColor = DARK_BLUE_COLOR.cgColor
         }
-        cell.badgeLabel.text = data.notificationCount?.description
-        if indexPath.item == 0 || indexPath.item == 1{
-            cell.badgeLabel.isHidden = false
-        }
+//        cell.badgeLabel.text = data.notificationCount?.description
+//        if indexPath.item == 0 || indexPath.item == 1{
+//            cell.badgeLabel.isHidden = false
+//        }
         cell.badgeLabel.layer.cornerRadius = 7.5
         cell.badgeLabel.layer.masksToBounds = true
         return cell
@@ -672,13 +671,17 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 2 {
+        if indexPath.item == 1 {
             selectedForm = true
             self.tabBarController?.selectedIndex = 2
         } else {
+//            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+//            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
+//            controller.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(controller, animated: true)
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let controller = storyboard.instantiateViewController(identifier: "NotificationVC")
-            controller.hidesBottomBarWhenPushed = true
+            let controller = storyboard.instantiateViewController(identifier: "EventListVC") as! EventListVC
+            controller.vc = self
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

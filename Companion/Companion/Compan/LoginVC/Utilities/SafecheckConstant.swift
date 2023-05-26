@@ -35,3 +35,6 @@ let API_END_REJECT_CALL = "/eventapi/reject-call"
 let API_END_END_CALL = "/eventapi/end-call"
 let API_END_LOGOUT = "/eventapi/logout"
 let API_END_GET_CARETEAM = "/eventapi/get-care-team"
+
+let API_END_JOIN_EVENT = "/eventapi/join-event"
+let API_END_LEAVE_EVENT = "/eventapi/leave-event"
