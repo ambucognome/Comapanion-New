@@ -566,23 +566,13 @@ class BaseAPIManager : NSObject {
     // completion : Completion object to return parameters to the calling functions
     // Returns
     func makeRequestToJoinEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
-        Alamofire.request(Router.joinEvent(data)).responseJSON { response in
-            switch response.result {
-            case .success(let JSON):
-                ERProgressHud.shared.hide()
-                let statusCode = response.response?.statusCode
-                guard let jsonData =  JSON  as? NSDictionary else {
-                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
-                    return
-                }
-                if statusCode == SUCCESS_CODE_200{
-                    completion(true, jsonData, statusCode!)
-                }   else {
-                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
-//                    LogoutHelper.shared.logout()
-//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
-                }
-            case .failure( _):
+        Alamofire.request(Router.joinEvent(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
                 completion(false,[:],0)
             }
         }
@@ -592,23 +582,13 @@ class BaseAPIManager : NSObject {
     // completion : Completion object to return parameters to the calling functions
     // Returns
     func makeRequestToLeaveEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
-        Alamofire.request(Router.leaveEvent(data)).responseJSON { response in
-            switch response.result {
-            case .success(let JSON):
-                ERProgressHud.shared.hide()
-                let statusCode = response.response?.statusCode
-                guard let jsonData =  JSON  as? NSDictionary else {
-                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
-                    return
-                }
-                if statusCode == SUCCESS_CODE_200{
-                    completion(true, jsonData, statusCode!)
-                }   else {
-                    APIManager.sharedInstance.showAlertWithCode(code: response.response?.statusCode ?? 0)
-//                    LogoutHelper.shared.logout()
-//                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
-                }
-            case .failure( _):
+        Alamofire.request(Router.leaveEvent(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
                 completion(false,[:],0)
             }
         }
