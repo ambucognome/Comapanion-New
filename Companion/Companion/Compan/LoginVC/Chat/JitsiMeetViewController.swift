@@ -100,7 +100,49 @@ class JitsiMeetViewController: UIViewController {
         meetView.join(options)
     }
     
+    func joinEvent() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
+                       "eventId": self.eventId ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
 
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToJoinEvent(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+        
+    }
+    
+    func leaveEvent() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            let dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
+                           "eventId": self.eventId ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToLeaveEvent(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                self.dismiss(animated: true)
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+    }
 
 }
 
