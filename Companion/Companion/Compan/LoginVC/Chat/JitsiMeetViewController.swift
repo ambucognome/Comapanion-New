@@ -119,7 +119,6 @@ class JitsiMeetViewController: UIViewController {
         }
      }
         }
-        
     }
     
     func leaveEvent() {
