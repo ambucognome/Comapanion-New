@@ -94,6 +94,7 @@ class EventDetailVC: UIViewController {
         vc.meetingName = self.eventData?.meetingId
             vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
         appDelegate.voiceCallVC = vc
+                vc.eventId = self.eventData?.eventId ?? ""
             vc.modalPresentationStyle = .fullScreen
                 if let navVC = UIApplication.getTopViewController() {
                     navVC.present(vc, animated: true)
