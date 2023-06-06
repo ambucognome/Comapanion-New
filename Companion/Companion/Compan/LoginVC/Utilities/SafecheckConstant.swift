@@ -38,3 +38,4 @@ let API_END_GET_CARETEAM = "/eventapi/get-care-team"
 
 let API_END_JOIN_EVENT = "/eventapi/join-event"
 let API_END_LEAVE_EVENT = "/eventapi/leave-event"
+let API_END_GET_EVENT_DETAILS = "/eventapi/get-event-details"
