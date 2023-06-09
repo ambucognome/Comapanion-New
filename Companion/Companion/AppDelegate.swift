@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import GoogleSignIn
 
 
 var LAUNCHED_FROM_KILLED_STATE : Bool = true
@@ -76,6 +77,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 
         return true
     }
+    
+    func application(
+      _ app: UIApplication,
+      open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+      var handled: Bool
+
+      handled = GIDSignIn.sharedInstance.handle(url)
+      if handled {
+        return true
+      }
+      return false
+    }
+    
+
     
     @objc func draggedView(_ sender:UIPanGestureRecognizer){
         let windoww = UIApplication.shared.windows.last!
@@ -214,3 +230,4 @@ class func colorForNavBar(color: UIColor) -> UIImage {
      return image!
     }
 }
+

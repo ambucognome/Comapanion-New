@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import GoogleSignIn
 
 
 class CompanionLoginViewController: UIViewController {
@@ -32,6 +32,25 @@ class CompanionLoginViewController: UIViewController {
             return
         }
         self.loginAPI()
+    }
+    
+    @IBAction func googleSignInBtn(_ sender: Any) {
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+           guard error == nil else { return }
+            print(signInResult)
+           // If sign in succeeded, display the app's main content View.
+            guard let signInResult = signInResult else { return }
+
+                let user = signInResult.user
+
+                let emailAddress = user.profile?.email
+
+                let fullName = user.profile?.name
+                let givenName = user.profile?.givenName
+                let familyName = user.profile?.familyName
+
+                let profilePicUrl = user.profile?.imageURL(withDimension: 320)
+         }
     }
     
     func setRootViewController(vc: UIViewController) {

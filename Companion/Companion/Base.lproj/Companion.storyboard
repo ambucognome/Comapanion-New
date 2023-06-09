@@ -84,12 +84,34 @@
                                     <constraint firstAttribute="width" constant="300" id="8fE-BG-Jvc"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z18-cg-TWZ">
+                                <rect key="frame" x="20" y="564" width="374" height="50"/>
+                                <color key="backgroundColor" red="0.070588235289999995" green="0.21960784310000001" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="XZb-EY-BYn"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Google Sign In">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="googleSignInBtn:" destination="Nnp-mT-gtt" eventType="touchUpInside" id="lgz-z4-mjm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZG7-Rz-Sa2"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="17x-tH-THY" firstAttribute="top" secondItem="bej-6A-zvD" secondAttribute="bottom" constant="60" id="3Mg-jt-6NT"/>
                             <constraint firstItem="rzn-zq-ETL" firstAttribute="leading" secondItem="ZG7-Rz-Sa2" secondAttribute="leading" constant="20" id="5cR-gO-lAh"/>
+                            <constraint firstItem="z18-cg-TWZ" firstAttribute="leading" secondItem="ZG7-Rz-Sa2" secondAttribute="leading" constant="20" id="7Dr-Ut-8Dh"/>
+                            <constraint firstItem="z18-cg-TWZ" firstAttribute="top" secondItem="uGb-0S-052" secondAttribute="bottom" constant="40" id="9C6-ns-ea0"/>
                             <constraint firstItem="ZG7-Rz-Sa2" firstAttribute="bottom" secondItem="rzn-zq-ETL" secondAttribute="bottom" constant="20" id="B7C-cF-faH"/>
                             <constraint firstItem="bej-6A-zvD" firstAttribute="centerX" secondItem="ZG7-Rz-Sa2" secondAttribute="centerX" id="BLR-Yu-u7t"/>
                             <constraint firstItem="ZG7-Rz-Sa2" firstAttribute="trailing" secondItem="rzn-zq-ETL" secondAttribute="trailing" constant="20" id="CvJ-Yl-1NY"/>
@@ -99,6 +121,7 @@
                             <constraint firstItem="pvL-BP-1A7" firstAttribute="trailing" secondItem="Y3k-my-Fz4" secondAttribute="trailing" id="YZ6-2e-Qyr"/>
                             <constraint firstItem="17x-tH-THY" firstAttribute="centerX" secondItem="ZG7-Rz-Sa2" secondAttribute="centerX" id="ZHm-Vq-1Q6"/>
                             <constraint firstItem="Y3k-my-Fz4" firstAttribute="top" secondItem="17x-tH-THY" secondAttribute="bottom" constant="20" id="aJ1-2D-QyZ"/>
+                            <constraint firstItem="ZG7-Rz-Sa2" firstAttribute="trailing" secondItem="z18-cg-TWZ" secondAttribute="trailing" constant="20" id="bbg-YB-rTX"/>
                             <constraint firstItem="pvL-BP-1A7" firstAttribute="leading" secondItem="Y3k-my-Fz4" secondAttribute="leading" id="biJ-bj-Tgc"/>
                             <constraint firstItem="Y3k-my-Fz4" firstAttribute="top" secondItem="ZG7-Rz-Sa2" secondAttribute="top" constant="170" id="fUi-SO-zm8"/>
                             <constraint firstItem="JPG-ep-fRn" firstAttribute="top" secondItem="pvL-BP-1A7" secondAttribute="bottom" constant="8" symbolic="YES" id="owk-Q1-TlF"/>

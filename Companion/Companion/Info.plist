@@ -5,14 +5,24 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.cognome.companion-ios</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>companion</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>com.cognome.companion-ios</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1075459580269-8v78fbsbmfjsodfuqioa78v3d1vqmdmr</string>
+			</array>
 		</dict>
 	</array>
+	<key>GIDClientID</key>
+	<string>1075459580269-8v78fbsbmfjsodfuqioa78v3d1vqmdmr.apps.googleusercontent.com</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

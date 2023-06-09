@@ -31,4 +31,5 @@ target 'Companion' do
     pod 'SideMenu'
     pod 'IQKeyboardManagerSwift'
     pod 'CalendarKit'
+    pod 'GoogleSignIn'
 end
