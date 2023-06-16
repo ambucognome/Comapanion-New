@@ -17,6 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        //universal link
+        if let url = connectionOptions.userActivities.first?.webpageURL {
+         print(url)
+            let queryParametes = url.queryParameters
+            if let eventId = queryParametes?["eventId"], eventId != "" {
+                self.getEventDetails(eventId: eventId)
+            }
+        }
+        //URL scheme
             if let url = connectionOptions.urlContexts.first?.url {
                 // handle
                 if url.absoluteString.contains("companion://eventId"){
@@ -25,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                    self.getEventDetails(eventId: eventId)
                                }
                 }
-                
+
             }
         
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -77,6 +86,16 @@ extension SceneDelegate {
                        if component.count > 1, let eventId = component.last { // 3
                            self.getEventDetails(eventId: eventId)
                        }
+        }
+    }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        if let url = userActivity.webpageURL {
+            print(url)
+            let queryParametes = url.queryParameters
+            if let eventId = queryParametes?["eventId"], eventId != "" {
+                self.getEventDetails(eventId: eventId)
+            }
         }
     }
     

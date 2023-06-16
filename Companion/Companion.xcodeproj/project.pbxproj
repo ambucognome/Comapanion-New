@@ -59,6 +59,7 @@
 		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
 		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
 		92B3A848296C023A00C03761 /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3A847296C023A00C03761 /* GridViewController.swift */; };
+		92CF331F2A3C95FD00FA5763 /* Companion.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 92AA354229E5A7CC00A6A4AB /* Companion.entitlements */; };
 		92CFA7E3295461F800D77883 /* CompanionLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */; };
 		92CFA7E6295461F800D77883 /* Companion.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CFA7E4295461F800D77883 /* Companion.storyboard */; };
 		92CFA7E8295461FA00D77883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFA7E7295461FA00D77883 /* Assets.xcassets */; };
@@ -1150,6 +1151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CF331F2A3C95FD00FA5763 /* Companion.entitlements in Resources */,
 				92D9C3272A03FAE8008F5987 /* callertune.caf in Resources */,
 				92D9C3232A03F574008F5987 /* phoneringing.caf in Resources */,
 				92CFABA3295B1B9C00D77883 /* FloatingLabelTextField.xib in Resources */,
