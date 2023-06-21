@@ -345,6 +345,7 @@ class NotificationManager : NSObject {
                     }
                     if let navVC = UIApplication.getTopViewController()  {
                         if (navVC as? JitsiMeetViewController != nil) || (navVC as? RingingViewController != nil){
+                            self.userBusyAPICall(callerEmailId: callerEmailId, roomId: roomId, opponentEmailId: opponentEmailId)
                             return
                         } else {
                             navVC.present(controller, animated: true, completion: nil)
@@ -414,6 +415,16 @@ class NotificationManager : NSObject {
                             banner.show()
                         }
                     }
+                } else if eventType == 10 {
+                    if let navVC = UIApplication.getTopViewController()  {
+                        if navVC as? CallingViewController != nil {
+                            navVC.dismiss(animated: true) {
+                                let banner = NotificationBanner(title: "User is busy", subtitle: nil, leftView: nil, rightView: nil, style: .warning, colors: nil)
+                                banner.haptic = .heavy
+                                banner.show()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -474,6 +485,7 @@ class NotificationManager : NSObject {
                     }
                     if let navVC = UIApplication.getTopViewController()  {
                         if (navVC as? JitsiMeetViewController != nil) || (navVC as? RingingViewController != nil){
+                            self.userBusyAPICall(callerEmailId: callerEmailId, roomId: roomId, opponentEmailId: opponentEmailId)
                             return
                         } else {
                             navVC.present(controller, animated: true, completion: nil)
@@ -558,6 +570,34 @@ class NotificationManager : NSObject {
             }
         }
         
+    }
+    
+    
+    func userBusyAPICall(callerEmailId:String, roomId:String, opponentEmailId: String){
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = [
+              "actionBy": retrievedCodableObject.user?.firstname ?? "",
+              "callerEmailId": callerEmailId,
+              "roomId": roomId,
+              "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": opponentEmailId
+          ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToUserBusy(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+            
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
     }
 }
 

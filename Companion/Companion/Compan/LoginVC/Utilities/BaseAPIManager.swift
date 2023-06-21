@@ -38,6 +38,7 @@ class BaseAPIManager : NSObject {
         case joinEvent(Data)
         case leaveEvent(Data)
         case getEventDetails(Data)
+        case userBusy(Data)
 
 
         // Api Methods
@@ -74,6 +75,8 @@ class BaseAPIManager : NSObject {
             case .leaveEvent:
                 return .post
             case .getEventDetails:
+                return .post
+            case .userBusy:
                 return .post
             }
         }
@@ -113,6 +116,8 @@ class BaseAPIManager : NSObject {
                 return API_END_LEAVE_EVENT
             case .getEventDetails:
                 return API_END_GET_EVENT_DETAILS
+            case .userBusy:
+                return API_END_USER_BUSY
             }
         }
         
@@ -234,6 +239,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .getEventDetails(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .userBusy(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -666,6 +678,22 @@ class BaseAPIManager : NSObject {
                     completion(true, jsonData, statusCode!)
                 }
             case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  User Busy
+    // completion : Completion object to return parameters to the calling functions
+    // Returns
+    func makeRequestToUserBusy(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.userBusy(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
                 completion(false,[:],0)
             }
         }

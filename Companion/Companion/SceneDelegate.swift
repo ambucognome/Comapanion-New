@@ -101,7 +101,7 @@ extension SceneDelegate {
     
     func getEventDetails(eventId:String) {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            let data: [String: Any] = ["eventId": eventId,"meiId":retrievedCodableObject.user?.mail ?? ""]
+            let data: [String: Any] = ["eventId": eventId,"meiId":"ambu@cognome.com"]//retrievedCodableObject.user?.mail ?? ""]
         let jsonData = try! JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
