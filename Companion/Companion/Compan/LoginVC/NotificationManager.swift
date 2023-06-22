@@ -567,8 +567,33 @@ class NotificationManager : NSObject {
                         }
                     }
                 }
+                else if eventType == 10 {
+                    if let navVC = UIApplication.getTopViewController()  {
+                        if navVC as? CallingViewController != nil {
+                            navVC.dismiss(animated: true) {
+                                let banner = NotificationBanner(title: "User is busy", subtitle: nil, leftView: nil, rightView: nil, style: .warning, colors: nil)
+                                banner.haptic = .heavy
+                                banner.show()
+                            }
+                        }
+                    }
+                }
             }
-        }
+  } else if let eventDic = data["eventdatajson"] as? [String:Any] {
+      let eventType = eventDic["eventType"] as? NSNumber ?? 0
+    if eventType == 10 {
+          if let navVC = UIApplication.getTopViewController()  {
+              if navVC as? CallingViewController != nil {
+                  navVC.dismiss(animated: true) {
+                      let banner = NotificationBanner(title: "User is busy", subtitle: nil, leftView: nil, rightView: nil, style: .warning, colors: nil)
+                      banner.haptic = .heavy
+                      banner.show()
+                  }
+              }
+          }
+      }
+  }
+
         
     }
     
