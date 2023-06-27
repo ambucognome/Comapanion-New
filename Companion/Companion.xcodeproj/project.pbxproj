@@ -16,6 +16,10 @@
 		92496F6E29890E5F0037D723 /* TwoFactorAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */; };
 		92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F6F29890E6D0037D723 /* NotificationsViewController.swift */; };
 		92496F7229890E970037D723 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F7129890E970037D723 /* ProfileViewController.swift */; };
+		925AD0E22A4B0E6600014A97 /* SocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E12A4B0E6600014A97 /* SocketConnection.swift */; };
+		925AD0E42A4B0F7100014A97 /* SampleUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E32A4B0F7100014A97 /* SampleUploader.swift */; };
+		925AD0E62A4B0F9300014A97 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E52A4B0F9300014A97 /* Atomic.swift */; };
+		925AD0E82A4B0FD200014A97 /* DarwinNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E72A4B0FD200014A97 /* DarwinNotificationCenter.swift */; };
 		928122C829BF5BC00021A679 /* FSCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9281229629BF5BBF0021A679 /* FSCalendarCollectionViewLayout.m */; };
 		928122C929BF5BC00021A679 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122AB29BF5BBF0021A679 /* FSCalendarStickyHeader.m */; };
 		928122CA29BF5BC00021A679 /* FSCalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122B029BF5BBF0021A679 /* FSCalendarConstants.m */; };
@@ -253,6 +257,11 @@
 		92496F6D29890E5F0037D723 /* TwoFactorAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthVC.swift; sourceTree = "<group>"; };
 		92496F6F29890E6D0037D723 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		92496F7129890E970037D723 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		925AD0E02A4B0DE400014A97 /* Broadcast Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Broadcast Extension.entitlements"; sourceTree = "<group>"; };
+		925AD0E12A4B0E6600014A97 /* SocketConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketConnection.swift; sourceTree = "<group>"; };
+		925AD0E32A4B0F7100014A97 /* SampleUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUploader.swift; sourceTree = "<group>"; };
+		925AD0E52A4B0F9300014A97 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		925AD0E72A4B0FD200014A97 /* DarwinNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarwinNotificationCenter.swift; sourceTree = "<group>"; };
 		9281229629BF5BBF0021A679 /* FSCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
 		9281229829BF5BBF0021A679 /* FSCalendarWeekdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarWeekdayView.h; sourceTree = "<group>"; };
 		9281229929BF5BBF0021A679 /* FSCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
@@ -338,8 +347,6 @@
 		92CF33282A4438E100FA5763 /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
 		92CF332A2A4438E100FA5763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92CF33312A4438E100FA5763 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		92CF33342A4438E100FA5763 /* BroadcastSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastSetupViewController.swift; sourceTree = "<group>"; };
-		92CF33362A4438E100FA5763 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92CFA7DB295461F800D77883 /* Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Companion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionLoginViewController.swift; sourceTree = "<group>"; };
 		92CFA7E5295461F800D77883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Companion.storyboard; sourceTree = "<group>"; };
@@ -676,19 +683,15 @@
 		92CF33272A4438E100FA5763 /* Broadcast Extension */ = {
 			isa = PBXGroup;
 			children = (
+				925AD0E02A4B0DE400014A97 /* Broadcast Extension.entitlements */,
 				92CF33282A4438E100FA5763 /* SampleHandler.swift */,
+				925AD0E12A4B0E6600014A97 /* SocketConnection.swift */,
+				925AD0E32A4B0F7100014A97 /* SampleUploader.swift */,
+				925AD0E52A4B0F9300014A97 /* Atomic.swift */,
+				925AD0E72A4B0FD200014A97 /* DarwinNotificationCenter.swift */,
 				92CF332A2A4438E100FA5763 /* Info.plist */,
 			);
 			path = "Broadcast Extension";
-			sourceTree = "<group>";
-		};
-		92CF33332A4438E100FA5763 /* Broadcast ExtensionSetupUI */ = {
-			isa = PBXGroup;
-			children = (
-				92CF33342A4438E100FA5763 /* BroadcastSetupViewController.swift */,
-				92CF33362A4438E100FA5763 /* Info.plist */,
-			);
-			path = "Broadcast ExtensionSetupUI";
 			sourceTree = "<group>";
 		};
 		92CFA7D2295461F800D77883 = {
@@ -698,7 +701,6 @@
 				92D9C3202A03F40E008F5987 /* phoneringing.caf */,
 				92CFA7DD295461F800D77883 /* Companion */,
 				92CF33272A4438E100FA5763 /* Broadcast Extension */,
-				92CF33332A4438E100FA5763 /* Broadcast ExtensionSetupUI */,
 				92CFA7DC295461F800D77883 /* Products */,
 				8E2A8D55C1F2FAC40C4C1E13 /* Pods */,
 				2F3F3F5501F7AC01898B43EA /* Frameworks */,
@@ -1331,6 +1333,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925AD0E82A4B0FD200014A97 /* DarwinNotificationCenter.swift in Sources */,
+				925AD0E62A4B0F9300014A97 /* Atomic.swift in Sources */,
+				925AD0E42A4B0F7100014A97 /* SampleUploader.swift in Sources */,
+				925AD0E22A4B0E6600014A97 /* SocketConnection.swift in Sources */,
 				92CF33292A4438E100FA5763 /* SampleHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1555,13 +1561,14 @@
 		92CF333E2A4438E100FA5763 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Broadcast Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = Companion;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1582,13 +1589,14 @@
 		92CF333F2A4438E100FA5763 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Broadcast Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = Companion;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
