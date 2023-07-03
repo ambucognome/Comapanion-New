@@ -92,6 +92,7 @@ class JitsiMeetViewController: UIViewController {
             builder.setFeatureFlag("speakerstats.enabled", withBoolean:false)
             builder.setFeatureFlag("call-integration.enabled", withBoolean:true) // CallKit integration
             builder.setFeatureFlag("raise-hand.enabled", withBoolean:true)
+            builder.setFeatureFlag("close-captions.enabled", withBoolean:true)
             if self.isFromDialing {
                 builder.setFeatureFlag("pip.enabled", withBoolean:true)
             }

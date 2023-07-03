@@ -20,10 +20,10 @@ PODS:
     - GTMSessionFetcher/Core (< 4.0, >= 1.5)
   - GTMSessionFetcher/Core (3.1.0)
   - IQKeyboardManagerSwift (6.5.10)
-  - JitsiMeetSDK (5.1.0):
+  - JitsiMeetSDK (7.0.1):
     - Giphy (= 2.1.20)
-    - JitsiWebRTC (= 100.0.0)
-  - JitsiWebRTC (100.0.0)
+    - JitsiWebRTC (~> 106.0)
+  - JitsiWebRTC (106.0.0)
   - KeychainSwift (11.0.0)
   - Kingfisher (7.4.1)
   - libwebp (1.2.4):
@@ -63,7 +63,7 @@ DEPENDENCIES:
   - DropDown
   - GoogleSignIn
   - IQKeyboardManagerSwift
-  - JitsiMeetSDK (= 5.1.0)
+  - JitsiMeetSDK
   - KeychainSwift (~> 11.0)
   - Kingfisher
   - lottie-ios
@@ -121,8 +121,8 @@ SPEC CHECKSUMS:
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: c9e714f7eec91a55641e2bab9f45fd83a219b882
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
-  JitsiMeetSDK: 4197be0ab568e179e7c368ef8d4c90db8746c541
-  JitsiWebRTC: 873becc5a3edd1adebe86303ee5d36aab4f7fcc3
+  JitsiMeetSDK: 3a8798edb12e401237a0d74ce863a3227ca5d681
+  JitsiWebRTC: f441eb0e2d67f0588bf24e21c5162e97342714fb
   KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
@@ -141,6 +141,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyMenu: bffdad1aa7de3a5faf3dc218c989b112a804299b
 
-PODFILE CHECKSUM: 754d3a17a664bdc774694bd279793ced09f8f3e0
+PODFILE CHECKSUM: 384751ab5b68c478a40a9b3dde2713a9b04b46f3
 
 COCOAPODS: 1.11.3
