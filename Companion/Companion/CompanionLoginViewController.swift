@@ -117,7 +117,8 @@ class CompanionLoginViewController: UIViewController {
             "fcmToken": SafeCheckUtils.getDeviceToken(),
             "userId": emailID,
             "appType" : "ios",
-            "username" : username
+            "username" : username,
+            "voipToken": SafeCheckUtils.getVoipDeviceToken()
            ]
         let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
