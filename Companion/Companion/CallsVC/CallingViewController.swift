@@ -23,7 +23,7 @@ class CallingViewController: UIViewController {
         super.viewDidLoad()
         self.playSound()
         self.nameLabel.text = "Calling \(name)"
-        timer = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(self.timerfunction), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 40.0, target: self, selector: #selector(self.timerfunction), userInfo: nil, repeats: false)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

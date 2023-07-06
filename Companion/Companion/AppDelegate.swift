@@ -288,10 +288,11 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
                     callerName = body.replacingOccurrences(of: "Incoming call from ", with: "")
                 }
             }
-            if let eventData = dict["eventdatajson"] as? NSDictionary {
-                roomId = eventData["roomId"] as? String ?? ""
-                callerEmailId = eventData["callerEmailId"] as? String ?? ""
-
+            if let eventDataString = dict["eventdatajson"] as? String {
+                if let eventData = eventDataString.convertToDictionary() {
+                    roomId = eventData["roomId"] as? String ?? ""
+                    callerEmailId = eventData["callerEmailId"] as? String ?? ""
+                }
             }
         }
         if let navVC = UIApplication.getTopViewController()  {
