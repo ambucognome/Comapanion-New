@@ -90,18 +90,22 @@ class ProfileViewController: UIViewController {
     
     func logout(emailID: String){
         if SafeCheckUtils.getDeviceToken() != "" {
+            let username = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
         let parameters : [String: String] = [
             "appId": Bundle.main.bundleIdentifier ?? "",
             "appToken": "",
             "fcmToken": SafeCheckUtils.getDeviceToken(),
             "userId": emailID,
-            "appType" : "ios"
+            "appType" : "ios",
+              "username": username,
+              "voipToken": SafeCheckUtils.getVoipDeviceToken()
+            
            ]
         let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
 
-        BaseAPIManager.sharedInstance.makeRequestToUploadFCMToken( data: jsonData){ (success, response,statusCode)  in
+        BaseAPIManager.sharedInstance.makeRequestToLogout( data: jsonData){ (success, response,statusCode)  in
             if (success) {
                 print(response)
             } else {

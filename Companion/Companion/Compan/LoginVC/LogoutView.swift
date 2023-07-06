@@ -43,6 +43,7 @@ class LogoutHelper : NSObject {
     
     func logout() {
         let deviceToken = SafeCheckUtils.getDeviceToken()
+        let voipToken = SafeCheckUtils.getVoipDeviceToken()
         self.removeLogoutView()
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
@@ -53,6 +54,7 @@ class LogoutHelper : NSObject {
         nav.modalPresentationCapturesStatusBarAppearance = true
         nav.modalPresentationStyle = .custom
         SafeCheckUtils.setDeviceToken(deviceToken: deviceToken)
+        SafeCheckUtils.setVoipDeviceToken(deviceToken: voipToken)
 //        Messaging.messaging().deleteData { error in
 //            
 //        }

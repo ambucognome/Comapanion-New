@@ -313,7 +313,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print(jsonString)
 
         eventsData.removeAll()
-        eventsData.removeAll()
 
         ERProgressHud.shared.show()
                     BaseAPIManager.sharedInstance.makeRequestToGetEvent(data: jsonData){ (success, response,statusCode)  in

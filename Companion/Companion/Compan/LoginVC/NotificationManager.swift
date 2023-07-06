@@ -13,6 +13,7 @@ var LAUNCHED_FROM_NOTIFICATION = false
 var notificationData : [AnyHashable : Any] = [:]
 
 var CALL_COMPLETED = false
+var CALL_STARTED = false
 
 class NotificationManager : NSObject {
     

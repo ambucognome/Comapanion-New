@@ -90,7 +90,7 @@ class JitsiMeetViewController: UIViewController {
             builder.setFeatureFlag("security-options.enabled", withBoolean:false)
             builder.setFeatureFlag("reactions.enabled", withBoolean:false)
             builder.setFeatureFlag("speakerstats.enabled", withBoolean:false)
-            builder.setFeatureFlag("call-integration.enabled", withBoolean:true) // CallKit integration
+            builder.setFeatureFlag("call-integration.enabled", withBoolean:false) // CallKit integration
             builder.setFeatureFlag("raise-hand.enabled", withBoolean:true)
             builder.setFeatureFlag("close-captions.enabled", withBoolean:true)
             if self.isFromDialing {
@@ -148,6 +148,10 @@ class JitsiMeetViewController: UIViewController {
 
 extension JitsiMeetViewController: JitsiMeetViewDelegate {
     
+    func endConferenceCall() {
+        meetView.leave()
+    }
+    
     func conferenceTerminated(_ data: [AnyHashable : Any]!) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.voiceCallVC = nil
@@ -157,14 +161,17 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
         if self.isFromDialing {
         self.dismiss(animated: true) {
                 CALL_COMPLETED = true
+                CALL_STARTED = false
                 self.endCall()
         }
         } else {
             self.leaveEvent()
         }
+        appDelegate.endCall( reason: .declinedElsewhere)
 //        self.navigationController?.popViewController(animated: true)
     }
     
+
     func endCall() {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
         let dataDic = [
@@ -192,6 +199,7 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
     }
     
     func conferenceJoined(_ data: [AnyHashable : Any]!) {
+        CALL_STARTED = true
         print(data)
         if self.isFromDialing == false {
             self.joinEvent()
@@ -226,3 +234,5 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
     
     
 }
+
+

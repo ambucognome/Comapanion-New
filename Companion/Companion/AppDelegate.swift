@@ -15,9 +15,16 @@ import NotificationBannerSwift
 var LAUNCHED_FROM_KILLED_STATE : Bool = true
 
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
     
+    var callerEmailId = ""
+    var roomId = ""
+    var opponentEmailId = ""
+    var callUDID = UUID()
+    var provider : CXProvider?
+
     var logoutView : LogoutView?
     var callView : OnCallView?
     var voiceCallVC : JitsiMeetViewController?
@@ -265,11 +272,33 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
     // Handle incoming pushes
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
          print("Voip notification",payload.dictionaryPayload)
-        self.showCallView(callerName: "test")
+        self.showCallView(payload: payload.dictionaryPayload)
         
     }
     
-    func showCallView(callerName:String){
+    func showCallView(payload: [AnyHashable:Any]){
+        if (SafeCheckUtils.getToken() == "") {
+            return
+        }
+        var callerName = ""
+        if let dict = payload as? NSDictionary {
+            if let aps = dict["aps"] as? NSDictionary {
+                if let alert = aps["alert"] as? NSDictionary {
+                    let body = alert["body"] as? String ?? ""
+                    callerName = body.replacingOccurrences(of: "Incoming call from ", with: "")
+                }
+            }
+            if let eventData = dict["eventdatajson"] as? NSDictionary {
+                roomId = eventData["roomId"] as? String ?? ""
+                callerEmailId = eventData["callerEmailId"] as? String ?? ""
+
+            }
+        }
+        if let navVC = UIApplication.getTopViewController()  {
+            if (navVC is JitsiMeetViewController) {
+                return
+            }
+        }
         // 1: Create an incoming call update object. This object stores different types of information about the caller. You can use it in setting whether the call has a video.
         let update = CXCallUpdate()
         // Specify the type of information to display about the caller during an incoming call. The different types of information available include `.generic`. For example, you could use the caller&#039;s name for the generic type. During an incoming call, the name displays to the other user. Other available information types are emails and phone numbers.
@@ -290,19 +319,20 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
 //        config.ringtoneSound = "ES_CellRingtone23.mp3";
 
         // 3: Create a CXProvider instance and set its delegate
-        let provider = CXProvider(configuration: config)
-        provider.setDelegate(self, queue: nil)
-
+        self.provider =  CXProvider(configuration: config)
+        provider?.setDelegate(self, queue: nil)
+        let udid = UUID()
+        self.callUDID = udid
+        
         // 4. Post local notification to the user that there is an incoming call. When using CallKit, you do not need to rely on only displaying incoming calls using the local notification API because it helps to show incoming calls to users using the native full-screen incoming call UI on iOS. Add the helper method below `reportIncomingCall` to show the full-screen UI. It must contain `UUID()` that helps to identify the caller using a random identifier. You should also provide the `CXCallUpdate` that comprises metadata information about the incoming call. You can also check for errors to see if everything works fine.
-        provider.reportNewIncomingCall(with: UUID(), update: update, completion: { error in })
+        provider?.reportNewIncomingCall(with: udid, update: update, completion: { error in })
     }
+    
     
     // What happens when the user accepts the call by pressing the incoming call button? You should implement the method below and call the fulfill method if the call is successful.
     func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
         print("call answered")
-        let banner = NotificationBanner(title: "Call Accepted", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
-        banner.haptic = .heavy
-        banner.show()
+        self.acceptCall()
         action.fulfill()
         return
     }
@@ -310,10 +340,94 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
     // What happens when the user taps the reject button? Call the fail method if the call is unsuccessful. It checks the call based on the UUID. It uses the network to connect to the end call method you provide.
     func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
         print("call rejected")
-        let banner = NotificationBanner(title: "Call Rejected/ Ended", subtitle: nil, leftView: nil, rightView: nil, style: .success, colors: nil)
-        banner.haptic = .heavy
-        banner.show()
-        action.fail()
+        if CALL_STARTED && (CALL_COMPLETED == false)  {
+            if let navVC = UIApplication.getTopViewController()  {
+                if let callVC = (navVC as? JitsiMeetViewController) {
+                    callVC.endCall()
+
+                }
+            }
+            action.fulfill()
+        } else if CALL_STARTED == false {
+            self.rejectCall()
+            action.fail()
+        }
+
         return
     }
+    
+    public func endCall( reason: CXCallEndedReason) {
+        let uuid = self.callUDID
+        self.provider?.reportCall(with: uuid, endedAt: Date(), reason: reason)
+      }
+    
+    
+    func acceptCall() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = [
+              "actionBy": retrievedCodableObject.user?.firstname ?? "",
+              "callerEmailId": self.callerEmailId,
+              "roomId": self.roomId,
+              "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": retrievedCodableObject.user?.mail ?? ""
+            
+          ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToAcceptCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+                    let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+                    vc.meetingName = self.roomId
+                    vc.isFromDialing = true
+                    vc.callerEmailId = self.callerEmailId
+                    vc.opponentEmailId = self.opponentEmailId
+                    vc.modalPresentationStyle = .fullScreen
+                    vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+                    appDelegate.voiceCallVC = vc
+                    if let navVC = UIApplication.getTopViewController()  {
+                        navVC.present(vc, animated: false, completion: nil)
+                    }
+            } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+    }
+    
+    func rejectCall() {
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = [
+              "actionBy": retrievedCodableObject.user?.firstname ?? "",
+              "callerEmailId": self.callerEmailId,
+              "roomId": self.roomId,
+              "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": self.opponentEmailId
+          ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToRejectCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+            
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
+    }
+    
+    
 }
+
