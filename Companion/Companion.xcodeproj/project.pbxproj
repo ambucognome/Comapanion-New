@@ -36,6 +36,7 @@
 		928122D629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122C629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m */; };
 		928122D729BF5BC10021A679 /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122C729BF5BC00021A679 /* FSCalendarDelegationFactory.m */; };
 		928122DA29BF5DF50021A679 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928122D929BF5DF50021A679 /* HomeViewController.swift */; };
+		9283B24E2A53164A008646A2 /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9283B24D2A53164A008646A2 /* BasicViewController.swift */; };
 		92914E272A20E822003B968E /* EventListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92914E262A20E822003B968E /* EventListVC.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
@@ -312,6 +313,7 @@
 		928122C729BF5BC00021A679 /* FSCalendarDelegationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarDelegationFactory.m; sourceTree = "<group>"; };
 		928122D829BF5C310021A679 /* Companion-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Companion-Bridging-Header.h"; sourceTree = "<group>"; };
 		928122D929BF5DF50021A679 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9283B24D2A53164A008646A2 /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
 		92914E262A20E822003B968E /* EventListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListVC.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 				92CFAA93295B1B9B00D77883 /* LoginVC */,
 				92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */,
 				92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */,
+				9283B24D2A53164A008646A2 /* BasicViewController.swift */,
 				92CFA937295A0E8A00D77883 /* AppDelegate.swift */,
 				92D9C3282A0CC467008F5987 /* LocalNotification.swift */,
 				92CFA938295A0E8A00D77883 /* SceneDelegate.swift */,
@@ -1454,6 +1457,7 @@
 				928122C829BF5BC00021A679 /* FSCalendarCollectionViewLayout.m in Sources */,
 				92CFAB46295B1B9C00D77883 /* Message.swift in Sources */,
 				92CFAB33295B1B9C00D77883 /* TimePickerTableViewCell.swift in Sources */,
+				9283B24E2A53164A008646A2 /* BasicViewController.swift in Sources */,
 				92AA353829BF9EA600A6A4AB /* EventCell.swift in Sources */,
 				92CFAB85295B1B9C00D77883 /* PickerTableViewCell.swift in Sources */,
 				92CFAB78295B1B9C00D77883 /* ImageViewController.swift in Sources */,

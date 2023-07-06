@@ -61,6 +61,23 @@ class func getToken() -> String {
         return deviceToken
     }
     
+    // Save the voip token
+    // Params :
+    // device token : It is the string which is to be saved
+    class func setVoipDeviceToken(deviceToken : String){
+        UserDefaults.standard.set(deviceToken, forKey: "voiptoken")
+    }
+    
+    // Fetch the device token
+    class func getVoipDeviceToken() -> String {
+        let defaults = UserDefaults.standard
+        guard let deviceVoipToken =  defaults.value(forKey: "voiptoken") as? String else {
+            //APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            return ""
+        }
+        return deviceVoipToken
+    }
+    
     // Save the FCM token
     // Params :
     // fcmToken : It is the string which is to be saved

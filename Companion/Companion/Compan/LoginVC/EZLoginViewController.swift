@@ -124,7 +124,9 @@ class EZLoginViewController: UIViewController {
             "appId": Bundle.main.bundleIdentifier ?? "",
             "appToken": "",
             "fcmToken": SafeCheckUtils.getFCMToken(),
-            "userId": self.ezIdTextField.text!
+            "userId": self.ezIdTextField.text!,
+            "username": SafeCheckUtils.getUserData()?.user?.firstname ?? "",
+            "voipToken": SafeCheckUtils.getVoipDeviceToken()
            ]
         let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String

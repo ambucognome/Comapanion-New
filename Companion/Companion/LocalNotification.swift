@@ -52,22 +52,5 @@ class LocalNotification: NSObject {
     
 }
 
-//
-//
-//create event incoming os_trace_payload_
-//
-//call request dial start
-//
-//ring_
-//
-//accept - request ResponseDisposition
-//
-//call accepted os_trace_payload_t
-//
-//reject notificatio payload
-//
-//
-//end call option
-//
-//
+
 
