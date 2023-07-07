@@ -398,6 +398,8 @@ class NotificationManager : NSObject {
                 }  else if eventType == 5 {
                     let roomId = dataDic["roomId"] as? String ?? ""
                     let actionBy = dataDic["actionBy"] as? String ?? ""
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.endCall( reason: .remoteEnded)
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? JitsiMeetViewController != nil {
                             navVC.dismiss(animated: false) {
@@ -549,6 +551,8 @@ class NotificationManager : NSObject {
                 } else if eventType == 5 {
                     let roomId = dataDic["roomId"] as? String ?? ""
                     let actionBy = dataDic["actionBy"] as? String ?? ""
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.endCall( reason: .remoteEnded)
                     if let navVC = UIApplication.getTopViewController()  {
                         if navVC as? JitsiMeetViewController != nil {
                             navVC.dismiss(animated: false) {
