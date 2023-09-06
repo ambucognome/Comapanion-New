@@ -390,7 +390,16 @@ class NotificationManager : NSObject {
                                 banner.show()
 
                             }
+                        } else if navVC as? RingingViewController != nil {
+                            navVC.dismiss(animated: false) {
+                                CALL_COMPLETED = true
+                                let banner = NotificationBanner(title: "Call rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                                banner.haptic = .heavy
+                                banner.show()
+
+                            }
                         }
+
 //                        let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
 //                        banner.haptic = .heavy
 //                        banner.show()
@@ -542,10 +551,14 @@ class NotificationManager : NSObject {
                                 banner.show()
                                 return
                             }
-                        } else {
-//                        let banner = NotificationBanner(title: "Call was rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
-//                            banner.haptic = .heavy
-//                            banner.show()
+                        } else if navVC as? RingingViewController != nil {
+                            navVC.dismiss(animated: false) {
+                                CALL_COMPLETED = true
+                                let banner = NotificationBanner(title: "Call rejected", subtitle: nil, leftView: nil, rightView: nil, style: .danger, colors: nil)
+                                banner.haptic = .heavy
+                                banner.show()
+
+                            }
                         }
                     }
                 } else if eventType == 5 {

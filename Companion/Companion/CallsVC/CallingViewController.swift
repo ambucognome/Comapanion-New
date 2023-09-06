@@ -18,6 +18,9 @@ class CallingViewController: UIViewController {
     
     var name = ""
     var player: AVAudioPlayer?
+    
+    var roomId = ""
+    var opponentEmailId = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +47,31 @@ class CallingViewController: UIViewController {
 
     @IBAction func rejectBtn(_ sender: Any) {
         player?.stop()
-        self.dismiss(animated: false, completion: nil)
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+        let dataDic = [
+              "actionBy": retrievedCodableObject.user?.firstname ?? "",
+              "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+              "roomId": self.roomId,
+              "appId": Bundle.main.bundleIdentifier ?? "",
+              "opponentEmailId": self.opponentEmailId
+          ]
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToRejectCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                self.dismiss(animated: true)
+            
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
+        }
     }
     
     func playSound() {

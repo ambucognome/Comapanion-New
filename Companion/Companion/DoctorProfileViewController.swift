@@ -66,6 +66,8 @@ class DoctorProfileViewController: UIViewController {
             let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
             let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
             vc.name = self.data?.name ?? ""
+            vc.roomId = roomId
+            vc.opponentEmailId = self.data?.email ?? ""
             vc.modalPresentationStyle = .fullScreen
         if let navVC = UIApplication.getTopViewController() {
             navVC.present(vc, animated: true)
