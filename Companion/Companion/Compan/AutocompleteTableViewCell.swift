@@ -80,6 +80,7 @@ class AutocompleteTableViewCell: UITableViewCell, UITextFieldDelegate {
     var ddcModel: DDCFormModel?
 
     
+    
     @IBAction func resetBtn(_ sender: Any) {
         RequestHelper.shared.createRequestForEntity(entity: self.entity!, newValue: "", entityGroupId: entityGroupId,parentEntityGroupId: parentEntityGroupId,groupOrder: groupOrder,dataModel: self.ddcModel)
     }

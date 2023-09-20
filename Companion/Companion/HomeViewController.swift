@@ -546,7 +546,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         for data in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: data.date) {
                 self.tableView.restore()
-                return 1
+                return 2
             }
         }
         self.tableView.setEmptyMessage("No Events for this date.")
@@ -566,7 +566,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 events.append(dataa)
             }
         }
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
 //            cell.eventData = data.events
             cell.dateEvents = events
@@ -577,9 +577,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.vc = self
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CareTeamTableViewCell") as! CareTeamTableViewCell
-            cell.careTeamData = careteamData//data.careTeam
-//            cell.dateEvents = events
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SurveysTableViewCell") as! SurveysTableViewCell
             cell.tableView.reloadData()
             cell.selectionStyle = .none
             return cell

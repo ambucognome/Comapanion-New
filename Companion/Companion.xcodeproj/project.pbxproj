@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		87B3B2A4DC7E407353ADBF06 /* Pods_Companion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFEC946DCB5B4D7F57E91E9 /* Pods_Companion.framework */; };
 		9243A62A2A176C4100073436 /* GuestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243A6292A176C4000073436 /* GuestCell.swift */; };
+		9243DC642AB45ADE00B0A520 /* SurveysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DC632AB45ADE00B0A520 /* SurveysTableViewCell.swift */; };
+		9243DC662AB45AEF00B0A520 /* SurveyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DC652AB45AEF00B0A520 /* SurveyCell.swift */; };
 		92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F642988EADC0037D723 /* SettingsViewController.swift */; };
 		92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F672988EDDB0037D723 /* SettingTableViewCell.swift */; };
 		92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */; };
@@ -251,6 +253,8 @@
 		51B6E23D635BCE2B91E39B68 /* Pods-Companion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Companion.release.xcconfig"; path = "Target Support Files/Pods-Companion/Pods-Companion.release.xcconfig"; sourceTree = "<group>"; };
 		8FFEC946DCB5B4D7F57E91E9 /* Pods_Companion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Companion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9243A6292A176C4000073436 /* GuestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestCell.swift; sourceTree = "<group>"; };
+		9243DC632AB45ADE00B0A520 /* SurveysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveysTableViewCell.swift; sourceTree = "<group>"; };
+		9243DC652AB45AEF00B0A520 /* SurveyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCell.swift; sourceTree = "<group>"; };
 		92496F642988EADC0037D723 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		92496F672988EDDB0037D723 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		92496F682988EDDB0037D723 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -631,6 +635,8 @@
 				92AA352D29BF9EA500A6A4AB /* DoctorTableViewCell.swift */,
 				92AA353129BF9EA500A6A4AB /* EventCell.swift */,
 				92AA352C29BF9EA500A6A4AB /* EventsTableViewCell.swift */,
+				9243DC632AB45ADE00B0A520 /* SurveysTableViewCell.swift */,
+				9243DC652AB45AEF00B0A520 /* SurveyCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1481,7 +1487,9 @@
 				92CFAB3B295B1B9C00D77883 /* AuthenticationErrors.swift in Sources */,
 				928122D129BF5BC00021A679 /* FSCalendarCell.m in Sources */,
 				92CFAB73295B1B9C00D77883 /* Userable.swift in Sources */,
+				9243DC642AB45ADE00B0A520 /* SurveysTableViewCell.swift in Sources */,
 				92CFABA9295B1B9C00D77883 /* RadioButtonTableViewCell.swift in Sources */,
+				9243DC662AB45AEF00B0A520 /* SurveyCell.swift in Sources */,
 				92AD9E302966E02400B5E936 /* Colors.swift in Sources */,
 				928122D729BF5BC10021A679 /* FSCalendarDelegationFactory.m in Sources */,
 				92CFAB9E295B1B9C00D77883 /* AuthenticationMethods.swift in Sources */,
