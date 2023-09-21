@@ -11,6 +11,8 @@ class SurveyCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var completedDateLabel: UILabel!
+    @IBOutlet weak var tagView: UIView!
+    @IBOutlet weak var typeLabel: UILabel!
 
 
     override func awakeFromNib() {

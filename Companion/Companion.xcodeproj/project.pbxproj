@@ -40,6 +40,8 @@
 		928122DA29BF5DF50021A679 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928122D929BF5DF50021A679 /* HomeViewController.swift */; };
 		9283B24E2A53164A008646A2 /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9283B24D2A53164A008646A2 /* BasicViewController.swift */; };
 		92914E272A20E822003B968E /* EventListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92914E262A20E822003B968E /* EventListVC.swift */; };
+		9299B59D2ABC509B002963AC /* SurveyListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B59C2ABC509B002963AC /* SurveyListVC.swift */; };
+		9299B59F2ABC5174002963AC /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B59E2ABC5174002963AC /* NotificationVC.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -319,6 +321,8 @@
 		928122D929BF5DF50021A679 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9283B24D2A53164A008646A2 /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
 		92914E262A20E822003B968E /* EventListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListVC.swift; sourceTree = "<group>"; };
+		9299B59C2ABC509B002963AC /* SurveyListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListVC.swift; sourceTree = "<group>"; };
+		9299B59E2ABC5174002963AC /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -747,6 +751,8 @@
 				92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */,
 				9243A6292A176C4000073436 /* GuestCell.swift */,
 				92914E262A20E822003B968E /* EventListVC.swift */,
+				9299B59C2ABC509B002963AC /* SurveyListVC.swift */,
+				9299B59E2ABC5174002963AC /* NotificationVC.swift */,
 				92D9C31D2A02C3A7008F5987 /* CallsVC */,
 				92AA350429BF6F2D00A6A4AB /* Cells */,
 				92E49AAD298A7DBD0018F6E5 /* MenuVC */,
@@ -1498,6 +1504,8 @@
 				92AA352429BF945300A6A4AB /* SheetTransition.swift in Sources */,
 				92CFA7F329546D8900D77883 /* MenuViewController.swift in Sources */,
 				92CFAB50295B1B9C00D77883 /* ListReponseObject.swift in Sources */,
+				9299B59D2ABC509B002963AC /* SurveyListVC.swift in Sources */,
+				9299B59F2ABC5174002963AC /* NotificationVC.swift in Sources */,
 				92CFA93A295A0E8A00D77883 /* SceneDelegate.swift in Sources */,
 				92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */,
 				92CFABA6295B1B9C00D77883 /* Extention.swift in Sources */,

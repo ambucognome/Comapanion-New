@@ -12,8 +12,10 @@ class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shadowView: UIView!
 
-    var titles = ["Covid Check","Sample Survey"]
-    var completedDate = ["Completed on 28 August","Pending"]
+    var titles = ["Covid Check","Sample Survey","Completed Survey"]
+    var completedDate = ["Assigned on 28 August","Pending","Completed on 31 August"]
+    var tags = ["Assigned","Pending","Completed"]
+
 //    var dateEvents = [DateData]()
 
     
@@ -56,6 +58,16 @@ class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDat
             let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyCell") as! SurveyCell
         cell.nameLabel.text = self.titles[indexPath.row]
         cell.completedDateLabel.text = self.completedDate[indexPath.row]
+        cell.tagView.layer.cornerRadius = 4
+        cell.tagView.layer.borderWidth = 1
+        cell.typeLabel.text = self.tags[indexPath.row]
+        if indexPath.row == 0 {
+            cell.tagView.layer.borderColor = DARK_BLUE_COLOR.cgColor
+        } else if indexPath.row == 1 {
+            cell.tagView.layer.borderColor = UIColor.red.cgColor
+        } else if indexPath.row == 2 {
+            cell.tagView.layer.borderColor = UIColor.systemGreen.cgColor
+        }
         self.layoutSubviews()
             return cell
     }

@@ -678,8 +678,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 //            controller.hidesBottomBarWhenPushed = true
 //            self.navigationController?.pushViewController(controller, animated: true)
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let controller = storyboard.instantiateViewController(identifier: "EventListVC") as! EventListVC
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC") as! NotificationVC
             controller.vc = self
+            controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
