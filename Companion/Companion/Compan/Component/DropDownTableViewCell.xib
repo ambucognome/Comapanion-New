@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DropDownTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DropDownTableViewCell" rowHeight="105" id="fp1-qa-2Ac" userLabel="TextfieldComponent" customClass="DropDownTableViewCell" customModule="ddcv2" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="105"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fp1-qa-2Ac" id="1K0-XR-VCd">
+                <rect key="frame" x="0.0" y="0.0" width="372" height="105"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-lS-mZz">
+                        <rect key="frame" x="20" y="20.5" width="332" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Your Country" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UXL-GI-b7B" customClass="DropDown" customModule="ddcv2" customModuleProvider="target">
+                        <rect key="frame" x="20" y="49" width="332" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="listHeight">
+                                <real key="value" value="200"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="arrowPadding">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="arrowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSearchEnable" value="NO"/>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Cq-xO-rTb">
+                        <rect key="frame" x="327" y="10" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="9Cs-Up-vlg"/>
+                            <constraint firstAttribute="height" constant="30" id="XKO-zk-GTz"/>
+                        </constraints>
+                        <state key="normal" image="undo"/>
+                        <connections>
+                            <action selector="resetBtn:" destination="fp1-qa-2Ac" eventType="touchUpInside" id="xAL-FP-L3K"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntY-Bm-aSN">
+                        <rect key="frame" x="20" y="88" width="332" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="608-dW-3ka"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" systemColor="systemRedColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="8Cq-xO-rTb" secondAttribute="trailing" constant="15" id="7qT-iU-U3p"/>
+                    <constraint firstItem="UXL-GI-b7B" firstAttribute="leading" secondItem="FRh-lS-mZz" secondAttribute="leading" id="Bpz-TH-G3z"/>
+                    <constraint firstItem="ntY-Bm-aSN" firstAttribute="top" secondItem="UXL-GI-b7B" secondAttribute="bottom" constant="5" id="FvP-P2-H46"/>
+                    <constraint firstItem="ntY-Bm-aSN" firstAttribute="trailing" secondItem="UXL-GI-b7B" secondAttribute="trailing" id="H8u-6g-kZp"/>
+                    <constraint firstAttribute="trailing" secondItem="FRh-lS-mZz" secondAttribute="trailing" constant="20" id="LgT-L2-BxJ"/>
+                    <constraint firstItem="ntY-Bm-aSN" firstAttribute="leading" secondItem="UXL-GI-b7B" secondAttribute="leading" id="OvZ-PL-6Ge"/>
+                    <constraint firstAttribute="bottom" secondItem="ntY-Bm-aSN" secondAttribute="bottom" constant="5" id="UNW-Hz-ylF"/>
+                    <constraint firstItem="UXL-GI-b7B" firstAttribute="trailing" secondItem="FRh-lS-mZz" secondAttribute="trailing" id="ghb-U8-KOs"/>
+                    <constraint firstItem="FRh-lS-mZz" firstAttribute="leading" secondItem="1K0-XR-VCd" secondAttribute="leading" constant="20" id="jbz-zo-u4d"/>
+                    <constraint firstItem="8Cq-xO-rTb" firstAttribute="top" secondItem="1K0-XR-VCd" secondAttribute="top" constant="10" id="nLO-Nt-zFs"/>
+                    <constraint firstItem="FRh-lS-mZz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1K0-XR-VCd" secondAttribute="top" constant="20" id="qaL-eg-P0j"/>
+                    <constraint firstItem="UXL-GI-b7B" firstAttribute="top" secondItem="FRh-lS-mZz" secondAttribute="bottom" constant="8" symbolic="YES" id="ug9-tP-VVI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="errorLabel" destination="ntY-Bm-aSN" id="0D6-eb-r2x"/>
+                <outlet property="errorLabelHeight" destination="608-dW-3ka" id="xRS-rz-Bay"/>
+                <outlet property="mainDropDown" destination="UXL-GI-b7B" id="qCy-uR-7gL"/>
+                <outlet property="resetBtn" destination="8Cq-xO-rTb" id="PV0-eT-WTw"/>
+                <outlet property="uriLbl" destination="FRh-lS-mZz" id="kp4-Gd-SqT"/>
+            </connections>
+            <point key="canvasLocation" x="189.85507246376812" y="-10.379464285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="undo" width="32" height="32"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -19,9 +19,6 @@ class LoginViewController: UIViewController {
     var surveyStartTime = ""
     var surveyID = ""
 
-
-    let transition = BubbleTransition()
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -121,21 +118,5 @@ class LoginViewController: UIViewController {
 //              }
 //            }
     }
-    }
-}
-
-extension LoginViewController : UIViewControllerTransitioningDelegate {
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .present
-      transition.startingPoint = ezLoginBtn.center
-      transition.bubbleColor = ezLoginBtn.backgroundColor!
-      return transition
-    }
-
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .dismiss
-      transition.startingPoint = ezLoginBtn.center
-      transition.bubbleColor = ezLoginBtn.backgroundColor!
-      return transition
     }
 }

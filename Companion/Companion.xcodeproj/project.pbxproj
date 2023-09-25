@@ -42,6 +42,64 @@
 		92914E272A20E822003B968E /* EventListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92914E262A20E822003B968E /* EventListVC.swift */; };
 		9299B59D2ABC509B002963AC /* SurveyListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B59C2ABC509B002963AC /* SurveyListVC.swift */; };
 		9299B59F2ABC5174002963AC /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B59E2ABC5174002963AC /* NotificationVC.swift */; };
+		9299B5A32ABEF41B002963AC /* ERProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5A22ABEF41B002963AC /* ERProgressHud.swift */; };
+		9299B5A72ABEF48B002963AC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5A62ABEF48B002963AC /* Constants.swift */; };
+		9299B5A92ABEF4C4002963AC /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5A82ABEF4C4002963AC /* Extention.swift */; };
+		9299B5B32ABEF687002963AC /* AuthenticationMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5AB2ABEF687002963AC /* AuthenticationMethods.swift */; };
+		9299B5B52ABEF687002963AC /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5AD2ABEF687002963AC /* FloatingLabelTextField.swift */; };
+		9299B5B62ABEF687002963AC /* NewScriptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5AE2ABEF687002963AC /* NewScriptHelper.swift */; };
+		9299B5B72ABEF687002963AC /* FloatingLabelTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5AF2ABEF687002963AC /* FloatingLabelTextField.xib */; };
+		9299B5B82ABEF687002963AC /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5B02ABEF687002963AC /* CustomTextField.swift */; };
+		9299B5B92ABEF687002963AC /* NewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5B12ABEF687002963AC /* NewUtilities.swift */; };
+		9299B5C32ABEF6CF002963AC /* ApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BC2ABEF6CE002963AC /* ApiParameters.swift */; };
+		9299B5C42ABEF6CF002963AC /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BD2ABEF6CE002963AC /* Instruments.swift */; };
+		9299B5C52ABEF6CF002963AC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BE2ABEF6CE002963AC /* APIManager.swift */; };
+		9299B5C62ABEF6CF002963AC /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BF2ABEF6CE002963AC /* ValidationHelper.swift */; };
+		9299B5C72ABEF6CF002963AC /* NewRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5C02ABEF6CE002963AC /* NewRequestHelper.swift */; };
+		9299B5C82ABEF6CF002963AC /* DDCFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5C12ABEF6CE002963AC /* DDCFormModel.swift */; };
+		9299B5C92ABEF6CF002963AC /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5C22ABEF6CE002963AC /* FieldType.swift */; };
+		9299B5E82ABEF6F9002963AC /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CB2ABEF6F9002963AC /* DatePickerTableViewCell.xib */; };
+		9299B5E92ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib */; };
+		9299B5EA2ABEF6F9002963AC /* TextfieldComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CD2ABEF6F9002963AC /* TextfieldComponent.xib */; };
+		9299B5EB2ABEF6F9002963AC /* TimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5CE2ABEF6F9002963AC /* TimePickerTableViewCell.swift */; };
+		9299B5EC2ABEF6F9002963AC /* CheckBoxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CF2ABEF6F9002963AC /* CheckBoxTableViewCell.xib */; };
+		9299B5ED2ABEF6F9002963AC /* PickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5D02ABEF6F9002963AC /* PickerTableViewCell.xib */; };
+		9299B5EE2ABEF6F9002963AC /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5D12ABEF6F9002963AC /* TextViewTableViewCell.swift */; };
+		9299B5EF2ABEF6F9002963AC /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5D22ABEF6F9002963AC /* SliderTableViewCell.swift */; };
+		9299B5F02ABEF6F9002963AC /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5D32ABEF6F9002963AC /* DatePickerTableViewCell.swift */; };
+		9299B5F12ABEF6F9002963AC /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5D42ABEF6F9002963AC /* PickerTableViewCell.swift */; };
+		9299B5F22ABEF6F9002963AC /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5D52ABEF6F9002963AC /* AutocompleteTableViewCell.swift */; };
+		9299B5F32ABEF6F9002963AC /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5D62ABEF6F9002963AC /* SliderTableViewCell.xib */; };
+		9299B5F42ABEF6F9002963AC /* RadioButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5D72ABEF6F9002963AC /* RadioButtonTableViewCell.xib */; };
+		9299B5F52ABEF6F9002963AC /* RepeatableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5D92ABEF6F9002963AC /* RepeatableTableViewCell.swift */; };
+		9299B5F62ABEF6F9002963AC /* RepeatableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5DA2ABEF6F9002963AC /* RepeatableTableViewCell.xib */; };
+		9299B5F72ABEF6F9002963AC /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5DB2ABEF6F9002963AC /* TextViewTableViewCell.xib */; };
+		9299B5F82ABEF6F9002963AC /* ToggleSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5DC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.swift */; };
+		9299B5F92ABEF6F9002963AC /* AutocompleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5DD2ABEF6F9002963AC /* AutocompleteTableViewCell.xib */; };
+		9299B5FA2ABEF6F9002963AC /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5DE2ABEF6F9002963AC /* DropDownTableViewCell.xib */; };
+		9299B5FB2ABEF6F9002963AC /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5DF2ABEF6F9002963AC /* DropDownTableViewCell.swift */; };
+		9299B5FC2ABEF6F9002963AC /* RadioButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5E02ABEF6F9002963AC /* RadioButtonTableViewCell.swift */; };
+		9299B5FD2ABEF6F9002963AC /* CheckBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5E12ABEF6F9002963AC /* CheckBoxTableViewCell.swift */; };
+		9299B5FE2ABEF6F9002963AC /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5E22ABEF6F9002963AC /* MessageTableViewCell.swift */; };
+		9299B5FF2ABEF6F9002963AC /* TimePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5E32ABEF6F9002963AC /* TimePickerTableViewCell.xib */; };
+		9299B6002ABEF6F9002963AC /* InlineGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5E52ABEF6F9002963AC /* InlineGroupCell.swift */; };
+		9299B6012ABEF6F9002963AC /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5E62ABEF6F9002963AC /* MessageTableViewCell.xib */; };
+		9299B6022ABEF6F9002963AC /* TextfieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5E72ABEF6F9002963AC /* TextfieldComponent.swift */; };
+		9299B6052ABEF708002963AC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6032ABEF708002963AC /* BaseViewController.swift */; };
+		9299B6062ABEF708002963AC /* DynamiccTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6042ABEF708002963AC /* DynamiccTemplateViewController.swift */; };
+		9299B61A2ABEF748002963AC /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B60B2ABEF748002963AC /* DropDownCell.xib */; };
+		9299B61B2ABEF748002963AC /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B60D2ABEF748002963AC /* DPDKeyboardListener.swift */; };
+		9299B61C2ABEF748002963AC /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B60E2ABEF748002963AC /* DPDConstants.swift */; };
+		9299B61D2ABEF748002963AC /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B60F2ABEF748002963AC /* DPDUIView+Extension.swift */; };
+		9299B61E2ABEF748002963AC /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6112ABEF748002963AC /* DropDownCell.swift */; };
+		9299B61F2ABEF748002963AC /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6122ABEF748002963AC /* DropDown+Appearance.swift */; };
+		9299B6202ABEF748002963AC /* DropDownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6132ABEF748002963AC /* DropDownList.swift */; };
+		9299B6212ABEF748002963AC /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6142ABEF748002963AC /* iOSDropDown.swift */; };
+		9299B6222ABEF748002963AC /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6172ABEF748002963AC /* UIColor+Ext.swift */; };
+		9299B6232ABEF748002963AC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6182ABEF748002963AC /* Colors.swift */; };
+		9299B6242ABEF748002963AC /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6192ABEF748002963AC /* DatePickerDialog.swift */; };
+		9299B6262AC04A46002963AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9299B6252AC04A46002963AC /* Main.storyboard */; };
+		9299B6282AC04BD0002963AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9299B6272AC04BD0002963AC /* Assets.xcassets */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -64,9 +122,6 @@
 		92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */; };
 		92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */; };
 		92AA353F29D6E86D00A6A4AB /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */; };
-		92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */; };
-		92AD9E302966E02400B5E936 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2B2966E02400B5E936 /* Colors.swift */; };
-		92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */; };
 		92B3A848296C023A00C03761 /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3A847296C023A00C03761 /* GridViewController.swift */; };
 		92CF331F2A3C95FD00FA5763 /* Companion.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 92AA354229E5A7CC00A6A4AB /* Companion.entitlements */; };
 		92CF33262A4438E100FA5763 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CF33252A4438E100FA5763 /* ReplayKit.framework */; };
@@ -81,23 +136,6 @@
 		92CFA7F729547B9700D77883 /* AppCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */; };
 		92CFA939295A0E8A00D77883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFA937295A0E8A00D77883 /* AppDelegate.swift */; };
 		92CFA93A295A0E8A00D77883 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFA938295A0E8A00D77883 /* SceneDelegate.swift */; };
-		92CFAB28295B1B9C00D77883 /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAA7C295B1B9B00D77883 /* DatePickerTableViewCell.xib */; };
-		92CFAB29295B1B9C00D77883 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA7D295B1B9B00D77883 /* ViewController.swift */; };
-		92CFAB2A295B1B9C00D77883 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAA81295B1B9B00D77883 /* DropDownCell.xib */; };
-		92CFAB2B295B1B9C00D77883 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA83295B1B9B00D77883 /* DPDKeyboardListener.swift */; };
-		92CFAB2C295B1B9C00D77883 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA84295B1B9B00D77883 /* DPDConstants.swift */; };
-		92CFAB2D295B1B9C00D77883 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA85295B1B9B00D77883 /* DPDUIView+Extension.swift */; };
-		92CFAB2E295B1B9C00D77883 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA87295B1B9B00D77883 /* DropDownCell.swift */; };
-		92CFAB2F295B1B9C00D77883 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA88295B1B9B00D77883 /* DropDown+Appearance.swift */; };
-		92CFAB30295B1B9C00D77883 /* DropDownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA89295B1B9B00D77883 /* DropDownList.swift */; };
-		92CFAB31295B1B9C00D77883 /* ToggleSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAA8A295B1B9B00D77883 /* ToggleSwitchTableViewCell.xib */; };
-		92CFAB32295B1B9C00D77883 /* TextfieldComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAA8B295B1B9B00D77883 /* TextfieldComponent.xib */; };
-		92CFAB33295B1B9C00D77883 /* TimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA8C295B1B9B00D77883 /* TimePickerTableViewCell.swift */; };
-		92CFAB34295B1B9C00D77883 /* CheckBoxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAA8D295B1B9B00D77883 /* CheckBoxTableViewCell.xib */; };
-		92CFAB35295B1B9C00D77883 /* PickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAA8E295B1B9B00D77883 /* PickerTableViewCell.xib */; };
-		92CFAB36295B1B9C00D77883 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA8F295B1B9B00D77883 /* TextViewTableViewCell.swift */; };
-		92CFAB37295B1B9C00D77883 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA91295B1B9B00D77883 /* Constants.swift */; };
-		92CFAB38295B1B9C00D77883 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA92295B1B9B00D77883 /* SliderTableViewCell.swift */; };
 		92CFAB39295B1B9C00D77883 /* BioMetricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA95295B1B9B00D77883 /* BioMetricAuthenticator.swift */; };
 		92CFAB3A295B1B9C00D77883 /* BiometricAuthenticationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA96295B1B9B00D77883 /* BiometricAuthenticationConstants.swift */; };
 		92CFAB3B295B1B9C00D77883 /* AuthenticationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAA97295B1B9B00D77883 /* AuthenticationErrors.swift */; };
@@ -173,51 +211,10 @@
 		92CFAB81295B1B9C00D77883 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEA295B1B9C00D77883 /* LoginViewController.swift */; };
 		92CFAB82295B1B9C00D77883 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEB295B1B9C00D77883 /* LaunchViewController.swift */; };
 		92CFAB83295B1B9C00D77883 /* FailScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEC295B1B9C00D77883 /* FailScreenViewController.swift */; };
-		92CFAB84295B1B9C00D77883 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAED295B1B9C00D77883 /* DatePickerTableViewCell.swift */; };
-		92CFAB85295B1B9C00D77883 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEE295B1B9C00D77883 /* PickerTableViewCell.swift */; };
-		92CFAB86295B1B9C00D77883 /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEF295B1B9C00D77883 /* AutocompleteTableViewCell.swift */; };
-		92CFAB87295B1B9C00D77883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF0295B1B9C00D77883 /* Assets.xcassets */; };
-		92CFAB88295B1B9C00D77883 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF1295B1B9C00D77883 /* SliderTableViewCell.xib */; };
-		92CFAB89295B1B9C00D77883 /* RadioButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF2295B1B9C00D77883 /* RadioButtonTableViewCell.xib */; };
-		92CFAB8A295B1B9C00D77883 /* RepeatableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAF4295B1B9C00D77883 /* RepeatableTableViewCell.swift */; };
-		92CFAB8B295B1B9C00D77883 /* RepeatableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF5295B1B9C00D77883 /* RepeatableTableViewCell.xib */; };
 		92CFAB8C295B1B9C00D77883 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF6295B1B9C00D77883 /* GoogleService-Info.plist */; };
-		92CFAB8D295B1B9C00D77883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF8295B1B9C00D77883 /* Main.storyboard */; };
-		92CFAB8E295B1B9C00D77883 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAFB295B1B9C00D77883 /* LoadViewController.swift */; };
-		92CFAB8F295B1B9C00D77883 /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAFC295B1B9C00D77883 /* TextViewTableViewCell.xib */; };
-		92CFAB90295B1B9C00D77883 /* ScriptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAFF295B1B9C00D77883 /* ScriptHelper.swift */; };
-		92CFAB91295B1B9C00D77883 /* ApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB00295B1B9C00D77883 /* ApiParameters.swift */; };
-		92CFAB92295B1B9C00D77883 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB01295B1B9C00D77883 /* APIManager.swift */; };
-		92CFAB93295B1B9C00D77883 /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB02295B1B9C00D77883 /* ValidationHelper.swift */; };
-		92CFAB94295B1B9C00D77883 /* DDCFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB03295B1B9C00D77883 /* DDCFormModel.swift */; };
 		92CFAB95295B1B9C00D77883 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB05295B1B9C00D77883 /* AnyDecodable.swift */; };
 		92CFAB96295B1B9C00D77883 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB06295B1B9C00D77883 /* AnyCodable.swift */; };
 		92CFAB97295B1B9C00D77883 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB07295B1B9C00D77883 /* AnyEncodable.swift */; };
-		92CFAB98295B1B9C00D77883 /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB08295B1B9C00D77883 /* FieldType.swift */; };
-		92CFAB99295B1B9C00D77883 /* RequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB09295B1B9C00D77883 /* RequestHelper.swift */; };
-		92CFAB9A295B1B9C00D77883 /* ToggleSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB0A295B1B9C00D77883 /* ToggleSwitchTableViewCell.swift */; };
-		92CFAB9B295B1B9C00D77883 /* AutocompleteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAB0B295B1B9C00D77883 /* AutocompleteTableViewCell.xib */; };
-		92CFAB9C295B1B9C00D77883 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAB0C295B1B9C00D77883 /* DropDownTableViewCell.xib */; };
-		92CFAB9D295B1B9C00D77883 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB0D295B1B9C00D77883 /* DropDownTableViewCell.swift */; };
-		92CFAB9E295B1B9C00D77883 /* AuthenticationMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB0F295B1B9C00D77883 /* AuthenticationMethods.swift */; };
-		92CFAB9F295B1B9C00D77883 /* ERProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB10295B1B9C00D77883 /* ERProgressHud.swift */; };
-		92CFABA0295B1B9C00D77883 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB11295B1B9C00D77883 /* Utilities.swift */; };
-		92CFABA1295B1B9C00D77883 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB12295B1B9C00D77883 /* iOSDropDown.swift */; };
-		92CFABA2295B1B9C00D77883 /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB13295B1B9C00D77883 /* FloatingLabelTextField.swift */; };
-		92CFABA3295B1B9C00D77883 /* FloatingLabelTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAB14295B1B9C00D77883 /* FloatingLabelTextField.xib */; };
-		92CFABA4295B1B9C00D77883 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB15295B1B9C00D77883 /* CustomTextField.swift */; };
-		92CFABA5295B1B9C00D77883 /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB18295B1B9C00D77883 /* BubbleTransition.swift */; };
-		92CFABA6295B1B9C00D77883 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB19295B1B9C00D77883 /* Extention.swift */; };
-		92CFABA7295B1B9C00D77883 /* NeumorphicTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB1B295B1B9C00D77883 /* NeumorphicTextField.swift */; };
-		92CFABA8295B1B9C00D77883 /* NeumorphicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB1C295B1B9C00D77883 /* NeumorphicButton.swift */; };
-		92CFABA9295B1B9C00D77883 /* RadioButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB1D295B1B9C00D77883 /* RadioButtonTableViewCell.swift */; };
-		92CFABAA295B1B9C00D77883 /* CheckBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB1E295B1B9C00D77883 /* CheckBoxTableViewCell.swift */; };
-		92CFABAB295B1B9C00D77883 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB1F295B1B9C00D77883 /* MessageTableViewCell.swift */; };
-		92CFABAC295B1B9C00D77883 /* TimePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAB20295B1B9C00D77883 /* TimePickerTableViewCell.xib */; };
-		92CFABAD295B1B9C00D77883 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAB21295B1B9C00D77883 /* MessageTableViewCell.xib */; };
-		92CFABAE295B1B9C00D77883 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */; };
-		92CFABAF295B1B9C00D77883 /* DynamicTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */; };
-		92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */; };
 		92D9C31C2A02C391008F5987 /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31B2A02C390008F5987 /* CallingViewController.swift */; };
 		92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */; };
 		92D9C3232A03F574008F5987 /* phoneringing.caf in Resources */ = {isa = PBXBuildFile; fileRef = 92D9C3202A03F40E008F5987 /* phoneringing.caf */; };
@@ -323,6 +320,65 @@
 		92914E262A20E822003B968E /* EventListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListVC.swift; sourceTree = "<group>"; };
 		9299B59C2ABC509B002963AC /* SurveyListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListVC.swift; sourceTree = "<group>"; };
 		9299B59E2ABC5174002963AC /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		9299B5A22ABEF41B002963AC /* ERProgressHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERProgressHud.swift; sourceTree = "<group>"; };
+		9299B5A62ABEF48B002963AC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9299B5A82ABEF4C4002963AC /* Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
+		9299B5AB2ABEF687002963AC /* AuthenticationMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationMethods.swift; sourceTree = "<group>"; };
+		9299B5AD2ABEF687002963AC /* FloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingLabelTextField.swift; sourceTree = "<group>"; };
+		9299B5AE2ABEF687002963AC /* NewScriptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewScriptHelper.swift; sourceTree = "<group>"; };
+		9299B5AF2ABEF687002963AC /* FloatingLabelTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingLabelTextField.xib; sourceTree = "<group>"; };
+		9299B5B02ABEF687002963AC /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		9299B5B12ABEF687002963AC /* NewUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUtilities.swift; sourceTree = "<group>"; };
+		9299B5BC2ABEF6CE002963AC /* ApiParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiParameters.swift; sourceTree = "<group>"; };
+		9299B5BD2ABEF6CE002963AC /* Instruments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
+		9299B5BE2ABEF6CE002963AC /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		9299B5BF2ABEF6CE002963AC /* ValidationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationHelper.swift; sourceTree = "<group>"; };
+		9299B5C02ABEF6CE002963AC /* NewRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestHelper.swift; sourceTree = "<group>"; };
+		9299B5C12ABEF6CE002963AC /* DDCFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCFormModel.swift; sourceTree = "<group>"; };
+		9299B5C22ABEF6CE002963AC /* FieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
+		9299B5CB2ABEF6F9002963AC /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5CC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleSwitchTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5CD2ABEF6F9002963AC /* TextfieldComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldComponent.xib; sourceTree = "<group>"; };
+		9299B5CE2ABEF6F9002963AC /* TimePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5CF2ABEF6F9002963AC /* CheckBoxTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckBoxTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5D02ABEF6F9002963AC /* PickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5D12ABEF6F9002963AC /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5D22ABEF6F9002963AC /* SliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5D32ABEF6F9002963AC /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5D42ABEF6F9002963AC /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5D52ABEF6F9002963AC /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5D62ABEF6F9002963AC /* SliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5D72ABEF6F9002963AC /* RadioButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioButtonTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5D92ABEF6F9002963AC /* RepeatableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatableTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5DA2ABEF6F9002963AC /* RepeatableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepeatableTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5DB2ABEF6F9002963AC /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5DC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5DD2ABEF6F9002963AC /* AutocompleteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5DE2ABEF6F9002963AC /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5DF2ABEF6F9002963AC /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5E02ABEF6F9002963AC /* RadioButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5E12ABEF6F9002963AC /* CheckBoxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5E22ABEF6F9002963AC /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		9299B5E32ABEF6F9002963AC /* TimePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimePickerTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5E52ABEF6F9002963AC /* InlineGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineGroupCell.swift; sourceTree = "<group>"; };
+		9299B5E62ABEF6F9002963AC /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
+		9299B5E72ABEF6F9002963AC /* TextfieldComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldComponent.swift; sourceTree = "<group>"; };
+		9299B6032ABEF708002963AC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9299B6042ABEF708002963AC /* DynamiccTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamiccTemplateViewController.swift; sourceTree = "<group>"; };
+		9299B6092ABEF748002963AC /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDown.h; sourceTree = "<group>"; };
+		9299B60B2ABEF748002963AC /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
+		9299B60D2ABEF748002963AC /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
+		9299B60E2ABEF748002963AC /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
+		9299B60F2ABEF748002963AC /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
+		9299B6112ABEF748002963AC /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		9299B6122ABEF748002963AC /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
+		9299B6132ABEF748002963AC /* DropDownList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownList.swift; sourceTree = "<group>"; };
+		9299B6142ABEF748002963AC /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
+		9299B6172ABEF748002963AC /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		9299B6182ABEF748002963AC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		9299B6192ABEF748002963AC /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
+		9299B6252AC04A46002963AC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9299B6272AC04BD0002963AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -348,9 +404,6 @@
 		92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		92AA354029E5A7B000A6A4AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92AA354229E5A7CC00A6A4AB /* Companion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Companion.entitlements; sourceTree = "<group>"; };
-		92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
-		92AD9E2B2966E02400B5E936 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		92B3A847296C023A00C03761 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		92CF33242A4438E100FA5763 /* Broadcast Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Broadcast Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CF33252A4438E100FA5763 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
@@ -367,24 +420,6 @@
 		92CFA7F629547B9700D77883 /* AppCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCollectionViewCell.swift; sourceTree = "<group>"; };
 		92CFA937295A0E8A00D77883 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92CFA938295A0E8A00D77883 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		92CFAA7C295B1B9B00D77883 /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAA7D295B1B9B00D77883 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		92CFAA7F295B1B9B00D77883 /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDown.h; sourceTree = "<group>"; };
-		92CFAA81295B1B9B00D77883 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
-		92CFAA83295B1B9B00D77883 /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
-		92CFAA84295B1B9B00D77883 /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
-		92CFAA85295B1B9B00D77883 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
-		92CFAA87295B1B9B00D77883 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
-		92CFAA88295B1B9B00D77883 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
-		92CFAA89295B1B9B00D77883 /* DropDownList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownList.swift; sourceTree = "<group>"; };
-		92CFAA8A295B1B9B00D77883 /* ToggleSwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleSwitchTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAA8B295B1B9B00D77883 /* TextfieldComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldComponent.xib; sourceTree = "<group>"; };
-		92CFAA8C295B1B9B00D77883 /* TimePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAA8D295B1B9B00D77883 /* CheckBoxTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckBoxTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAA8E295B1B9B00D77883 /* PickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAA8F295B1B9B00D77883 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAA91295B1B9B00D77883 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		92CFAA92295B1B9B00D77883 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		92CFAA95295B1B9B00D77883 /* BioMetricAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BioMetricAuthenticator.swift; sourceTree = "<group>"; };
 		92CFAA96295B1B9B00D77883 /* BiometricAuthenticationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticationConstants.swift; sourceTree = "<group>"; };
 		92CFAA97295B1B9B00D77883 /* AuthenticationErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationErrors.swift; sourceTree = "<group>"; };
@@ -460,56 +495,12 @@
 		92CFAAEA295B1B9C00D77883 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		92CFAAEB295B1B9C00D77883 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		92CFAAEC295B1B9C00D77883 /* FailScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailScreenViewController.swift; sourceTree = "<group>"; };
-		92CFAAED295B1B9C00D77883 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAAEE295B1B9C00D77883 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAAEF295B1B9C00D77883 /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAAF0295B1B9C00D77883 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		92CFAAF1295B1B9C00D77883 /* SliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAAF2295B1B9C00D77883 /* RadioButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioButtonTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAAF4295B1B9C00D77883 /* RepeatableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatableTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAAF5295B1B9C00D77883 /* RepeatableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepeatableTableViewCell.xib; sourceTree = "<group>"; };
 		92CFAAF6295B1B9C00D77883 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92CFAAF7295B1B9C00D77883 /* CompanDebug.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = CompanDebug.entitlements; sourceTree = "<group>"; };
-		92CFAAF9295B1B9C00D77883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		92CFAAFB295B1B9C00D77883 /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
-		92CFAAFC295B1B9C00D77883 /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
 		92CFAAFD295B1B9C00D77883 /* CompanRelease.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = CompanRelease.entitlements; sourceTree = "<group>"; };
-		92CFAAFF295B1B9C00D77883 /* ScriptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptHelper.swift; sourceTree = "<group>"; };
-		92CFAB00295B1B9C00D77883 /* ApiParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiParameters.swift; sourceTree = "<group>"; };
-		92CFAB01295B1B9C00D77883 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		92CFAB02295B1B9C00D77883 /* ValidationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationHelper.swift; sourceTree = "<group>"; };
-		92CFAB03295B1B9C00D77883 /* DDCFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCFormModel.swift; sourceTree = "<group>"; };
 		92CFAB05295B1B9C00D77883 /* AnyDecodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDecodable.swift; sourceTree = "<group>"; };
 		92CFAB06295B1B9C00D77883 /* AnyCodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
 		92CFAB07295B1B9C00D77883 /* AnyEncodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyEncodable.swift; sourceTree = "<group>"; };
-		92CFAB08295B1B9C00D77883 /* FieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
-		92CFAB09295B1B9C00D77883 /* RequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestHelper.swift; sourceTree = "<group>"; };
-		92CFAB0A295B1B9C00D77883 /* ToggleSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleSwitchTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAB0B295B1B9C00D77883 /* AutocompleteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutocompleteTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAB0C295B1B9C00D77883 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAB0D295B1B9C00D77883 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAB0F295B1B9C00D77883 /* AuthenticationMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationMethods.swift; sourceTree = "<group>"; };
-		92CFAB10295B1B9C00D77883 /* ERProgressHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERProgressHud.swift; sourceTree = "<group>"; };
-		92CFAB11295B1B9C00D77883 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		92CFAB12295B1B9C00D77883 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
-		92CFAB13295B1B9C00D77883 /* FloatingLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingLabelTextField.swift; sourceTree = "<group>"; };
-		92CFAB14295B1B9C00D77883 /* FloatingLabelTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingLabelTextField.xib; sourceTree = "<group>"; };
-		92CFAB15295B1B9C00D77883 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		92CFAB17295B1B9C00D77883 /* BubbleTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleTransition.h; sourceTree = "<group>"; };
-		92CFAB18295B1B9C00D77883 /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
-		92CFAB19295B1B9C00D77883 /* Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
-		92CFAB1B295B1B9C00D77883 /* NeumorphicTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeumorphicTextField.swift; sourceTree = "<group>"; };
-		92CFAB1C295B1B9C00D77883 /* NeumorphicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeumorphicButton.swift; sourceTree = "<group>"; };
-		92CFAB1D295B1B9C00D77883 /* RadioButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAB1E295B1B9C00D77883 /* CheckBoxTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBoxTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAB1F295B1B9C00D77883 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
-		92CFAB20295B1B9C00D77883 /* TimePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimePickerTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAB21295B1B9C00D77883 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
-		92CFAB23295B1B9C00D77883 /* Compan-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compan-Bridging-Header.h"; sourceTree = "<group>"; };
-		92CFAB24295B1B9C00D77883 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicTemplateViewController.swift; sourceTree = "<group>"; };
-		92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextfieldComponent.swift; sourceTree = "<group>"; };
 		92D9C31B2A02C390008F5987 /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
 		92D9C31E2A02CAF7008F5987 /* RingingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingViewController.swift; sourceTree = "<group>"; };
 		92D9C3202A03F40E008F5987 /* phoneringing.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = phoneringing.caf; sourceTree = "<group>"; };
@@ -631,6 +622,152 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		9299B5AA2ABEF687002963AC /* Utility & Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9299B5AB2ABEF687002963AC /* AuthenticationMethods.swift */,
+				9299B5AD2ABEF687002963AC /* FloatingLabelTextField.swift */,
+				9299B5AE2ABEF687002963AC /* NewScriptHelper.swift */,
+				9299B5AF2ABEF687002963AC /* FloatingLabelTextField.xib */,
+				9299B5B02ABEF687002963AC /* CustomTextField.swift */,
+				9299B5A82ABEF4C4002963AC /* Extention.swift */,
+				9299B5B12ABEF687002963AC /* NewUtilities.swift */,
+			);
+			path = "Utility & Extensions";
+			sourceTree = "<group>";
+		};
+		9299B5BB2ABEF6CE002963AC /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				9299B5BC2ABEF6CE002963AC /* ApiParameters.swift */,
+				9299B5BD2ABEF6CE002963AC /* Instruments.swift */,
+				9299B5BE2ABEF6CE002963AC /* APIManager.swift */,
+				9299B5BF2ABEF6CE002963AC /* ValidationHelper.swift */,
+				9299B5C02ABEF6CE002963AC /* NewRequestHelper.swift */,
+				9299B5C12ABEF6CE002963AC /* DDCFormModel.swift */,
+				9299B5C22ABEF6CE002963AC /* FieldType.swift */,
+			);
+			name = APIManager;
+			path = ../../../../../Desktop/DDCV2/ddcv2/APIManager;
+			sourceTree = "<group>";
+		};
+		9299B5CA2ABEF6F9002963AC /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				9299B5CB2ABEF6F9002963AC /* DatePickerTableViewCell.xib */,
+				9299B5CC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib */,
+				9299B5CD2ABEF6F9002963AC /* TextfieldComponent.xib */,
+				9299B5CE2ABEF6F9002963AC /* TimePickerTableViewCell.swift */,
+				9299B5CF2ABEF6F9002963AC /* CheckBoxTableViewCell.xib */,
+				9299B5D02ABEF6F9002963AC /* PickerTableViewCell.xib */,
+				9299B5D12ABEF6F9002963AC /* TextViewTableViewCell.swift */,
+				9299B5D22ABEF6F9002963AC /* SliderTableViewCell.swift */,
+				9299B5D32ABEF6F9002963AC /* DatePickerTableViewCell.swift */,
+				9299B5D42ABEF6F9002963AC /* PickerTableViewCell.swift */,
+				9299B5D52ABEF6F9002963AC /* AutocompleteTableViewCell.swift */,
+				9299B5D62ABEF6F9002963AC /* SliderTableViewCell.xib */,
+				9299B5D72ABEF6F9002963AC /* RadioButtonTableViewCell.xib */,
+				9299B5D82ABEF6F9002963AC /* RepeatableGroupCell */,
+				9299B5DB2ABEF6F9002963AC /* TextViewTableViewCell.xib */,
+				9299B5DC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.swift */,
+				9299B5DD2ABEF6F9002963AC /* AutocompleteTableViewCell.xib */,
+				9299B5DE2ABEF6F9002963AC /* DropDownTableViewCell.xib */,
+				9299B5DF2ABEF6F9002963AC /* DropDownTableViewCell.swift */,
+				9299B5E02ABEF6F9002963AC /* RadioButtonTableViewCell.swift */,
+				9299B5E12ABEF6F9002963AC /* CheckBoxTableViewCell.swift */,
+				9299B5E22ABEF6F9002963AC /* MessageTableViewCell.swift */,
+				9299B5E32ABEF6F9002963AC /* TimePickerTableViewCell.xib */,
+				9299B5E42ABEF6F9002963AC /* InlineGroupCell */,
+				9299B5E62ABEF6F9002963AC /* MessageTableViewCell.xib */,
+				9299B5E72ABEF6F9002963AC /* TextfieldComponent.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		9299B5D82ABEF6F9002963AC /* RepeatableGroupCell */ = {
+			isa = PBXGroup;
+			children = (
+				9299B5D92ABEF6F9002963AC /* RepeatableTableViewCell.swift */,
+				9299B5DA2ABEF6F9002963AC /* RepeatableTableViewCell.xib */,
+			);
+			path = RepeatableGroupCell;
+			sourceTree = "<group>";
+		};
+		9299B5E42ABEF6F9002963AC /* InlineGroupCell */ = {
+			isa = PBXGroup;
+			children = (
+				9299B5E52ABEF6F9002963AC /* InlineGroupCell.swift */,
+			);
+			path = InlineGroupCell;
+			sourceTree = "<group>";
+		};
+		9299B6072ABEF748002963AC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9299B6082ABEF748002963AC /* DropDown */,
+				9299B6142ABEF748002963AC /* iOSDropDown.swift */,
+				9299B6152ABEF748002963AC /* DatePickerDialog */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9299B6082ABEF748002963AC /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				9299B6092ABEF748002963AC /* DropDown.h */,
+				9299B60A2ABEF748002963AC /* resources */,
+				9299B60C2ABEF748002963AC /* helpers */,
+				9299B6102ABEF748002963AC /* src */,
+			);
+			path = DropDown;
+			sourceTree = "<group>";
+		};
+		9299B60A2ABEF748002963AC /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				9299B60B2ABEF748002963AC /* DropDownCell.xib */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		9299B60C2ABEF748002963AC /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9299B60D2ABEF748002963AC /* DPDKeyboardListener.swift */,
+				9299B60E2ABEF748002963AC /* DPDConstants.swift */,
+				9299B60F2ABEF748002963AC /* DPDUIView+Extension.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		9299B6102ABEF748002963AC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9299B6112ABEF748002963AC /* DropDownCell.swift */,
+				9299B6122ABEF748002963AC /* DropDown+Appearance.swift */,
+				9299B6132ABEF748002963AC /* DropDownList.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		9299B6152ABEF748002963AC /* DatePickerDialog */ = {
+			isa = PBXGroup;
+			children = (
+				9299B6162ABEF748002963AC /* Sources */,
+			);
+			path = DatePickerDialog;
+			sourceTree = "<group>";
+		};
+		9299B6162ABEF748002963AC /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9299B6172ABEF748002963AC /* UIColor+Ext.swift */,
+				9299B6182ABEF748002963AC /* Colors.swift */,
+				9299B6192ABEF748002963AC /* DatePickerDialog.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		92AA350429BF6F2D00A6A4AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -674,24 +811,6 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		92AD9E262966E02400B5E936 /* DatePickerDialog */ = {
-			isa = PBXGroup;
-			children = (
-				92AD9E292966E02400B5E936 /* Sources */,
-			);
-			path = DatePickerDialog;
-			sourceTree = "<group>";
-		};
-		92AD9E292966E02400B5E936 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				92AD9E2A2966E02400B5E936 /* UIColor+Ext.swift */,
-				92AD9E2B2966E02400B5E936 /* Colors.swift */,
-				92AD9E2C2966E02400B5E936 /* DatePickerDialog.swift */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 		92CF33272A4438E100FA5763 /* Broadcast Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +852,8 @@
 			children = (
 				92AA354229E5A7CC00A6A4AB /* Companion.entitlements */,
 				92AA350D29BF945300A6A4AB /* FittedSheets */,
+				92CFAB04295B1B9C00D77883 /* AnyCodableClasses */,
+				9299B5A22ABEF41B002963AC /* ERProgressHud.swift */,
 				9281229529BF5BAA0021A679 /* FSCalendar */,
 				92CFAA7B295B1B9B00D77883 /* Compan */,
 				92CFAA93295B1B9B00D77883 /* LoginVC */,
@@ -770,93 +891,20 @@
 		92CFAA7B295B1B9B00D77883 /* Compan */ = {
 			isa = PBXGroup;
 			children = (
-				92CFAA7C295B1B9B00D77883 /* DatePickerTableViewCell.xib */,
-				92CFAA7D295B1B9B00D77883 /* ViewController.swift */,
-				92CFAA7E295B1B9B00D77883 /* DropDown */,
-				92CFAA8A295B1B9B00D77883 /* ToggleSwitchTableViewCell.xib */,
-				92CFAA8B295B1B9B00D77883 /* TextfieldComponent.xib */,
-				92CFAA8C295B1B9B00D77883 /* TimePickerTableViewCell.swift */,
-				92CFAA8D295B1B9B00D77883 /* CheckBoxTableViewCell.xib */,
-				92CFAA8E295B1B9B00D77883 /* PickerTableViewCell.xib */,
-				92CFAA8F295B1B9B00D77883 /* TextViewTableViewCell.swift */,
-				92CFAA90295B1B9B00D77883 /* Constants */,
-				92CFAA92295B1B9B00D77883 /* SliderTableViewCell.swift */,
-				92CFAAED295B1B9C00D77883 /* DatePickerTableViewCell.swift */,
-				92CFAAEE295B1B9C00D77883 /* PickerTableViewCell.swift */,
-				92CFAAEF295B1B9C00D77883 /* AutocompleteTableViewCell.swift */,
-				92CFAAF0295B1B9C00D77883 /* Assets.xcassets */,
-				92CFAAF1295B1B9C00D77883 /* SliderTableViewCell.xib */,
-				92CFAAF2295B1B9C00D77883 /* RadioButtonTableViewCell.xib */,
-				92CFAAF3295B1B9C00D77883 /* RepeatableGroupCell */,
+				9299B6072ABEF748002963AC /* Resources */,
+				9299B5AA2ABEF687002963AC /* Utility & Extensions */,
+				9299B5BB2ABEF6CE002963AC /* APIManager */,
+				9299B5CA2ABEF6F9002963AC /* Component */,
+				9299B5A62ABEF48B002963AC /* Constants.swift */,
+				9299B6032ABEF708002963AC /* BaseViewController.swift */,
+				9299B6042ABEF708002963AC /* DynamiccTemplateViewController.swift */,
+				9299B6272AC04BD0002963AC /* Assets.xcassets */,
+				9299B6252AC04A46002963AC /* Main.storyboard */,
 				92CFAAF6295B1B9C00D77883 /* GoogleService-Info.plist */,
 				92CFAAF7295B1B9C00D77883 /* CompanDebug.entitlements */,
-				92CFAAF8295B1B9C00D77883 /* Main.storyboard */,
-				92CFAAFA295B1B9C00D77883 /* LoadViewControllers */,
-				92CFAAFC295B1B9C00D77883 /* TextViewTableViewCell.xib */,
 				92CFAAFD295B1B9C00D77883 /* CompanRelease.entitlements */,
-				92CFAAFE295B1B9C00D77883 /* APIManager */,
-				92CFAB0A295B1B9C00D77883 /* ToggleSwitchTableViewCell.swift */,
-				92CFAB0B295B1B9C00D77883 /* AutocompleteTableViewCell.xib */,
-				92CFAB0C295B1B9C00D77883 /* DropDownTableViewCell.xib */,
-				92CFAB0D295B1B9C00D77883 /* DropDownTableViewCell.swift */,
-				92CFAB0E295B1B9C00D77883 /* Utility & Extensions */,
-				92CFAB1D295B1B9C00D77883 /* RadioButtonTableViewCell.swift */,
-				92CFAB1E295B1B9C00D77883 /* CheckBoxTableViewCell.swift */,
-				92CFAB1F295B1B9C00D77883 /* MessageTableViewCell.swift */,
-				92CFAB20295B1B9C00D77883 /* TimePickerTableViewCell.xib */,
-				92CFAB21295B1B9C00D77883 /* MessageTableViewCell.xib */,
-				92CFAB22295B1B9C00D77883 /* SWRevealController */,
-				92CFAB26295B1B9C00D77883 /* DynamicTemplateViewController.swift */,
-				92CFAB27295B1B9C00D77883 /* TextfieldComponent.swift */,
 			);
 			path = Compan;
-			sourceTree = "<group>";
-		};
-		92CFAA7E295B1B9B00D77883 /* DropDown */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAA7F295B1B9B00D77883 /* DropDown.h */,
-				92CFAA80295B1B9B00D77883 /* resources */,
-				92CFAA82295B1B9B00D77883 /* helpers */,
-				92CFAA86295B1B9B00D77883 /* src */,
-			);
-			path = DropDown;
-			sourceTree = "<group>";
-		};
-		92CFAA80295B1B9B00D77883 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAA81295B1B9B00D77883 /* DropDownCell.xib */,
-			);
-			path = resources;
-			sourceTree = "<group>";
-		};
-		92CFAA82295B1B9B00D77883 /* helpers */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAA83295B1B9B00D77883 /* DPDKeyboardListener.swift */,
-				92CFAA84295B1B9B00D77883 /* DPDConstants.swift */,
-				92CFAA85295B1B9B00D77883 /* DPDUIView+Extension.swift */,
-			);
-			path = helpers;
-			sourceTree = "<group>";
-		};
-		92CFAA86295B1B9B00D77883 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAA87295B1B9B00D77883 /* DropDownCell.swift */,
-				92CFAA88295B1B9B00D77883 /* DropDown+Appearance.swift */,
-				92CFAA89295B1B9B00D77883 /* DropDownList.swift */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		92CFAA90295B1B9B00D77883 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAA91295B1B9B00D77883 /* Constants.swift */,
-			);
-			path = Constants;
 			sourceTree = "<group>";
 		};
 		92CFAA93295B1B9B00D77883 /* LoginVC */ = {
@@ -1055,38 +1103,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		92CFAAF3295B1B9C00D77883 /* RepeatableGroupCell */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAAF4295B1B9C00D77883 /* RepeatableTableViewCell.swift */,
-				92CFAAF5295B1B9C00D77883 /* RepeatableTableViewCell.xib */,
-			);
-			path = RepeatableGroupCell;
-			sourceTree = "<group>";
-		};
-		92CFAAFA295B1B9C00D77883 /* LoadViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAAFB295B1B9C00D77883 /* LoadViewController.swift */,
-			);
-			path = LoadViewControllers;
-			sourceTree = "<group>";
-		};
-		92CFAAFE295B1B9C00D77883 /* APIManager */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAAFF295B1B9C00D77883 /* ScriptHelper.swift */,
-				92CFAB00295B1B9C00D77883 /* ApiParameters.swift */,
-				92CFAB01295B1B9C00D77883 /* APIManager.swift */,
-				92CFAB02295B1B9C00D77883 /* ValidationHelper.swift */,
-				92CFAB03295B1B9C00D77883 /* DDCFormModel.swift */,
-				92CFAB04295B1B9C00D77883 /* AnyCodableClasses */,
-				92CFAB08295B1B9C00D77883 /* FieldType.swift */,
-				92CFAB09295B1B9C00D77883 /* RequestHelper.swift */,
-			);
-			path = APIManager;
-			sourceTree = "<group>";
-		};
 		92CFAB04295B1B9C00D77883 /* AnyCodableClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1095,52 +1111,6 @@
 				92CFAB07295B1B9C00D77883 /* AnyEncodable.swift */,
 			);
 			path = AnyCodableClasses;
-			sourceTree = "<group>";
-		};
-		92CFAB0E295B1B9C00D77883 /* Utility & Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				92AD9E262966E02400B5E936 /* DatePickerDialog */,
-				92CFAB0F295B1B9C00D77883 /* AuthenticationMethods.swift */,
-				92CFAB10295B1B9C00D77883 /* ERProgressHud.swift */,
-				92CFAB11295B1B9C00D77883 /* Utilities.swift */,
-				92CFAB12295B1B9C00D77883 /* iOSDropDown.swift */,
-				92CFAB13295B1B9C00D77883 /* FloatingLabelTextField.swift */,
-				92CFAB14295B1B9C00D77883 /* FloatingLabelTextField.xib */,
-				92CFAB15295B1B9C00D77883 /* CustomTextField.swift */,
-				92CFAB16295B1B9C00D77883 /* BubbleTransition */,
-				92CFAB19295B1B9C00D77883 /* Extention.swift */,
-				92CFAB1A295B1B9C00D77883 /* ReusableViews */,
-			);
-			path = "Utility & Extensions";
-			sourceTree = "<group>";
-		};
-		92CFAB16295B1B9C00D77883 /* BubbleTransition */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAB17295B1B9C00D77883 /* BubbleTransition.h */,
-				92CFAB18295B1B9C00D77883 /* BubbleTransition.swift */,
-			);
-			path = BubbleTransition;
-			sourceTree = "<group>";
-		};
-		92CFAB1A295B1B9C00D77883 /* ReusableViews */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAB1B295B1B9C00D77883 /* NeumorphicTextField.swift */,
-				92CFAB1C295B1B9C00D77883 /* NeumorphicButton.swift */,
-			);
-			path = ReusableViews;
-			sourceTree = "<group>";
-		};
-		92CFAB22295B1B9C00D77883 /* SWRevealController */ = {
-			isa = PBXGroup;
-			children = (
-				92CFAB23295B1B9C00D77883 /* Compan-Bridging-Header.h */,
-				92CFAB24295B1B9C00D77883 /* SWRevealViewController.h */,
-				92CFAB25295B1B9C00D77883 /* SWRevealViewController.m */,
-			);
-			path = SWRevealController;
 			sourceTree = "<group>";
 		};
 		92D9C31D2A02C3A7008F5987 /* CallsVC */ = {
@@ -1264,38 +1234,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				92CF331F2A3C95FD00FA5763 /* Companion.entitlements in Resources */,
+				9299B61A2ABEF748002963AC /* DropDownCell.xib in Resources */,
+				9299B5E82ABEF6F9002963AC /* DatePickerTableViewCell.xib in Resources */,
+				9299B5E92ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib in Resources */,
 				92D9C3272A03FAE8008F5987 /* callertune.caf in Resources */,
 				92D9C3232A03F574008F5987 /* phoneringing.caf in Resources */,
-				92CFABA3295B1B9C00D77883 /* FloatingLabelTextField.xib in Resources */,
 				92CFAB53295B1B9C00D77883 /* OnCallView.xib in Resources */,
 				92CFAB45295B1B9C00D77883 /* conversation.json in Resources */,
+				9299B6012ABEF6F9002963AC /* MessageTableViewCell.xib in Resources */,
+				9299B5EA2ABEF6F9002963AC /* TextfieldComponent.xib in Resources */,
+				9299B5FF2ABEF6F9002963AC /* TimePickerTableViewCell.xib in Resources */,
+				9299B6262AC04A46002963AC /* Main.storyboard in Resources */,
+				9299B5EC2ABEF6F9002963AC /* CheckBoxTableViewCell.xib in Resources */,
+				9299B6282AC04BD0002963AC /* Assets.xcassets in Resources */,
 				92CFA7EB295461FA00D77883 /* LaunchScreen.storyboard in Resources */,
-				92CFAB9B295B1B9C00D77883 /* AutocompleteTableViewCell.xib in Resources */,
-				92CFAB8D295B1B9C00D77883 /* Main.storyboard in Resources */,
-				92CFAB87295B1B9C00D77883 /* Assets.xcassets in Resources */,
-				92CFABAD295B1B9C00D77883 /* MessageTableViewCell.xib in Resources */,
+				9299B5FA2ABEF6F9002963AC /* DropDownTableViewCell.xib in Resources */,
 				92CFA7E8295461FA00D77883 /* Assets.xcassets in Resources */,
-				92CFABAC295B1B9C00D77883 /* TimePickerTableViewCell.xib in Resources */,
 				92CFAB4E295B1B9C00D77883 /* conversation_older.json in Resources */,
-				92CFAB88295B1B9C00D77883 /* SliderTableViewCell.xib in Resources */,
-				92CFAB89295B1B9C00D77883 /* RadioButtonTableViewCell.xib in Resources */,
 				92CFA7E6295461F800D77883 /* Companion.storyboard in Resources */,
+				9299B5ED2ABEF6F9002963AC /* PickerTableViewCell.xib in Resources */,
 				92CFAB74295B1B9C00D77883 /* README.md in Resources */,
 				92CFAB67295B1B9C00D77883 /* Assets.xcassets in Resources */,
-				92CFAB32295B1B9C00D77883 /* TextfieldComponent.xib in Resources */,
-				92CFAB8B295B1B9C00D77883 /* RepeatableTableViewCell.xib in Resources */,
 				92CFAB3D295B1B9C00D77883 /* LogoutView.xib in Resources */,
-				92CFAB34295B1B9C00D77883 /* CheckBoxTableViewCell.xib in Resources */,
-				92CFAB8F295B1B9C00D77883 /* TextViewTableViewCell.xib in Resources */,
-				92CFAB31295B1B9C00D77883 /* ToggleSwitchTableViewCell.xib in Resources */,
+				9299B5F72ABEF6F9002963AC /* TextViewTableViewCell.xib in Resources */,
+				9299B5F62ABEF6F9002963AC /* RepeatableTableViewCell.xib in Resources */,
 				92CFAB56295B1B9C00D77883 /* LICENSE in Resources */,
 				92CFAB3E295B1B9C00D77883 /* covidCheck.storyboard in Resources */,
-				92CFAB2A295B1B9C00D77883 /* DropDownCell.xib in Resources */,
-				92CFAB9C295B1B9C00D77883 /* DropDownTableViewCell.xib in Resources */,
+				9299B5F42ABEF6F9002963AC /* RadioButtonTableViewCell.xib in Resources */,
+				9299B5B72ABEF687002963AC /* FloatingLabelTextField.xib in Resources */,
+				9299B5F32ABEF6F9002963AC /* SliderTableViewCell.xib in Resources */,
 				92CFAB8C295B1B9C00D77883 /* GoogleService-Info.plist in Resources */,
-				92CFAB35295B1B9C00D77883 /* PickerTableViewCell.xib in Resources */,
 				92CFAB4A295B1B9C00D77883 /* user.json in Resources */,
-				92CFAB28295B1B9C00D77883 /* DatePickerTableViewCell.xib in Resources */,
+				9299B5F92ABEF6F9002963AC /* AutocompleteTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1361,145 +1331,141 @@
 			buildActionMask = 2147483647;
 			files = (
 				92CFAB95295B1B9C00D77883 /* AnyDecodable.swift in Sources */,
-				92CFABA7295B1B9C00D77883 /* NeumorphicTextField.swift in Sources */,
+				9299B5C62ABEF6CF002963AC /* ValidationHelper.swift in Sources */,
 				92CFAB81295B1B9C00D77883 /* LoginViewController.swift in Sources */,
+				9299B61B2ABEF748002963AC /* DPDKeyboardListener.swift in Sources */,
 				92AA352929BF945300A6A4AB /* SheetViewController.swift in Sources */,
 				92CFAB39295B1B9C00D77883 /* BioMetricAuthenticator.swift in Sources */,
 				92AA352629BF945300A6A4AB /* InitialTouchPanGestureRecognizer.swift in Sources */,
 				92CFAB5A295B1B9C00D77883 /* ChatViewConfiguration.swift in Sources */,
 				92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */,
 				92CFAB5E295B1B9C00D77883 /* DocumentPickerHelper.swift in Sources */,
+				9299B61E2ABEF748002963AC /* DropDownCell.swift in Sources */,
+				9299B6052ABEF708002963AC /* BaseViewController.swift in Sources */,
 				928122C929BF5BC00021A679 /* FSCalendarStickyHeader.m in Sources */,
-				92AD9E2F2966E02400B5E936 /* UIColor+Ext.swift in Sources */,
 				92CFAB7A295B1B9C00D77883 /* BaseAPIManager.swift in Sources */,
-				92CFAB2E295B1B9C00D77883 /* DropDownCell.swift in Sources */,
 				92CFAB61295B1B9C00D77883 /* ImagePickerHelper.swift in Sources */,
 				92CFAB66295B1B9C00D77883 /* MediaProcesser.swift in Sources */,
 				92914E272A20E822003B968E /* EventListVC.swift in Sources */,
-				92CFAB94295B1B9C00D77883 /* DDCFormModel.swift in Sources */,
 				92CFAB71295B1B9C00D77883 /* NSMutableAttributedString+Extensions.swift in Sources */,
 				92CFAB3F295B1B9C00D77883 /* SelectionStyleCell.swift in Sources */,
+				9299B6232ABEF748002963AC /* Colors.swift in Sources */,
 				92CFAB5D295B1B9C00D77883 /* ChatBarView.swift in Sources */,
 				92CFAB72295B1B9C00D77883 /* TypingIndicatorView.swift in Sources */,
 				92AA352829BF945300A6A4AB /* Localize.swift in Sources */,
 				92496F6E29890E5F0037D723 /* TwoFactorAuthVC.swift in Sources */,
 				928122D529BF5BC00021A679 /* FSCalendarExtensions.m in Sources */,
 				92CFA7E3295461F800D77883 /* CompanionLoginViewController.swift in Sources */,
+				9299B5A32ABEF41B002963AC /* ERProgressHud.swift in Sources */,
 				92CFAB40295B1B9C00D77883 /* MessageImageCell.swift in Sources */,
 				92CFAB52295B1B9C00D77883 /* OnCallView.swift in Sources */,
 				92CFAB55295B1B9C00D77883 /* SocketHelper.swift in Sources */,
-				92CFABB0295B1B9C00D77883 /* TextfieldComponent.swift in Sources */,
 				92CFAB63295B1B9C00D77883 /* PhotoDataManager.swift in Sources */,
-				92CFAB90295B1B9C00D77883 /* ScriptHelper.swift in Sources */,
+				9299B5FC2ABEF6F9002963AC /* RadioButtonTableViewCell.swift in Sources */,
 				92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */,
 				92AA353329BF9EA500A6A4AB /* EventsTableViewCell.swift in Sources */,
 				92CFAB6B295B1B9C00D77883 /* Bundle.swift in Sources */,
 				92496F652988EADC0037D723 /* SettingsViewController.swift in Sources */,
-				92CFAB8E295B1B9C00D77883 /* LoadViewController.swift in Sources */,
+				9299B5FD2ABEF6F9002963AC /* CheckBoxTableViewCell.swift in Sources */,
 				92CFAB75295B1B9C00D77883 /* MessageViewController.swift in Sources */,
+				9299B5F82ABEF6F9002963AC /* ToggleSwitchTableViewCell.swift in Sources */,
 				92CFAB5F295B1B9C00D77883 /* UIImage+Extensions.swift in Sources */,
 				928122CE29BF5BC00021A679 /* FSCalendarDelegationProxy.m in Sources */,
-				92CFAB91295B1B9C00D77883 /* ApiParameters.swift in Sources */,
 				92CFA939295A0E8A00D77883 /* AppDelegate.swift in Sources */,
-				92CFAB9D295B1B9C00D77883 /* DropDownTableViewCell.swift in Sources */,
+				9299B5F12ABEF6F9002963AC /* PickerTableViewCell.swift in Sources */,
 				92CFAB59295B1B9C00D77883 /* ChatStackView.swift in Sources */,
-				92CFABA8295B1B9C00D77883 /* NeumorphicButton.swift in Sources */,
 				92CFAB96295B1B9C00D77883 /* AnyCodable.swift in Sources */,
+				9299B5EE2ABEF6F9002963AC /* TextViewTableViewCell.swift in Sources */,
+				9299B5FE2ABEF6F9002963AC /* MessageTableViewCell.swift in Sources */,
 				92CFAB4F295B1B9C00D77883 /* MessageCell.swift in Sources */,
-				92CFAB99295B1B9C00D77883 /* RequestHelper.swift in Sources */,
 				92CFAB4C295B1B9C00D77883 /* ChatBarType.swift in Sources */,
 				92496F7229890E970037D723 /* ProfileViewController.swift in Sources */,
 				92CFAB3C295B1B9C00D77883 /* SurveyHelper.swift in Sources */,
-				92CFAB93295B1B9C00D77883 /* ValidationHelper.swift in Sources */,
-				92CFABA2295B1B9C00D77883 /* FloatingLabelTextField.swift in Sources */,
-				92CFABAB295B1B9C00D77883 /* MessageTableViewCell.swift in Sources */,
 				92D9C31C2A02C391008F5987 /* CallingViewController.swift in Sources */,
+				9299B61D2ABEF748002963AC /* DPDUIView+Extension.swift in Sources */,
 				92CFAB60295B1B9C00D77883 /* ImagePickerCollectionView.swift in Sources */,
 				92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */,
-				92CFABA4295B1B9C00D77883 /* CustomTextField.swift in Sources */,
+				9299B6002ABEF6F9002963AC /* InlineGroupCell.swift in Sources */,
 				92CFA7F729547B9700D77883 /* AppCollectionViewCell.swift in Sources */,
 				928122CC29BF5BC00021A679 /* FSCalendarWeekdayView.m in Sources */,
 				92CFAB62295B1B9C00D77883 /* ImagePickerCollectionCell.swift in Sources */,
-				92CFAB9F295B1B9C00D77883 /* ERProgressHud.swift in Sources */,
-				92CFAB2B295B1B9C00D77883 /* DPDKeyboardListener.swift in Sources */,
+				9299B5FB2ABEF6F9002963AC /* DropDownTableViewCell.swift in Sources */,
 				92CFAB64295B1B9C00D77883 /* ImagePickerView.swift in Sources */,
 				92CFAB65295B1B9C00D77883 /* ImagePickerCollectionHeader.swift in Sources */,
-				92CFAB9A295B1B9C00D77883 /* ToggleSwitchTableViewCell.swift in Sources */,
 				928122D429BF5BC00021A679 /* FSCalendarHeaderView.m in Sources */,
 				928122CF29BF5BC00021A679 /* FSCalendarCalculator.m in Sources */,
+				9299B5B32ABEF687002963AC /* AuthenticationMethods.swift in Sources */,
+				9299B61C2ABEF748002963AC /* DPDConstants.swift in Sources */,
 				92AA352529BF945300A6A4AB /* SheetView.swift in Sources */,
 				928122DA29BF5DF50021A679 /* HomeViewController.swift in Sources */,
-				92CFAB8A295B1B9C00D77883 /* RepeatableTableViewCell.swift in Sources */,
 				92CFAB5C295B1B9C00D77883 /* Utils.swift in Sources */,
+				9299B5F22ABEF6F9002963AC /* AutocompleteTableViewCell.swift in Sources */,
 				92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */,
+				9299B5C72ABEF6CF002963AC /* NewRequestHelper.swift in Sources */,
 				92CFAB79295B1B9C00D77883 /* InitialViewController.swift in Sources */,
 				92CFAB82295B1B9C00D77883 /* LaunchViewController.swift in Sources */,
 				92CFAB49295B1B9C00D77883 /* MessageViewModel.swift in Sources */,
-				92CFAB30295B1B9C00D77883 /* DropDownList.swift in Sources */,
+				9299B5A92ABEF4C4002963AC /* Extention.swift in Sources */,
 				92CFAB76295B1B9C00D77883 /* NotificationManager.swift in Sources */,
 				92B3A848296C023A00C03761 /* GridViewController.swift in Sources */,
-				92CFABA5295B1B9C00D77883 /* BubbleTransition.swift in Sources */,
 				92E49AB3298CE02A0018F6E5 /* IntroViewController.swift in Sources */,
 				92AA353F29D6E86D00A6A4AB /* EventDetailVC.swift in Sources */,
+				9299B5B82ABEF687002963AC /* CustomTextField.swift in Sources */,
 				92CFAB68295B1B9C00D77883 /* LayoutConstraintSet.swift in Sources */,
 				92AA352329BF945300A6A4AB /* SheetContentViewController.swift in Sources */,
 				92CFA7F529546D9B00D77883 /* DashboardViewController.swift in Sources */,
 				92CFAB6C295B1B9C00D77883 /* FooterRefreshView.swift in Sources */,
-				92CFAB37295B1B9C00D77883 /* Constants.swift in Sources */,
-				92CFAB29295B1B9C00D77883 /* ViewController.swift in Sources */,
 				928122D229BF5BC00021A679 /* FSCalendarCollectionView.m in Sources */,
 				92CFAB47295B1B9C00D77883 /* FileInfo.swift in Sources */,
 				92CFAB48295B1B9C00D77883 /* UserChat.swift in Sources */,
+				9299B5EF2ABEF6F9002963AC /* SliderTableViewCell.swift in Sources */,
 				92AA352729BF945300A6A4AB /* Yalta.swift in Sources */,
+				9299B5C42ABEF6CF002963AC /* Instruments.swift in Sources */,
 				9243A62A2A176C4100073436 /* GuestCell.swift in Sources */,
 				928122CB29BF5BC00021A679 /* FSCalendarAppearance.m in Sources */,
 				928122D329BF5BC00021A679 /* FSCalendarSeparatorDecorationView.m in Sources */,
+				9299B5C32ABEF6CF002963AC /* ApiParameters.swift in Sources */,
+				9299B6242ABEF748002963AC /* DatePickerDialog.swift in Sources */,
+				9299B5C82ABEF6CF002963AC /* DDCFormModel.swift in Sources */,
 				92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */,
 				92CFAB4D295B1B9C00D77883 /* UIBezierPath.swift in Sources */,
 				92CFAB5B295B1B9C00D77883 /* ChatViewController+Subviews.swift in Sources */,
 				92AA353529BF9EA600A6A4AB /* CareTeamTableViewCell.swift in Sources */,
 				92CFAB58295B1B9C00D77883 /* ChatButton.swift in Sources */,
+				9299B5C92ABEF6CF002963AC /* FieldType.swift in Sources */,
+				9299B5B92ABEF687002963AC /* NewUtilities.swift in Sources */,
+				9299B5F02ABEF6F9002963AC /* DatePickerTableViewCell.swift in Sources */,
 				92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */,
 				92AA353629BF9EA600A6A4AB /* DoctorProfileViewController.swift in Sources */,
-				92CFAB84295B1B9C00D77883 /* DatePickerTableViewCell.swift in Sources */,
 				92EC46162A1B470A00C57EEE /* InitialsImageView.swift in Sources */,
+				9299B6062ABEF708002963AC /* DynamiccTemplateViewController.swift in Sources */,
 				92D9C31F2A02CAF7008F5987 /* RingingViewController.swift in Sources */,
-				92CFABA1295B1B9C00D77883 /* iOSDropDown.swift in Sources */,
 				92CFAB54295B1B9C00D77883 /* JitsiMeetViewController.swift in Sources */,
+				9299B6222ABEF748002963AC /* UIColor+Ext.swift in Sources */,
 				928122C829BF5BC00021A679 /* FSCalendarCollectionViewLayout.m in Sources */,
 				92CFAB46295B1B9C00D77883 /* Message.swift in Sources */,
-				92CFAB33295B1B9C00D77883 /* TimePickerTableViewCell.swift in Sources */,
 				9283B24E2A53164A008646A2 /* BasicViewController.swift in Sources */,
 				92AA353829BF9EA600A6A4AB /* EventCell.swift in Sources */,
-				92CFAB85295B1B9C00D77883 /* PickerTableViewCell.swift in Sources */,
+				9299B5EB2ABEF6F9002963AC /* TimePickerTableViewCell.swift in Sources */,
 				92CFAB78295B1B9C00D77883 /* ImageViewController.swift in Sources */,
-				92CFAB2C295B1B9C00D77883 /* DPDConstants.swift in Sources */,
-				92AD9E312966E02400B5E936 /* DatePickerDialog.swift in Sources */,
 				92CFAB42295B1B9C00D77883 /* Kingfisher.swift in Sources */,
 				92AA353429BF9EA600A6A4AB /* DoctorTableViewCell.swift in Sources */,
-				92CFAB38295B1B9C00D77883 /* SliderTableViewCell.swift in Sources */,
-				92CFABA0295B1B9C00D77883 /* Utilities.swift in Sources */,
 				92CFAB6D295B1B9C00D77883 /* UIScrollView+Refreshable.swift in Sources */,
 				92AA352229BF945300A6A4AB /* SheetViewDelegate.swift in Sources */,
-				92CFABAE295B1B9C00D77883 /* SWRevealViewController.m in Sources */,
-				92CFAB86295B1B9C00D77883 /* AutocompleteTableViewCell.swift in Sources */,
-				92CFAB92295B1B9C00D77883 /* APIManager.swift in Sources */,
 				92CFAB4B295B1B9C00D77883 /* Pagination.swift in Sources */,
 				928122D029BF5BC00021A679 /* FSCalendar.m in Sources */,
 				928122CA29BF5BC00021A679 /* FSCalendarConstants.m in Sources */,
-				92CFAB98295B1B9C00D77883 /* FieldType.swift in Sources */,
 				92CFAB6F295B1B9C00D77883 /* FooterRefreshAnimator.swift in Sources */,
-				92CFAB2F295B1B9C00D77883 /* DropDown+Appearance.swift in Sources */,
 				92CFAB3B295B1B9C00D77883 /* AuthenticationErrors.swift in Sources */,
+				9299B5F52ABEF6F9002963AC /* RepeatableTableViewCell.swift in Sources */,
 				928122D129BF5BC00021A679 /* FSCalendarCell.m in Sources */,
 				92CFAB73295B1B9C00D77883 /* Userable.swift in Sources */,
 				9243DC642AB45ADE00B0A520 /* SurveysTableViewCell.swift in Sources */,
-				92CFABA9295B1B9C00D77883 /* RadioButtonTableViewCell.swift in Sources */,
 				9243DC662AB45AEF00B0A520 /* SurveyCell.swift in Sources */,
-				92AD9E302966E02400B5E936 /* Colors.swift in Sources */,
 				928122D729BF5BC10021A679 /* FSCalendarDelegationFactory.m in Sources */,
-				92CFAB9E295B1B9C00D77883 /* AuthenticationMethods.swift in Sources */,
+				9299B5B52ABEF687002963AC /* FloatingLabelTextField.swift in Sources */,
 				92CFAB43295B1B9C00D77883 /* ImagePickerType.swift in Sources */,
+				9299B5A72ABEF48B002963AC /* Constants.swift in Sources */,
 				92CFAB7F295B1B9C00D77883 /* LoginModel.swift in Sources */,
 				92AA352429BF945300A6A4AB /* SheetTransition.swift in Sources */,
 				92CFA7F329546D8900D77883 /* MenuViewController.swift in Sources */,
@@ -1508,13 +1474,12 @@
 				9299B59F2ABC5174002963AC /* NotificationVC.swift in Sources */,
 				92CFA93A295A0E8A00D77883 /* SceneDelegate.swift in Sources */,
 				92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */,
-				92CFABA6295B1B9C00D77883 /* Extention.swift in Sources */,
-				92CFAB2D295B1B9C00D77883 /* DPDUIView+Extension.swift in Sources */,
 				92CFAB69295B1B9C00D77883 /* UITableView.swift in Sources */,
 				92CFAB51295B1B9C00D77883 /* MessageTextCell.swift in Sources */,
+				9299B5C52ABEF6CF002963AC /* APIManager.swift in Sources */,
 				92CFAB41295B1B9C00D77883 /* Array.swift in Sources */,
-				92CFABAA295B1B9C00D77883 /* CheckBoxTableViewCell.swift in Sources */,
 				92CFAB7B295B1B9C00D77883 /* SafecheckConstant.swift in Sources */,
+				9299B61F2ABEF748002963AC /* DropDown+Appearance.swift in Sources */,
 				92CFAB97295B1B9C00D77883 /* AnyEncodable.swift in Sources */,
 				92CFAB7D295B1B9C00D77883 /* WebViewController.swift in Sources */,
 				92CFAB57295B1B9C00D77883 /* ChatViewController.swift in Sources */,
@@ -1522,17 +1487,19 @@
 				92CFAB7C295B1B9C00D77883 /* LogoutView.swift in Sources */,
 				92CFAB77295B1B9C00D77883 /* EZLoginViewController.swift in Sources */,
 				928122D629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m in Sources */,
-				92CFAB36295B1B9C00D77883 /* TextViewTableViewCell.swift in Sources */,
 				92CFAB6E295B1B9C00D77883 /* HeaderRefreshView.swift in Sources */,
 				92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */,
 				92CFAB44295B1B9C00D77883 /* Data.swift in Sources */,
 				92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */,
 				92AA353729BF9EA600A6A4AB /* MyCareTeamViewController.swift in Sources */,
+				9299B6022ABEF6F9002963AC /* TextfieldComponent.swift in Sources */,
 				92CFAB70295B1B9C00D77883 /* HeaderRefreshAnimator.swift in Sources */,
 				92CFAB3A295B1B9C00D77883 /* BiometricAuthenticationConstants.swift in Sources */,
+				9299B6212ABEF748002963AC /* iOSDropDown.swift in Sources */,
 				92CFAB80295B1B9C00D77883 /* SafeCheckUtils.swift in Sources */,
 				92AA352129BF945300A6A4AB /* SheetOptions.swift in Sources */,
-				92CFABAF295B1B9C00D77883 /* DynamicTemplateViewController.swift in Sources */,
+				9299B6202ABEF748002963AC /* DropDownList.swift in Sources */,
+				9299B5B62ABEF687002963AC /* NewScriptHelper.swift in Sources */,
 				92CFAB6A295B1B9C00D77883 /* UIDevice.swift in Sources */,
 				92CFAB83295B1B9C00D77883 /* FailScreenViewController.swift in Sources */,
 				92AA352029BF945300A6A4AB /* UIViewControllerExtension.swift in Sources */,
@@ -1565,14 +1532,6 @@
 				92CFA7EA295461FA00D77883 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		92CFAAF8295B1B9C00D77883 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				92CFAAF9295B1B9C00D77883 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

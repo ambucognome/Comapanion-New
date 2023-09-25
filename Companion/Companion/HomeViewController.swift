@@ -27,6 +27,24 @@ struct DateData {
     var careTeam : [CareTeam]
 }
 
+struct SurveryData {
+    var date : String
+    var surverys : [SurveyStruct]
+}
+
+
+
+struct SurveyStruct {
+    var concept : String
+    var eventId : String
+    var time : String
+    var date : String = ""
+    var templateId : String
+    var surveyId : String
+    var name : String
+    var sourceUri : String?
+}
+
 struct EventStruct {
     var name : String
     var time : String
@@ -38,6 +56,9 @@ struct EventStruct {
     var meetingId : String = ""
     var context : [String:Any] = [:]
     var eventId : String = ""
+    var templateId : String = ""
+    var instrumentId : String = ""
+
 }
 
 struct GuestStruct {
@@ -71,10 +92,13 @@ let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notific
 //MARK: Add events data here
 var eventsData : [DateData] = []
 
+var surveyData : [SurveryData] = []
+
 var careteamData = [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
                     CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, DynamicTemplateViewControllerDelegate, CalendarViewControllerDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, CalendarViewControllerDelegate, SurveysTableViewCellDelegate, DynamicTemplateViewControllerDelegate {
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
@@ -104,7 +128,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var dateRange = [
         "fromDate": "2023-01-10 00:00:00",
-        "toDate": "2023-10-10 20:00:00" ]
+        "toDate": "2025-01-10 20:00:00" ]
 
     
     override func viewDidLoad() {
@@ -162,12 +186,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
 
     func addObservers(){
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(getTemplate),
-            name: NSNotification.Name(rawValue: "ReloadAPI") ,
-            object: nil
-        )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(getTemplate),
+//            name: NSNotification.Name(rawValue: "ReloadAPI") ,
+//            object: nil
+//        )
     }
 
     func removeObservers(){
@@ -193,17 +217,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         "key": "test12345",
         "app":"Companion_iOS"    ]
     
+    let CREATE_EVENT_TEMPLATE = "ddc:template_c6c08dfe-097b-43eb-aff0-3ac705fbb910"
+    
     @IBAction func addBtn(_ sender: Any) {
-        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            context["userid"] = retrievedCodableObject.user?.mail ?? ""
-            context["key"] = "Companion_\(self.random(digits: 5))"
-            self.getTemplate()
-        }
+//        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+//            context["userid"] = retrievedCodableObject.user?.mail ?? ""
+//            context["key"] = "Companion_\(self.random(digits: 5))"
+//            self.getTemplate()
+//        }
+        self.getTemplateForEvent(templateId: self.CREATE_EVENT_TEMPLATE)
+        
         
     }
     
     @objc func getTemplate() {
-        self.getTempleWith(uri: template_uri, context: self.context)
+//        self.getTempleWith(uri: template_uri, context: self.context)
     }
     
     func random(digits:Int) -> String {
@@ -214,6 +242,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return number
     }
     
+    
+    func didSubmitEventForm(response: NSArray) {
+        print("Did submit event form")
+        self.createEventWithV2(response: response)
+    }
+    
+    func didSubmitSurveyForm(response: NSArray, eventId: String) {
+        print("Did Submit survey form")
+        self.submitSurvey(ddcResponse: response, eventId: eventId)
+    }
 
     var template_uri = "http://chdi.montefiore.org/calendarEvent"
     
@@ -222,17 +260,108 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.createEvent(data: params)
     }
     
-    func didUpdateEvent(eventData: [String : Any],eventId: String) {
-        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            context["userid"] = retrievedCodableObject.user?.mail ?? ""
-            context["key"] = "Companion_\(self.random(digits: 5))"
-            self.getTemplate()
-        }
-        self.deleteEvent(eventId: eventId, data: eventData)
-    }
+//    func didUpdateEvent(eventData: [String : Any],eventId: String) {
+//        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+//            context["userid"] = retrievedCodableObject.user?.mail ?? ""
+//            context["key"] = "Companion_\(self.random(digits: 5))"
+//            self.getTemplate()
+//        }
+//        self.deleteEvent(eventId: eventId, data: eventData)
+//    }
     
     func didDeleteEvent(eventId: String) {
         self.deleteEvent(eventId: eventId, isDeleteSelected: true)
+    }
+    
+    func didUpdateEvent(eventData: NSArray, eventId: String) {
+        print("updatedEvent")
+        self.deleteEvent(eventId: eventId)
+    }
+    
+    func openForm(templateId: String, eventId: String, callStartSurvey: Bool) {
+        if callStartSurvey {
+            self.startSurvey(eventId: eventId, templateId: templateId)
+        } else {
+            self.getTemplate(templateId: templateId, eventId: eventId)
+        }
+    }
+    
+    
+    func createEventWithV2(response: NSArray,isEdit: Bool = false) {
+
+        var dataDic : [String: Any] = [:]
+        dataDic["appId"] = Bundle.main.bundleIdentifier ?? ""
+        var ddcContext : [String: Any] = ["key": "test12345","app":"Companion_iOS"]
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            ddcContext["userid"] = retrievedCodableObject.user?.mail
+        }
+        dataDic["ddc_context"] = ddcContext
+        dataDic["template_uri"] = self.CREATE_EVENT_TEMPLATE
+        dataDic["id"] = instruments?.id
+        var filteredEntities = [Entityy]()
+        var groupEntities = [Entityy]()
+        if let instrumentsData = instruments?.entities {
+            for data in instrumentsData {
+                if data.entityType == "ENTITY_INSTRUMENT" && data.parentEntityInstrumentID != nil {
+                    groupEntities.append(data)
+                }
+                if data.entityType == "ENTITY_INSTRUMENT" && data.parentEntityInstrumentID == nil {
+                    filteredEntities.append(data)
+                }
+            }
+        }
+        
+        let orderedEntitiesInstrument = filteredEntities.sorted { $0.order! < $1.order!  }
+        dataDic["title"] = orderedEntitiesInstrument[0].value
+        dataDic["description"] = orderedEntitiesInstrument[1].value
+        dataDic["start_time"] = orderedEntitiesInstrument[3].value
+        dataDic["event_duration"] = orderedEntitiesInstrument[4].value
+        
+        let orderedGuestEntitle = groupEntities.sorted { $0.order! < $1.order!  }
+
+        var guest : [String: Any] = [:]
+        guest["name"] = orderedGuestEntitle[0].value
+        guest["email"] = orderedGuestEntitle[1].value
+        guest["guest_id"] = orderedGuestEntitle[1].value
+        
+        dataDic["guests"] = [["guest":guest]]
+
+        let date = orderedEntitiesInstrument[2].value
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let newDate = dateFormatter.date(from: date!)
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        let dateString = formatter.string(from: newDate! as Date)
+        dataDic["date"] = dateString
+
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        
+        ERProgressHud.shared.show()
+                    BaseAPIManager.sharedInstance.makeRequestToCreateEvent( data: jsonData){ (success, response,statusCode)  in
+                        if (success) {
+                            ERProgressHud.shared.hide()
+                            print(response)
+                            if statusCode == 200 {
+                                if isEdit {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event updated successfully.", style: .success)
+                                    banner.show()
+                                } else {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event created successfully.", style: .success)
+                                    banner.show()
+                                }
+//                                self.getEvents(data: self.dateRange)
+                            }
+                        } else {
+                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                            ERProgressHud.shared.hide()
+                        }
+                    }
+        
     }
     
     func createEvent(data: [String: Any],isEdit: Bool = false) {
@@ -294,10 +423,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                 if isDeleteSelected {
                                     let banner = NotificationBanner(title: "Success", subtitle: "Event deleted successfully.", style: .success)
                                     banner.show()
-                                    self.getEvents(data: self.dateRange)
+//                                    self.getEvents(data: self.dateRange)
                                     return
                                 }
-                                self.createEvent(data: data,isEdit: true)
+//                                self.createEvent(data: data,isEdit: true)
+                                self.createEventWithV2(response: [],isEdit: true)
                             }
                         } else {
                             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
@@ -313,95 +443,112 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print(jsonString)
 
         eventsData.removeAll()
+        surveyData.removeAll()
 
         ERProgressHud.shared.show()
                     BaseAPIManager.sharedInstance.makeRequestToGetEvent(data: jsonData){ (success, response,statusCode)  in
                         if (success) {
                             ERProgressHud.shared.hide()
                             print(response)
-                            for i in 0..<response.count {
-                                if let eventDic = response[i] as? NSDictionary {
-                                    let eventID = eventDic["eventId"] as? String ?? ""
-                                    let metaDataString = eventDic["metadata"] as? String ?? ""
-                                    if let metaDataDic = metaDataString.convertToDictionary() {
-                                        print(metaDataDic)
-                                        let parentId = eventDic["parentId"] as? String
-                                        let eventDate = metaDataDic["date"] as? String ?? ""
-                                        
-                                        let dateFormatter = DateFormatter()
-                                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-                                        let newDate = dateFormatter.date(from: eventDate)
-
-                                        let formatter = DateFormatter()
-                                        formatter.dateFormat = "dd/MM/yyyy"
-                                        let dateString = formatter.string(from: newDate! as Date)
-                                        
-                                        let startTime = metaDataDic["startTime"] as? String ?? ""
-                                        let timeFormatter = DateFormatter()
-                                        timeFormatter.dateFormat = "hh:mm:ss a"
-                                        let time = timeFormatter.date(from: startTime)
-
-                                        let newformatter = DateFormatter()
-                                        newformatter.dateFormat = "h:mm a"
-                                        let timeString = newformatter.string(from: time! as Date)
-                                        
-                                        
-                                        let title = metaDataDic["title"] as? String ?? ""
-                                        let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
-                                        let description = metaDataDic["description"] as? String ?? ""
-                                        let guestString = metaDataDic["guests"] as? String ?? ""
-                                        let meetingId = metaDataDic["meetingId"] as? String ?? ""
-                                        
-                                        var guestDat = [GuestStruct]()
-                                        if let array = guestString.convertToNSDictionary() {
-                                            for guest in array {
-                                            if let guestDic = guest as? NSDictionary {
-                                                if let guestData = guestDic["guest"] as? NSDictionary {
-                                                let guestName = guestData["name"] as? String ?? ""
-                                                 let email = guestData["email"] as? String ?? ""
-                                                 let guestId = guestData["guestId"] as? String ?? ""
-                                                    guestDat.append(GuestStruct(guestname: guestName, guestId: guestId, guestEmail: email))
+                            if let appointmentArray = response["appointments"] as? NSArray {
+                                for i in 0..<appointmentArray.count {
+                                    if let eventDic = appointmentArray[i] as? NSDictionary {
+                                        let eventID = eventDic["eventId"] as? String ?? ""
+                                        let metaDataString = eventDic["metadata"] as? String ?? ""
+                                        if let metaDataDic = metaDataString.convertToDictionary() {
+                                            print(metaDataDic)
+                                            let parentId = eventDic["parentId"] as? String
+                                            let eventDate = metaDataDic["date"] as? String ?? ""
+                                            let instrumentId =  metaDataDic["instanceId"] as? String ?? ""
+                                            let templateId = eventDic["sourceUri"] as? String ?? ""
+                                            
+                                            let dateFormatter = DateFormatter()
+                                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                            let newDate = dateFormatter.date(from: eventDate)
+                                            
+                                            let formatter = DateFormatter()
+                                            formatter.dateFormat = "dd/MM/yyyy"
+                                            let dateString = formatter.string(from: newDate! as Date)
+                                            
+                                            let startTime = metaDataDic["startTime"] as? String ?? ""
+                                            let timeFormatter = DateFormatter()
+                                            timeFormatter.dateFormat = "hh:mm:ss a"
+                                            let time = timeFormatter.date(from: startTime)
+                                            
+                                            let newformatter = DateFormatter()
+                                            newformatter.dateFormat = "h:mm a"
+                                            let timeString = newformatter.string(from: time! as Date)
+                                            
+                                            
+                                            let title = metaDataDic["title"] as? String ?? ""
+                                            let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
+                                            let description = metaDataDic["description"] as? String ?? ""
+                                            let guestString = metaDataDic["guests"] as? String ?? ""
+                                            let meetingId = metaDataDic["meetingId"] as? String ?? ""
+                                            
+                                            var guestDat = [GuestStruct]()
+                                            if let array = guestString.convertToNSDictionary() {
+                                                for guest in array {
+                                                    if let guestDic = guest as? NSDictionary {
+                                                        if let guestData = guestDic["guest"] as? NSDictionary {
+                                                            let guestName = guestData["name"] as? String ?? ""
+                                                            let email = guestData["email"] as? String ?? ""
+                                                            let guestId = guestData["guestId"] as? String ?? ""
+                                                            guestDat.append(GuestStruct(guestname: guestName, guestId: guestId, guestEmail: email))
+                                                        }
+                                                    }
                                                 }
                                             }
+                                            
+                                            let contextString = metaDataDic["context"] as? String ?? ""
+                                            if let cont = contextString.convertToDictionary() {
+                                                print(cont)
+                                                
+                                                let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, date: dateString, guestData: guestDat,meetingId: meetingId, context: cont, eventId: eventID, templateId: templateId, instrumentId: instrumentId)], careTeam: [CareTeam(image: "profile1", name: "guestName", specality: "guestId", lastVisitDate: "email")])
+                                                eventsData.append(data)
+                                                self.tableView.reloadData()
+                                                
                                             }
-                                        }
-//                                        let guestStr = guestString.replacingOccurrences(of: "[Guest(", with: "").replacingOccurrences(of: ")]", with: "")
-//                                        let components = guestStr.components(separatedBy: ", ")
-//                                        var guestDic: [String : String] = [:]
-//
-//                                        for component in components{
-//                                          let pair = component.components(separatedBy: "=")
-//                                            guestDic[pair[0]] = pair[1]
-//                                        }
-//                                        print(guestDic)
-//                                        let guestName = guestDic["name"] ?? ""
-//                                        let email = guestDic["email"] ?? ""
-//                                        let guestId = guestDic["guestId"] ?? ""
-                                        
-                                        let contextString = metaDataDic["context"] as? String ?? ""
-                                        if let cont = contextString.convertToDictionary() {
-                                            print(cont)
-                                        
-//                                        let contextStr = contextString.replacingOccurrences(of: "{", with: "").replacingOccurrences(of: "}", with: "")
-//                                        let contextComponents = contextStr.components(separatedBy: ",")
-//                                        var contextDic: [String : String] = [:]
-//
-//                                        for component in contextComponents{
-//                                          let pair = component.components(separatedBy: ":")
-//                                            contextDic[pair[0]] = pair[1]
-//                                        }
-                                        
-                                        
-                                            let data = DateData(date: dateString, events: [EventStruct(name: title, time: timeString,duration: eventDuration, parentId: parentId, description: description, date: dateString, guestData: guestDat,meetingId: meetingId, context: cont, eventId: eventID)], careTeam: [CareTeam(image: "profile1", name: "guestName", specality: "guestId", lastVisitDate: "email")])
-                                            eventsData.append(data)
-                                            self.tableView.reloadData()
-
+                                            
                                         }
                                         
                                     }
-
                                 }
                             }
+                            if let surveys = response["surveys"] as? NSArray {
+                                for i in 0..<surveys.count {
+                                    if let surveyDic = surveys[i] as? NSDictionary {
+                                        let concept = surveyDic["concept"] as? String ?? ""
+                                        let eventId = surveyDic["eventId"] as? String ?? ""
+                                        let eventTime = surveyDic["eventTime"] as? String ?? ""
+                                        
+                                        
+                                        let contextString = surveyDic["metadata"] as? String ?? ""
+                                        if let cont = contextString.convertToDictionary() {
+                                            print(cont)
+                                            let name = cont["surveyTitle"] as? String ?? ""
+                                            let templateId = cont["templateId"] as? String ?? ""
+                                            let surveyId = cont["surveyId"] as? String ?? ""
+                                            
+                                            let eventDate = cont["startDate"] as? String ?? ""
+                                            
+                                            let dateFormatter = DateFormatter()
+                                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                            let newDate = dateFormatter.date(from: eventTime)
+                                            
+                                            let formatter = DateFormatter()
+                                            formatter.dateFormat = "dd/MM/yyyy"
+                                            let dateString = formatter.string(from: newDate! as Date)
+                                            
+                                            
+                                            let data = SurveryData(date: dateString, surverys: [SurveyStruct(concept: concept, eventId: eventId, time: eventTime, templateId: templateId, surveyId: surveyId, name: name)])
+                                            surveyData.append(data)
+                                            self.tableView.reloadData()
+                                        }
+                                    }
+                                }
+                            }
+                            
                             self.tableView.reloadData()
                             self.calendar.reloadData()
                             DispatchQueue.main.asyncAfter(deadline: .now()  + 0.1) {
@@ -416,66 +563,202 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         }
                     }
     }
-
-    func getTempleWith(uri: String, context: Any) {
-        let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
-        let parameters: [String: Any] = [
-            "author" : name,
-            "template_uri" : (uri),
-            "context": context
-        ]
-        context_parameters = context as! [String : Any]
-        if (self.navigationController?.topViewController as? DynamicTemplateViewController) == nil {
+    
+    //Get Template Api Call
+    func getTemplateForEvent(templateId: String){
             ERProgressHud.shared.show()
-        }
-        print("getTemplate request========",parameters)
-        APIManager.sharedInstance.makeRequestToGetTemplate(params: parameters as [String:Any]){ (success, response,statusCode)  in
-            if (success) {
-                ERProgressHud.shared.hide()
-                print(response)
-                if let responseData = response as? Dictionary<String, Any> {
-                                  var jsonData: Data? = nil
-                                  do {
-                                      jsonData = try JSONSerialization.data(
-                                          withJSONObject: responseData as Any,
-                                          options: .prettyPrinted)
-                                      do{
-                                          let jsonDataModels = try JSONDecoder().decode(DDCFormModel.self, from: jsonData!)
-//                                          print(response)
-                                          let frameworkBundle = Bundle(for: DynamicTemplateViewController.self)
-                                          let storyboard = UIStoryboard(name: "Main", bundle: frameworkBundle)
-                                          let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
-                                          vc.delegate = self
-                                          vc.dataModel = jsonDataModels
-                                          vc.hidesBottomBarWhenPushed = true
-                                          vc.isFromEvent = true
-//                                          ddcModel = jsonDataModels
-//                                          self.present(vc, animated: true, completion: nil)
-                                          if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
-                                              if let vccc = self.navigationController?.topViewController as? DynamicTemplateViewController {
-                                                vccc.dataModel = jsonDataModels
-                                                  vccc.tableView.reloadData()
-                                                }
-                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
-                                              return
-                                          }
-                                          self.navigationController?.pushViewController(vc, animated: true)
-//                                          LogoutHelper.shared.showLogoutView()
-                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
+            APIManager.sharedInstance.makeRequestToGetTemplate(templateId: templateId){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+                    if let responseData = response as? Dictionary<String, Any> {
+                                      var jsonData: Data? = nil
+                                      do {
+                                          jsonData = try JSONSerialization.data(
+                                              withJSONObject: responseData as Any,
+                                              options: .prettyPrinted)
+                                          do{
+                                              let jsonDataModels = try JSONDecoder().decode(DDCFormModell.self, from: jsonData!)
+                                              print(jsonDataModels)
+                                              let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                              let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamiccTemplateViewController
+                                              ddcModel = jsonDataModels
+                                              vc.delegate = self
+                                              vc.isEventTemplate = true
+                                              vc.hideIndexField = true
+                                              self.saveInstrument(templateId: jsonDataModels.id!,isEventTemplate: true)
+                                              vc.hidesBottomBarWhenPushed = true
+                                              self.navigationController?.pushViewController(vc, animated: true)
 
-                                      }catch {
+                                          }catch {
+                                              print(error)
+                                          }
+                                      } catch {
                                           print(error)
                                       }
-                                  } catch {
-                                      print(error)
-                                  }
-                        }
+                            }
+                } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+        }
+
+    //Get Template Api Call
+    func getTemplate(templateId: String,eventId: String, shouldUpdateIndex: Bool = false, newEventId: String = ""){
+            ERProgressHud.shared.show()
+            APIManager.sharedInstance.makeRequestToGetTemplate(templateId: templateId){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+                    if let responseData = response as? Dictionary<String, Any> {
+                                      var jsonData: Data? = nil
+                                      do {
+                                          jsonData = try JSONSerialization.data(
+                                              withJSONObject: responseData as Any,
+                                              options: .prettyPrinted)
+                                          do{
+                                              let jsonDataModels = try JSONDecoder().decode(DDCFormModell.self, from: jsonData!)
+                                              print(jsonDataModels)
+                                              let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                              let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamiccTemplateViewController
+                                              ddcModel = jsonDataModels
+                                              vc.delegate = self
+                                              vc.eventId = eventId
+                                              vc.hideIndexField = true
+                                              self.saveInstrument(templateId: jsonDataModels.id!,shouldUpdateIndex: shouldUpdateIndex, newEventId: newEventId, oldEventId: eventId)
+                                              vc.hidesBottomBarWhenPushed = true
+                                              self.navigationController?.pushViewController(vc, animated: true)
+
+                                          }catch {
+                                              print(error)
+                                          }
+                                      } catch {
+                                          print(error)
+                                      }
+                            }
+                } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+        }
+        
+        
+    func saveInstrument(templateId: String,shouldUpdateIndex: Bool = false, newEventId: String = "", oldEventId: String = "",isEventTemplate : Bool = false){
+            let parameter : [String:Any] = ["templateId": templateId, "predefinedFields": [:] ]
+            let jsonData = try! JSONSerialization.data(withJSONObject: parameter, options: JSONSerialization.WritingOptions.prettyPrinted)
+            let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+            print(jsonString)
+
+            APIManager.sharedInstance.makeRequestToSaveInstrument(data: jsonData){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+                    if let responseData = response as? Dictionary<String, Any> {
+                                      var jsonData: Data? = nil
+                                      do {
+                                          jsonData = try JSONSerialization.data(
+                                              withJSONObject: responseData as Any,
+                                              options: .prettyPrinted)
+                                          do{
+                                              let jsonDataModels = try JSONDecoder().decode(Instruments.self, from: jsonData!)
+                                              print(jsonDataModels)
+
+                                              instruments = jsonDataModels
+                                              if !isEventTemplate {
+                                                  if shouldUpdateIndex {
+                                                      NewRequestHelper.shared.updateIndexField(eventId: newEventId)
+                                                  } else {
+                                                      NewRequestHelper.shared.updateIndexField(eventId: oldEventId)
+                                                  }
+                                              } else {
+                                                  NewRequestHelper.shared.updateIndexField(eventId: self.random(digits: 8))
+                                              }
+                                              NewScriptHelper.shared.checkIsVisibleEntity(ddcModel: ddcModel)
+                                              if (self.navigationController?.topViewController as? DynamiccTemplateViewController) != nil {
+                                                  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
+                                                  return
+                                              }
+                                          } catch {
+                                              print(error)
+                                          }
+                                      } catch {
+                                          print(error)
+                                      }
+                            }            } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+        }
+        
+        func getInstrument(instrumentId: String){
+            APIManager.sharedInstance.makeRequestToGetInstrument(instrumentId: instrumentId){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+                    if let responseData = response as? Dictionary<String, Any> {
+                                      var jsonData: Data? = nil
+                                      do {
+                                          jsonData = try JSONSerialization.data(
+                                              withJSONObject: responseData as Any,
+                                              options: .prettyPrinted)
+                                          do{
+                                              let jsonDataModels = try JSONDecoder().decode(Instruments.self, from: jsonData!)
+                                              instruments = jsonDataModels
+                                              NewScriptHelper.shared.checkIsVisibleEntity(ddcModel: ddcModel)
+
+                                              if (self.navigationController?.topViewController as? DynamiccTemplateViewController) != nil {
+                                                  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
+                                                  return
+                                              }
+                                              
+                                          } catch {
+                                              print(error)
+                                          }
+                                      } catch {
+                                          print(error)
+                                      }
+                            }            } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+        }
+    
+    func startSurvey(eventId: String, templateId: String) {
+        BaseAPIManager.sharedInstance.makeRequestToStartSurveyNew(eventId: eventId){ (success, response,statusCode)  in
+            if (success) {
+                print(response)
+                let newEventId = response["eventId"] as? String ?? ""
+                self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId)
             } else {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                 ERProgressHud.shared.hide()
             }
         }
     }
+    
+    func submitSurvey(ddcResponse: NSArray, eventId: String) {
+        let observationKey : [String:Any] = ["observations":ddcResponse]
+        var parameter : [String:Any] = ["ddcResponse": observationKey, "eventId": eventId]
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+            parameter["mei"] = retrievedCodableObject.user?.mail
+        }
+            let jsonData = try! JSONSerialization.data(withJSONObject: parameter, options: JSONSerialization.WritingOptions.prettyPrinted)
+            let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+            print(jsonString)
+
+            BaseAPIManager.sharedInstance.makeRequestToSubmitSurvey(data: jsonData){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+
+                    let banner = NotificationBanner(title: "Success", subtitle: "Survey Submitted successfully.", style: .success)
+                    banner.show()
+                } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+    }
+    
     
     // MARK:- UIGestureRecognizerDelegate
     
@@ -531,6 +814,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 eventCount += 1
             }
         }
+        for data in surveyData {
+            if self.getDateFromString(dateString: data.date) == date {
+                eventCount += 1
+            }
+        }
         return eventCount
     }
     
@@ -543,14 +831,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK:- UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
+        var count = 0
         for data in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: data.date) {
                 self.tableView.restore()
-                return 2
+                count = 1
             }
         }
-        self.tableView.setEmptyMessage("No Events for this date.")
-        return 0
+        for data in surveyData {
+            if self.selectedDate == self.getDateFromString(dateString: data.date) {
+                self.tableView.restore()
+                count += 1
+                return count
+            }
+        }
+        if count == 0 {
+            self.tableView.setEmptyMessage("No Events for this date.")
+        }
+        return count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -558,17 +856,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var surveys = [SurveryData]()
+        for dataa in surveyData {
+            if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
+                surveys.append(dataa)
+            }
+        }
         var events = [DateData]()
-//        var data = eventsData[indexPath.section - 1]
         for dataa in eventsData {
             if self.selectedDate == self.getDateFromString(dateString: dataa.date) {
-//                data = dataa
                 events.append(dataa)
             }
         }
-        if indexPath.section == 1 {
+        
+        if surveys.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
-//            cell.eventData = data.events
             cell.dateEvents = events
             cell.tableView.reloadData()
             cell.layoutSubviews()
@@ -576,12 +878,37 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.nav = self.navigationController
             cell.vc = self
             return cell
-        } else {
+        } else if events.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SurveysTableViewCell") as! SurveysTableViewCell
             cell.tableView.reloadData()
             cell.selectionStyle = .none
+            cell.surveys = surveys
+            cell.nav = self.navigationController
+            cell.vc = self
+            cell.delegate = self
             return cell
+        } else {
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SurveysTableViewCell") as! SurveysTableViewCell
+                cell.tableView.reloadData()
+                cell.selectionStyle = .none
+                cell.surveys = surveys
+                cell.nav = self.navigationController
+                cell.vc = self
+                cell.delegate = self
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
+                cell.dateEvents = events
+                cell.tableView.reloadData()
+                cell.layoutSubviews()
+                cell.selectionStyle = .none
+                cell.nav = self.navigationController
+                cell.vc = self
+                return cell
+            }
         }
+
     }
     
     

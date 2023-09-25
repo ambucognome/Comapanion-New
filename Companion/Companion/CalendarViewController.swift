@@ -9,11 +9,11 @@ import UIKit
 import CalendarKit
 
 protocol  CalendarViewControllerDelegate {
-    func didUpdateEvent(eventData: [String : Any], eventId: String)
+    func didUpdateEvent(eventData: NSArray, eventId: String)
     func didDeleteEvent(eventId: String)
 }
-
-class CalendarViewController: DayViewController , DynamicTemplateViewControllerDelegate{
+//KARNA
+class CalendarViewController: DayViewController, DynamicTemplateViewControllerDelegate {
     
     var template_uri = "http://chdi.montefiore.org/calendarEvent"
 
@@ -68,10 +68,20 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
     
     func didSubmitSurvey(params: [String : Any]) {
         print("survey completed")
-        self.navigationController?.popViewController(completion: {
-            self.calendarDelegate?.didUpdateEvent(eventData: params,eventId: self.selectedEventId)
-        })
+//        self.navigationController?.popViewController(completion: {
+//            self.calendarDelegate?.didUpdateEvent(eventData: params,eventId: self.selectedEventId)
+//        })
         
+    }
+    
+    func didSubmitSurveyForm(response: NSArray, eventId: String) {
+        print("didSubmitSurveyForm")
+    }
+    
+    func didSubmitEventForm(response: NSArray) {
+        print("didSubmitEventForm")
+        self.calendarDelegate?.didUpdateEvent(eventData: response, eventId: self.selectedEventId)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func getDateFromString(dateString: String) -> Date {
@@ -157,19 +167,18 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
         alert.addAction(UIAlertAction(title: "Edit", style: .default , handler:{ (UIAlertAction)in
             if let data = descriptor.userInfo as? EventStruct {
                 self.selectedEventId = data.eventId
-                self.getTempleWith(uri: self.template_uri, contextt: data.context)
+                self.getTempleWith(templateId: data.templateId, instrumentId: data.instrumentId)
             }
-            
         }))
         
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive , handler:{ (UIAlertAction)in
             if let data = descriptor.userInfo as? EventStruct {
-                self.navigationController?.popViewController(completion: {
                 self.calendarDelegate?.didDeleteEvent(eventId: data.eventId)
-                })
+                self.navigationController?.popViewController(animated: true)
             }
-            
-        }))
+
+        })
+        alert.addAction(deleteAction)
 
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -188,24 +197,12 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
       }
       endEventEditing()
       print("Event has been longPressed: \(descriptor) \(String(describing: descriptor.userInfo))")
-
     }
     
-    func getTempleWith(uri: String, contextt: Any) {
-        let name = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
-        let parameters: [String: Any] = [
-            "author" : name,
-            "template_uri" : (uri),
-            "context": contextt
-        ]
-        context_parameters = contextt as! [String : Any]
-        if (self.navigationController?.topViewController as? DynamicTemplateViewController) == nil {
-            ERProgressHud.shared.show()
-        }
-        print("getTemplate request========",parameters)
-        APIManager.sharedInstance.makeRequestToGetTemplate(params: parameters as [String:Any]){ (success, response,statusCode)  in
+    func getTempleWith(templateId: String, instrumentId: String) {
+        ERProgressHud.shared.show()
+        APIManager.sharedInstance.makeRequestToGetTemplate(templateId: templateId){ (success, response,statusCode)  in
             if (success) {
-                ERProgressHud.shared.hide()
                 print(response)
                 if let responseData = response as? Dictionary<String, Any> {
                                   var jsonData: Data? = nil
@@ -214,28 +211,16 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
                                           withJSONObject: responseData as Any,
                                           options: .prettyPrinted)
                                       do{
-                                          let jsonDataModels = try JSONDecoder().decode(DDCFormModel.self, from: jsonData!)
-//                                          print(response)
-                                          let frameworkBundle = Bundle(for: DynamicTemplateViewController.self)
-                                          let storyboard = UIStoryboard(name: "Main", bundle: frameworkBundle)
-                                          let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamicTemplateViewController
+                                          let jsonDataModels = try JSONDecoder().decode(DDCFormModell.self, from: jsonData!)
+                                          print(jsonDataModels)
+                                          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                          let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamiccTemplateViewController
+                                          ddcModel = jsonDataModels
                                           vc.delegate = self
-                                          vc.dataModel = jsonDataModels
+                                          vc.isEventTemplate = true
+                                          self.getInstrument(instrumentId: instrumentId)
                                           vc.hidesBottomBarWhenPushed = true
-                                          vc.isFromEvent = true
-//                                          ddcModel = jsonDataModels
-//                                          self.present(vc, animated: true, completion: nil)
-                                          if (self.navigationController?.topViewController as? DynamicTemplateViewController) != nil {
-                                              if let vccc = self.navigationController?.topViewController as? DynamicTemplateViewController {
-                                                vccc.dataModel = jsonDataModels
-                                                  vccc.tableView.reloadData()
-                                                }
-                                              ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
-                                              return
-                                          }
                                           self.navigationController?.pushViewController(vc, animated: true)
-//                                          LogoutHelper.shared.showLogoutView()
-                                          ScriptHelper.shared.checkIsVisibleEntity(ddcModel: jsonDataModels)
 
                                       }catch {
                                           print(error)
@@ -245,6 +230,39 @@ class CalendarViewController: DayViewController , DynamicTemplateViewControllerD
                                   }
                         }
             } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
+        }
+    }
+    
+    func getInstrument(instrumentId: String){
+        APIManager.sharedInstance.makeRequestToGetInstrument(instrumentId: instrumentId){ (success, response,statusCode)  in
+            if (success) {
+                print(response)
+                if let responseData = response as? Dictionary<String, Any> {
+                                  var jsonData: Data? = nil
+                                  do {
+                                      jsonData = try JSONSerialization.data(
+                                          withJSONObject: responseData as Any,
+                                          options: .prettyPrinted)
+                                      do{
+                                          let jsonDataModels = try JSONDecoder().decode(Instruments.self, from: jsonData!)
+                                          instruments = jsonDataModels
+                                          NewScriptHelper.shared.checkIsVisibleEntity(ddcModel: ddcModel)
+
+                                          if (self.navigationController?.topViewController as? DynamiccTemplateViewController) != nil {
+                                              NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
+                                              return
+                                          }
+                                          
+                                      } catch {
+                                          print(error)
+                                      }
+                                  } catch {
+                                      print(error)
+                                  }
+                        }            } else {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                 ERProgressHud.shared.hide()
             }

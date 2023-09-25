@@ -6,6 +6,7 @@
 //
 
 import UIKit
+var username = ""
 
 class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -23,6 +24,7 @@ class MenuViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         self.configure()
+        //KARNA
         self.nameLabel.text = username
         tableView.layer.cornerRadius = 25
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

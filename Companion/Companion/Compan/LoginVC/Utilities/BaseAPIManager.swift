@@ -39,6 +39,8 @@ class BaseAPIManager : NSObject {
         case leaveEvent(Data)
         case getEventDetails(Data)
         case userBusy(Data)
+        case startSurveyNew(String)
+        case submitSurvey(Data)
 
 
         // Api Methods
@@ -77,6 +79,10 @@ class BaseAPIManager : NSObject {
             case .getEventDetails:
                 return .post
             case .userBusy:
+                return .post
+            case .startSurveyNew:
+                return .get
+            case .submitSurvey:
                 return .post
             }
         }
@@ -118,6 +124,10 @@ class BaseAPIManager : NSObject {
                 return API_END_GET_EVENT_DETAILS
             case .userBusy:
                 return API_END_USER_BUSY
+            case .startSurveyNew:
+                return API_END_START_SURVEY_NEW
+            case .submitSurvey:
+                return API_END_SUBMIT_SURVEY
             }
         }
         
@@ -246,6 +256,19 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .userBusy(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .startSurveyNew(let eventId):
+                let urlWithEventId = EVENT_BASE_URL + path + eventId
+                let url = try urlWithEventId.asURL()
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                return urlRequest
+            case .submitSurvey(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -469,13 +492,13 @@ class BaseAPIManager : NSObject {
     //  Get Event
     // completion : Completion object to return parameters to the calling functions
     // Returns Events
-    func makeRequestToGetEvent(data:Data,completion: @escaping completionHandlerWithSuccessAndResultArray) {
+    func makeRequestToGetEvent(data:Data,completion: @escaping completionHandlerWithStatusCode) {
         Alamofire.request(Router.getEvents(data)).responseJSON { response in
             switch response.result {
             case .success(let JSON):
                 ERProgressHud.shared.hide()
                 let statusCode = response.response?.statusCode
-                guard let jsonData =  JSON  as? NSArray else {
+                guard let jsonData =  JSON  as? NSDictionary else {
 //                    completion(true, [], statusCode!)
                     APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                     return
@@ -488,7 +511,7 @@ class BaseAPIManager : NSObject {
 //                    APIManager.sharedInstance.showAlertWithMessage(message: "Session Expired. Login to continue.")
                 }
             case .failure( _):
-                completion(false,[],0)
+                completion(false,[:],0)
             }
         }
     }
@@ -682,6 +705,44 @@ class BaseAPIManager : NSObject {
     // Returns
     func makeRequestToUserBusy(data:Data,completion: @escaping completionHandlerWithStatusCode) {
         Alamofire.request(Router.userBusy(data)).response { response in
+            print(response)
+            ERProgressHud.shared.hide()
+            let statusCode = response.response?.statusCode
+            if statusCode == 200 {
+                completion(true,[:],200)
+            } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    // Start survey new
+    // completion : Completion object to return parameters to the calling functions
+    // Returns User details
+    func makeRequestToStartSurveyNew(eventId:String,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.startSurveyNew(eventId)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    //  Submit Survey
+    // completion : Completion object to return parameters to the calling functions
+    // Returns Event
+    func makeRequestToSubmitSurvey(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.submitSurvey(data)).response { response in
             print(response)
             ERProgressHud.shared.hide()
             let statusCode = response.response?.statusCode

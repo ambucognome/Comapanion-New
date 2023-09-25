@@ -442,6 +442,11 @@ extension String {
     
 }
 
+extension String {
+var boolValue: Bool {
+    return (self as NSString).boolValue
+}}
+
 extension UITextField {
     
     func setIcon(_ image: UIImage) {
@@ -496,13 +501,50 @@ extension UITextField {
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboardd))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeybrd))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     
-    @objc func dismissKeyboardd() {
+    @objc func dismissKeybrd() {
         view.endEditing(true)
+    }
+}
+
+extension UserDefaults {
+  func setCodableObject<T: Codable>(_ data: T?, forKey defaultName: String) {
+    let encoded = try? JSONEncoder().encode(data)
+    set(encoded, forKey: defaultName)
+  }
+    
+    func codableObject<T : Codable>(dataType: T.Type, key: String) -> T? {
+      guard let userDefaultData = data(forKey: key) else {
+        return nil
+      }
+      return try? JSONDecoder().decode(T.self, from: userDefaultData)
+    }
+}
+
+
+extension String {
+    var htmlToAttributedString: NSAttributedString? {
+        guard let data = data(using: .utf8) else { return nil }
+        do {
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            return nil
+        }
+    }
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }
 
@@ -514,8 +556,6 @@ extension Encodable {
             let jsonData = try jsonEncoder.encode(self)
             if let json = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers),
                let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
-//                let prettyString = (String(decoding: jsonData, as: UTF8.self))
-//                print(prettyString)
                 // Convert to a string and print
                 if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
 //                   print(JSONString)
@@ -552,70 +592,4 @@ extension Encodable {
         }
     }
     
-}
-
-extension String {
-    var htmlToAttributedString: NSAttributedString? {
-        guard let data = data(using: .utf8) else { return nil }
-        do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            return nil
-        }
-    }
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
-    }
-}
-
-extension UILabel {
-    var numberOfVisibleLines: Int {
-        let maxSize = CGSize(width: frame.size.width, height: CGFloat(MAXFLOAT))
-        let textHeight = sizeThatFits(maxSize).height
-        let lineHeight = font.lineHeight
-        return Int(ceil(textHeight / lineHeight))
-    }
-}
-
-
-extension UserDefaults {
-  func setCodableObject<T: Codable>(_ data: T?, forKey defaultName: String) {
-    let encoded = try? JSONEncoder().encode(data)
-    set(encoded, forKey: defaultName)
-  }
-    
-    func codableObject<T : Codable>(dataType: T.Type, key: String) -> T? {
-      guard let userDefaultData = data(forKey: key) else {
-        return nil
-      }
-      return try? JSONDecoder().decode(T.self, from: userDefaultData)
-    }
-}
-
-extension Date {
-    var millisecondsSince1970:Int64 {
-        Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-    
-    init(milliseconds:Int64) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
-    }
-}
-
-extension UINavigationController {
-func popViewController(animated:Bool = true, completion: @escaping ()->()) {
-    CATransaction.begin()
-    CATransaction.setCompletionBlock(completion)
-    self.popViewController(animated: animated)
-    CATransaction.commit()
-}
-}
-
-
-extension Double {
-    /// Rounds the double to decimal places value
-    func rounded(toPlaces places:Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
-    }
 }

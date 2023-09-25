@@ -113,46 +113,46 @@ class FailScreenViewController: UIViewController {
     }
     
     func startSurvey() {
-        surveyID = ""
-        templateURI = ""
-        ERProgressHud.shared.show()
-        if let retrievedCodableObject =  SafeCheckUtils.getUserData() {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            let orderJsonData = try! encoder.encode(retrievedCodableObject.user!)
-            let jsonString = NSString(data: orderJsonData, encoding: String.Encoding.utf8.rawValue)! as String
-            print(jsonString)
-            BaseAPIManager.sharedInstance.makeRequestToStartSurvey( data: orderJsonData, isForced: "true"){ (success, response,statusCode)  in
-                        if (success) {
-                            ERProgressHud.shared.hide()
-                            print(response)
-                            let template_uri = response["ddc_template_uri"] as? String ?? ""
-                            templateURI = template_uri
-                                    if let survey = response["survey"] as? NSDictionary {
-                                        survey_data = survey
-                                        let surveyTime =  survey["survey_start"] as? String ?? ""
-                                        let id =  survey["id"] as? NSNumber ?? 0
-                                        self.surveyStartTime = Utilities.convertDateToTimestamp(date: surveyTime)
-                                        surveyID = id.stringValue
-                                        
-                                    
-                                            //open fresh form
-                                            let context = [
-                                                "survey_id" : surveyID,
-                                            "user": retrievedCodableObject.user?.eid ?? ""
-                                            ]
-                                        self.navigationController?.popViewController {
-                                            self.delegate?.forceStart(context: context)
-                                        }
-                                        
-//                                                self.getTempleWith(author: "System", uri: templateURI, context: context)
-                                }
-                        } else {
-                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
-                            ERProgressHud.shared.hide()
-                        }
-            }
-        }
+//        surveyID = ""
+//        templateURI = ""
+//        ERProgressHud.shared.show()
+//        if let retrievedCodableObject =  SafeCheckUtils.getUserData() {
+//            let encoder = JSONEncoder()
+//            encoder.outputFormatting = .prettyPrinted
+//            let orderJsonData = try! encoder.encode(retrievedCodableObject.user!)
+//            let jsonString = NSString(data: orderJsonData, encoding: String.Encoding.utf8.rawValue)! as String
+//            print(jsonString)
+//            BaseAPIManager.sharedInstance.makeRequestToStartSurvey( data: orderJsonData, isForced: "true"){ (success, response,statusCode)  in
+//                        if (success) {
+//                            ERProgressHud.shared.hide()
+//                            print(response)
+//                            let template_uri = response["ddc_template_uri"] as? String ?? ""
+//                            templateURI = template_uri
+//                                    if let survey = response["survey"] as? NSDictionary {
+//                                        survey_data = survey
+//                                        let surveyTime =  survey["survey_start"] as? String ?? ""
+//                                        let id =  survey["id"] as? NSNumber ?? 0
+//                                        self.surveyStartTime = Utilities.convertDateToTimestamp(date: surveyTime)
+//                                        surveyID = id.stringValue
+//                                        
+//                                    
+//                                            //open fresh form
+//                                            let context = [
+//                                                "survey_id" : surveyID,
+//                                            "user": retrievedCodableObject.user?.eid ?? ""
+//                                            ]
+//                                        self.navigationController?.popViewController {
+//                                            self.delegate?.forceStart(context: context)
+//                                        }
+//                                        
+////                                                self.getTempleWith(author: "System", uri: templateURI, context: context)
+//                                }
+//                        } else {
+//                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+//                            ERProgressHud.shared.hide()
+//                        }
+//            }
+//        }
     }
     
 //    func getTempleWith(author: String, uri: String, context: Any) {

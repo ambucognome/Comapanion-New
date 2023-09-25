@@ -7,17 +7,21 @@
 
 import UIKit
 
+protocol SurveysTableViewCellDelegate {
+    func openForm(templateId: String,eventId: String, callStartSurvey: Bool)
+}
+
 class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shadowView: UIView!
 
-    var titles = ["Covid Check","Sample Survey","Completed Survey"]
-    var completedDate = ["Assigned on 28 August","Pending","Completed on 31 August"]
-    var tags = ["Assigned","Pending","Completed"]
-
-//    var dateEvents = [DateData]()
-
+    var surveys = [SurveryData]()
+    
+    var nav : UINavigationController?
+    var vc : HomeViewController?
+    
+    var delegate : SurveysTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,22 +55,28 @@ class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.titles.count
+        return self.surveys.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyCell") as! SurveyCell
-        cell.nameLabel.text = self.titles[indexPath.row]
-        cell.completedDateLabel.text = self.completedDate[indexPath.row]
+        cell.nameLabel.text = self.surveys[indexPath.row].surverys[0].name
+        cell.completedDateLabel.text = "SurveyId: \(self.surveys[indexPath.row].surverys[0].surveyId)"
         cell.tagView.layer.cornerRadius = 4
         cell.tagView.layer.borderWidth = 1
-        cell.typeLabel.text = self.tags[indexPath.row]
-        if indexPath.row == 0 {
+
+        if self.surveys[indexPath.row].surverys[0].concept == "SURVEY ASSIGNED" {
             cell.tagView.layer.borderColor = DARK_BLUE_COLOR.cgColor
-        } else if indexPath.row == 1 {
-            cell.tagView.layer.borderColor = UIColor.red.cgColor
-        } else if indexPath.row == 2 {
-            cell.tagView.layer.borderColor = UIColor.systemGreen.cgColor
+            cell.typeLabel.textColor = DARK_BLUE_COLOR
+            cell.typeLabel.text = "Assigned"
+        } else if self.surveys[indexPath.row].surverys[0].concept == "SURVEY STARTED" {
+            cell.tagView.layer.borderColor = UIColor(red: 246/255, green: 109/255, blue: 109/255, alpha: 1.0).cgColor
+            cell.typeLabel.textColor = UIColor(red: 246/255, green: 109/255, blue: 109/255, alpha: 1.0)
+            cell.typeLabel.text = "Pending"
+        } else {
+            cell.tagView.layer.borderColor = UIColor(red: 51/255, green: 102/255, blue: 0/255, alpha: 1.0).cgColor
+            cell.typeLabel.textColor = UIColor(red: 51/255, green: 102/255, blue: 0/255, alpha: 1.0)
+            cell.typeLabel.text = "Completed"
         }
         self.layoutSubviews()
             return cell
@@ -75,9 +85,24 @@ class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDat
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.openDDCForm(index: indexPath.row)
     }
+    
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
+    }
+    
+    
+    func openDDCForm(index: Int) {
+        let templatedId = self.surveys[index].surverys[0].templateId
+        let surveyStatus = self.surveys[index].surverys[0].concept
+        let eventId = self.surveys[index].surverys[0].eventId
+        var shouldStartSurvey = false
+//        if surveyStatus == "SURVEY ASSIGNED" {
+            shouldStartSurvey = true
+//        }
+        self.delegate?.openForm(templateId: templatedId,eventId: eventId,callStartSurvey: shouldStartSurvey)
     }
 }

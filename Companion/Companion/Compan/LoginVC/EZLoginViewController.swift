@@ -23,7 +23,6 @@ class EZLoginViewController: UIViewController {
     @IBOutlet weak var normalLoginBtn: UIButton!
 
     
-    let transition = BubbleTransition()
     
 
     var ezId = ""
@@ -144,21 +143,5 @@ class EZLoginViewController: UIViewController {
          }
 //        }
 //      }
-    }
-}
-
-extension EZLoginViewController : UIViewControllerTransitioningDelegate {
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .present
-      transition.startingPoint = normalLoginBtn.center
-      transition.bubbleColor = normalLoginBtn.backgroundColor!
-      return transition
-    }
-
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .dismiss
-      transition.startingPoint = normalLoginBtn.center
-      transition.bubbleColor = normalLoginBtn.backgroundColor!
-      return transition
     }
 }
