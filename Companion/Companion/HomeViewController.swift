@@ -43,6 +43,7 @@ struct SurveyStruct {
     var surveyId : String
     var name : String
     var sourceUri : String?
+    var instrumentId : String?
 }
 
 struct EventStruct {
@@ -278,11 +279,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.deleteEvent(eventId: eventId)
     }
     
-    func openForm(templateId: String, eventId: String, callStartSurvey: Bool) {
+    func openForm(templateId: String, eventId: String, callStartSurvey: Bool,instrumentId: String?,isReadOnly: Bool) {
         if callStartSurvey {
             self.startSurvey(eventId: eventId, templateId: templateId)
         } else {
-            self.getTemplate(templateId: templateId, eventId: eventId)
+            self.getTemplate(templateId: templateId, eventId: eventId, instrumentId: instrumentId,isReadOly: isReadOnly)
         }
     }
     
@@ -531,7 +532,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                             let surveyId = cont["surveyId"] as? String ?? ""
                                             
                                             let eventDate = cont["startDate"] as? String ?? ""
-                                            
+                                            let instrumentId = cont["instrumentId"] as? String
                                             let dateFormatter = DateFormatter()
                                             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                                             let newDate = dateFormatter.date(from: eventTime)
@@ -541,7 +542,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                             let dateString = formatter.string(from: newDate! as Date)
                                             
                                             
-                                            let data = SurveryData(date: dateString, surverys: [SurveyStruct(concept: concept, eventId: eventId, time: eventTime, templateId: templateId, surveyId: surveyId, name: name)])
+                                            let data = SurveryData(date: dateString, surverys: [SurveyStruct(concept: concept, eventId: eventId, time: eventTime, templateId: templateId, surveyId: surveyId, name: name,instrumentId: instrumentId)])
                                             surveyData.append(data)
                                             self.tableView.reloadData()
                                         }
@@ -604,7 +605,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
 
     //Get Template Api Call
-    func getTemplate(templateId: String,eventId: String, shouldUpdateIndex: Bool = false, newEventId: String = ""){
+    func getTemplate(templateId: String,eventId: String, shouldUpdateIndex: Bool = false, newEventId: String = "",instrumentId:String?,isReadOly: Bool = false){
             ERProgressHud.shared.show()
             APIManager.sharedInstance.makeRequestToGetTemplate(templateId: templateId){ (success, response,statusCode)  in
                 if (success) {
@@ -624,7 +625,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                               vc.delegate = self
                                               vc.eventId = eventId
                                               vc.hideIndexField = true
-                                              self.saveInstrument(templateId: jsonDataModels.id!,shouldUpdateIndex: shouldUpdateIndex, newEventId: newEventId, oldEventId: eventId)
+                                              isReadOnly = false
+                                              if let id = instrumentId {
+                                                  isReadOnly = isReadOly
+                                                  self.getInstrument(instrumentId: id)
+                                              } else {
+                                                  self.saveInstrument(templateId: jsonDataModels.id!,shouldUpdateIndex: shouldUpdateIndex, newEventId: newEventId, oldEventId: eventId)
+                                              }
                                               vc.hidesBottomBarWhenPushed = true
                                               self.navigationController?.pushViewController(vc, animated: true)
 
@@ -728,7 +735,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if (success) {
                 print(response)
                 let newEventId = response["eventId"] as? String ?? ""
-                self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId)
+                self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId, instrumentId: nil)
             } else {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                 ERProgressHud.shared.hide()

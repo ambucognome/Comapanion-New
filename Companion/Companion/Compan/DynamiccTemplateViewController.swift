@@ -24,6 +24,9 @@ protocol DynamicTemplateViewControllerDelegate {
 class DynamiccTemplateViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var footerView: UIView!
+    @IBOutlet weak var footerViewHeight: NSLayoutConstraint!
+
     
     var delegate: DynamicTemplateViewControllerDelegate?
     var eventId = ""
@@ -33,6 +36,13 @@ class DynamiccTemplateViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isReadOnly {
+            self.footerView.isHidden = true
+            self.footerViewHeight.constant = 0
+        } else {
+            self.footerView.isHidden = false
+            self.footerViewHeight.constant = 80
+        }
 
         // Do any additional setup after loading the view.
         tableView.register(UITableViewCell.self,
@@ -111,6 +121,7 @@ class DynamiccTemplateViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func updateAllEntityValue(instruments: Instruments){
+        ERProgressHud.shared.show()
         var entityData : [[String:Any]] = []
         if let instrumentsData = instruments.entities {
             for data in instrumentsData {
@@ -129,7 +140,7 @@ class DynamiccTemplateViewController: UIViewController, UITableViewDelegate, UIT
         APIManager.sharedInstance.makeRequestToUpdateEntityValue(data: jsonData){ (success, response,statusCode)  in
             if (success) {
                 print(response)
-                
+                ERProgressHud.shared.hide()
                 if self.isEventTemplate {
                     self.delegate?.didSubmitEventForm(response: response)
                 } else {

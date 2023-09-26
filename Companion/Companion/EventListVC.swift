@@ -119,7 +119,8 @@ class EventListVC: UIViewController {
                                             let name = cont["surveyTitle"] as? String ?? ""
                                             let templateId = cont["templateId"] as? String ?? ""
                                             let surveyId = cont["surveyId"] as? String ?? ""
-                                            
+                                            let instrumentId = cont["instrumentId"] as? String
+
                                             let eventDate = cont["startDate"] as? String ?? ""
                                             
                                             let dateFormatter = DateFormatter()
@@ -131,7 +132,7 @@ class EventListVC: UIViewController {
                                             let dateString = formatter.string(from: newDate! as Date)
                                             
                                             
-                                            let data = SurveryData(date: dateString, surverys: [SurveyStruct(concept: concept, eventId: eventId, time: eventTime, templateId: templateId, surveyId: surveyId, name: name)])
+                                            let data = SurveryData(date: dateString, surverys: [SurveyStruct(concept: concept, eventId: eventId, time: eventTime, templateId: templateId, surveyId: surveyId, name: name,instrumentId: instrumentId)])
                                             surveyData.append(data)
                                             self.tableView.reloadData()
                                         }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SurveysTableViewCellDelegate {
-    func openForm(templateId: String,eventId: String, callStartSurvey: Bool)
+    func openForm(templateId: String,eventId: String, callStartSurvey: Bool,instrumentId: String?,isReadOnly: Bool)
 }
 
 class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
@@ -99,10 +99,14 @@ class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDat
         let templatedId = self.surveys[index].surverys[0].templateId
         let surveyStatus = self.surveys[index].surverys[0].concept
         let eventId = self.surveys[index].surverys[0].eventId
+        let instrumentId = self.surveys[index].surverys[0].instrumentId
         var shouldStartSurvey = false
-//        if surveyStatus == "SURVEY ASSIGNED" {
+        var isReadOnly = false
+        if surveyStatus == "SURVEY ASSIGNED" {
             shouldStartSurvey = true
-//        }
-        self.delegate?.openForm(templateId: templatedId,eventId: eventId,callStartSurvey: shouldStartSurvey)
+        } else if surveyStatus == "SURVEY SUBMITTED" {
+            isReadOnly = true
+        }
+        self.delegate?.openForm(templateId: templatedId,eventId: eventId,callStartSurvey: shouldStartSurvey,instrumentId: instrumentId, isReadOnly: isReadOnly)
     }
 }
