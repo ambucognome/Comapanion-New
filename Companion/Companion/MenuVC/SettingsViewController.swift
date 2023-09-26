@@ -176,8 +176,8 @@ extension SettingsViewController : UICollectionViewDelegate, UICollectionViewDat
 //            controller.hidesBottomBarWhenPushed = true
 //            self.navigationController?.pushViewController(controller, animated: true)
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-            let controller = storyboard.instantiateViewController(identifier: "EventListVC") as! EventListVC
-//            controller.vc = self
+            let controller = storyboard.instantiateViewController(identifier: "NotificationVC") as! NotificationVC
+            controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }

@@ -9,24 +9,25 @@ import UIKit
 
 
 
-class InitialViewController: UIViewController, FailScreenViewControllerDelegate, PassScreenViewControllerDelegate { //KARNA //DynamicTemplateViewControllerDelegate
+class InitialViewController: UIViewController, FailScreenViewControllerDelegate, PassScreenViewControllerDelegate {  //DynamicTemplateViewControllerDelegate
     
     var surveyStartTime = ""
     
     var isDemo = false
-    var template_uri = "http://chdi.montefiore.org/CovidSafeCheck"
+    var template_uri = "ddc:template_8c18e689-3a3f-4200-9fc1-afcb8ed78345"//"http://chdi.montefiore.org/CovidSafeCheck"
     var key = "101"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if self.isDemo {
-            self.view.isHidden = true
-            self.getTempleWith(uri: template_uri, context: [ "key" : key])
-            return
-        }
-        self.startSurvey()
-        self.navigationController?.isNavigationBarHidden = true
-        self.addObservers()
+//        if self.isDemo {
+//            self.view.isHidden = true
+//            self.getTempleWith(uri: template_uri, context: [ "key" : key])
+//            return
+//        }
+//        self.startSurvey()
+//        self.navigationController?.isNavigationBarHidden = true
+//        self.addObservers()
+        self.getTemplate(templateId: template_uri)
     }
     deinit {
         removeObservers()
@@ -84,6 +85,83 @@ class InitialViewController: UIViewController, FailScreenViewControllerDelegate,
                     }
         
     }
+    
+    //Get Template Api Call
+    func getTemplate(templateId: String){
+            ERProgressHud.shared.show()
+            APIManager.sharedInstance.makeRequestToGetTemplate(templateId: templateId){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+                    if let responseData = response as? Dictionary<String, Any> {
+                                      var jsonData: Data? = nil
+                                      do {
+                                          jsonData = try JSONSerialization.data(
+                                              withJSONObject: responseData as Any,
+                                              options: .prettyPrinted)
+                                          do{
+                                              let jsonDataModels = try JSONDecoder().decode(DDCFormModell.self, from: jsonData!)
+                                              print(jsonDataModels)
+                                              let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                              let vc = storyboard.instantiateViewController(withIdentifier: "dynamic") as! DynamiccTemplateViewController
+                                              ddcModel = jsonDataModels
+//                                              vc.delegate = self
+                                              vc.isEventTemplate = false
+                                              vc.hideIndexField = false
+                                              self.saveInstrument(templateId: jsonDataModels.id!,isEventTemplate: false)
+                                              vc.hidesBottomBarWhenPushed = true
+                                              self.navigationController?.pushViewController(vc, animated: true)
+
+                                          }catch {
+                                              print(error)
+                                          }
+                                      } catch {
+                                          print(error)
+                                      }
+                            }
+                } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+        }
+    
+    func saveInstrument(templateId: String,shouldUpdateIndex: Bool = false, newEventId: String = "", oldEventId: String = "",isEventTemplate : Bool = false){
+            let parameter : [String:Any] = ["templateId": templateId, "predefinedFields": [:] ]
+            let jsonData = try! JSONSerialization.data(withJSONObject: parameter, options: JSONSerialization.WritingOptions.prettyPrinted)
+            let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+            print(jsonString)
+
+            APIManager.sharedInstance.makeRequestToSaveInstrument(data: jsonData){ (success, response,statusCode)  in
+                if (success) {
+                    print(response)
+                    if let responseData = response as? Dictionary<String, Any> {
+                                      var jsonData: Data? = nil
+                                      do {
+                                          jsonData = try JSONSerialization.data(
+                                              withJSONObject: responseData as Any,
+                                              options: .prettyPrinted)
+                                          do{
+                                              let jsonDataModels = try JSONDecoder().decode(Instruments.self, from: jsonData!)
+                                              print(jsonDataModels)
+
+                                              instruments = jsonDataModels
+                                              NewScriptHelper.shared.checkIsVisibleEntity(ddcModel: ddcModel)
+                                              if (self.navigationController?.topViewController as? DynamiccTemplateViewController) != nil {
+                                                  NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadTable"), object: nil)
+                                                  return
+                                              }
+                                          } catch {
+                                              print(error)
+                                          }
+                                      } catch {
+                                          print(error)
+                                      }
+                            }            } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    ERProgressHud.shared.hide()
+                }
+            }
+        }
     
     
     func startSurvey() {
@@ -251,5 +329,7 @@ class InitialViewController: UIViewController, FailScreenViewControllerDelegate,
 //            }
 //        }
     }
+    
+    
 
 }
