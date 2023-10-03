@@ -14,7 +14,7 @@ class InitialViewController: UIViewController, FailScreenViewControllerDelegate,
     var surveyStartTime = ""
     
     var isDemo = false
-    var template_uri = "ddc:template_8c18e689-3a3f-4200-9fc1-afcb8ed78345"//"http://chdi.montefiore.org/CovidSafeCheck"
+    var template_uri = "ddc:template_2a3dc0d9-fac1-42a2-8fc2-776377985e02"// "ddc:template_8c18e689-3a3f-4200-9fc1-afcb8ed78345"//"http://chdi.montefiore.org/CovidSafeCheck"
     var key = "101"
 
     override func viewDidLoad() {

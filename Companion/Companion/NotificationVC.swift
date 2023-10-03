@@ -14,6 +14,7 @@ class NotificationVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     var vc : HomeViewController?
+    var nav: UINavigationController?
     
     enum TabIndex : Int {
         case firstChildTab = 0
@@ -34,6 +35,7 @@ class NotificationVC: UIViewController {
     lazy var secondChildTabVC: UIViewController? = {
         let storyboard = UIStoryboard(name: "Companion", bundle: nil)
         let secondChildTabVC = storyboard.instantiateViewController(withIdentifier: "SurveyListVC") as! SurveyListVC
+        secondChildTabVC.nav = self.nav
         return secondChildTabVC
     }()
 

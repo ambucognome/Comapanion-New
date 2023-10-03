@@ -671,11 +671,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
                                               instruments = jsonDataModels
                                               if !isEventTemplate {
-                                                  if shouldUpdateIndex {
-                                                      NewRequestHelper.shared.updateIndexField(eventId: newEventId)
-                                                  } else {
-                                                      NewRequestHelper.shared.updateIndexField(eventId: oldEventId)
-                                                  }
+//                                                  if shouldUpdateIndex {
+//                                                      NewRequestHelper.shared.updateIndexField(eventId: newEventId)
+//                                                  } else {
+                                                  NewRequestHelper.shared.updateIndexField(eventId: instruments?.id ?? "")
+//                                                  }
                                               } else {
                                                   NewRequestHelper.shared.updateIndexField(eventId: self.random(digits: 8))
                                               }
@@ -1014,6 +1014,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
             let controller = storyboard.instantiateViewController(identifier: "NotificationVC") as! NotificationVC
             controller.vc = self
+            controller.nav = self.navigationController
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
         }

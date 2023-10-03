@@ -184,11 +184,12 @@ extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemp
 
                                               instruments = jsonDataModels
                                               if !isEventTemplate {
-                                                  if shouldUpdateIndex {
-                                                      NewRequestHelper.shared.updateIndexField(eventId: newEventId)
-                                                  } else {
-                                                      NewRequestHelper.shared.updateIndexField(eventId: oldEventId)
-                                                  }
+//                                                  if shouldUpdateIndex {
+//                                                      NewRequestHelper.shared.updateIndexField(eventId: newEventId)
+//                                                  } else {
+//                                                      NewRequestHelper.shared.updateIndexField(eventId: oldEventId)
+//                                                  }
+                                                  NewRequestHelper.shared.updateIndexField(eventId: instruments?.id ?? "")
                                               } else {
                                                   NewRequestHelper.shared.updateIndexField(eventId: self.random(digits: 8))
                                               }
