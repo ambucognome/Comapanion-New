@@ -22,12 +22,19 @@ let API_END_START_SURVEY = "/startSurvey"
 let API_END_COMPLETE_SURVEY = "/completeSurvey"
 let API_END_ADD_TOKEN = "/add-token"
 
-                        
+
+// PROD
 let EVENT_BASE_URL = "https://companioneventapi.azurewebsites.net"//"http://192.168.199.90:8080"//
+
+// DEV
+//let EVENT_BASE_URL = "https://companion-evenetapi-dev.azurewebsites.net/"//"http://192.168.199.90:8080"//
+
 let API_END_CREATE_EVENT = "/eventapi/events/create"
 let API_END_GET_EVENTS = "/eventapi/events/survey/date-range"//"/eventapi/events/date-range"
 let API_END_DELETE_EVENT = "/eventapi/events/delete"
 let API_END_ADD_DEVICE_TOKEN = "/eventapi/add-token"
+
+
 
 
 let API_END_START_CALL = "/eventapi/start-call"
@@ -45,3 +52,5 @@ let API_END_USER_BUSY = "/eventapi/user-busy"
 
 let API_END_START_SURVEY_NEW = "/eventapi/start-survey/"
 let API_END_SUBMIT_SURVEY = "/eventapi/submit-survey"
+
+let API_END_SAVE_INSTRUMENTID = "/eventapi/save-instrument-id-started-event"

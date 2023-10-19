@@ -102,7 +102,7 @@ class SurveysTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDat
         let instrumentId = self.surveys[index].surverys[0].instrumentId
         var shouldStartSurvey = false
         var isReadOnly = false
-        if surveyStatus == "SURVEY ASSIGNED" {
+        if surveyStatus == "SURVEY ASSIGNED" ||  surveyStatus == "SURVEY STARTED"{
             shouldStartSurvey = true
         } else if surveyStatus == "SURVEY SUBMITTED" {
             isReadOnly = true

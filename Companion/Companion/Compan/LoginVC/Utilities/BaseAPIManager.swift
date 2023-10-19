@@ -42,6 +42,9 @@ class BaseAPIManager : NSObject {
         case startSurveyNew(String)
         case submitSurvey(Data)
 
+        // saving it to backend
+        case saveInstrumentID(Data)
+
 
         // Api Methods
         var method: HTTPMethod {
@@ -83,6 +86,9 @@ class BaseAPIManager : NSObject {
             case .startSurveyNew:
                 return .get
             case .submitSurvey:
+                return .post
+                
+            case .saveInstrumentID:
                 return .post
             }
         }
@@ -128,6 +134,8 @@ class BaseAPIManager : NSObject {
                 return API_END_START_SURVEY_NEW
             case .submitSurvey:
                 return API_END_SUBMIT_SURVEY
+            case .saveInstrumentID:
+                return API_END_SAVE_INSTRUMENTID
             }
         }
         
@@ -269,6 +277,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpMethod = method.rawValue
                 return urlRequest
             case .submitSurvey(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .saveInstrumentID(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -749,6 +764,30 @@ class BaseAPIManager : NSObject {
             if statusCode == 200 {
                 completion(true,[:],200)
             } else {
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    // Update Entity Value
+    // completion : Completion object to return parameters to the calling functions
+    // Returns Dynamic Form Components in Json format
+    func makeRequestToSaveIntrumentID(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.saveInstrumentID(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
+                }
+            case .failure( _):
                 completion(false,[:],0)
             }
         }

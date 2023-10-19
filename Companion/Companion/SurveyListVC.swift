@@ -12,7 +12,7 @@ class SurveyListVC: UIViewController {
 
     
     @IBOutlet weak var tableView: UITableView!
-    
+    var newEventIdStartSurvey: String = ""
     var vc : HomeViewController?
     var nav : UINavigationController?
 
@@ -28,6 +28,7 @@ class SurveyListVC: UIViewController {
 
 extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemplateViewControllerDelegate {
 
+    
     
     func didSubmitEventForm(response: NSArray) {
         
@@ -96,7 +97,7 @@ extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemp
         let instrumentId = surveyData[index].surverys[0].instrumentId
         var shouldStartSurvey = false
         var isReadOnly = false
-        if surveyStatus == "SURVEY ASSIGNED" {
+        if surveyStatus == "SURVEY ASSIGNED" ||  surveyStatus == "SURVEY STARTED"{
             shouldStartSurvey = true
         }  else if surveyStatus == "SURVEY SUBMITTED" {
             isReadOnly = true
@@ -248,6 +249,7 @@ extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemp
             if (success) {
                 print(response)
                 let newEventId = response["eventId"] as? String ?? ""
+                self.newEventIdStartSurvey = newEventId
                 self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId, instrumentId: nil)
             } else {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
@@ -258,7 +260,7 @@ extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemp
     
     func submitSurvey(ddcResponse: NSArray, eventId: String) {
         let observationKey : [String:Any] = ["observations":ddcResponse]
-        var parameter : [String:Any] = ["ddcResponse": observationKey, "eventId": eventId]
+        var parameter : [String:Any] = ["ddcResponse": observationKey, "eventId": self.newEventIdStartSurvey]
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             parameter["mei"] = retrievedCodableObject.user?.mail
         }

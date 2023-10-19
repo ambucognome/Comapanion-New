@@ -98,6 +98,9 @@ var surveyData : [SurveryData] = []
 var careteamData = [CareTeam(image: "profile1", name: "Hugo Franco", specality: "Cardiologist", lastVisitDate: "Last visit : May 20 2022"),
                     CareTeam(image: "profile2", name: "Cora Barber", specality: "Dentist", lastVisitDate: "Last visit : April 23 2022")]
 
+var newEventIdStartSurvey: String = ""
+var instrumentIdFromSaveInstrument: String = ""
+
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, UIGestureRecognizerDelegate, CalendarViewControllerDelegate, SurveysTableViewCellDelegate, DynamicTemplateViewControllerDelegate {
     
     
@@ -218,7 +221,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         "key": "test12345",
         "app":"Companion_iOS"    ]
     
-    let CREATE_EVENT_TEMPLATE = "ddc:template_c6c08dfe-097b-43eb-aff0-3ac705fbb910"
+    let CREATE_EVENT_TEMPLATE = "ddc:template_08060374-0022-4d30-9ddd-6896ef7b6fc5"
     
     @IBAction func addBtn(_ sender: Any) {
 //        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
@@ -281,12 +284,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func openForm(templateId: String, eventId: String, callStartSurvey: Bool,instrumentId: String?,isReadOnly: Bool) {
         if callStartSurvey {
-            self.startSurvey(eventId: eventId, templateId: templateId)
+            
+            if ((instrumentId) != nil || instrumentId != "") {
+                
+                // Loading Assigned or Pending form
+                self.startSurvey(eventId: eventId, templateId: templateId, instrumentId: instrumentId ?? "")
+
+                
+            } else {
+                
+                self.startSurvey(eventId: eventId, templateId: templateId, instrumentId: "")
+                
+            }
+            
         } else {
+        
+            // loading completed form
             self.getTemplate(templateId: templateId, eventId: eventId, instrumentId: instrumentId,isReadOly: isReadOnly)
+            
         }
     }
-    
     
     func createEventWithV2(response: NSArray,isEdit: Bool = false) {
 
@@ -316,7 +333,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         dataDic["title"] = orderedEntitiesInstrument[0].value
         dataDic["description"] = orderedEntitiesInstrument[1].value
         dataDic["start_time"] = orderedEntitiesInstrument[3].value
-        dataDic["event_duration"] = orderedEntitiesInstrument[4].value
+        
+        dataDic["event_duration"] = (orderedEntitiesInstrument[4].value! as NSString).integerValue
+        
+        
+        
         
         let orderedGuestEntitle = groupEntities.sorted { $0.order! < $1.order!  }
 
@@ -521,7 +542,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                     if let surveyDic = surveys[i] as? NSDictionary {
                                         let concept = surveyDic["concept"] as? String ?? ""
                                         let eventId = surveyDic["eventId"] as? String ?? ""
-                                        let eventTime = surveyDic["eventTime"] as? String ?? ""
+                                        var eventTime = surveyDic["eventTime"] as? String ?? ""
                                         
                                         
                                         let contextString = surveyDic["metadata"] as? String ?? ""
@@ -534,8 +555,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                             let eventDate = cont["startDate"] as? String ?? ""
                                             let instrumentId = cont["instrumentId"] as? String
                                             let dateFormatter = DateFormatter()
-                                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                                            dateFormatter.dateFormat = "yyyy-MM-dd"
+                                            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                                            
+                                            if let dotRange = eventTime.range(of: "T") {
+                                                eventTime.removeSubrange(dotRange.lowerBound..<eventTime.endIndex)
+                                            }
                                             let newDate = dateFormatter.date(from: eventTime)
+                                            
+                                            
                                             
                                             let formatter = DateFormatter()
                                             formatter.dateFormat = "dd/MM/yyyy"
@@ -670,6 +699,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                               print(jsonDataModels)
 
                                               instruments = jsonDataModels
+                                              instrumentIdFromSaveInstrument = instruments?.id ?? ""
+                                              
+                                              self.saveInstrumentID(eventId: newEventIdStartSurvey, instrumenId: instrumentIdFromSaveInstrument)
+                                              
                                               if !isEventTemplate {
 //                                                  if shouldUpdateIndex {
 //                                                      NewRequestHelper.shared.updateIndexField(eventId: newEventId)
@@ -697,6 +730,33 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         
+    
+    // save instrument ID to server
+    
+    func saveInstrumentID (eventId:String, instrumenId:String) {
+        
+        let saveInstrumentData = [
+            "eventId": eventId,
+            "instrumentId": instrumenId
+          ]
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: saveInstrumentData, options: JSONSerialization.WritingOptions.prettyPrinted)
+
+        
+        BaseAPIManager.sharedInstance.makeRequestToSaveIntrumentID(data:jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+
+            } else {
+                ERProgressHud.shared.hide()
+               
+            }
+        }
+        
+    }
+    
+    
         func getInstrument(instrumentId: String){
             APIManager.sharedInstance.makeRequestToGetInstrument(instrumentId: instrumentId){ (success, response,statusCode)  in
                 if (success) {
@@ -730,12 +790,22 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
     
-    func startSurvey(eventId: String, templateId: String) {
+    func startSurvey(eventId: String, templateId: String, instrumentId:String) {
         BaseAPIManager.sharedInstance.makeRequestToStartSurveyNew(eventId: eventId){ (success, response,statusCode)  in
             if (success) {
-                print(response)
                 let newEventId = response["eventId"] as? String ?? ""
-                self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId, instrumentId: nil)
+
+                newEventIdStartSurvey = newEventId
+                
+                if (instrumentId == "") {
+                    self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId, instrumentId: nil)
+                } else {
+                    print("eventId ", eventId)
+                    print("instrumentId ", instrumentId)
+
+                    self.getTemplate(templateId: templateId,eventId: eventId, shouldUpdateIndex: true,newEventId: newEventId, instrumentId: instrumentId)
+                }
+                
             } else {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                 ERProgressHud.shared.hide()
@@ -745,7 +815,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func submitSurvey(ddcResponse: NSArray, eventId: String) {
         let observationKey : [String:Any] = ["observations":ddcResponse]
-        var parameter : [String:Any] = ["ddcResponse": observationKey, "eventId": eventId]
+        
+        print("newEventId ", newEventIdStartSurvey)
+
+        var parameter : [String:Any] = ["ddcResponse": observationKey, "eventId": newEventIdStartSurvey]
+        
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             parameter["mei"] = retrievedCodableObject.user?.mail
         }
@@ -879,39 +953,39 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if surveys.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
             cell.dateEvents = events
-            cell.tableView.reloadData()
             cell.layoutSubviews()
             cell.selectionStyle = .none
             cell.nav = self.navigationController
             cell.vc = self
+            cell.tableView.reloadData()
             return cell
         } else if events.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SurveysTableViewCell") as! SurveysTableViewCell
-            cell.tableView.reloadData()
             cell.selectionStyle = .none
             cell.surveys = surveys
             cell.nav = self.navigationController
             cell.vc = self
             cell.delegate = self
+            cell.tableView.reloadData()
             return cell
         } else {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SurveysTableViewCell") as! SurveysTableViewCell
-                cell.tableView.reloadData()
                 cell.selectionStyle = .none
                 cell.surveys = surveys
                 cell.nav = self.navigationController
                 cell.vc = self
                 cell.delegate = self
+                cell.tableView.reloadData()
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "EventsTableViewCell") as! EventsTableViewCell
                 cell.dateEvents = events
-                cell.tableView.reloadData()
                 cell.layoutSubviews()
                 cell.selectionStyle = .none
                 cell.nav = self.navigationController
                 cell.vc = self
+                cell.tableView.reloadData()
                 return cell
             }
         }

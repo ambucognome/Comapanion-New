@@ -110,7 +110,7 @@ class EventListVC: UIViewController {
                                     if let surveyDic = surveys[i] as? NSDictionary {
                                         let concept = surveyDic["concept"] as? String ?? ""
                                         let eventId = surveyDic["eventId"] as? String ?? ""
-                                        let eventTime = surveyDic["eventTime"] as? String ?? ""
+                                        var eventTime = surveyDic["eventTime"] as? String ?? ""
                                         
                                         
                                         let contextString = surveyDic["metadata"] as? String ?? ""
@@ -121,10 +121,14 @@ class EventListVC: UIViewController {
                                             let surveyId = cont["surveyId"] as? String ?? ""
                                             let instrumentId = cont["instrumentId"] as? String
 
-                                            let eventDate = cont["startDate"] as? String ?? ""
-                                            
                                             let dateFormatter = DateFormatter()
-                                            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+                                            dateFormatter.dateFormat = "yyyy-MM-dd"
+                                            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                                            
+                                            if let dotRange = eventTime.range(of: "T") {
+                                                eventTime.removeSubrange(dotRange.lowerBound..<eventTime.endIndex)
+                                            }
                                             let newDate = dateFormatter.date(from: eventTime)
                                             
                                             let formatter = DateFormatter()
