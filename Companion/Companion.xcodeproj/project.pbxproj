@@ -51,13 +51,6 @@
 		9299B5B72ABEF687002963AC /* FloatingLabelTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5AF2ABEF687002963AC /* FloatingLabelTextField.xib */; };
 		9299B5B82ABEF687002963AC /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5B02ABEF687002963AC /* CustomTextField.swift */; };
 		9299B5B92ABEF687002963AC /* NewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5B12ABEF687002963AC /* NewUtilities.swift */; };
-		9299B5C32ABEF6CF002963AC /* ApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BC2ABEF6CE002963AC /* ApiParameters.swift */; };
-		9299B5C42ABEF6CF002963AC /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BD2ABEF6CE002963AC /* Instruments.swift */; };
-		9299B5C52ABEF6CF002963AC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BE2ABEF6CE002963AC /* APIManager.swift */; };
-		9299B5C62ABEF6CF002963AC /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5BF2ABEF6CE002963AC /* ValidationHelper.swift */; };
-		9299B5C72ABEF6CF002963AC /* NewRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5C02ABEF6CE002963AC /* NewRequestHelper.swift */; };
-		9299B5C82ABEF6CF002963AC /* DDCFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5C12ABEF6CE002963AC /* DDCFormModel.swift */; };
-		9299B5C92ABEF6CF002963AC /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B5C22ABEF6CE002963AC /* FieldType.swift */; };
 		9299B5E82ABEF6F9002963AC /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CB2ABEF6F9002963AC /* DatePickerTableViewCell.xib */; };
 		9299B5E92ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib */; };
 		9299B5EA2ABEF6F9002963AC /* TextfieldComponent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9299B5CD2ABEF6F9002963AC /* TextfieldComponent.xib */; };
@@ -100,6 +93,13 @@
 		9299B6242ABEF748002963AC /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299B6192ABEF748002963AC /* DatePickerDialog.swift */; };
 		9299B6262AC04A46002963AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9299B6252AC04A46002963AC /* Main.storyboard */; };
 		9299B6282AC04BD0002963AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9299B6272AC04BD0002963AC /* Assets.xcassets */; };
+		929F71D02AE64E3600D13034 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71CF2AE64E3600D13034 /* APIManager.swift */; };
+		929F71D72AE64E4900D13034 /* ValidationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D12AE64E4900D13034 /* ValidationHelper.swift */; };
+		929F71D82AE64E4900D13034 /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D22AE64E4900D13034 /* FieldType.swift */; };
+		929F71D92AE64E4900D13034 /* DDCFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D32AE64E4900D13034 /* DDCFormModel.swift */; };
+		929F71DA2AE64E4900D13034 /* ApiParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D42AE64E4900D13034 /* ApiParameters.swift */; };
+		929F71DB2AE64E4900D13034 /* NewRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D52AE64E4900D13034 /* NewRequestHelper.swift */; };
+		929F71DC2AE64E4900D13034 /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D62AE64E4900D13034 /* Instruments.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -329,13 +329,6 @@
 		9299B5AF2ABEF687002963AC /* FloatingLabelTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FloatingLabelTextField.xib; sourceTree = "<group>"; };
 		9299B5B02ABEF687002963AC /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		9299B5B12ABEF687002963AC /* NewUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUtilities.swift; sourceTree = "<group>"; };
-		9299B5BC2ABEF6CE002963AC /* ApiParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiParameters.swift; sourceTree = "<group>"; };
-		9299B5BD2ABEF6CE002963AC /* Instruments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
-		9299B5BE2ABEF6CE002963AC /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		9299B5BF2ABEF6CE002963AC /* ValidationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationHelper.swift; sourceTree = "<group>"; };
-		9299B5C02ABEF6CE002963AC /* NewRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestHelper.swift; sourceTree = "<group>"; };
-		9299B5C12ABEF6CE002963AC /* DDCFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCFormModel.swift; sourceTree = "<group>"; };
-		9299B5C22ABEF6CE002963AC /* FieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
 		9299B5CB2ABEF6F9002963AC /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
 		9299B5CC2ABEF6F9002963AC /* ToggleSwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		9299B5CD2ABEF6F9002963AC /* TextfieldComponent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextfieldComponent.xib; sourceTree = "<group>"; };
@@ -379,6 +372,13 @@
 		9299B6192ABEF748002963AC /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		9299B6252AC04A46002963AC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9299B6272AC04BD0002963AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		929F71CF2AE64E3600D13034 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		929F71D12AE64E4900D13034 /* ValidationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationHelper.swift; sourceTree = "<group>"; };
+		929F71D22AE64E4900D13034 /* FieldType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
+		929F71D32AE64E4900D13034 /* DDCFormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDCFormModel.swift; sourceTree = "<group>"; };
+		929F71D42AE64E4900D13034 /* ApiParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiParameters.swift; sourceTree = "<group>"; };
+		929F71D52AE64E4900D13034 /* NewRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestHelper.swift; sourceTree = "<group>"; };
+		929F71D62AE64E4900D13034 /* Instruments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -636,21 +636,6 @@
 			path = "Utility & Extensions";
 			sourceTree = "<group>";
 		};
-		9299B5BB2ABEF6CE002963AC /* APIManager */ = {
-			isa = PBXGroup;
-			children = (
-				9299B5BC2ABEF6CE002963AC /* ApiParameters.swift */,
-				9299B5BD2ABEF6CE002963AC /* Instruments.swift */,
-				9299B5BE2ABEF6CE002963AC /* APIManager.swift */,
-				9299B5BF2ABEF6CE002963AC /* ValidationHelper.swift */,
-				9299B5C02ABEF6CE002963AC /* NewRequestHelper.swift */,
-				9299B5C12ABEF6CE002963AC /* DDCFormModel.swift */,
-				9299B5C22ABEF6CE002963AC /* FieldType.swift */,
-			);
-			name = APIManager;
-			path = ../../../../../Desktop/DDCV2/ddcv2/APIManager;
-			sourceTree = "<group>";
-		};
 		9299B5CA2ABEF6F9002963AC /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,6 +751,20 @@
 				9299B6192ABEF748002963AC /* DatePickerDialog.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		929F71CE2AE64E2800D13034 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				929F71CF2AE64E3600D13034 /* APIManager.swift */,
+				929F71D42AE64E4900D13034 /* ApiParameters.swift */,
+				929F71D32AE64E4900D13034 /* DDCFormModel.swift */,
+				929F71D22AE64E4900D13034 /* FieldType.swift */,
+				929F71D62AE64E4900D13034 /* Instruments.swift */,
+				929F71D52AE64E4900D13034 /* NewRequestHelper.swift */,
+				929F71D12AE64E4900D13034 /* ValidationHelper.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		92AA350429BF6F2D00A6A4AB /* Cells */ = {
@@ -891,9 +890,9 @@
 		92CFAA7B295B1B9B00D77883 /* Compan */ = {
 			isa = PBXGroup;
 			children = (
+				929F71CE2AE64E2800D13034 /* Network */,
 				9299B6072ABEF748002963AC /* Resources */,
 				9299B5AA2ABEF687002963AC /* Utility & Extensions */,
-				9299B5BB2ABEF6CE002963AC /* APIManager */,
 				9299B5CA2ABEF6F9002963AC /* Component */,
 				9299B5A62ABEF48B002963AC /* Constants.swift */,
 				9299B6032ABEF708002963AC /* BaseViewController.swift */,
@@ -1331,16 +1330,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				92CFAB95295B1B9C00D77883 /* AnyDecodable.swift in Sources */,
-				9299B5C62ABEF6CF002963AC /* ValidationHelper.swift in Sources */,
 				92CFAB81295B1B9C00D77883 /* LoginViewController.swift in Sources */,
 				9299B61B2ABEF748002963AC /* DPDKeyboardListener.swift in Sources */,
 				92AA352929BF945300A6A4AB /* SheetViewController.swift in Sources */,
 				92CFAB39295B1B9C00D77883 /* BioMetricAuthenticator.swift in Sources */,
 				92AA352629BF945300A6A4AB /* InitialTouchPanGestureRecognizer.swift in Sources */,
 				92CFAB5A295B1B9C00D77883 /* ChatViewConfiguration.swift in Sources */,
+				929F71D72AE64E4900D13034 /* ValidationHelper.swift in Sources */,
 				92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */,
 				92CFAB5E295B1B9C00D77883 /* DocumentPickerHelper.swift in Sources */,
 				9299B61E2ABEF748002963AC /* DropDownCell.swift in Sources */,
+				929F71DB2AE64E4900D13034 /* NewRequestHelper.swift in Sources */,
 				9299B6052ABEF708002963AC /* BaseViewController.swift in Sources */,
 				928122C929BF5BC00021A679 /* FSCalendarStickyHeader.m in Sources */,
 				92CFAB7A295B1B9C00D77883 /* BaseAPIManager.swift in Sources */,
@@ -1356,6 +1356,7 @@
 				92496F6E29890E5F0037D723 /* TwoFactorAuthVC.swift in Sources */,
 				928122D529BF5BC00021A679 /* FSCalendarExtensions.m in Sources */,
 				92CFA7E3295461F800D77883 /* CompanionLoginViewController.swift in Sources */,
+				929F71D82AE64E4900D13034 /* FieldType.swift in Sources */,
 				9299B5A32ABEF41B002963AC /* ERProgressHud.swift in Sources */,
 				92CFAB40295B1B9C00D77883 /* MessageImageCell.swift in Sources */,
 				92CFAB52295B1B9C00D77883 /* OnCallView.swift in Sources */,
@@ -1377,8 +1378,11 @@
 				92CFAB96295B1B9C00D77883 /* AnyCodable.swift in Sources */,
 				9299B5EE2ABEF6F9002963AC /* TextViewTableViewCell.swift in Sources */,
 				9299B5FE2ABEF6F9002963AC /* MessageTableViewCell.swift in Sources */,
+				929F71DA2AE64E4900D13034 /* ApiParameters.swift in Sources */,
 				92CFAB4F295B1B9C00D77883 /* MessageCell.swift in Sources */,
 				92CFAB4C295B1B9C00D77883 /* ChatBarType.swift in Sources */,
+				929F71D92AE64E4900D13034 /* DDCFormModel.swift in Sources */,
+				929F71D02AE64E3600D13034 /* APIManager.swift in Sources */,
 				92496F7229890E970037D723 /* ProfileViewController.swift in Sources */,
 				92CFAB3C295B1B9C00D77883 /* SurveyHelper.swift in Sources */,
 				92D9C31C2A02C391008F5987 /* CallingViewController.swift in Sources */,
@@ -1401,7 +1405,6 @@
 				92CFAB5C295B1B9C00D77883 /* Utils.swift in Sources */,
 				9299B5F22ABEF6F9002963AC /* AutocompleteTableViewCell.swift in Sources */,
 				92496F692988EDDB0037D723 /* SettingTableViewCell.swift in Sources */,
-				9299B5C72ABEF6CF002963AC /* NewRequestHelper.swift in Sources */,
 				92CFAB79295B1B9C00D77883 /* InitialViewController.swift in Sources */,
 				92CFAB82295B1B9C00D77883 /* LaunchViewController.swift in Sources */,
 				92CFAB49295B1B9C00D77883 /* MessageViewModel.swift in Sources */,
@@ -1420,19 +1423,15 @@
 				92CFAB48295B1B9C00D77883 /* UserChat.swift in Sources */,
 				9299B5EF2ABEF6F9002963AC /* SliderTableViewCell.swift in Sources */,
 				92AA352729BF945300A6A4AB /* Yalta.swift in Sources */,
-				9299B5C42ABEF6CF002963AC /* Instruments.swift in Sources */,
 				9243A62A2A176C4100073436 /* GuestCell.swift in Sources */,
 				928122CB29BF5BC00021A679 /* FSCalendarAppearance.m in Sources */,
 				928122D329BF5BC00021A679 /* FSCalendarSeparatorDecorationView.m in Sources */,
-				9299B5C32ABEF6CF002963AC /* ApiParameters.swift in Sources */,
 				9299B6242ABEF748002963AC /* DatePickerDialog.swift in Sources */,
-				9299B5C82ABEF6CF002963AC /* DDCFormModel.swift in Sources */,
 				92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */,
 				92CFAB4D295B1B9C00D77883 /* UIBezierPath.swift in Sources */,
 				92CFAB5B295B1B9C00D77883 /* ChatViewController+Subviews.swift in Sources */,
 				92AA353529BF9EA600A6A4AB /* CareTeamTableViewCell.swift in Sources */,
 				92CFAB58295B1B9C00D77883 /* ChatButton.swift in Sources */,
-				9299B5C92ABEF6CF002963AC /* FieldType.swift in Sources */,
 				9299B5B92ABEF687002963AC /* NewUtilities.swift in Sources */,
 				9299B5F02ABEF6F9002963AC /* DatePickerTableViewCell.swift in Sources */,
 				92496F6C29890E4B0037D723 /* AppLockViewController.swift in Sources */,
@@ -1476,7 +1475,6 @@
 				92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */,
 				92CFAB69295B1B9C00D77883 /* UITableView.swift in Sources */,
 				92CFAB51295B1B9C00D77883 /* MessageTextCell.swift in Sources */,
-				9299B5C52ABEF6CF002963AC /* APIManager.swift in Sources */,
 				92CFAB41295B1B9C00D77883 /* Array.swift in Sources */,
 				92CFAB7B295B1B9C00D77883 /* SafecheckConstant.swift in Sources */,
 				9299B61F2ABEF748002963AC /* DropDown+Appearance.swift in Sources */,
@@ -1491,6 +1489,7 @@
 				92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */,
 				92CFAB44295B1B9C00D77883 /* Data.swift in Sources */,
 				92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */,
+				929F71DC2AE64E4900D13034 /* Instruments.swift in Sources */,
 				92AA353729BF9EA600A6A4AB /* MyCareTeamViewController.swift in Sources */,
 				9299B6022ABEF6F9002963AC /* TextfieldComponent.swift in Sources */,
 				92CFAB70295B1B9C00D77883 /* HeaderRefreshAnimator.swift in Sources */,
@@ -1543,7 +1542,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
@@ -1571,7 +1570,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
@@ -1716,7 +1715,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1757,7 +1756,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;
