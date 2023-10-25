@@ -111,6 +111,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var addEventBtn: UIButton!
+
 
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -137,6 +140,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if SafeCheckUtils.getIsGuest() {
+            self.addEventBtn.isHidden = true
+        }
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
@@ -183,6 +189,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidAppear(animated)
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             self.dateRange["meiID"] = retrievedCodableObject.user?.mail
+            self.getEvents(data: dateRange)
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            self.dateRange["meiID"] = retrievedCodableObject.user.emailID
             self.getEvents(data: dateRange)
         }
     }
@@ -312,6 +321,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var ddcContext : [String: Any] = ["key": "test12345","app":"Companion_iOS"]
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             ddcContext["userid"] = retrievedCodableObject.user?.mail
+        }
+        if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            ddcContext["userid"] = retrievedCodableObject.user.emailID
         }
         dataDic["ddc_context"] = ddcContext
         dataDic["template_uri"] = self.CREATE_EVENT_TEMPLATE
@@ -822,6 +834,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             parameter["mei"] = retrievedCodableObject.user?.mail
+        }
+        if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            parameter["mei"] = retrievedCodableObject.user.emailID
         }
             let jsonData = try! JSONSerialization.data(withJSONObject: parameter, options: JSONSerialization.WritingOptions.prettyPrinted)
             let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String

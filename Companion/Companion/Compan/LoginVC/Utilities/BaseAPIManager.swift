@@ -825,7 +825,11 @@ class BaseAPIManager : NSObject {
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
                 } else {
-                    APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
+                    if statusCode == 401 {
+                        completion(false,[:],statusCode!)
+                    } else {
+                        APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
+                    }
                 }
             case .failure( _):
                 completion(false,[:],0)

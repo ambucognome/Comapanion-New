@@ -179,5 +179,35 @@ class func getToken() -> String {
         }
         return name
     }
+    
+    // Save if user is guest
+    // Params :
+    // token : It is the string which is to be saved
+    class func setIsGuest(isGuest : Bool){
+        UserDefaults.standard.set(isGuest, forKey: "isGuest")
+    }
 
+    // Fetch if user is guest
+    class func getIsGuest() -> Bool {
+        let defaults = UserDefaults.standard
+        guard let isGuest =  defaults.value(forKey: "isGuest") as? Bool else {
+            return false
+        }
+        return isGuest
+    }
+
+    // Save the token
+    // Params :
+    // token : It is the string which is to be saved
+    class func setGuestUserData(data : GuestLoginModel){
+        UserDefaults.standard.setCodableObject(data, forKey: "guestloginData")
+    }
+
+    // Fetch the token
+    class func getGuestUserData() -> GuestLoginModel? {
+        guard let data = UserDefaults.standard.codableObject(dataType: GuestLoginModel.self, key: "guestloginData") else {
+            return nil
+        }
+        return data
+    }
 }

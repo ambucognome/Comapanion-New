@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b3e-Tf-UVC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b3e-Tf-UVC">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -641,7 +641,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NUp-c0-nVV">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="17"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patients" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEz-48-ZRM">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Patients" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEz-48-ZRM">
                                                 <rect key="frame" x="0.0" y="0.0" width="118" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.63137254899999995" green="0.63137254899999995" blue="0.63137254899999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1660,6 +1660,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Vbw-f5-zb7"/>
                     <connections>
+                        <outlet property="addEventBtn" destination="35r-Sg-TEf" id="hNq-sF-Hss"/>
                         <outlet property="calendar" destination="cIZ-nf-Cm4" id="OgT-ua-vgJ"/>
                         <outlet property="calendarHeightConstraint" destination="7av-t4-XpN" id="TcJ-Cy-MDU"/>
                         <outlet property="collectionView" destination="M8J-i8-v2w" id="mKK-LM-i8Y"/>
@@ -3717,6 +3718,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qIM-NG-kUM"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="vqU-SP-7LK" id="xG7-Jh-PN0"/>
+                        <outlet property="loginBtn" destination="DeA-Hp-0Kh" id="dWU-XC-4M5"/>
+                        <outlet property="pinTextField" destination="jLF-EJ-7yd" id="rBM-69-bIB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kVq-YJ-hbJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
