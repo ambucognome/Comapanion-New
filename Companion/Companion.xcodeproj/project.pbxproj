@@ -122,6 +122,7 @@
 		92AA353929BF9EA600A6A4AB /* CareTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353229BF9EA500A6A4AB /* CareTeamCell.swift */; };
 		92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353C29C076DB00A6A4AB /* CalendarViewController.swift */; };
 		92AA353F29D6E86D00A6A4AB /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */; };
+		92B150C92AE6CC4E004D5974 /* GuestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B150C82AE6CC4E004D5974 /* GuestLoginViewController.swift */; };
 		92B3A848296C023A00C03761 /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3A847296C023A00C03761 /* GridViewController.swift */; };
 		92CF331F2A3C95FD00FA5763 /* Companion.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 92AA354229E5A7CC00A6A4AB /* Companion.entitlements */; };
 		92CF33262A4438E100FA5763 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CF33252A4438E100FA5763 /* ReplayKit.framework */; };
@@ -404,6 +405,7 @@
 		92AA353E29D6E86D00A6A4AB /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		92AA354029E5A7B000A6A4AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92AA354229E5A7CC00A6A4AB /* Companion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Companion.entitlements; sourceTree = "<group>"; };
+		92B150C82AE6CC4E004D5974 /* GuestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestLoginViewController.swift; sourceTree = "<group>"; };
 		92B3A847296C023A00C03761 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		92CF33242A4438E100FA5763 /* Broadcast Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Broadcast Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CF33252A4438E100FA5763 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
@@ -857,6 +859,7 @@
 				92CFAA7B295B1B9B00D77883 /* Compan */,
 				92CFAA93295B1B9B00D77883 /* LoginVC */,
 				92CFA7E2295461F800D77883 /* CompanionLoginViewController.swift */,
+				92B150C82AE6CC4E004D5974 /* GuestLoginViewController.swift */,
 				92E49AB2298CE02A0018F6E5 /* IntroViewController.swift */,
 				9283B24D2A53164A008646A2 /* BasicViewController.swift */,
 				92CFA937295A0E8A00D77883 /* AppDelegate.swift */,
@@ -1417,6 +1420,7 @@
 				92CFAB68295B1B9C00D77883 /* LayoutConstraintSet.swift in Sources */,
 				92AA352329BF945300A6A4AB /* SheetContentViewController.swift in Sources */,
 				92CFA7F529546D9B00D77883 /* DashboardViewController.swift in Sources */,
+				92B150C92AE6CC4E004D5974 /* GuestLoginViewController.swift in Sources */,
 				92CFAB6C295B1B9C00D77883 /* FooterRefreshView.swift in Sources */,
 				928122D229BF5BC00021A679 /* FSCalendarCollectionView.m in Sources */,
 				92CFAB47295B1B9C00D77883 /* FileInfo.swift in Sources */,

@@ -53,6 +53,17 @@ class CompanionLoginViewController: UIViewController {
          }
     }
     
+    //MARK: Guest Login
+    
+    @IBAction func guestSignInBtn(_ sender: Any) {
+
+            let storyboard = UIStoryboard(name: "Companion", bundle: nil)
+            let controller = storyboard.instantiateViewController(identifier: "GuestLoginViewController")
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        
+    }
+    
     func setRootViewController(vc: UIViewController) {
         UIApplication.shared.windows.first?.rootViewController = vc
         UIApplication.shared.windows.first?.makeKeyAndVisible()
