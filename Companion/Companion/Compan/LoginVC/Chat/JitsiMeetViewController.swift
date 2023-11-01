@@ -105,9 +105,14 @@ class JitsiMeetViewController: UIViewController {
     }
     
     func joinEvent() {
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
-                       "eventId": self.eventId ]
+            dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
+                           "eventId": self.eventId ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = ["meiId" : retrievedCodableObject.user.emailID,
+                           "eventId": self.eventId ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -122,13 +127,18 @@ class JitsiMeetViewController: UIViewController {
             ERProgressHud.shared.hide()
         }
      }
-        }
+        
     }
     
     func leaveEvent() {
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            let dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
+            dataDic = ["meiId" : retrievedCodableObject.user?.mail ?? "",
                            "eventId": self.eventId ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = ["meiId" : retrievedCodableObject.user.emailID,
+                           "eventId": self.eventId ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -145,7 +155,7 @@ class JitsiMeetViewController: UIViewController {
         }
      }
         }
-    }
+    
 
 }
 
@@ -176,14 +186,24 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
     
 
     func endCall() {
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.mail ?? "",
-              "callerEmailId": self.callerEmailId,
-              "roomId": self.meetingName,
-            "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": self.opponentEmailId
-          ]
+             dataDic = [
+                "actionBy": retrievedCodableObject.user?.mail ?? "",
+                "callerEmailId": self.callerEmailId,
+                "roomId": self.meetingName ?? "",
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": self.opponentEmailId
+            ]
+        }   else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = [
+                "actionBy": retrievedCodableObject.user.emailID,
+               "callerEmailId": self.callerEmailId,
+               "roomId": self.meetingName ?? "",
+               "appId": Bundle.main.bundleIdentifier ?? "",
+               "opponentEmailId": self.opponentEmailId
+           ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -198,7 +218,6 @@ extension JitsiMeetViewController: JitsiMeetViewDelegate {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
     
     func conferenceJoined(_ data: [AnyHashable : Any]!) {

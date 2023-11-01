@@ -44,14 +44,21 @@ class DoctorProfileViewController: UIViewController {
     }
     
     @objc func call() {
- 
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        var dataDic = [
-            "callerEmailId": retrievedCodableObject.user?.mail ?? "",
-            "callerName": retrievedCodableObject.user?.firstname ?? "",
-            "appId": Bundle.main.bundleIdentifier ?? ""
-          ]
-            dataDic["calleeEmailId"] = self.data?.email ?? ""
+             dataDic = [
+                "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+                "callerName": retrievedCodableObject.user?.firstname ?? "",
+                "appId": Bundle.main.bundleIdentifier ?? ""
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+             dataDic = [
+                "callerEmailId": retrievedCodableObject.user.emailID,
+                "callerName": retrievedCodableObject.user.username,
+                "appId": Bundle.main.bundleIdentifier ?? ""
+            ]
+        }
+        dataDic["calleeEmailId"] = self.data?.email ?? ""
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -78,7 +85,6 @@ class DoctorProfileViewController: UIViewController {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
 
 

@@ -100,8 +100,12 @@ extension SceneDelegate {
     }
     
     func getEventDetails(eventId:String) {
+        var data = [String: Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-            let data: [String: Any] = ["eventId": eventId,"meiId":retrievedCodableObject.user?.mail ?? ""]
+            data = ["eventId": eventId,"meiId":retrievedCodableObject.user?.mail ?? ""]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            data = ["eventId": eventId,"meiId":retrievedCodableObject.user.emailID]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -182,7 +186,6 @@ extension SceneDelegate {
                             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                             ERProgressHud.shared.hide()
                         }
-                    }
         }
     }
 

@@ -32,8 +32,6 @@ class PassScreenViewController: UIViewController {
         self.setupViews()
     }
 
-    
-    
     func setupViews(){
         self.dayLabel.text = surveyDay
         self.timeLabel.text = surveyExpirationTime

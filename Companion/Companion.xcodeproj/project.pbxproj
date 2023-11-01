@@ -101,6 +101,12 @@
 		929F71DB2AE64E4900D13034 /* NewRequestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D52AE64E4900D13034 /* NewRequestHelper.swift */; };
 		929F71DC2AE64E4900D13034 /* Instruments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71D62AE64E4900D13034 /* Instruments.swift */; };
 		929F71DE2AE93C3D00D13034 /* GuestLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71DD2AE93C3D00D13034 /* GuestLoginModel.swift */; };
+		929F71E02AEF9F1100D13034 /* CallLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71DF2AEF9F1100D13034 /* CallLogViewController.swift */; };
+		929F71E32AEFA14600D13034 /* IncomingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71E22AEFA14600D13034 /* IncomingListVC.swift */; };
+		929F71E52AEFA15100D13034 /* OutgoingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71E42AEFA15100D13034 /* OutgoingListVC.swift */; };
+		929F71E72AEFA15F00D13034 /* MissedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71E62AEFA15F00D13034 /* MissedListVC.swift */; };
+		929F71E92AEFA16A00D13034 /* RejectedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71E82AEFA16A00D13034 /* RejectedListVC.swift */; };
+		929F71EB2AF2593000D13034 /* CallLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71EA2AF2593000D13034 /* CallLogModel.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -382,6 +388,12 @@
 		929F71D52AE64E4900D13034 /* NewRequestHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestHelper.swift; sourceTree = "<group>"; };
 		929F71D62AE64E4900D13034 /* Instruments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruments.swift; sourceTree = "<group>"; };
 		929F71DD2AE93C3D00D13034 /* GuestLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestLoginModel.swift; sourceTree = "<group>"; };
+		929F71DF2AEF9F1100D13034 /* CallLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLogViewController.swift; sourceTree = "<group>"; };
+		929F71E22AEFA14600D13034 /* IncomingListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingListVC.swift; sourceTree = "<group>"; };
+		929F71E42AEFA15100D13034 /* OutgoingListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingListVC.swift; sourceTree = "<group>"; };
+		929F71E62AEFA15F00D13034 /* MissedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedListVC.swift; sourceTree = "<group>"; };
+		929F71E82AEFA16A00D13034 /* RejectedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedListVC.swift; sourceTree = "<group>"; };
+		929F71EA2AF2593000D13034 /* CallLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLogModel.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -771,6 +783,19 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		929F71E12AEF9F6800D13034 /* Call Logs */ = {
+			isa = PBXGroup;
+			children = (
+				929F71DF2AEF9F1100D13034 /* CallLogViewController.swift */,
+				929F71EA2AF2593000D13034 /* CallLogModel.swift */,
+				929F71E22AEFA14600D13034 /* IncomingListVC.swift */,
+				929F71E42AEFA15100D13034 /* OutgoingListVC.swift */,
+				929F71E62AEFA15F00D13034 /* MissedListVC.swift */,
+				929F71E82AEFA16A00D13034 /* RejectedListVC.swift */,
+			);
+			path = "Call Logs";
+			sourceTree = "<group>";
+		};
 		92AA350429BF6F2D00A6A4AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1144,6 +1169,7 @@
 				92496F642988EADC0037D723 /* SettingsViewController.swift */,
 				92B3A847296C023A00C03761 /* GridViewController.swift */,
 				92496F7129890E970037D723 /* ProfileViewController.swift */,
+				929F71E12AEF9F6800D13034 /* Call Logs */,
 			);
 			path = MenuVC;
 			sourceTree = "<group>";
@@ -1351,6 +1377,7 @@
 				928122C929BF5BC00021A679 /* FSCalendarStickyHeader.m in Sources */,
 				92CFAB7A295B1B9C00D77883 /* BaseAPIManager.swift in Sources */,
 				92CFAB61295B1B9C00D77883 /* ImagePickerHelper.swift in Sources */,
+				929F71E02AEF9F1100D13034 /* CallLogViewController.swift in Sources */,
 				92CFAB66295B1B9C00D77883 /* MediaProcesser.swift in Sources */,
 				92914E272A20E822003B968E /* EventListVC.swift in Sources */,
 				929F71DE2AE93C3D00D13034 /* GuestLoginModel.swift in Sources */,
@@ -1369,6 +1396,7 @@
 				92CFAB52295B1B9C00D77883 /* OnCallView.swift in Sources */,
 				92CFAB55295B1B9C00D77883 /* SocketHelper.swift in Sources */,
 				92CFAB63295B1B9C00D77883 /* PhotoDataManager.swift in Sources */,
+				929F71E92AEFA16A00D13034 /* RejectedListVC.swift in Sources */,
 				9299B5FC2ABEF6F9002963AC /* RadioButtonTableViewCell.swift in Sources */,
 				92496F6A2988EDDB0037D723 /* SwitchTableViewCell.swift in Sources */,
 				92AA353329BF9EA500A6A4AB /* EventsTableViewCell.swift in Sources */,
@@ -1385,6 +1413,7 @@
 				92CFAB96295B1B9C00D77883 /* AnyCodable.swift in Sources */,
 				9299B5EE2ABEF6F9002963AC /* TextViewTableViewCell.swift in Sources */,
 				9299B5FE2ABEF6F9002963AC /* MessageTableViewCell.swift in Sources */,
+				929F71EB2AF2593000D13034 /* CallLogModel.swift in Sources */,
 				929F71DA2AE64E4900D13034 /* ApiParameters.swift in Sources */,
 				92CFAB4F295B1B9C00D77883 /* MessageCell.swift in Sources */,
 				92CFAB4C295B1B9C00D77883 /* ChatBarType.swift in Sources */,
@@ -1436,6 +1465,7 @@
 				928122D329BF5BC00021A679 /* FSCalendarSeparatorDecorationView.m in Sources */,
 				9299B6242ABEF748002963AC /* DatePickerDialog.swift in Sources */,
 				92D9C3292A0CC467008F5987 /* LocalNotification.swift in Sources */,
+				929F71E32AEFA14600D13034 /* IncomingListVC.swift in Sources */,
 				92CFAB4D295B1B9C00D77883 /* UIBezierPath.swift in Sources */,
 				92CFAB5B295B1B9C00D77883 /* ChatViewController+Subviews.swift in Sources */,
 				92AA353529BF9EA600A6A4AB /* CareTeamTableViewCell.swift in Sources */,
@@ -1483,6 +1513,7 @@
 				92AA353D29C076DB00A6A4AB /* CalendarViewController.swift in Sources */,
 				92CFAB69295B1B9C00D77883 /* UITableView.swift in Sources */,
 				92CFAB51295B1B9C00D77883 /* MessageTextCell.swift in Sources */,
+				929F71E52AEFA15100D13034 /* OutgoingListVC.swift in Sources */,
 				92CFAB41295B1B9C00D77883 /* Array.swift in Sources */,
 				92CFAB7B295B1B9C00D77883 /* SafecheckConstant.swift in Sources */,
 				9299B61F2ABEF748002963AC /* DropDown+Appearance.swift in Sources */,
@@ -1495,6 +1526,7 @@
 				928122D629BF5BC00021A679 /* FSCalendarTransitionCoordinator.m in Sources */,
 				92CFAB6E295B1B9C00D77883 /* HeaderRefreshView.swift in Sources */,
 				92496F7029890E6D0037D723 /* NotificationsViewController.swift in Sources */,
+				929F71E72AEFA15F00D13034 /* MissedListVC.swift in Sources */,
 				92CFAB44295B1B9C00D77883 /* Data.swift in Sources */,
 				92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */,
 				929F71DC2AE64E4900D13034 /* Instruments.swift in Sources */,
@@ -1723,7 +1755,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1745,7 +1777,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 22;
+				MARKETING_VERSION = 23;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1764,7 +1796,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;
@@ -1785,7 +1817,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 22;
+				MARKETING_VERSION = 23;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -47,14 +47,24 @@ class CallingViewController: UIViewController {
 
     @IBAction func rejectBtn(_ sender: Any) {
         player?.stop()
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
-              "callerEmailId": retrievedCodableObject.user?.mail ?? "",
-              "roomId": self.roomId,
-              "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": self.opponentEmailId
-          ]
+            dataDic = [
+                "actionBy": retrievedCodableObject.user?.firstname ?? "",
+                "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+                "roomId": self.roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": self.opponentEmailId
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = [
+                "actionBy": retrievedCodableObject.user.username,
+                "callerEmailId": retrievedCodableObject.user.emailID,
+                "roomId": self.roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": self.opponentEmailId
+            ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -65,12 +75,11 @@ class CallingViewController: UIViewController {
                 ERProgressHud.shared.hide()
                 print(response)
                 self.dismiss(animated: true)
-            
-        } else {
-            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
-            ERProgressHud.shared.hide()
-        }
-     }
+                
+            } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
         }
     }
     

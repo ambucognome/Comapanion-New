@@ -19,7 +19,7 @@ class CompanionLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        SafeCheckUtils.setIsGuest(isGuest: true)
+        SafeCheckUtils.setIsGuest(isGuest: false)
         selectedForm = false
     }
     

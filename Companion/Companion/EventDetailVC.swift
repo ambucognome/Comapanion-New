@@ -43,13 +43,22 @@ class EventDetailVC: UIViewController {
     }
     
     @objc func call() {
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-            "appId": Bundle.main.bundleIdentifier ?? "",
-            "calleeEmailId": self.eventData?.guestData[0].guestEmail ?? "",
-            "callerEmailId": retrievedCodableObject.user?.mail ?? "",
-            "callerName": retrievedCodableObject.user?.firstname ?? ""
-          ]
+            let dataDic = [
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "calleeEmailId": self.eventData?.guestData[0].guestEmail ?? "",
+                "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+                "callerName": retrievedCodableObject.user?.firstname ?? ""
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            let dataDic = [
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "calleeEmailId": self.eventData?.guestData[0].guestEmail ?? "",
+                "callerEmailId": retrievedCodableObject.user.emailID,
+                "callerName": retrievedCodableObject.user.username
+            ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -72,7 +81,6 @@ class EventDetailVC: UIViewController {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
 
     
@@ -102,9 +110,27 @@ class EventDetailVC: UIViewController {
                     navVC.present(vc, animated: true)
                 }
             }
-//            self.present(vc, animated: true)
-//        self.navigationController?.pushViewController(vc, animated: true)
-        }
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            
+            OnCallHelper.shared.removeOnCallView()
+            if let vc = appDelegate.voiceCallVC {
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+                self.dismiss(animated: false) {
+
+            let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+            vc.meetingName = self.eventData?.meetingId
+                    vc.userName = retrievedCodableObject.user.username
+            appDelegate.voiceCallVC = vc
+                    vc.eventId = self.eventData?.eventId ?? ""
+                vc.modalPresentationStyle = .fullScreen
+                    if let navVC = UIApplication.getTopViewController() {
+                        navVC.present(vc, animated: true)
+                    }
+                }
+            }
     }
     
 }

@@ -33,6 +33,9 @@ class ProfileViewController: UIViewController {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             self.emailLabel.text = retrievedCodableObject.user?.mail
             self.nameLabel.text = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            self.emailLabel.text = retrievedCodableObject.user.emailID
+            self.nameLabel.text = retrievedCodableObject.user.username
         }
 
         let btnLeftMenu: UIButton = UIButton()
@@ -84,13 +87,20 @@ class ProfileViewController: UIViewController {
         }
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             self.logout(emailID: retrievedCodableObject.user?.mail ?? "")
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            self.logout(emailID: retrievedCodableObject.user.emailID)
         }
         LogoutHelper.shared.logout()
     }
     
     func logout(emailID: String){
         if SafeCheckUtils.getDeviceToken() != "" {
-            let username = "\(SafeCheckUtils.getUserData()?.user?.firstname ?? "") \(SafeCheckUtils.getUserData()?.user?.lastname ?? "")"
+            var username = ""
+            if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+                username = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+            } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                username = retrievedCodableObject.user.username
+            }
         let parameters : [String: String] = [
             "appId": Bundle.main.bundleIdentifier ?? "",
             "appToken": "",
@@ -127,6 +137,15 @@ class ProfileViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func callLogBtn(_ sender: UIButton) {
+        let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "CallLogViewController") as! CallLogViewController
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func meetingLogBtn(_ sender: UIButton) {
     }
     
     @IBAction func changeImageButtonTapped(_ sender: UIButton) {

@@ -21,9 +21,12 @@ class EventListVC: UIViewController {
         self.title = "Events"
         var dateRange = [
             "fromDate": "2023-01-10 00:00:00",
-            "toDate": "2023-10-10 20:00:00"]
+            "toDate": "2024-10-10 20:00:00"]
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             dateRange["meiID"] = retrievedCodableObject.user?.mail
+            self.getEvents(data: dateRange)
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dateRange["meiID"] = retrievedCodableObject.user.emailID
             self.getEvents(data: dateRange)
         }
     }
@@ -224,7 +227,21 @@ extension EventListVC : UITableViewDataSource, UITableViewDelegate {
                 if let navVC = UIApplication.getTopViewController() {
                     navVC.present(jitsi, animated: true)
                 }
-            }
+            } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                
+                OnCallHelper.shared.removeOnCallView()
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
+                let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+                let jitsi = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+                    jitsi.meetingName = data.meetingId
+                jitsi.userName = retrievedCodableObject.user.username
+                appDelegate.voiceCallVC = jitsi
+                    jitsi.modalPresentationStyle = .fullScreen
+                        if let navVC = UIApplication.getTopViewController() {
+                            navVC.present(jitsi, animated: true)
+                        }
+                    }
 //            self.present(vc, animated: true)
 //        self.navigationController?.pushViewController(vc, animated: true)
         

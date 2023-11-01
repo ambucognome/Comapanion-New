@@ -138,7 +138,7 @@ class CalendarViewController: DayViewController, DynamicTemplateViewControllerDe
         //        let nav = UINavigationController(rootViewController: controller)
                 let sheetController = SheetViewController(
                     controller: controller,
-                    sizes: [.intrinsic],options: options)
+                    sizes: [.marginFromTop(40)],options: options)
                 sheetController.gripSize = CGSize(width: 50, height: 3)
                 sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
                 self.present(sheetController, animated: true, completion: nil)
@@ -156,7 +156,7 @@ class CalendarViewController: DayViewController, DynamicTemplateViewControllerDe
     //        let nav = UINavigationController(rootViewController: controller)
             let sheetController = SheetViewController(
                 controller: controller,
-                sizes: [.intrinsic],options: options)
+                sizes: [.marginFromTop(40)],options: options)
             sheetController.gripSize = CGSize(width: 50, height: 3)
             sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
             self.present(sheetController, animated: true, completion: nil)

@@ -24,16 +24,17 @@ let API_END_ADD_TOKEN = "/add-token"
 
 
 // PROD
-let EVENT_BASE_URL = "https://companioneventapi.azurewebsites.net"//"http://192.168.199.90:8080"//
+//let EVENT_BASE_URL = "https://companioneventapi.azurewebsites.net"//"http://192.168.199.90:8080"//
 
 // DEV
-//let EVENT_BASE_URL = "https://companion-evenetapi-dev.azurewebsites.net"//"http://192.168.199.90:8080"//
+let EVENT_BASE_URL = "https://companion-evenetapi-dev.azurewebsites.net"//"http://192.168.199.90:8080"//
 
 let API_END_CREATE_EVENT = "/eventapi/events/create"
 let API_END_GET_EVENTS = "/eventapi/events/survey/date-range"//"/eventapi/events/date-range"
 let API_END_DELETE_EVENT = "/eventapi/events/delete"
 let API_END_ADD_DEVICE_TOKEN = "/eventapi/add-token"
 let API_END_GUEST_LOGIN = "/eventapi/guest-login"
+let API_END_GET_CALL_LOGS = "/eventapi/call-logs-for-user"
 
 
 

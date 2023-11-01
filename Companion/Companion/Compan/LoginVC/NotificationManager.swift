@@ -234,7 +234,7 @@ class NotificationManager : NSObject {
                     vc.getEvents(data: [
                         "fromDate": "2023-01-10 00:00:00",
                         "toDate": "2023-10-10 20:00:00" ,
-                        "meiID" : SafeCheckUtils.getUserData()?.user?.mail ?? ""
+                        "meiID" : SafeCheckUtils.getUserData()?.user?.mail ?? SafeCheckUtils.getGuestUserData()?.user.emailID ?? ""
                         ])
                 }
                 navVC.present(sheetController, animated: true, completion: nil)
@@ -318,7 +318,7 @@ class NotificationManager : NSObject {
                                 vc.getEvents(data: [
                                     "fromDate": "2023-01-10 00:00:00",
                                     "toDate": "2023-10-10 20:00:00" ,
-                                    "meiID" : SafeCheckUtils.getUserData()?.user?.mail ?? ""
+                                    "meiID" : SafeCheckUtils.getUserData()?.user?.mail ??  SafeCheckUtils.getGuestUserData()?.user.emailID ?? ""
                                     ])
                             }
                             navVC.present(sheetController, animated: true, completion: nil)
@@ -343,6 +343,8 @@ class NotificationManager : NSObject {
                     controller.opponentEmailId = opponentEmailId
                     if let retrievedCodableObject = SafeCheckUtils.getUserData() {
                         controller.opponentEmailId = retrievedCodableObject.user?.mail ?? ""
+                    } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                        controller.opponentEmailId = retrievedCodableObject.user.emailID
                     }
                     if let navVC = UIApplication.getTopViewController()  {
                         if (navVC as? JitsiMeetViewController != nil) || (navVC as? RingingViewController != nil){
@@ -494,7 +496,10 @@ class NotificationManager : NSObject {
                     controller.opponentEmailId = opponentEmailId
                     if let retrievedCodableObject = SafeCheckUtils.getUserData() {
                         controller.opponentEmailId = retrievedCodableObject.user?.mail ?? ""
+                    } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                        controller.opponentEmailId = retrievedCodableObject.user.emailID
                     }
+
                     if let navVC = UIApplication.getTopViewController()  {
                         if (navVC as? JitsiMeetViewController != nil) || (navVC as? RingingViewController != nil){
                             self.userBusyAPICall(callerEmailId: callerEmailId, roomId: roomId, opponentEmailId: opponentEmailId)
@@ -516,7 +521,10 @@ class NotificationManager : NSObject {
                     vc.modalPresentationStyle = .fullScreen
                     if let retrievedCodableObject = SafeCheckUtils.getUserData() {
                         vc.userName = retrievedCodableObject.user?.firstname ?? ""
+                    }  else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                        vc.userName = retrievedCodableObject.user.username
                     }
+
                     vc.isFromDialing = true
                     vc.callerEmailId = callerEmailId //email
                     vc.opponentEmailId = opponentEmailId
@@ -617,14 +625,24 @@ class NotificationManager : NSObject {
     
     
     func userBusyAPICall(callerEmailId:String, roomId:String, opponentEmailId: String){
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
-              "callerEmailId": callerEmailId,
-              "roomId": roomId,
-              "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": opponentEmailId
-          ]
+            dataDic = [
+                "actionBy": retrievedCodableObject.user?.firstname ?? "",
+                "callerEmailId": callerEmailId,
+                "roomId": roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": opponentEmailId
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = [
+                "actionBy": retrievedCodableObject.user.username,
+                "callerEmailId": callerEmailId,
+                "roomId": roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": opponentEmailId
+            ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -640,7 +658,6 @@ class NotificationManager : NSObject {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
 }
 

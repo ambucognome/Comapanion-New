@@ -47,6 +47,9 @@ class BaseAPIManager : NSObject {
         
         // Guest Login
         case guestloginUser(Data)
+        
+        // Get Call Logs
+        case getCallLogs(Data)
 
 
         // Api Methods
@@ -96,6 +99,9 @@ class BaseAPIManager : NSObject {
                 
             case .guestloginUser:
                 return .post
+                
+            case .getCallLogs:
+                return .post
             }
         }
             
@@ -142,9 +148,10 @@ class BaseAPIManager : NSObject {
                 return API_END_SUBMIT_SURVEY
             case .saveInstrumentID:
                 return API_END_SAVE_INSTRUMENTID
-                
             case .guestloginUser:
                 return API_END_GUEST_LOGIN
+            case .getCallLogs(_):
+                return API_END_GET_CALL_LOGS
             }
         }
         
@@ -300,6 +307,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .guestloginUser(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .getCallLogs(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -809,6 +823,34 @@ class BaseAPIManager : NSObject {
         }
     }
     
+    // Get Call logs Api Call
+    // completion : Completion object to return parameters to the calling functions
+    // Returns call logs
+    func makeRequestToGetCallLogs(data:Data,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.getCallLogs(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                } else {
+                    if statusCode == 401 {
+                        completion(false,[:],statusCode!)
+                    } else {
+                        APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
+                    }
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+
     // Guest Login User Api Call
     // completion : Completion object to return parameters to the calling functions
     // Returns Dynamic Form Components in Json format
@@ -836,7 +878,6 @@ class BaseAPIManager : NSObject {
             }
         }
     }
-
     
     // Shows alert view according to the code sent
     // Params:

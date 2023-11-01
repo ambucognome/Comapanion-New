@@ -43,7 +43,7 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func getCareteam() {
-        let params : [String:String] = ["meiId":SafeCheckUtils.getUserData()?.user?.mail ?? ""]
+        let params : [String:String] = ["meiId":SafeCheckUtils.getUserData()?.user?.mail ?? SafeCheckUtils.getGuestUserData()?.user.emailID ?? ""]
         let jsonData = try! JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)

@@ -30,15 +30,26 @@ class RingingViewController: UIViewController {
 
     @IBAction func acceptBtn(_ sender: Any) {
         self.player?.stop()
+        var dataDic = [String:Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
-              "callerEmailId": callerEmailId,
-              "roomId": self.roomId,
-              "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": self.opponentEmailId
-            
-          ]
+             dataDic = [
+                "actionBy": retrievedCodableObject.user?.firstname ?? "",
+                "callerEmailId": callerEmailId,
+                "roomId": self.roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": self.opponentEmailId
+                
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+             dataDic = [
+                "actionBy": retrievedCodableObject.user.username,
+                "callerEmailId": callerEmailId,
+                "roomId": self.roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": self.opponentEmailId
+                
+            ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -56,7 +67,7 @@ class RingingViewController: UIViewController {
                     vc.callerEmailId = self.callerEmailId
                     vc.opponentEmailId = self.opponentEmailId
                     vc.modalPresentationStyle = .fullScreen
-                    vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+                    vc.userName = SafeCheckUtils.getUserData()?.user?.mail ?? SafeCheckUtils.getGuestUserData()?.user.emailID ?? ""
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {
                         navVC.present(vc, animated: false, completion: nil)
@@ -68,19 +79,30 @@ class RingingViewController: UIViewController {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
     
     @IBAction func rejectBtn(_ sender: Any) {
         self.player?.stop()
-        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
-              "callerEmailId": callerEmailId,
-              "roomId": self.roomId,
-              "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": self.opponentEmailId
-          ]
+            var dataDic = [String:Any]()
+            if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+                 dataDic = [
+                    "actionBy": retrievedCodableObject.user?.firstname ?? "",
+                    "callerEmailId": callerEmailId,
+                    "roomId": self.roomId,
+                    "appId": Bundle.main.bundleIdentifier ?? "",
+                    "opponentEmailId": self.opponentEmailId
+                    
+                ]
+            } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                 dataDic = [
+                    "actionBy": retrievedCodableObject.user.username,
+                    "callerEmailId": callerEmailId,
+                    "roomId": self.roomId,
+                    "appId": Bundle.main.bundleIdentifier ?? "",
+                    "opponentEmailId": self.opponentEmailId
+                    
+                ]
+            }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -97,7 +119,6 @@ class RingingViewController: UIViewController {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
     
     func playSound() {

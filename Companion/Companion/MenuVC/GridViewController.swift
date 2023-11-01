@@ -103,6 +103,9 @@ extension GridViewController : UICollectionViewDelegate, UICollectionViewDataSou
         if let retrievedCodableObject =  SafeCheckUtils.getUserData() {
             userName = (retrievedCodableObject.user?.firstname ?? "") + " " + (retrievedCodableObject.user?.lastname ?? "")
             eid = retrievedCodableObject.user?.eid ?? ""
+        } else if let retrievedCodableObject =  SafeCheckUtils.getGuestUserData() {
+            userName = retrievedCodableObject.user.username
+            eid = retrievedCodableObject.user.userID
         }
         let json2String = "{\"ezid\":\"\(eid)\",\"username\":\"\(userName)\",\"userType\":\"SAFECHECK\",\"type\":\"login\"}"
         SocketHelper.Events.event.emit(params: json2String)

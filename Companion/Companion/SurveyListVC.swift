@@ -263,6 +263,8 @@ extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemp
         var parameter : [String:Any] = ["ddcResponse": observationKey, "eventId": self.newEventIdStartSurvey]
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             parameter["mei"] = retrievedCodableObject.user?.mail
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            parameter["mei"] = retrievedCodableObject.user.emailID
         }
             let jsonData = try! JSONSerialization.data(withJSONObject: parameter, options: JSONSerialization.WritingOptions.prettyPrinted)
             let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String

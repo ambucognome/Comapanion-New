@@ -365,15 +365,26 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
     
     
     func acceptCall() {
+        var dataDic = [String: Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
-              "callerEmailId": self.callerEmailId,
-              "roomId": self.roomId,
-              "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": retrievedCodableObject.user?.mail ?? ""
-            
-          ]
+             dataDic = [
+                "actionBy": retrievedCodableObject.user?.firstname ?? "",
+                "callerEmailId": self.callerEmailId,
+                "roomId": self.roomId,
+                "appId": Bundle.main.bundleIdentifier ?? "",
+                "opponentEmailId": retrievedCodableObject.user?.mail ?? ""
+                
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = [
+               "actionBy": retrievedCodableObject.user.username ,
+               "callerEmailId": self.callerEmailId,
+               "roomId": self.roomId,
+               "appId": Bundle.main.bundleIdentifier ?? "",
+               "opponentEmailId": retrievedCodableObject.user.emailID
+               
+           ]
+        }
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -390,7 +401,13 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
                     vc.callerEmailId = self.callerEmailId
                     vc.opponentEmailId = self.opponentEmailId
                     vc.modalPresentationStyle = .fullScreen
-                    vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+                var username = ""
+                if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+                    username = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+                } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+                    username = retrievedCodableObject.user.username
+                }
+                    vc.userName = username
                     appDelegate.voiceCallVC = vc
                     if let navVC = UIApplication.getTopViewController()  {
                         navVC.present(vc, animated: false, completion: nil)
@@ -399,19 +416,31 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
             APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
             ERProgressHud.shared.hide()
         }
-     }
+     
         }
     }
     
     func rejectCall() {
+        var dataDic = [String: Any]()
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
-        let dataDic = [
-              "actionBy": retrievedCodableObject.user?.firstname ?? "",
-              "callerEmailId": self.callerEmailId,
-              "roomId": self.roomId,
-              "appId": Bundle.main.bundleIdentifier ?? "",
-              "opponentEmailId": self.opponentEmailId
-          ]
+            dataDic = [
+                  "actionBy": retrievedCodableObject.user?.firstname ?? "",
+                  "callerEmailId": self.callerEmailId,
+                  "roomId": self.roomId,
+                  "appId": Bundle.main.bundleIdentifier ?? "",
+                  "opponentEmailId": self.opponentEmailId
+              ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+            dataDic = [
+               "actionBy": retrievedCodableObject.user.username ,
+               "callerEmailId": self.callerEmailId,
+               "roomId": self.roomId,
+               "appId": Bundle.main.bundleIdentifier ?? "",
+               "opponentEmailId": retrievedCodableObject.user.emailID
+           ]
+        }
+            
+            
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -427,7 +456,6 @@ extension AppDelegate : PKPushRegistryDelegate, CXProviderDelegate {
             ERProgressHud.shared.hide()
         }
      }
-        }
     }
     
     
