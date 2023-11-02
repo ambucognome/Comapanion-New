@@ -10,6 +10,11 @@ import Foundation
 class SafeCheckUtils: NSObject {
 
     static let shared = SafeCheckUtils()
+    
+    // Returns the date by changing the month
+    class func addOrSubtractMonth(month: Int) -> Date {
+        Calendar.current.date(byAdding: .month, value: month, to: Date())!
+    }
 
 
 // Save the token

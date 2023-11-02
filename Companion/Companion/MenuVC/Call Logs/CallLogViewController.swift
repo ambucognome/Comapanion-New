@@ -50,9 +50,12 @@ class CallLogViewController: UIViewController {
         let secondChildTabVC = storyboard.instantiateViewController(withIdentifier: "RejectedListVC") as! RejectedListVC
         return secondChildTabVC
     }()
+    
+    var fetchLogDate = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchLogDate = SafeCheckUtils.addOrSubtractMonth(month: -1)
         self.getCallLogs()
         self.title = "Call Logs"
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
@@ -64,7 +67,12 @@ class CallLogViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
             self.displayCurrentTab(0)
         })
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("loadmore"), object: nil)
 
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,9 +87,14 @@ class CallLogViewController: UIViewController {
     }
     
     func getCallLogs(){
+        
         ERProgressHud.shared.show()
+        let formatter = DateFormatter()
+        formatter.dateFormat =  "yyyy-MM-dd'T'hh:mm:ss.SSS"
+        let dateString = formatter.string(from: self.fetchLogDate.zeroTime!)
+        
         var parameters : [String: String] = [
-            "endDate": "2023-10-25T08:56:04.339Z"]
+            "endDate": dateString]
         
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             parameters["meiID"] = retrievedCodableObject.user?.mail

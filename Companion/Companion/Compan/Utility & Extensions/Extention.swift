@@ -9,6 +9,24 @@
 import Foundation
 import UIKit
 
+extension Date {
+    var zeroSeconds: Date? {
+        get {
+            let calendar = Calendar.current
+            let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: self)
+            return calendar.date(from: dateComponents)
+        }
+    }
+    
+    var zeroTime: Date? {
+        get {
+            let calendar = Calendar.current
+            let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+            return calendar.date(from: dateComponents)
+        }
+    }
+}
+
 extension UIImage {
     func createSelectionIndicator(color: UIColor, size: CGSize, lineWidth: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
