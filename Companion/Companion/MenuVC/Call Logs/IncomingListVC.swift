@@ -14,13 +14,11 @@ class IncomingListVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("reloadLogs"), object: nil)
-        
     }
     
     @objc func methodOfReceivedNotification(notification: Notification) {
         self.tableView.reloadData()
     }
-
 
 }
 
@@ -59,7 +57,9 @@ extension IncomingListVC : UITableViewDataSource, UITableViewDelegate {
         let dateString = formatter.string(from: newDate! as Date)
         cell.time.text = dateString
         cell.selectionStyle = .none
-        cell.durationLabel.text = "Duration: \(data!.duration) mins"
+        let durationDouble = Double(data!.duration)
+        cell.durationLabel.text = "Duration: \(durationDouble.asString(style: .short))"
+        
         cell.hostLabel.text = ""
         cell.selectionStyle = .none
         return cell

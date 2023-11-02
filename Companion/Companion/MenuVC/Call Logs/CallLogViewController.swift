@@ -86,6 +86,7 @@ class CallLogViewController: UIViewController {
         if let retrievedCodableObject = SafeCheckUtils.getUserData() {
             parameters["meiID"] = retrievedCodableObject.user?.mail
         }
+        
         if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
             parameters["meiID"] = retrievedCodableObject.user.emailID
         }
@@ -152,4 +153,13 @@ class CallLogViewController: UIViewController {
     }
 
     
+}
+
+extension Double {
+  func asString(style: DateComponentsFormatter.UnitsStyle) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.hour, .minute, .second, .nanosecond]
+    formatter.unitsStyle = style
+    return formatter.string(from: self) ?? ""
+  }
 }
