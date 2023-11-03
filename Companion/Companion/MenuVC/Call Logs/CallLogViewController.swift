@@ -72,7 +72,6 @@ class CallLogViewController: UIViewController {
     }
     
     @objc func methodOfReceivedNotification(notification: Notification) {
-        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

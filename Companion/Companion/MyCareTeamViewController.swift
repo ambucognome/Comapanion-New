@@ -8,26 +8,30 @@
 import UIKit
 
 
-class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
 
+//MARK: caretaker data
+    var careteamData : [CareTeam] = []
     
-//MARK: Add caretaker data here
-    var careteamData : [CareTeam] = [
-        CareTeam(image: "6", name: "Alexina Nechis", specality: "Internal Medicine", lastVisitDate: "", experience: "400+", patients: "2 years", review: "200",bio: "I am a physician specializing in internal medicine. I provide comprehensive care for adults, focusing on the prevention and treatment of adult diseases. I have a special interest in chronic disease management and women's health.",email: "anechis@montefiore.org"),
-        CareTeam(image: "2", name: "Aston Merrill", specality: "Dermatology", lastVisitDate: "", experience: "3.06k+", patients: "6 years", review: "u",bio: "I'm a dermatologist specializing in the treatment of skin diseases and disorders. I'm passionate about helping my patients achieve and maintain healthy skin."),
-        CareTeam(image: "3", name: "Francis Fuentes", specality: "Radiology", lastVisitDate: "", experience: "1.06k+", patients: "2 years", review: "600",bio: "I'm a radiologist. I use medical imaging to diagnose and treat diseases. I work with patients and their families to provide the best possible care."),
-        CareTeam(image: "4", name: "Nathanael Cox", specality: "Orthopedic", lastVisitDate: "", experience: "6k+", patients: "9 years", review: "3.3k",bio: "Orthopedic Surgeon specializing in minimally invasive surgery and sports medicine. Dedicated to helping patients return to an active, pain-free lifestyle."),
-        CareTeam(image: "5", name: "Joanna Coffey", specality: "Ophthalmology", lastVisitDate: "", experience: "1k+", patients: "3 years", review: "100",bio: "I am a practicing ophthalmologist. I specialize in the diagnosis and treatment of conditions of the eye. I have a passion for helping my patients improve their vision and reach their full potential."),
-        CareTeam(image: "6", name: "Veronica Pugh", specality: "Pediatrics", lastVisitDate: "", experience: "8.11k+", patients: "8 years", review: "3.2k",bio: "I am a pediatrician. I have been providing care for children for over 15 years. I have a passion for helping children stay healthy and thrive.")]
+    struct Section {
+        let letter : String
+        let data : [CareTeam]
+    }
 
+    var sections = [Section]()
+    var searchSections = [Section]()
 
     var images = ["1","2","3","4","5","6"]
+    var isSearched = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.keyboardDismissMode = .onDrag
+        self.searchBar.delegate = self
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
 
         self.tableView.rowHeight = UITableView.automaticDimension
@@ -51,7 +55,7 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         self.careteamData.removeAll()
 
         ERProgressHud.shared.show()
-                    BaseAPIManager.sharedInstance.makeRequestToGetCareteam(data: jsonData){ (success, response,statusCode)  in
+        BaseAPIManager.sharedInstance.makeRequestToGetCareteam(data: jsonData){ [self] (success, response,statusCode)  in
                         if (success) {
                             ERProgressHud.shared.hide()
                             for i in 0..<response.count {
@@ -63,6 +67,15 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
                                     self.careteamData.append(careteam)
                                 }
                             }
+                            self.careteamData.sort(by: {$0.name < $1.name})
+                            // group the array to ["N": ["Nancy"], "S": ["Sue", "Sam"], "J": ["John", "James", "Jenna"], "E": ["Eric"]]
+                            let groupedDictionary = Dictionary(grouping: self.careteamData, by: {String($0.name.prefix(1))})
+                            // get the keys and sort them
+                            let keys = groupedDictionary.keys.sorted()
+                            // map the sorted keys to a struct
+                            self.sections = keys.map{Section(letter: $0, data: groupedDictionary[$0]!.sorted(by: {$0.name < $1.name}))}
+                            self.searchSections = [Section(letter: "Top Name Matches", data: self.careteamData)]
+
                             self.tableView.reloadData()
                             DispatchQueue.main.asyncAfter(deadline: .now()  + 0.0) {
                                 self.tableView.reloadData()
@@ -75,18 +88,48 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
                     }
     }
     
-    // MARK:- UITableViewDataSource
     
+    //MARK: Filter users based on searched text
+    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String) {
+        print(textSearched)
+        if textSearched == "" {
+            self.isSearched = false
+            tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now()  + 0.0) {
+                self.tableView.reloadData()
+            }
+        } else {
+            self.isSearched = true
+            self.searchSections = [Section(letter: "Top Name Matches", data: self.careteamData)]
+            let filtered = self.searchSections[0].data.filter{($0.name.localizedCaseInsensitiveContains(textSearched)) }
+            print(filtered)
+            self.searchSections = [Section(letter: "Top Name Matches", data: filtered)]
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK:- UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if self.isSearched {
+            return self.searchSections.count
+        } else {
+            return self.sections.count
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.careteamData.count
+        if self.isSearched {
+            return self.searchSections[section].data.count
+        } else {
+            return self.sections[section].data.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = careteamData[indexPath.row]
+        var data = self.sections[indexPath.section].data[indexPath.row]
+        if self.isSearched {
+            data = self.searchSections[indexPath.section].data[indexPath.row]
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
         cell.nameLabel.text = data.name
         cell.specialityLabel.text = data.specality
@@ -104,7 +147,7 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "Companion", bundle: nil)
         let controller = storyboard.instantiateViewController(identifier: "DoctorProfileViewController") as! DoctorProfileViewController
-            controller.data = careteamData[indexPath.row]
+            controller.data = self.sections[indexPath.section].data[indexPath.row]
 //        let nav = UINavigationController(rootViewController: controller)
         let sheetController = SheetViewController(
             controller: controller,
@@ -113,10 +156,7 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         sheetController.gripColor = UIColor(white: 96.0 / 255.0, alpha: 1.0)
         self.present(sheetController, animated: true, completion: nil)
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -124,6 +164,20 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if self.isSearched == false {
+            return self.sections[section].letter
+        }
+        return self.searchSections[section].letter
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if self.isSearched == false {
+            return self.sections.map{$0.letter}
+        }
+        return nil
     }
 
 }
@@ -201,3 +255,4 @@ extension MyCareTeamViewController : UICollectionViewDelegate, UICollectionViewD
     
     
 }
+
