@@ -95,9 +95,6 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         if textSearched == "" {
             self.isSearched = false
             tableView.reloadData()
-            DispatchQueue.main.asyncAfter(deadline: .now()  + 0.0) {
-                self.tableView.reloadData()
-            }
         } else {
             self.isSearched = true
             self.searchSections = [Section(letter: "Top Name Matches", data: self.careteamData)]
@@ -126,17 +123,19 @@ class MyCareTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var data = self.sections[indexPath.section].data[indexPath.row]
+        var data : CareTeam?
         if self.isSearched {
             data = self.searchSections[indexPath.section].data[indexPath.row]
+        } else {
+             data = self.sections[indexPath.section].data[indexPath.row]
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorTableViewCell") as! DoctorTableViewCell
-        cell.nameLabel.text = data.name
-        cell.specialityLabel.text = data.specality
-        cell.expLabel.text = data.experience
-        cell.patientsLabel.text = data.patients
+        cell.nameLabel.text = data?.name
+        cell.specialityLabel.text = data?.specality
+        cell.expLabel.text = data?.experience
+        cell.patientsLabel.text = data?.patients
 //        cell.imgView.image = UIImage(named: data.image)
-        cell.imgView.setImageForName(data.name, backgroundColor: nil, circular: false, textAttributes: nil)
+        cell.imgView.setImageForName(data?.name ?? "", backgroundColor: nil, circular: false, textAttributes: nil)
         cell.layoutSubviews()
         cell.shadowView.dropShadoww()
         return cell
