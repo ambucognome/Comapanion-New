@@ -107,6 +107,9 @@
 		929F71E72AEFA15F00D13034 /* MissedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71E62AEFA15F00D13034 /* MissedListVC.swift */; };
 		929F71E92AEFA16A00D13034 /* RejectedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71E82AEFA16A00D13034 /* RejectedListVC.swift */; };
 		929F71EB2AF2593000D13034 /* CallLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71EA2AF2593000D13034 /* CallLogModel.swift */; };
+		929F71EE2AFA2D8C00D13034 /* MeetingLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71ED2AFA2D8C00D13034 /* MeetingLogViewController.swift */; };
+		929F71F02AFA32A800D13034 /* MeetingLogDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71EF2AFA32A800D13034 /* MeetingLogDetailVC.swift */; };
+		929F71F22AFB770700D13034 /* MeetingLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929F71F12AFB770700D13034 /* MeetingLogModel.swift */; };
 		92AA351D29BF945300A6A4AB /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350E29BF945300A6A4AB /* UIColorExtension.swift */; };
 		92AA351E29BF945300A6A4AB /* SheetContentViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */; };
 		92AA351F29BF945300A6A4AB /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AA351029BF945300A6A4AB /* SheetSize.swift */; };
@@ -394,6 +397,9 @@
 		929F71E62AEFA15F00D13034 /* MissedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedListVC.swift; sourceTree = "<group>"; };
 		929F71E82AEFA16A00D13034 /* RejectedListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedListVC.swift; sourceTree = "<group>"; };
 		929F71EA2AF2593000D13034 /* CallLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallLogModel.swift; sourceTree = "<group>"; };
+		929F71ED2AFA2D8C00D13034 /* MeetingLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingLogViewController.swift; sourceTree = "<group>"; };
+		929F71EF2AFA32A800D13034 /* MeetingLogDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingLogDetailVC.swift; sourceTree = "<group>"; };
+		929F71F12AFB770700D13034 /* MeetingLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingLogModel.swift; sourceTree = "<group>"; };
 		92AA350E29BF945300A6A4AB /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		92AA350F29BF945300A6A4AB /* SheetContentViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetContentViewDelegate.swift; sourceTree = "<group>"; };
 		92AA351029BF945300A6A4AB /* SheetSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
@@ -796,6 +802,16 @@
 			path = "Call Logs";
 			sourceTree = "<group>";
 		};
+		929F71EC2AFA2D7100D13034 /* MeetingLogs */ = {
+			isa = PBXGroup;
+			children = (
+				929F71ED2AFA2D8C00D13034 /* MeetingLogViewController.swift */,
+				929F71F12AFB770700D13034 /* MeetingLogModel.swift */,
+				929F71EF2AFA32A800D13034 /* MeetingLogDetailVC.swift */,
+			);
+			path = MeetingLogs;
+			sourceTree = "<group>";
+		};
 		92AA350429BF6F2D00A6A4AB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1169,6 +1185,7 @@
 				92496F642988EADC0037D723 /* SettingsViewController.swift */,
 				92B3A847296C023A00C03761 /* GridViewController.swift */,
 				92496F7129890E970037D723 /* ProfileViewController.swift */,
+				929F71EC2AFA2D7100D13034 /* MeetingLogs */,
 				929F71E12AEF9F6800D13034 /* Call Logs */,
 			);
 			path = MenuVC;
@@ -1385,8 +1402,10 @@
 				92CFAB3F295B1B9C00D77883 /* SelectionStyleCell.swift in Sources */,
 				9299B6232ABEF748002963AC /* Colors.swift in Sources */,
 				92CFAB5D295B1B9C00D77883 /* ChatBarView.swift in Sources */,
+				929F71F22AFB770700D13034 /* MeetingLogModel.swift in Sources */,
 				92CFAB72295B1B9C00D77883 /* TypingIndicatorView.swift in Sources */,
 				92AA352829BF945300A6A4AB /* Localize.swift in Sources */,
+				929F71F02AFA32A800D13034 /* MeetingLogDetailVC.swift in Sources */,
 				92496F6E29890E5F0037D723 /* TwoFactorAuthVC.swift in Sources */,
 				928122D529BF5BC00021A679 /* FSCalendarExtensions.m in Sources */,
 				92CFA7E3295461F800D77883 /* CompanionLoginViewController.swift in Sources */,
@@ -1492,6 +1511,7 @@
 				92CFAB4B295B1B9C00D77883 /* Pagination.swift in Sources */,
 				928122D029BF5BC00021A679 /* FSCalendar.m in Sources */,
 				928122CA29BF5BC00021A679 /* FSCalendarConstants.m in Sources */,
+				929F71EE2AFA2D8C00D13034 /* MeetingLogViewController.swift in Sources */,
 				92CFAB6F295B1B9C00D77883 /* FooterRefreshAnimator.swift in Sources */,
 				92CFAB3B295B1B9C00D77883 /* AuthenticationErrors.swift in Sources */,
 				9299B5F52ABEF6F9002963AC /* RepeatableTableViewCell.swift in Sources */,

@@ -68,7 +68,6 @@ class CallLogViewController: UIViewController {
             self.displayCurrentTab(0)
         })
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("loadmore"), object: nil)
-
     }
     
     @objc func methodOfReceivedNotification(notification: Notification) {

@@ -51,6 +51,8 @@ class BaseAPIManager : NSObject {
         // Get Call Logs
         case getCallLogs(Data)
 
+        // Get Meeting Logs
+        case getMeetingLogs(Data)
 
         // Api Methods
         var method: HTTPMethod {
@@ -102,6 +104,8 @@ class BaseAPIManager : NSObject {
                 
             case .getCallLogs:
                 return .post
+            case .getMeetingLogs:
+                return .post
             }
         }
             
@@ -152,6 +156,8 @@ class BaseAPIManager : NSObject {
                 return API_END_GUEST_LOGIN
             case .getCallLogs(_):
                 return API_END_GET_CALL_LOGS
+            case .getMeetingLogs(_):
+                return API_END_GET_MEETING_LOGS
             }
         }
         
@@ -314,6 +320,13 @@ class BaseAPIManager : NSObject {
                 urlRequest.httpBody = data
                 return urlRequest
             case .getCallLogs(let data):
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data
+                return urlRequest
+            case .getMeetingLogs(let data):
                 let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
                 var urlRequest = URLRequest(url: url)
                 urlRequest.httpMethod = method.rawValue
@@ -847,6 +860,34 @@ class BaseAPIManager : NSObject {
                 }
             case .failure( _):
                 completion(false,[:],0)
+            }
+        }
+    }
+    
+    // Get Meeting logs Api Call
+    // completion : Completion object to return parameters to the calling functions
+    // Returns call logs
+    func makeRequestToGetMeetingLogs(data:Data,completion: @escaping completionHandlerWithSuccessAndResultArray) {
+        Alamofire.request(Router.getMeetingLogs(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSArray else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                } else {
+                    if statusCode == 401 {
+                        completion(false,[],statusCode!)
+                    } else {
+                        APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
+                    }
+                }
+            case .failure( _):
+                completion(false,[],0)
             }
         }
     }

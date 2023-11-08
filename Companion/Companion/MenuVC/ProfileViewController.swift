@@ -146,6 +146,9 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func meetingLogBtn(_ sender: UIButton) {
+        let vc = UIStoryboard(name: "Companion", bundle: nil).instantiateViewController(withIdentifier: "MeetingLogViewController") as! MeetingLogViewController
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func changeImageButtonTapped(_ sender: UIButton) {

@@ -35,8 +35,7 @@ let API_END_DELETE_EVENT = "/eventapi/events/delete"
 let API_END_ADD_DEVICE_TOKEN = "/eventapi/add-token"
 let API_END_GUEST_LOGIN = "/eventapi/guest-login"
 let API_END_GET_CALL_LOGS = "/eventapi/call-logs-for-user"
-
-
+let API_END_GET_MEETING_LOGS = "/eventapi/meeting-logs-for-user"
 
 let API_END_START_CALL = "/eventapi/start-call"
 let API_END_ACCEPT_CALL = "/eventapi/accept-call"
