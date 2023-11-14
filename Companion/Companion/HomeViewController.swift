@@ -85,9 +85,8 @@ struct CareTeam {
 let message = "App not selected"
 
 //MARK: Add reels data here
-let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notificationCount: 0,isSelected: false),
-//               AppStruct(name: "Careteam", image: UIImage(named: "careteam"), notificationCount: 1, isSelected: false),
-               AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
+let appList = [AppStruct(name: "Events", image: UIImage(named: "calen"), notificationCount: 0,isSelected: false)]
+//               AppStruct(name: "SafeCheck", image: UIImage(named: "form"), notificationCount: 0, isSelected: false)]
 
 
 //MARK: Add events data here
