@@ -6,7 +6,7 @@
 	<dict>
 		<key>AccessibilityResources.bundle/Info.plist</key>
 		<data>
-		iOnOXL9+nv63dAOyXVwLgKJuEkU=
+		1jk8ecGzblIht93FGVrxAI8fF1o=
 		</data>
 		<key>AccessibilityResources.bundle/en.lproj/Localizable.strings</key>
 		<dict>
@@ -27,7 +27,7 @@
 		</data>
 		<key>GoogleSignIn.bundle/Info.plist</key>
 		<data>
-		XYqbl+e/kI2YslXr2veGTyQ3heY=
+		I3CDoVWDhxckRQlcQ2WAGk5lpVc=
 		</data>
 		<key>GoogleSignIn.bundle/Roboto-Bold.ttf</key>
 		<data>
@@ -429,7 +429,7 @@
 		</data>
 		<key>Headers/JitsiMeetView.h</key>
 		<data>
-		G4FN0csD6yKmhAid02NpcnMEBoI=
+		ohgfCLP68iy8Z1T7UrjXNZ0mYB4=
 		</data>
 		<key>Headers/JitsiMeetViewDelegate.h</key>
 		<data>
@@ -437,7 +437,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		SCv8TfeVOHWqc7FyUsxufzizVZQ=
+		27HttStD2q/bxK0PVDvWkLpyO88=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -445,19 +445,19 @@
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		hmbqpFfQHp7fUEB0wfnnr3w6UOM=
+		p3Bq6VRWunF+aOe0GBhQU0KJJ2A=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		attHbd5zizkJT5x4tv5u/R9KIpk=
+		OoNZECyBLEfBHj7b3WWBpVfanw0=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		hmbqpFfQHp7fUEB0wfnnr3w6UOM=
+		p3Bq6VRWunF+aOe0GBhQU0KJJ2A=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		vHbY1WHWoKKZUvjc5miTdozz19U=
+		ofUYMSrBv9wbz+mP2X38dUDQCHs=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -465,19 +465,19 @@
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		U6CwNfD5u17DHVcUW/3ztKZqxSc=
+		jnxPhNaNuMxAQw74AjK13QnKdQc=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		3fr4XTsU6E42q64UwVJj7TtrtzA=
+		SH5UXVSOvvlk5Oit6WlBNQmW5qk=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		U6CwNfD5u17DHVcUW/3ztKZqxSc=
+		jnxPhNaNuMxAQw74AjK13QnKdQc=
 		</data>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		nyHZyY5DFcibzql0XPyT08YuyWk=
+		cHVoh9NzvUl+tG3Jf07qrxwOYoE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -544,22 +544,6 @@
 		rSvG8m4uPMSItIcsIF+N2tDJD8U=
 		</data>
 		<key>assets/node_modules/@react-navigation/elements/src/assets/back-icon@3x.png</key>
-		<data>
-		8kFG8Vv7Hfrw4yVcFrhUhbHieBA=
-		</data>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon-mask.png</key>
-		<data>
-		/9xO1HOyvigG6Z0PaA0dLp/gDlY=
-		</data>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon.png</key>
-		<data>
-		keLOi1inJdXs0IRSKnXqyhW57Aw=
-		</data>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon@2x.png</key>
-		<data>
-		rSvG8m4uPMSItIcsIF+N2tDJD8U=
-		</data>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon@3x.png</key>
 		<data>
 		8kFG8Vv7Hfrw4yVcFrhUhbHieBA=
 		</data>
@@ -649,7 +633,7 @@
 		</data>
 		<key>main.jsbundle</key>
 		<data>
-		HVCPbs5a4RSNJvQ8xYIha9aPWyI=
+		iwG5TEEykJTdlVgOO+us1Zs1Hzs=
 		</data>
 		<key>noAudioSignal.mp3</key>
 		<data>
@@ -802,7 +786,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yHDdL34xw1vuOog+e6j9jYd6xTY4uaoYGjkTspmgsX8=
+			uT/9Q9kH28M4R7f7XGa5x5ln9aO+o0ZbgK7+jZYvnEk=
 			</data>
 		</dict>
 		<key>AccessibilityResources.bundle/en.lproj/Localizable.strings</key>
@@ -832,7 +816,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JZqGjZtdUjYJ8H4GhUwNguy5h8Cp72jlqTUCby9c9Ds=
+			+peJy3tC1L9GPX+Xx79qp/Frmny53tEO+OYSVcNPcUw=
 			</data>
 		</dict>
 		<key>GoogleSignIn.bundle/Roboto-Bold.ttf</key>
@@ -1279,7 +1263,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xkyh5rva3g85SH3lg+llO1lsW9o8bJN/ytZnGmQP9Vo=
+			tzoKpAA3oNqa+8PXuBxkc9l4RIwny6u94nXZeTsZXsk=
 			</data>
 		</dict>
 		<key>Headers/JitsiMeetViewDelegate.h</key>
@@ -1300,28 +1284,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FEf3JjTaWr6cYnM9ZU/5Sogh7GxiAgO0coE/uXgmot0=
+			Ti8xn6Y+LAxDjXIBSgRbRTyIF0g12+5m6R+POTJZ9dM=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sfWINgwcfXwCkTCV68+tXDzw7zkGs1vEVqlM4biPVhM=
+			wQGIWzr5rExiAxMDg9o0z20+urW0cd9OzpzlWPygpcs=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FEf3JjTaWr6cYnM9ZU/5Sogh7GxiAgO0coE/uXgmot0=
+			Ti8xn6Y+LAxDjXIBSgRbRTyIF0g12+5m6R+POTJZ9dM=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			r5kQ5DMvo84+fYkWAyd4lm21EX8LlWOsJPwj+PQXiYA=
+			CCF4EK4hjRhj9Vd7BRBOJQLXJ93G2sSscw8PYGMTKwo=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -1335,28 +1319,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wXVxk6PVm/atO8vRvEuefzTpwr7pl3wxT/7ZxHj3Vkc=
+			jRKcAzK/BdrRO2iHzGomb5waTJExw1evk+nEmPNvb1c=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fWvDa0vaqXWRs2DnzWN3zmNDE4aYqOI2vH2RWsLNqHU=
+			QSWRO37SF7yemiPq3alzMpo5Q5rebMiOa5sNB9ASgSA=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wXVxk6PVm/atO8vRvEuefzTpwr7pl3wxT/7ZxHj3Vkc=
+			jRKcAzK/BdrRO2iHzGomb5waTJExw1evk+nEmPNvb1c=
 			</data>
 		</dict>
 		<key>Modules/JitsiMeetSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EqUjCNyAWO6ikv8HUWawyb1h05Bf4zujfv++40eNWb8=
+			9ymDxr5nLoOvavGRpFbsY5H4rmA5j0DdJe2f581s+W4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -1472,34 +1456,6 @@
 			</data>
 		</dict>
 		<key>assets/node_modules/@react-navigation/elements/src/assets/back-icon@3x.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Pd0Hc+0n4j0leJ8wFzGzrEVa2L5aonoKG4OPicbSciU=
-			</data>
-		</dict>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon-mask.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			LJXowmdeeZM1/QBGuwfb2gbLfs/1HtN5IsYwnWGcxNM=
-			</data>
-		</dict>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			LN/rjlzN55dvcBL7jM5zryIpAp7iHU8VCf7RFIccbNg=
-			</data>
-		</dict>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon@2x.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			K3RDqaWOksoRpXW9wRWYYVpX3eMFzYznDWAmBrMCzZg=
-			</data>
-		</dict>
-		<key>assets/node_modules/@react-navigation/stack/node_modules/@react-navigation/elements/src/assets/back-icon@3x.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
@@ -1657,7 +1613,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aOrBPcxhrhhS8F4yv8XgaAJr4jNjds2gPEqVtL7FtCQ=
+			WcxCbZl22cAde+gBIlii7PUhzpyCEEgl8vVxb6FSQWA=
 			</data>
 		</dict>
 		<key>noAudioSignal.mp3</key>

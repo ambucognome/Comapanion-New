@@ -20,7 +20,7 @@ target 'Companion' do
     pod 'SelectionList'
 #    pod 'DatePickerDialog'
     pod 'NotificationBannerSwift', '~> 3.0.0'
-    pod 'JitsiMeetSDK'
+    pod 'JitsiMeetSDK','~> 8.3.0'
 #    '5.1.0'
     
     pod 'Socket.IO-Client-Swift', '~> 15.2.0'
