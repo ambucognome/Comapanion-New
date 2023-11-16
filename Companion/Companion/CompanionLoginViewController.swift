@@ -72,7 +72,7 @@ class CompanionLoginViewController: UIViewController {
     
     func loginAPI(){
         ERProgressHud.shared.show()
-        let parameters : [String: String] = [ "eid" : self.ezIdTextField.text!,"lastname": self.lastNameTextField.text!,"loginType": "EZ-ID" ]
+        let parameters : [String: String] = [ "eid" : self.ezIdTextField.text!,"lastname": self.lastNameTextField.text!,"loginType": "EZ-ID" ]//LDAP
         let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)

@@ -175,6 +175,12 @@ class BaseAPIManager : NSObject {
             
             switch self {
             case .loginUser(let data):
+//                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+//                var urlRequest = URLRequest(url: url)
+//                urlRequest.httpMethod = method.rawValue
+//                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//                urlRequest.httpBody = data
+//                return urlRequest
                 urlRequest.httpBody = data
                 return urlRequest
             case .startSurvey(let data,let isForced):

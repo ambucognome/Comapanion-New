@@ -24,8 +24,6 @@ class JitsiMeetViewController: UIViewController {
     @IBOutlet private var meetViewWidth: NSLayoutConstraint!
 
     
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
