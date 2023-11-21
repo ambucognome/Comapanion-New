@@ -1602,7 +1602,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
@@ -1613,7 +1613,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 23;
+				MARKETING_VERSION = 24;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios.Broadcast-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1630,7 +1630,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
@@ -1641,7 +1641,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 23;
+				MARKETING_VERSION = 24;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios.Broadcast-Extension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1775,7 +1775,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1797,7 +1797,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 23;
+				MARKETING_VERSION = 24;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1816,7 +1816,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;
@@ -1837,7 +1837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 23;
+				MARKETING_VERSION = 24;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cognome.companion-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

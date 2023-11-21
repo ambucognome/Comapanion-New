@@ -22,7 +22,6 @@ let API_END_START_SURVEY = "/startSurvey"
 let API_END_COMPLETE_SURVEY = "/completeSurvey"
 let API_END_ADD_TOKEN = "/add-token"
 
-
 // PROD
 let EVENT_BASE_URL = "https://companioneventapi.azurewebsites.net"//"http://192.168.199.90:8080"//
 

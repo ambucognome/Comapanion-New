@@ -215,4 +215,19 @@ class func getToken() -> String {
         }
         return data
     }
+    
+    // Save did logout
+    // Params :
+    class func setDidLogout(loggedOut : Bool){
+        UserDefaults.standard.set(loggedOut, forKey: "logout")
+    }
+
+    // Fetch if logged out once
+    class func getDidLogout() -> Bool? {
+        let defaults = UserDefaults.standard
+        guard let logout =  defaults.value(forKey: "logout") as? Bool else {
+            return nil
+        }
+        return logout
+    }
 }

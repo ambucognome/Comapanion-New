@@ -53,14 +53,16 @@ class IntroViewController: UIViewController {
     
 
     func checkForUserType() {
+        if SafeCheckUtils.getDidLogout() == nil {
+            SafeCheckUtils.setDidLogout(loggedOut: true)
+            SafeCheckUtils.setToken(token: "")
+        }
+        
         if (SafeCheckUtils.getToken() != "") {
-            //User type not selected but logged in
+            //logged in
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
             let vc = storyboard.instantiateViewController(identifier: "TabBarController") as! UITabBarController
-//            vc.isFromLogin = false
             isFromLogin = false
-//            let nav = UINavigationController(rootViewController: vc)
             self.setRootViewController(vc: vc)
             if LAUNCHED_FROM_NOTIFICATION {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
