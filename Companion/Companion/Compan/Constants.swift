@@ -106,6 +106,8 @@ let ERROR_CODE_500 = 500
 let ERROR_MESSAGE_FOR_500 = "Internal Server Error. Please try again."
 let ERROR_CODE_503 = 503
 let ERROR_MESSAGE_FOR_503 = "Internal Server Error. Please try again."
+let ERROR_CODE_4044 = 4044
+let ERROR_MESSAGE_FOR_4044 = "Invalid credentials."
 
 
 

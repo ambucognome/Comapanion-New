@@ -380,6 +380,9 @@ class APIManager : NSObject {
             message = ERROR_MESSAGE_FOR_500
         case ERROR_CODE_503:
             message = ERROR_MESSAGE_FOR_503
+        case ERROR_CODE_4044:
+            message = ERROR_MESSAGE_FOR_4044
+
         default:
             message = ERROR_MESSAGE_DEFAULT
         }

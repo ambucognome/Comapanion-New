@@ -13,7 +13,9 @@
 #import <WebRTC/RTCMacros.h>
 
 /** The only valid value for the following if set is kRTCFieldTrialEnabledValue. */
-RTC_EXTERN NSString *const kRTCFieldTrialAudioForceABWENoTWCCKey;
+RTC_EXTERN NSString * const kRTCFieldTrialAudioForceNoTWCCKey;
+RTC_EXTERN NSString * const kRTCFieldTrialAudioForceABWENoTWCCKey;
+RTC_EXTERN NSString * const kRTCFieldTrialSendSideBweWithOverheadKey;
 RTC_EXTERN NSString * const kRTCFieldTrialFlexFec03AdvertisedKey;
 RTC_EXTERN NSString * const kRTCFieldTrialFlexFec03Key;
 RTC_EXTERN NSString * const kRTCFieldTrialH264HighProfileKey;

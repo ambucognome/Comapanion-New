@@ -72,7 +72,7 @@ class CompanionLoginViewController: UIViewController {
     
     func loginAPI(){
         ERProgressHud.shared.show()
-        let parameters : [String: String] = [ "eid" : self.ezIdTextField.text!,"lastname": self.lastNameTextField.text!,"loginType": "EZ-ID" ]//LDAP
+        let parameters : [String: String] = [ "password" : self.ezIdTextField.text!,"username": self.lastNameTextField.text!,"loginType": "LDAP","eid":"","lastname":""] 
         let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         print(jsonString)
@@ -113,7 +113,7 @@ class CompanionLoginViewController: UIViewController {
             } else {
                 ERProgressHud.shared.hide()
                 if statusCode == 401 {
-                    APIManager.sharedInstance.showAlertWithMessage(message: APIManager.sharedInstance.choooseMessageForErrorCode(errorCode: statusCode))
+                    APIManager.sharedInstance.showAlertWithMessage(message: APIManager.sharedInstance.choooseMessageForErrorCode(errorCode: 4044))
                     return
                 }
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)

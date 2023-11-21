@@ -899,7 +899,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print("\(self.dateFormatter.string(from: calendar.currentPage))")
+        print("page changed to: \(self.dateFormatter.string(from: calendar.currentPage))")
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {

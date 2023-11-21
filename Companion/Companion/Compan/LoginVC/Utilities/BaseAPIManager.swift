@@ -175,14 +175,14 @@ class BaseAPIManager : NSObject {
             
             switch self {
             case .loginUser(let data):
-//                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
-//                var urlRequest = URLRequest(url: url)
-//                urlRequest.httpMethod = method.rawValue
-//                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//                urlRequest.httpBody = data
-//                return urlRequest
+                let url = try EVENT_BASE_URL.asURL().appendingPathComponent(path)
+                var urlRequest = URLRequest(url: url)
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 urlRequest.httpBody = data
                 return urlRequest
+//                urlRequest.httpBody = data
+//                return urlRequest
             case .startSurvey(let data,let isForced):
                 let postUrl = try Router.baseURLString.asURL().appendingPathComponent(path)
                 var url = URLComponents(string: postUrl.absoluteString)!
@@ -365,6 +365,10 @@ class BaseAPIManager : NSObject {
             case .success(let JSON):
                 ERProgressHud.shared.hide()
                 let statusCode = response.response?.statusCode
+                if statusCode == 401 {
+                    completion(false,[:],statusCode!)
+                    return
+                }
                 guard let jsonData =  JSON  as? NSDictionary else {
                     APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                     return
@@ -372,12 +376,8 @@ class BaseAPIManager : NSObject {
                 if statusCode == SUCCESS_CODE_200{
                     completion(true, jsonData, statusCode!)
                 }   else {
-                    if statusCode == 401 {
-                        completion(false,[:],statusCode!)
-                    } else {
                     APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
                     completion(false,[:],statusCode!)
-                    }
                 }
             case .failure( _):
                 completion(false,[:],0)

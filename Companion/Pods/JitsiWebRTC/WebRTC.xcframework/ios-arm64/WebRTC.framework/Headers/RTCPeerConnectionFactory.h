@@ -31,25 +31,17 @@ NS_ASSUME_NONNULL_BEGIN
 (RTCVideoEncoderFactory);
 @protocol RTC_OBJC_TYPE
 (RTCSSLCertificateVerifier);
-@protocol RTC_OBJC_TYPE
-(RTCAudioDevice);
 
 RTC_OBJC_EXPORT
 @interface RTC_OBJC_TYPE (RTCPeerConnectionFactory) : NSObject
 
-/* Initialize object with default H264 video encoder/decoder factories and default ADM */
+/* Initialize object with default H264 video encoder/decoder factories */
 - (instancetype)init;
 
-/* Initialize object with injectable video encoder/decoder factories and default ADM */
+/* Initialize object with injectable video encoder/decoder factories */
 - (instancetype)
     initWithEncoderFactory:(nullable id<RTC_OBJC_TYPE(RTCVideoEncoderFactory)>)encoderFactory
             decoderFactory:(nullable id<RTC_OBJC_TYPE(RTCVideoDecoderFactory)>)decoderFactory;
-
-/* Initialize object with injectable video encoder/decoder factories and injectable ADM */
-- (instancetype)
-    initWithEncoderFactory:(nullable id<RTC_OBJC_TYPE(RTCVideoEncoderFactory)>)encoderFactory
-            decoderFactory:(nullable id<RTC_OBJC_TYPE(RTCVideoDecoderFactory)>)decoderFactory
-               audioDevice:(nullable id<RTC_OBJC_TYPE(RTCAudioDevice)>)audioDevice;
 
 /** Initialize an RTCAudioSource with constraints. */
 - (RTC_OBJC_TYPE(RTCAudioSource) *)audioSourceWithConstraints:
