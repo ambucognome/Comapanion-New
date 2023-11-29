@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>RTCAppGroupIdentifier</key>
-	<string>group.com.cognome.companion-ios</string>
-	<key>RTCScreenSharingExtension</key>
-	<string>com.cognome.companion-ios.Broadcast-Extension</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -32,6 +28,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>RTCAppGroupIdentifier</key>
+	<string>group.com.cognome.companion-ios</string>
+	<key>RTCScreenSharingExtension</key>
+	<string>com.cognome.companion-ios.Broadcast-Extension</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 //        FirebaseApp.configure()
         UNUserNotificationCenter.current().delegate = self
         registerForPushNotifications()
+        self.voipRegistration()
 //        Messaging.messaging().delegate = self
 //        UIApplication.shared.applicationIconBadgeNumber = 0
         IQKeyboardManager.shared.enable = true
@@ -84,7 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         
-        self.voipRegistration()
         return true
     }
     

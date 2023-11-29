@@ -67,38 +67,51 @@ class JitsiMeetViewController: UIViewController {
         let options = JitsiMeetConferenceOptions.fromBuilder { builder in
             builder.room = name
             builder.userInfo = JitsiMeetUserInfo(displayName: self.userName, andEmail: self.email, andAvatar: nil)
-
-            builder.setAudioMuted(true)
-            builder.setVideoMuted(true)
+//            builder.setAudioMuted(true)
+//            builder.setVideoMuted(true)
             let url = URL(string: "https://chdiaz.montefiore.org")
 //            let url = URL(string: "https://meet.jit.si")
             builder.serverURL = url
+            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
+            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
+            builder.setFeatureFlag("live-streaming.enabled", withBoolean: false)
+            builder.setFeatureFlag("invite.enabled", withBoolean: false)
+            builder.setFeatureFlag("close-captions.enabled", withBoolean: true)
+            builder.setFeatureFlag("recording.enabled", withBoolean: false)
+            builder.setFeatureFlag("prejoinpage.enabled", withBoolean: false)
+            builder.setFeatureFlag("settings.enabled", withBoolean: false)
+            builder.setFeatureFlag("filmstrip.enabled", withBoolean: true)
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
             builder.setFeatureFlag("ios.screensharing.enabled", withBoolean: true)
-            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
-            builder.setFeatureFlag("invite.enabled", withBoolean: false)
-            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
-            builder.setFeatureFlag("server-url-change.enabled", withBoolean:false)
-            builder.setFeatureFlag("meeting-password.enabled", withBoolean:false)
-            builder.setFeatureFlag("live-streaming.enabled", withBoolean:false)
-            builder.setFeatureFlag("ios.recording.enabled", withBoolean:false)
-            builder.setFeatureFlag("calendar.enabled", withBoolean:false)
-            builder.setFeatureFlag("close-captions.enabled", withBoolean:false)
+//            builder.setFeatureFlag("call-integration.enabled", withBoolean:false) // CallKit integration
             builder.setFeatureFlag("video-share.enabled", withBoolean:false)
             builder.setFeatureFlag("security-options.enabled", withBoolean:false)
-            builder.setFeatureFlag("reactions.enabled", withBoolean:false)
-            builder.setFeatureFlag("speakerstats.enabled", withBoolean:false)
-            builder.setFeatureFlag("call-integration.enabled", withBoolean:false) // CallKit integration
-            builder.setFeatureFlag("raise-hand.enabled", withBoolean:true)
-            builder.setFeatureFlag("close-captions.enabled", withBoolean:true)
-            builder.setFeatureFlag("prejoinpage.enabled", withBoolean:false)
+            builder.setFeatureFlag("breakout-rooms.enabled", withBoolean:false)
 
             if self.isFromDialing {
                 builder.setFeatureFlag("notifications.enabled", withBoolean:true)
                 builder.setFeatureFlag("pip.enabled", withBoolean:true)
             }
-        }
 
+            builder.setAudioMuted(true)
+            builder.setVideoMuted(true)
+
+//            builder.setFeatureFlag("add-people.enabled", withBoolean: false)
+//            builder.setFeatureFlag("invite.enabled", withBoolean: false)
+//            builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
+//            builder.setFeatureFlag("server-url-change.enabled", withBoolean:false)
+//            builder.setFeatureFlag("meeting-password.enabled", withBoolean:false)
+//            builder.setFeatureFlag("live-streaming.enabled", withBoolean:false)
+//            builder.setFeatureFlag("ios.recording.enabled", withBoolean:false)
+//            builder.setFeatureFlag("calendar.enabled", withBoolean:false)
+//            builder.setFeatureFlag("close-captions.enabled", withBoolean:false)
+//            builder.setFeatureFlag("reactions.enabled", withBoolean:false)
+//            builder.setFeatureFlag("speakerstats.enabled", withBoolean:false)
+//            builder.setFeatureFlag("raise-hand.enabled", withBoolean:true)
+////            builder.setFeatureFlag("prejoinpage.enabled", withBoolean:false)
+//
+        }
+        
         meetView.join(options)
     }
     
