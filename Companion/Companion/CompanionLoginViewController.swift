@@ -55,7 +55,6 @@ class CompanionLoginViewController: UIViewController {
     }
     
     //MARK: Guest Login
-    
     @IBAction func guestSignInBtn(_ sender: Any) {
 
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)
