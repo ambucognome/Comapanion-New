@@ -22,6 +22,8 @@
 		925AD0E42A4B0F7100014A97 /* SampleUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E32A4B0F7100014A97 /* SampleUploader.swift */; };
 		925AD0E62A4B0F9300014A97 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E52A4B0F9300014A97 /* Atomic.swift */; };
 		925AD0E82A4B0FD200014A97 /* DarwinNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925AD0E72A4B0FD200014A97 /* DarwinNotificationCenter.swift */; };
+		926083152B32F8A9007ED9AB /* GoogleService-Info-PROD.plist in Resources */ = {isa = PBXBuildFile; fileRef = 926083142B32F8A9007ED9AB /* GoogleService-Info-PROD.plist */; };
+		926083172B346925007ED9AB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 926083162B346925007ED9AB /* GoogleService-Info.plist */; };
 		928122C829BF5BC00021A679 /* FSCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9281229629BF5BBF0021A679 /* FSCalendarCollectionViewLayout.m */; };
 		928122C929BF5BC00021A679 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122AB29BF5BBF0021A679 /* FSCalendarStickyHeader.m */; };
 		928122CA29BF5BC00021A679 /* FSCalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 928122B029BF5BBF0021A679 /* FSCalendarConstants.m */; };
@@ -222,7 +224,6 @@
 		92CFAB81295B1B9C00D77883 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEA295B1B9C00D77883 /* LoginViewController.swift */; };
 		92CFAB82295B1B9C00D77883 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEB295B1B9C00D77883 /* LaunchViewController.swift */; };
 		92CFAB83295B1B9C00D77883 /* FailScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAAEC295B1B9C00D77883 /* FailScreenViewController.swift */; };
-		92CFAB8C295B1B9C00D77883 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CFAAF6295B1B9C00D77883 /* GoogleService-Info.plist */; };
 		92CFAB95295B1B9C00D77883 /* AnyDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB05295B1B9C00D77883 /* AnyDecodable.swift */; };
 		92CFAB96295B1B9C00D77883 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB06295B1B9C00D77883 /* AnyCodable.swift */; };
 		92CFAB97295B1B9C00D77883 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CFAB07295B1B9C00D77883 /* AnyEncodable.swift */; };
@@ -277,6 +278,8 @@
 		925AD0E32A4B0F7100014A97 /* SampleUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUploader.swift; sourceTree = "<group>"; };
 		925AD0E52A4B0F9300014A97 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		925AD0E72A4B0FD200014A97 /* DarwinNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarwinNotificationCenter.swift; sourceTree = "<group>"; };
+		926083142B32F8A9007ED9AB /* GoogleService-Info-PROD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-PROD.plist"; sourceTree = "<group>"; };
+		926083162B346925007ED9AB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9281229629BF5BBF0021A679 /* FSCalendarCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCollectionViewLayout.m; sourceTree = "<group>"; };
 		9281229829BF5BBF0021A679 /* FSCalendarWeekdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarWeekdayView.h; sourceTree = "<group>"; };
 		9281229929BF5BBF0021A679 /* FSCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
@@ -928,6 +931,8 @@
 				928122D829BF5C310021A679 /* Companion-Bridging-Header.h */,
 				92CFA7E7295461FA00D77883 /* Assets.xcassets */,
 				92CFA7E9295461FA00D77883 /* LaunchScreen.storyboard */,
+				926083162B346925007ED9AB /* GoogleService-Info.plist */,
+				926083142B32F8A9007ED9AB /* GoogleService-Info-PROD.plist */,
 				92AA354029E5A7B000A6A4AB /* Info.plist */,
 			);
 			path = Companion;
@@ -1308,10 +1313,11 @@
 				9299B5F62ABEF6F9002963AC /* RepeatableTableViewCell.xib in Resources */,
 				92CFAB56295B1B9C00D77883 /* LICENSE in Resources */,
 				92CFAB3E295B1B9C00D77883 /* covidCheck.storyboard in Resources */,
+				926083172B346925007ED9AB /* GoogleService-Info.plist in Resources */,
 				9299B5F42ABEF6F9002963AC /* RadioButtonTableViewCell.xib in Resources */,
 				9299B5B72ABEF687002963AC /* FloatingLabelTextField.xib in Resources */,
+				926083152B32F8A9007ED9AB /* GoogleService-Info-PROD.plist in Resources */,
 				9299B5F32ABEF6F9002963AC /* SliderTableViewCell.xib in Resources */,
-				92CFAB8C295B1B9C00D77883 /* GoogleService-Info.plist in Resources */,
 				92CFAB4A295B1B9C00D77883 /* user.json in Resources */,
 				9299B5F92ABEF6F9002963AC /* AutocompleteTableViewCell.xib in Resources */,
 			);
@@ -1602,7 +1608,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
@@ -1630,7 +1636,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Broadcast Extension/Broadcast Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Broadcast Extension/Info.plist";
@@ -1775,7 +1781,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1816,7 +1822,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Companion/Companion.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = R4NC253N45;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Companion/Info.plist;

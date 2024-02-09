@@ -139,9 +139,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if SafeCheckUtils.getIsGuest() {
-            self.addEventBtn.isHidden = true
-        }
+//        if SafeCheckUtils.getIsGuest() {
+//            self.addEventBtn.isHidden = true
+//        }
         if UIDevice.current.model.hasPrefix("iPad") {
             self.calendarHeightConstraint.constant = 400
         }
@@ -229,7 +229,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         "key": "test12345",
         "app":"Companion_iOS"    ]
     
-    let CREATE_EVENT_TEMPLATE = "ddc:template_08060374-0022-4d30-9ddd-6896ef7b6fc5"
+    //old one
+//    let CREATE_EVENT_TEMPLATE = "ddc:template_6c09c282-3843-459d-802a-58fb81d4e4ca"
+    
+    //DEV:
+    let CREATE_EVENT_TEMPLATE = "ddc:template_f415b562-0f02-4be2-8535-a7c60158cb13"
+    //"ddc:template_b9a500bc-1b04-466b-931c-b4109424eb10"
+
+    //PROD:
+//    let CREATE_EVENT_TEMPLATE = "ddc:template_0323f471-ab69-44a8-8aeb-c7f1ff01212c"
+
+    
     
     @IBAction func addBtn(_ sender: Any) {
 //        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
@@ -238,8 +248,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //            self.getTemplate()
 //        }
         self.getTemplateForEvent(templateId: self.CREATE_EVENT_TEMPLATE)
-        
-        
     }
     
     @objc func getTemplate() {
@@ -258,6 +266,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func didSubmitEventForm(response: NSArray) {
         print("Did submit event form")
         self.createEventWithV2(response: response)
+    }
+    
+    func didSubmitEventWithInstrumentTree(response: NSDictionary) {
+        print("Did submit event form with instrument tree")
+        self.createEventWithInstrumentData(response: response)
     }
     
     func didSubmitSurveyForm(response: NSArray, eventId: String) {
@@ -368,6 +381,42 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         let dateString = formatter.string(from: newDate! as Date)
         dataDic["date"] = dateString
+
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        
+        ERProgressHud.shared.show()
+                    BaseAPIManager.sharedInstance.makeRequestToCreateEvent( data: jsonData){ (success, response,statusCode)  in
+                        if (success) {
+                            ERProgressHud.shared.hide()
+                            print(response)
+                            if statusCode == 200 {
+                                if isEdit {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event updated successfully.", style: .success)
+                                    banner.show()
+                                } else {
+                                    let banner = NotificationBanner(title: "Success", subtitle: "Event created successfully.", style: .success)
+                                    banner.show()
+                                }
+//                                self.getEvents(data: self.dateRange)
+                            }
+                        } else {
+                            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                            ERProgressHud.shared.hide()
+                        }
+                    }
+        
+    }
+    
+    
+    // New event with instrument tree
+    func createEventWithInstrumentData(response: NSDictionary,isEdit: Bool = false) {
+        var dataDic : [String: Any] = [:]
+        dataDic["eventId"] = "string"
+        dataDic["mei"] = "string"
+        dataDic["ddcResponse"] = response
 
         let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
@@ -691,8 +740,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         
     func saveInstrument(templateId: String,shouldUpdateIndex: Bool = false, newEventId: String = "", oldEventId: String = "",isEventTemplate : Bool = false){
-            let parameter : [String:Any] = ["templateId": templateId, "predefinedFields": [:] ]
-            let jsonData = try! JSONSerialization.data(withJSONObject: parameter, options: JSONSerialization.WritingOptions.prettyPrinted)
+        var parameterr : [String:Any] = ["templateId": templateId, "predefinedFields": [:]]
+        if isEventTemplate {
+            parameterr["predefinedFields"] = ["indexfield":self.random(digits: 8)]
+        }
+            let jsonData = try! JSONSerialization.data(withJSONObject: parameterr, options: JSONSerialization.WritingOptions.prettyPrinted)
             let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
             print(jsonString)
 
@@ -721,7 +773,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                                   NewRequestHelper.shared.updateIndexField(eventId: instruments?.id ?? "")
 //                                                  }
                                               } else {
-                                                  NewRequestHelper.shared.updateIndexField(eventId: self.random(digits: 8))
+//                                                  NewRequestHelper.shared.updateIndexField(eventId: self.random(digits: 8))
                                               }
                                               NewScriptHelper.shared.checkIsVisibleEntity(ddcModel: ddcModel)
                                               if (self.navigationController?.topViewController as? DynamiccTemplateViewController) != nil {

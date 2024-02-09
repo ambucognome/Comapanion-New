@@ -29,6 +29,7 @@ class APIManager : NSObject {
         case deleteRepeatableGroup(Data)
         case getInstrument(String)
         case resetInstrument(Data)
+        case getInstrumentTree(String)
 
         // Api Methods
         var method: HTTPMethod {
@@ -49,6 +50,8 @@ class APIManager : NSObject {
                 return .get
             case .resetInstrument:
                 return .post
+            case .getInstrumentTree:
+                return .get
             }
         }
             
@@ -71,6 +74,8 @@ class APIManager : NSObject {
                 return API_END_GET_INSTRUMENT
             case .resetInstrument:
                 return API_END_RESET_INSTRUMENT
+            case .getInstrumentTree:
+                return API_END_GET_INSTRUMENT_TREE
             }
         }
         
@@ -109,6 +114,10 @@ class APIManager : NSObject {
                 return urlRequest
             case .resetInstrument(let data):
                 urlRequest.httpBody = data
+                return urlRequest
+            case .getInstrumentTree(let instrumentId):
+                url.appendQueryItem(name: "instrumentId", value: instrumentId)
+                let urlRequest = APIManager.sharedInstance.createURLRequest(url: url, method: method)
                 return urlRequest
             }
         }
@@ -307,6 +316,30 @@ class APIManager : NSObject {
     // Returns Dynamic Form Components in Json format
     func makeRequestToResetInstrument(data:Data,completion: @escaping completionHandlerWithStatusCode) {
         Alamofire.request(Router.resetInstrument(data)).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                ERProgressHud.shared.hide()
+                let statusCode = response.response?.statusCode
+                guard let jsonData =  JSON  as? NSDictionary else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                    return
+                }
+                if statusCode == SUCCESS_CODE_200{
+                    completion(true, jsonData, statusCode!)
+                } else {
+                    APIManager.sharedInstance.showAlertWithMessage(message: self.choooseMessageForErrorCode(errorCode: statusCode!))
+                }
+            case .failure( _):
+                completion(false,[:],0)
+            }
+        }
+    }
+    
+    // Get Instrument Tree
+    // completion : Completion object to return parameters to the calling functions
+    // Returns instruments
+    func makeRequestToGetInstrumentTree(instrumentId: String,completion: @escaping completionHandlerWithStatusCode) {
+        Alamofire.request(Router.getInstrumentTree(instrumentId)).responseJSON { response in
             switch response.result {
             case .success(let JSON):
                 ERProgressHud.shared.hide()

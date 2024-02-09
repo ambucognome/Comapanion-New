@@ -18,6 +18,7 @@ var isReadOnly = false // read only
 protocol DynamicTemplateViewControllerDelegate {
     func didSubmitSurveyForm(response: NSArray, eventId: String)
     func didSubmitEventForm(response: NSArray)
+    func didSubmitEventWithInstrumentTree(response: NSDictionary)
 
 }
 
@@ -142,11 +143,12 @@ class DynamiccTemplateViewController: UIViewController, UITableViewDelegate, UIT
                 print(response)
                 ERProgressHud.shared.hide()
                 if self.isEventTemplate {
-                    self.delegate?.didSubmitEventForm(response: response)
+                   // self.delegate?.didSubmitEventForm(response: response)
+                    self.getInstrumentTree()
                 } else {
                     self.delegate?.didSubmitSurveyForm(response: response,eventId: self.eventId)
+                    self.navigationController?.popViewController(animated: true)
                 }
-                self.navigationController?.popViewController(animated: true)
             } else {
                 APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
                 ERProgressHud.shared.hide()
@@ -154,6 +156,27 @@ class DynamiccTemplateViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    
+    func getInstrumentTree(){
+        ERProgressHud.shared.show()
+
+        APIManager.sharedInstance.makeRequestToGetInstrumentTree(instrumentId: instrumentIdFromSaveInstrument){ (success, response,statusCode)  in
+            if (success) {
+                print(response)
+                ERProgressHud.shared.hide()
+                self.delegate?.didSubmitEventWithInstrumentTree(response: response)
+//                if self.isEventTemplate {
+//                    self.delegate?.didSubmitEventForm(response: response)
+//                } else {
+//                    self.delegate?.didSubmitSurveyForm(response: response,eventId: self.eventId)
+//                }
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+                ERProgressHud.shared.hide()
+            }
+        }
+    }
     
 
 // MARK: - UITableViewDataSource
@@ -242,6 +265,9 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self.hideIndexField && indexPath.section == 0 && isEventTemplate == false {
+            return 0
+        }
+        if self.hideIndexField && indexPath.section == 0 && isEventTemplate {
             return 0
         }
         if self.hideIndexField && indexPath.section == 6 && isEventTemplate {

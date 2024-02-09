@@ -28,7 +28,9 @@ class SurveyListVC: UIViewController {
 
 extension SurveyListVC : UITableViewDataSource, UITableViewDelegate, DynamicTemplateViewControllerDelegate {
 
-    
+    func didSubmitEventWithInstrumentTree(response: NSDictionary) {
+        
+    }
     
     func didSubmitEventForm(response: NSArray) {
         

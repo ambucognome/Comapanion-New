@@ -21,7 +21,8 @@ struct MeetingLogStruct {
     var duration = ""
     var formattedEventDate = ""
     var formattedEndTime = ""
-
+    var eventId = ""
+    var meetingId = ""
 }
 
 class MeetingLogViewController: UIViewController {
@@ -69,7 +70,7 @@ class MeetingLogViewController: UIViewController {
                         let endTime = dataDic["endTime"] as? String ?? ""
                         let eventTime = dataDic["eventTime"] as? String ?? ""
                         let status = dataDic["status"] as? String ?? ""
-                        
+                        let eventId = dataDic["eventId"] as? String ?? ""
                         
                         
                         let dateFormatter = DateFormatter()
@@ -108,9 +109,12 @@ class MeetingLogViewController: UIViewController {
                         timeFormatter1.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
                         let time1 = timeFormatter1.date(from: endTime)
                         
+                        var formattedEndTime = ""
                         let newformatter1 = DateFormatter()
                         newformatter1.dateFormat = "h:mm a"
-                        let formattedEndTime = newformatter.string(from: time1! as Date)
+                        if let time = time1 {
+                            formattedEndTime = newformatter.string(from: time as Date)
+                        }
                         
                         
 
@@ -121,6 +125,7 @@ class MeetingLogViewController: UIViewController {
                             let eventDuration = metaDataDic["eventDuration"] as? String ?? ""
                             let hostUserId = metaDataDic["hostUserId"] as? String ?? ""
                             let description = metaDataDic["description"] as? String ?? ""
+                            let meetingId = metaDataDic["meetingId"] as? String ?? ""
                             var guestDat = [GuestStruct]()
                             if let guestArray = (metaDataDic["guests"] as? String ?? "").convertToNSDictionary() {
 //                                if let guestArray = metaDataDic["guests"] as? NSArray {
@@ -137,7 +142,7 @@ class MeetingLogViewController: UIViewController {
                                     }
                                 }
                             }
-                            let data = MeetingLogStruct(title: title,description: description,status: status, startTime: startTime, endTime: endTime,host: hostUserId, guest: guestDat, eventTime: eventTime,formattedEventTime: formattedEventTime,formattedStartTime: formattedStartTime,duration: eventDuration,formattedEventDate: formattedEventDate, formattedEndTime: formattedEndTime)
+                            let data = MeetingLogStruct(title: title,description: description,status: status, startTime: startTime, endTime: endTime,host: hostUserId, guest: guestDat, eventTime: eventTime,formattedEventTime: formattedEventTime,formattedStartTime: formattedStartTime,duration: eventDuration,formattedEventDate: formattedEventDate, formattedEndTime: formattedEndTime,eventId: eventId,meetingId: meetingId)
                             self.meetingLogData.append(data)
                         }
                     }

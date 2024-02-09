@@ -39,6 +39,55 @@ class MeetingLogDetailVC: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    @IBAction func joinBtn(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.voiceCallVC != nil {
+            APIManager.sharedInstance.showAlertWithMessage(message: "Call in progress, can't join another call.")
+            return
+        }
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+
+        OnCallHelper.shared.removeOnCallView()
+        if let vc = appDelegate.voiceCallVC {
+            self.navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+            self.dismiss(animated: false) {
+
+        let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+                vc.meetingName = self.logData?.meetingId
+            vc.userName = "\(retrievedCodableObject.user?.firstname ?? "") \(retrievedCodableObject.user?.lastname ?? "")"
+        appDelegate.voiceCallVC = vc
+                vc.eventId = self.logData?.eventId ?? ""
+            vc.modalPresentationStyle = .fullScreen
+                if let navVC = UIApplication.getTopViewController() {
+                    navVC.present(vc, animated: true)
+                }
+            }
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+
+            OnCallHelper.shared.removeOnCallView()
+            if let vc = appDelegate.voiceCallVC {
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+                self.dismiss(animated: false) {
+
+            let storyBoard = UIStoryboard(name: "covidCheck", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "JitsiMeetViewController") as! JitsiMeetViewController
+            vc.meetingName = self.logData?.meetingId
+                    vc.userName = retrievedCodableObject.user.username
+            appDelegate.voiceCallVC = vc
+                    vc.eventId = self.logData?.eventId ?? ""
+                vc.modalPresentationStyle = .fullScreen
+                    if let navVC = UIApplication.getTopViewController() {
+                        navVC.present(vc, animated: true)
+                    }
+                }
+            }
+    }
+    
 }
 
 extension MeetingLogDetailVC : UITableViewDelegate, UITableViewDataSource {

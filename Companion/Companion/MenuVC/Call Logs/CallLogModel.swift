@@ -14,8 +14,8 @@ struct CallLogModel: Codable {
 
 // MARK: - Incoming
 struct Log: Codable {
-    var roomID, caller, callee: String
-    var type: String
+    var roomID, caller, callerEmail, callee: String?
+    var calleeEmail, type: String?
     var duration: Int
     var startTime, endTime: String
     var reasonForCall: String
@@ -24,6 +24,6 @@ struct Log: Codable {
 
     enum CodingKeys: String, CodingKey {
         case roomID = "roomId"
-        case caller, callee, type, duration, startTime, endTime, reasonForCall, transcriptExists, transcript, formattedTranscription
+        case caller, callerEmail, callee, calleeEmail, type, duration, startTime, endTime, reasonForCall, transcriptExists, transcript, formattedTranscription
     }
 }

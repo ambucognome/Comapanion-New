@@ -53,11 +53,10 @@ class IntroViewController: UIViewController {
     
 
     func checkForUserType() {
-        if SafeCheckUtils.getDidLogout() == nil {
-            SafeCheckUtils.setDidLogout(loggedOut: true)
-            SafeCheckUtils.setToken(token: "")
-        }
-        
+//        if SafeCheckUtils.getDidLogout() == nil {
+//            SafeCheckUtils.setDidLogout(loggedOut: true)
+//            SafeCheckUtils.setToken(token: "")
+//        }
         if (SafeCheckUtils.getToken() != "") {
             //logged in
             let storyboard = UIStoryboard(name: "Companion", bundle: nil)

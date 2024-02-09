@@ -11,6 +11,7 @@ import GoogleSignIn
 import PushKit
 import CallKit
 import NotificationBannerSwift
+import FirebaseCore
 
 var LAUNCHED_FROM_KILLED_STATE : Bool = true
 
@@ -84,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         appearance.backgroundColor = .white
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
+        FirebaseApp.configure()
         return true
     }
     

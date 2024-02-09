@@ -18,7 +18,7 @@ let API_END_DELETE_REPEATABLE_GROUP = "v2/deleteRepeatableGroupInstrument"
 let API_END_UPDATE_ENTITY_VALUE = "v2/updateEntityInstruments"
 let API_END_GET_INSTRUMENT = "v2/instrument"
 let API_END_RESET_INSTRUMENT = "v2/resetInstrument"
-
+let API_END_GET_INSTRUMENT_TREE = "v2/instrumentTree"
 
 
 // All NSUSERDEFAULT key name

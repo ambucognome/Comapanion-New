@@ -32,4 +32,6 @@ target 'Companion' do
     pod 'IQKeyboardManagerSwift'
     pod 'CalendarKit'
     pod 'GoogleSignIn'
+    pod 'FirebaseAnalytics'
+    pod 'FirebaseCrashlytics'
 end

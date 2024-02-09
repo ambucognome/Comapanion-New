@@ -67,7 +67,59 @@ extension MissedListVC : UITableViewDataSource, UITableViewDelegate {
     
     // MARK:- UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+        let data = logData?.missed[indexPath.section]
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Call \(data?.caller ?? "")", style: .default , handler:{ (UIAlertAction)in
+            self.call(email: (data?.callerEmail ?? ""), name: data?.caller ?? "")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    
+    @objc func call(email: String, name: String) {
+        var dataDic = [String:Any]()
+        if let retrievedCodableObject = SafeCheckUtils.getUserData() {
+             dataDic = [
+                "callerEmailId": retrievedCodableObject.user?.mail ?? "",
+                "callerName": retrievedCodableObject.user?.firstname ?? "",
+                "appId": Bundle.main.bundleIdentifier ?? ""
+            ]
+        } else if let retrievedCodableObject = SafeCheckUtils.getGuestUserData() {
+             dataDic = [
+                "callerEmailId": retrievedCodableObject.user.emailID,
+                "callerName": retrievedCodableObject.user.username,
+                "appId": Bundle.main.bundleIdentifier ?? ""
+            ]
+        }
+        dataDic["calleeEmailId"] = email
+        let jsonData = try! JSONSerialization.data(withJSONObject: dataDic, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
+
+        ERProgressHud.shared.show()
+        BaseAPIManager.sharedInstance.makeRequestToStartCall(data: jsonData){ (success, response,statusCode)  in
+            if (success) {
+                ERProgressHud.shared.hide()
+                print(response)
+                let roomId = response["roomId"] as? String ?? ""
+        self.dismiss(animated: false) {
+            let storyBoard = UIStoryboard(name: "Companion", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
+            vc.name = name
+            vc.roomId = roomId
+            vc.opponentEmailId = email
+            vc.modalPresentationStyle = .fullScreen
+        if let navVC = UIApplication.getTopViewController() {
+            navVC.present(vc, animated: true)
+        }
+        }
+        } else {
+            APIManager.sharedInstance.showAlertWithMessage(message: ERROR_MESSAGE_DEFAULT)
+            ERProgressHud.shared.hide()
+        }
+     }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

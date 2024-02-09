@@ -55,19 +55,22 @@ class CallLogViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fetchLogDate = SafeCheckUtils.addOrSubtractMonth(month: -1)
-        self.getCallLogs()
         self.title = "Call Logs"
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.gray]
         segmentControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
         let selectedTextAttributes = [NSAttributedString.Key.foregroundColor: DARK_BLUE_COLOR]
         segmentControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
 
-
         DispatchQueue.main.asyncAfter(deadline: .now()  + .milliseconds(1), execute: {
             self.displayCurrentTab(0)
         })
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("loadmore"), object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.fetchLogDate = SafeCheckUtils.addOrSubtractMonth(month: -1)
+        self.getCallLogs()
     }
     
     @objc func methodOfReceivedNotification(notification: Notification) {

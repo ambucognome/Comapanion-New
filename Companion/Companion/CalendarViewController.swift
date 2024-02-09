@@ -14,6 +14,7 @@ protocol  CalendarViewControllerDelegate {
 }
 //KARNA
 class CalendarViewController: DayViewController, DynamicTemplateViewControllerDelegate {
+
     
     var template_uri = "http://chdi.montefiore.org/calendarEvent"
 
@@ -76,6 +77,10 @@ class CalendarViewController: DayViewController, DynamicTemplateViewControllerDe
     
     func didSubmitSurveyForm(response: NSArray, eventId: String) {
         print("didSubmitSurveyForm")
+    }
+    
+    func didSubmitEventWithInstrumentTree(response: NSDictionary) {
+        print("didSubmitEventForm With Tree")
     }
     
     func didSubmitEventForm(response: NSArray) {
