@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-//Base Url
-let BASEURL = "https://ddcv2backend.azurewebsites.net/"//"http://10.85.9.161:11000/"
+//MARK: DDC URL
+let BASEURL = "http://aks-gpdefault-96938936-vmss000001.private.cognome.com:31051/" //"https://ddcv2backend.azurewebsites.net/"//"http://10.85.9.161:11000/"
 let API_END_GET_TEMPLATE = "v2/template"
 let API_END_SAVE_INSTRUMENT = "v2/saveInstrument"
 let API_END_ADD_REPEATABLE_GROUP = "v2/addRepeatableGroupInstrument"
@@ -89,7 +89,7 @@ let FADED_BLUE = UIColor(red: 97.0 / 255.0, green: 144.0 / 255.0, blue: 185.0 / 
 
 //Temperory Hardcoded token
 let TEMP_TOKEN_KEY = "Authorization"
-let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoiY29tcGFuaW9uIiwiaWQiOiI2NGVlZTA3YjZkMmFjOTFiZTU3NWVkMmIiLCJpYXQiOjE2OTMzNzY2MzV9.vhfVTQQv4tmDYqBsAct7d3-XGYVbJGF6Y6mNZFlU4No"
+let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoibHlueCIsImlkIjoiNjVjNWZhMjEzYjJmYTc2OTg1NDQ3MGJjIiwiaWF0IjoxNzA3NDczNDQxfQ.3J222iFms9Qaq5kD15boF15hmZGzjoUUkrIMyV_umEA"
 
 //let TEMP_TOKEN_VALUE = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhcHBOYW1lIjoiZGRjLXYyIiwiaWQiOiI2NGU4OTQxMDFmMTkzMzAzNDllNzk5NGEiLCJpYXQiOjE2OTI5NjM4NTZ9.qLr1KyGtvUA5AyzbiG1bquTMu--DkN8UZHrSV75Cs1c"
 

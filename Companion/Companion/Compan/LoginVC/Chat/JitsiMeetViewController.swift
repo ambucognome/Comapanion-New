@@ -69,7 +69,8 @@ class JitsiMeetViewController: UIViewController {
             builder.userInfo = JitsiMeetUserInfo(displayName: self.userName, andEmail: self.email, andAvatar: nil)
 //            builder.setAudioMuted(true)
 //            builder.setVideoMuted(true)
-            let url = URL(string: "https://chdiaz.montefiore.org")
+            //MARK: JITSI SERVER URL
+            let url = URL(string: "https://jitsi.cognome.com/OutdoorBacksTriggerBravely")
 //            let url = URL(string: "https://meet.jit.si")
             builder.serverURL = url
             builder.setFeatureFlag("meeting-name.enabled", withBoolean: false)
